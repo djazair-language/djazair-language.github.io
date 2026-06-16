@@ -140,11 +140,11 @@
 <span class="kw">let</span> pattern <span class="op">=</span> regex<span class="op">.</span><span class="fn">compile</span>(<span class="str">"\\[(INFO|ERROR)\\] (.*)"</span>)
 <span class="kw">let</span> lines <span class="op">=</span> file<span class="op">.</span><span class="fn">readLines</span>(logFile)
 
-<span class="kw">for</span> idx, line <span class="kw">in</span> <span class="nd">enumerate</span>(lines)
-    <span class="kw">let</span> <span class="kw">match</span> <span class="op">=</span> pattern<span class="op">.</span><span class="fn">search</span>(line)
-    <span class="kw">if</span> <span class="op">!</span><span class="nd">isNull</span>(<span class="kw">match</span>)
-        <span class="kw">let</span> level <span class="op">=</span> <span class="kw">match</span><span class="op">.</span><span class="fn">group</span>(<span class="num">1</span>)
-        <span class="kw">let</span> msg <span class="op">=</span> <span class="kw">match</span><span class="op">.</span><span class="fn">group</span>(<span class="num">2</span>)
+<span class="kw">for</span> idx, line <span class="kw">in</span> lines
+    <span class="kw">let</span> m <span class="op">=</span> pattern<span class="op">.</span><span class="fn">search</span>(line)
+    <span class="kw">if</span> <span class="op">!</span><span class="nd">isNull</span>(m)
+        <span class="kw">let</span> level <span class="op">=</span> m<span class="op">.</span><span class="fn">group</span>(<span class="num">1</span>)
+        <span class="kw">let</span> msg <span class="op">=</span> m<span class="op">.</span><span class="fn">group</span>(<span class="num">2</span>)
         <span class="nd">print</span>(<span class="str">"Line ${idx + 1}: [${level}] - Message: ${msg}"</span>)
     <span class="kw">end</span>
 <span class="kw">end</span></code></pre>

@@ -247,52 +247,52 @@
 
 <h2 id="truthiness-assertions">Truthiness Assertions</h2>
 <ul>
-    <li><code>assert.isTrue(condition, message?)</code> - Assert condition is truthy.</li>
-    <li><code>assert.isFalse(condition, message?)</code> - Assert condition is falsy.</li>
+    <li><code>assert.isTrue(condition, message)</code> - Assert condition is truthy.</li>
+    <li><code>assert.isFalse(condition, message)</code> - Assert condition is falsy.</li>
 </ul>
 <pre><code><span class="kw">use</span> assert
-assert<span class="op">.</span><span class="fn">isTrue</span>(<span class="num">1</span> <span class="op">==</span> <span class="num">1</span>)
-assert<span class="op">.</span><span class="fn">isTrue</span>(<span class="str">"hello"</span>)
-assert<span class="op">.</span><span class="fn">isFalse</span>(<span class="num">1</span> <span class="op">==</span> <span class="num">2</span>)
-assert<span class="op">.</span><span class="fn">isFalse</span>(<span class="kw">False</span>)
-<span class="comment"># assert.isTrue(1 == 2)  # would throw</span></code></pre>
+assert<span class="op">.</span><span class="fn">isTrue</span>(<span class="num">1</span> <span class="op">==</span> <span class="num">1</span>, <span class="str">"math check"</span>)
+assert<span class="op">.</span><span class="fn">isTrue</span>(<span class="str">"hello"</span>, <span class="str">"string truthiness"</span>)
+assert<span class="op">.</span><span class="fn">isFalse</span>(<span class="num">1</span> <span class="op">==</span> <span class="num">2</span>, <span class="str">"inequality"</span>)
+assert<span class="op">.</span><span class="fn">isFalse</span>(<span class="kw">False</span>, <span class="str">"false value"</span>)
+<span class="comment"># assert.isTrue(1 == 2, "impossible")  # would throw</span></code></pre>
 
 <h2 id="value-assertions">Value Assertions</h2>
 <ul>
-    <li><code>assert.equal(a, b, message?)</code> - Assert a == b via value equality.</li>
-    <li><code>assert.notEqual(a, b, message?)</code> - Assert a != b.</li>
-    <li><code>assert.notNull(val, message?)</code> - Assert val is not Null.</li>
-    <li><code>assert.isNullVal(val, message?)</code> - Assert val is Null.</li>
+    <li><code>assert.equal(a, b, message)</code> - Assert a == b via value equality.</li>
+    <li><code>assert.notEqual(a, b, message)</code> - Assert a != b.</li>
+    <li><code>assert.notNull(val, message)</code> - Assert val is not Null.</li>
+    <li><code>assert.isNullVal(val, message)</code> - Assert val is Null.</li>
 </ul>
 <pre><code><span class="kw">use</span> assert
-assert<span class="op">.</span><span class="fn">equal</span>(<span class="num">5</span>, <span class="num">5</span>)
-assert<span class="op">.</span><span class="fn">equal</span>(<span class="str">"hello"</span>, <span class="str">"hello"</span>)
-assert<span class="op">.</span><span class="fn">notEqual</span>(<span class="num">1</span>, <span class="num">2</span>)
-assert<span class="op">.</span><span class="fn">notNull</span>(<span class="str">"value"</span>)
-assert<span class="op">.</span><span class="fn">isNullVal</span>(<span class="kw">Null</span>)
-<span class="comment"># assert.equal(1, 2)  # would throw</span></code></pre>
+assert<span class="op">.</span><span class="fn">equal</span>(<span class="num">5</span>, <span class="num">5</span>, <span class="str">"five equals five"</span>)
+assert<span class="op">.</span><span class="fn">equal</span>(<span class="str">"hello"</span>, <span class="str">"hello"</span>, <span class="str">"string equality"</span>)
+assert<span class="op">.</span><span class="fn">notEqual</span>(<span class="num">1</span>, <span class="num">2</span>, <span class="str">"inequality"</span>)
+assert<span class="op">.</span><span class="fn">notNull</span>(<span class="str">"value"</span>, <span class="str">"myValue"</span>)
+assert<span class="op">.</span><span class="fn">isNullVal</span>(<span class="kw">Null</span>, <span class="str">"myNull"</span>)
+<span class="comment"># assert.equal(1, 2, "cmp")  # would throw</span></code></pre>
 
 <h2 id="type-assertions">Type Assertions</h2>
 <ul>
-    <li><code>assert.string(val, name?)</code> - Assert val is a String.</li>
-    <li><code>assert.number(val, name?)</code> - Assert val is a Number.</li>
-    <li><code>assert.boolean(val, name?)</code> - Assert val is a Boolean.</li>
-    <li><code>assert.array(val, name?)</code> - Assert val is an Array.</li>
-    <li><code>assert.map(val, name?)</code> - Assert val is a Map.</li>
-    <li><code>assert.function(val, name?)</code> - Assert val is a Function (closure or native).</li>
-    <li><code>assert.instance(val, name?)</code> - Assert val is a class Instance.</li>
-    <li><code>assert.resource(val, name?)</code> - Assert val is a native Resource handle.</li>
-    <li><code>assert.positive(val, name?)</code> - Assert val is a positive number (&gt;= 0).</li>
+    <li><code>assert.string(val, name)</code> - Assert val is a String.</li>
+    <li><code>assert.number(val, name)</code> - Assert val is a Number.</li>
+    <li><code>assert.boolean(val, name)</code> - Assert val is a Boolean.</li>
+    <li><code>assert.array(val, name)</code> - Assert val is an Array.</li>
+    <li><code>assert.map(val, name)</code> - Assert val is a Map.</li>
+    <li><code>assert.function(val, name)</code> - Assert val is a Function (closure or native).</li>
+    <li><code>assert.instance(val, name)</code> - Assert val is a class Instance.</li>
+    <li><code>assert.resource(val, name)</code> - Assert val is a native Resource handle.</li>
+    <li><code>assert.positive(val, name)</code> - Assert val is a positive number (&gt;= 0).</li>
 </ul>
 <pre><code><span class="kw">use</span> assert
-assert<span class="op">.</span><span class="fn">string</span>(<span class="str">"hello"</span>)
-assert<span class="op">.</span><span class="fn">number</span>(<span class="num">42</span>)
-assert<span class="op">.</span><span class="fn">boolean</span>(<span class="kw">True</span>)
-assert<span class="op">.</span><span class="fn">array</span>([<span class="num">1</span>, <span class="num">2</span>, <span class="num">3</span>])
-assert<span class="op">.</span><span class="fn">map</span>({<span class="str">"key"</span><span class="op">:</span> <span class="str">"val"</span>})
-assert<span class="op">.</span><span class="fn">function</span>(<span class="kw">fn</span>() <span class="kw">end</span>)
-assert<span class="op">.</span><span class="fn">positive</span>(<span class="num">5</span>)
-<span class="comment"># assert.positive(-1)  # would throw</span></code></pre>
+assert<span class="op">.</span><span class="fn">string</span>(<span class="str">"hello"</span>, <span class="str">"myString"</span>)
+assert<span class="op">.</span><span class="fn">number</span>(<span class="num">42</span>, <span class="str">"myNum"</span>)
+assert<span class="op">.</span><span class="fn">boolean</span>(<span class="kw">True</span>, <span class="str">"myBool"</span>)
+assert<span class="op">.</span><span class="fn">array</span>([<span class="num">1</span>, <span class="num">2</span>, <span class="num">3</span>], <span class="str">"myArray"</span>)
+assert<span class="op">.</span><span class="fn">map</span>({<span class="str">"key"</span><span class="op">:</span> <span class="str">"val"</span>}, <span class="str">"myMap"</span>)
+assert<span class="op">.</span><span class="fn">function</span>(<span class="kw">fn</span>() <span class="kw">end</span>, <span class="str">"myFn"</span>)
+assert<span class="op">.</span><span class="fn">positive</span>(<span class="num">5</span>, <span class="str">"myVal"</span>)
+<span class="comment"># assert.positive(-1, "neg")  # would throw</span></code></pre>
 
                 </article>
 

@@ -162,10 +162,13 @@
 </table>
 
 <h2 id="script-arguments">Script Arguments</h2>
-<p>Any arguments passed after the script file path are automatically collected and made available inside your code as a list named <code>args</code>:</p>
-<pre><code><span class="comment"># script.dz</span>
+<p>Any arguments passed after the script file path are collected and accessible via <code>process.args()</code>:</p>
+<pre><code><span class="kw">use</span> process
+
+<span class="comment"># script.dz</span>
 <span class="nd">print</span>(<span class="str">"Supplied Arguments:"</span>)
-<span class="kw">for</span> arg <span class="kw">in</span> args
+<span class="kw">let</span> scriptArgs <span class="op">=</span> process<span class="op">.</span><span class="fn">args</span>()
+<span class="kw">for</span> arg <span class="kw">in</span> scriptArgs
     <span class="nd">print</span>(<span class="str">" - "</span> <span class="op">+</span> arg)
 <span class="kw">end</span></code></pre>
 <p>Run it like this:</p>
