@@ -244,6 +244,7 @@
                     
 <h1>HTTP Module</h1>
 <p>Import using: <code>use http</code></p>
+<div class="note"><strong>Note:</strong> The HTTP module uses plain TCP and does not currently support HTTPS (SSL/TLS). Use <code>http://</code> URLs only.</div>
 
 <h2 id="http-client">HTTP Client</h2>
 <ul>
@@ -256,23 +257,24 @@
     <li><code>http.options(url)</code> - HTTP OPTIONS request.</li>
     <li><code>http.request(method, url, body?, headers?)</code> - Generic HTTP request.</li>
 </ul>
-<p>All client methods return a Map with keys: <code>status</code>, <code>body</code>, <code>headers</code>.</p>
+<p>All client methods return a Map with keys: <code>statusCode</code>, <code>statusText</code>, <code>httpVersion</code>, <code>headers</code>, <code>body</code>. Returns <code>Null</code> on any connection or protocol error.</p>
 <pre><code><span class="kw">use</span> http
 <span class="comment"># GET request</span>
-<span class="kw">let</span> res <span class="op">=</span> http<span class="op">.</span><span class="fn">get</span>(<span class="str">"https://httpbin.org/get"</span>)
-<span class="nd">print</span>(<span class="str">"Status: "</span> <span class="op">+</span> <span class="nd">str</span>(res[<span class="str">"status"</span>]))
+<span class="kw">let</span> res <span class="op">=</span> http<span class="op">.</span><span class="fn">get</span>(<span class="str">"http://httpbin.org/get"</span>)
+<span class="nd">print</span>(<span class="str">"Status: "</span> <span class="op">+</span> <span class="nd">str</span>(res[<span class="str">"statusCode"</span>]))
 
 <span class="comment"># POST with body</span>
-<span class="kw">let</span> postRes <span class="op">=</span> http<span class="op">.</span><span class="fn">post</span>(<span class="str">"https://httpbin.org/post"</span>,
+<span class="kw">let</span> postRes <span class="op">=</span> http<span class="op">.</span><span class="fn">post</span>(<span class="str">"http://httpbin.org/post"</span>,
     '{<span class="str">"data"</span><span class="op">:</span> <span class="str">"hello"</span>}',
     {<span class="str">"Content-Type"</span><span class="op">:</span> <span class="str">"application/json"</span>})
-<span class="nd">print</span>(<span class="nd">str</span>(postRes))
+<span class="nd">print</span>(<span class="str">"POST statusCode: "</span> <span class="op">+</span> <span class="nd">str</span>(postRes[<span class="str">"statusCode"</span>]))
+<span class="nd">print</span>(postRes[<span class="str">"body"</span>])
 
 <span class="comment"># Request with custom method</span>
 <span class="kw">let</span> custom <span class="op">=</span> http<span class="op">.</span><span class="fn">request</span>(<span class="str">"PATCH"</span>,
-    <span class="str">"https://httpbin.org/patch"</span>,
+    <span class="str">"http://httpbin.org/patch"</span>,
     '{<span class="str">"patch"</span><span class="op">:</span> true}')
-<span class="nd">print</span>(<span class="str">"Custom status: "</span> <span class="op">+</span> <span class="nd">str</span>(custom[<span class="str">"status"</span>]))</code></pre>
+<span class="nd">print</span>(<span class="str">"PATCH statusCode: "</span> <span class="op">+</span> <span class="nd">str</span>(custom[<span class="str">"statusCode"</span>]))</code></pre>
 
 <h2 id="http-server">HTTP Server</h2>
 <ul>
