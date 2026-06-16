@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <link rel="stylesheet" href="../assets/style.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/7.0.0/fuse.min.js"></script>
+    <script id="search-index-data" type="application/json">[{"title": "Home", "path": "index.html", "description": "The Djazair Programming Language official documentation home page.", "text": "The Djazair Programming Language\n    A modern, embeddable scripting language — written in pure C, featuring async coroutines, pattern matching, OOP, and a rich standard library. Designed for automation, tooling, game development, and seamless C/C++ embedding.\n    \n        Get Started\n        Learn t"}, {"title": "Installation", "path": "getting-started/installation.html", "description": "Install and build Djazair from source code on Windows, Linux, and macOS.", "text": "Installing Djazair\nDjazair is built to compile cleanly on Linux, macOS, and Windows. It relies on standard compiler environments and has minimal external dependencies.\n\nLinux & macOS Compilation\nEnsure you have GCC or Clang and make installed. Open a terminal and run the following commands:\n# Clone "}, {"title": "First Program", "path": "getting-started/first-program.html", "description": "Write and run your very first hello world program in Djazair.", "text": "Your First Djazair Program\nIn this guide, we will write, structure, and run our very first program in Djazair.\n\nWriting the Script\nCreate a file named hello.dz in your preferred editor. Paste the following line of code into it:\n# Hello world in Djazair\nprint(\"Hello from Djazair!\")\n\n\nRunning the Scri"}, {"title": "Running Programs", "path": "getting-started/running-programs.html", "description": "Learn the various CLI commands to execute your scripts inline or via files.", "text": "Running Djazair Scripts\nThe Djazair interpreter offers a command-line interface (CLI) to execute code, check versions, and configure file paths.\n\nCLI Usage\nThe general syntax of the interpreter CLI is:\ndjazair [options] [script_file.dz] [arguments...]\n\nAvailable Options\n\n    \n        \n            Op"}, {"title": "Comments", "path": "language-guide/comments.html", "description": "Learn how to document your Djazair code with single and multi-line comments.", "text": "Comments\nComments are text entries ignored by the compiler, used to document structures and write explanations.\n\nSingle-line Comments\nSingle-line comments start with a hash character (#). Everything following the # on that line is ignored:\n# Declare a score variable\nlet score = 100 # Inline comment "}, {"title": "Variables", "path": "language-guide/variables.html", "description": "Declare variables with let and understand lexical block scoping.", "text": "Variables & Scope\nVariables store values. Djazair is dynamically typed, meaning variables can hold any type of value and change types over time.\n\nDeclaration\nDeclare variables using let:\nlet username = \"Riyadh\"\nlet age = 30\nlet balance = 200.50\n\n# Reassignment\nbalance = 450.75\n\n\nScoping Rules\nDjazai"}, {"title": "Data Types", "path": "language-guide/data-types.html", "description": "Understand primitive and object types, dynamic typing, and memory model.", "text": "Data Types\nDjazair features a rich set of built-in data types. It uses dynamic typing, but every value has a concrete runtime type.\n\nSummary of Types\n\n    \n        \n            Type\n            Sample Literals\n            Description\n        \n    \n    \n        \n            Number\n            42, 3.1"}, {"title": "Input & Output", "path": "language-guide/input-output.html", "description": "Console output, user input, and string formatting in Djazair.", "text": "Input & Output\nDjazair provides built-in functions for console output and user input.\n\nConsole Output\nUse print() to output values to stdout. It accepts multiple arguments separated by spaces:\nprint(\"Hello World\")\nprint(\"The answer is\", 42)\nprint(\"Value:\", True, Null, [1, 2])\n\n\nString Interpolation\n"}, {"title": "Operators", "path": "language-guide/operators.html", "description": "Examine mathematical, comparison, logical, assignment, and membership operators.", "text": "Operators Reference\nDjazair provides standard arithmetic, comparison, logical, bitwise, assignment, increment/decrement, and identity operators.\n\nArithmetic Operators\nBasic mathematical calculations:\nlet sum = 10 + 5    # Addition => 15\nlet diff = 10 - 5   # Subtraction => 5\nlet prod = 10 * 5   # Mu"}, {"title": "Conditions", "path": "language-guide/conditions.html", "description": "Control execution flow using if-elif-else statements and ternary expressions.", "text": "Conditions (If-Else & Match)\nControl flow structures let your script make decisions depending on boolean expressions or value patterns.\n\nIf, Elif, Else\nThe conditional syntax uses if, elif, else, and concludes with the end keyword:\nlet score = 85\n\nif score >= 90\n    print(\"Grade: A\")\nelif score >= 8"}, {"title": "Loops", "path": "language-guide/loops.html", "description": "Write loops using while, do-while, and for-in iterators over collections and ranges.", "text": "Loops\nPerform repeated executions using while, do-while, and for-in constructs.\n\nWhile Loop\nRuns as long as a boolean expression evaluates to True:\nlet i = 1\nwhile i \n\nDo-While Loop\nExecutes the body block at least once, then continues while the condition matches:\nlet x = 10\ndo\n    print(\"Runs at le"}, {"title": "Arrays", "path": "language-guide/arrays.html", "description": "Create dynamic lists and manipulate them using standard array methods.", "text": "Arrays\nArrays are dynamic, ordered lists. They can hold mixed data types, resize automatically, and feature an extensive collection of utility methods.\n\nInstantiation\nlet list = [10, \"apple\", True, [3, 4]]\nprint(list[0])    # => 10\nprint(list[3][1]) # => 4\n\n\nFull Methods Catalog\n\n    \n        \n     "}, {"title": "Strings", "path": "language-guide/strings.html", "description": "Learn string interpolation, multi-line blocks, and comprehensive string methods.", "text": "Strings\nDjazair Strings are immutable, UTF-8 encoded, and packed with formatting, trimming, and searching APIs.\n\nString Literals\nUse double quotes for standard strings. Strings support variable interpolation using ${expression}:\nlet user = \"Riyadh\"\nlet greet = \"Hello, ${user}! The time is ${getLine("}, {"title": "Maps", "path": "language-guide/maps.html", "description": "Create and manipulate key-value hash maps with built-in methods.", "text": "Maps\nMaps (dictionaries) are unordered key-value hash tables. Keys can be any type.\n\nCreating Maps\nlet empty = {}\nlet user = {\"name\": \"Riad\", \"age\": 30, \"active\": True}\nprint(user[\"name\"])  # => Riad\n\n\nMap Methods\n\n    MethodDescription\n    \n        length()Number of entries\n        keys()Array of k"}, {"title": "Functions", "path": "language-guide/functions.html", "description": "Write reusable code blocks, closures, arrow functions, and default arguments.", "text": "Functions\nFunctions are declared using the fn keyword and terminated with end. They are first-class citizen objects in Djazair.\n\nStandard Declaration\nfn calculateSum(a, b)\n    return a + b\nend\n\nprint(calculateSum(10, 20)) # => 30\n\n\nDefault Arguments\nDjazair allows function parameters to have default"}, {"title": "Modules", "path": "language-guide/modules.html", "description": "Import files and use native modules to organize codebases cleanly.", "text": "Modules & Imports\nOrganize and scale your application by breaking it down into discrete script files or leveraging standard libraries.\n\nLocal Files (import)\nImport local script files using the import keyword. You can assign a namespace or use wildcard imports:\n# main.dz\nimport \"utils.dz\" as utils   "}, {"title": "Classes", "path": "language-guide/classes.html", "description": "Develop using Object-Oriented paradigms: classes, inheritance, super, and self.", "text": "Classes & OOP\nDjazair implements fully featured Object-Oriented programming including classes, constructors, methods, and single inheritance.\n\nClass Declaration\nDeclare classes, instantiate objects, and refer to properties inside methods via the self prefix:\nclass User\n    init(name, email)\n        "}, {"title": "Error Handling", "path": "language-guide/error-handling.html", "description": "Handle runtime issues gracefully using try-catch-finally blocks and throw statements.", "text": "Error Handling\nRuntime faults are caught and mitigated gracefully via structured exception blocks.\n\nTry-Catch-Finally Blocks\nThe error handling block uses try, catch [variable], finally, and finishes with end:\ntry\n    let num = 1 / 0\ncatch error\n    print(\"Caught an error: \" + str(error))\nfinally\n  "}, {"title": "Async / Await", "path": "language-guide/async-await.html", "description": "Concurrent programming with coroutines using async and await.", "text": "Async / Await\nDjazair supports coroutine-based concurrency using async fn and await.\n\nAsync Functions\nDeclare with async fn. They return a coroutine instead of executing immediately:\nasync fn fetchData()\n    # Simulate async work\n    return 42\nend\n\nlet task = fetchData()\nprint(task)  # Coroutine obj"}, {"title": "Hello World", "path": "examples/hello-world.html", "description": "Standard hello world code snippet and explanation.", "text": "Example: Hello World\nA simple printing execution showing standard Djazair outputs:\n# The hello world program\nprint(\"Hello World from Djazair!\")\n\nHow it Works\nThe code uses the global built-in print() function to write text streams directly to the terminal stdout. Lines starting with # represent sing"}, {"title": "Calculator", "path": "examples/calculator.html", "description": "Implement a fully featured command-line calculator in Djazair.", "text": "Example: Calculator\nAn interactive command line calculator script:\nprint(\"--- Djazair CLI Calculator ---\")\nprint(\"Enter calculation mode or type 'exit' to quit.\")\n\nwhile True\n    let inputStr = input(\"calc> \")\n    if inputStr == \"exit\"\n        break\n    end\n    \n    # Simple evaluation split\n    let"}, {"title": "Todo App", "path": "examples/todo-app.html", "description": "A console Todo tracker demonstrating list manipulation and file persistence.", "text": "Example: Todo Application\nA terminal Todo list manager featuring file persistence:\nuse file\nuse json\n\nlet todoFile = \"todos.json\"\nlet todos = []\n\nif file.exists(todoFile)\n    todos = json.parse(file.read(todoFile))\nend\n\nfn saveTodos()\n    file.write(todoFile, json.stringify(todos))\nend\n\nwhile True\n "}, {"title": "File Processing", "path": "examples/file-processing.html", "description": "Read files line-by-line, parse data structures, and output logs.", "text": "Example: File Processing\nA script that parses a log file and extracts formatted records:\nuse file\nuse regex\n\nlet logFile = \"app.log\"\nif not file.exists(logFile)\n    # Seed dummy log\n    file.write(logFile, \"[INFO] Started\\n[ERROR] DB Connection failed\\n[INFO] Retrying\\n\")\nend\n\nlet pattern = regex.co"}, {"title": "Embedding API", "path": "reference/embedding.html", "description": "C/C++ API for embedding Djazair in applications.", "text": "Embedding Djazair in C/C++\nDjazair is designed to be easily embedded into C/C++ applications via a single header djazair.h.\n\nMinimal Example\n#include \"djazair.h\"\n#include &lt;stdio.h&gt;\n\nint main() {\n    // Create a new VM instance\n    djazair_vm* vm = djazair_new_vm();\n    \n    // Execute a script"}, {"title": "FAQ", "path": "faq.html", "description": "Frequently Asked Questions about Djazair syntax, internals, and performance.", "text": "Frequently Asked Questions\n\n1. Is Djazair compiled or interpreted?\nDjazair features a hybrid design inspired by modern byte-oriented engines. The compiler parses your code, resolves scopes, compiles variables and functions into streamlined bytecode instruction chunks, and executes them on a fast vir"}]</script>
     <style>
         .feature-icon {
             width: 48px; height: 48px;
@@ -298,50 +299,48 @@
                 });
             })();
 
-            // --- Full-text search via Fuse.js ---
+            // --- Full-text search via Fuse.js (inline index, no fetch) ---
             (function() {
                 var input = document.getElementById("search-input");
                 var resultsEl = document.getElementById("search-results");
-                if (!input || !resultsEl || typeof Fuse === "undefined") return;
+                var indexScript = document.getElementById("search-index-data");
+                if (!input || !resultsEl || !indexScript || typeof Fuse === "undefined") return;
 
-                var fuse;
-                fetch(input.getAttribute("data-index") || "assets/search-index.json")
-                    .then(function(r) { return r.json(); })
-                    .then(function(data) {
-                        fuse = new Fuse(data, {
-                            keys: ["title", "description", "text"],
-                            threshold: 0.4,
-                            includeScore: true,
-                            minMatchCharLength: 2
-                        });
-                        // restore sidebar filter as fallback
-                        var oldFilter = input.onkeyup;
-                        input.onkeyup = function() {
-                            var query = input.value.trim();
-                            if (query.length < 2) { resultsEl.classList.remove("show"); return; }
-                            var results = fuse.search(query);
-                            var html = "";
-                            if (results.length === 0) {
-                                html = '<div class="result-empty">No results found</div>';
-                            } else {
-                                for (var i = 0; i < Math.min(results.length, 10); i++) {
-                                    var r = results[i].item;
-                                    html += '<a href="' + r.path + '" class="result-item">' +
-                                        '<div class="result-title">' + r.title + '</div>' +
-                                        '<div class="result-desc">' + r.description + '</div>' +
-                                        '</a>';
-                                }
-                            }
-                            resultsEl.innerHTML = html;
-                            resultsEl.classList.add("show");
-                        };
-                        input.addEventListener("blur", function() {
-                            setTimeout(function() { resultsEl.classList.remove("show"); }, 200);
-                        });
-                        input.addEventListener("focus", function() {
-                            if (input.value.trim().length >= 2) resultsEl.classList.add("show");
-                        });
-                    });
+                var data;
+                try { data = JSON.parse(indexScript.textContent); } catch(e) { return; }
+                var fuse = new Fuse(data, {
+                    keys: ["title", "description", "text"],
+                    threshold: 0.4,
+                    includeScore: true,
+                    minMatchCharLength: 2
+                });
+
+                input.addEventListener("input", function() {
+                    var query = input.value.trim();
+                    if (query.length < 2) { resultsEl.classList.remove("show"); return; }
+                    var results = fuse.search(query);
+                    var html = "";
+                    if (results.length === 0) {
+                        html = '<div class="result-empty">No results found</div>';
+                    } else {
+                        for (var i = 0; i < Math.min(results.length, 10); i++) {
+                            var r = results[i].item;
+                            html += '<a href="' + r.path + '" class="result-item">' +
+                                '<div class="result-title">' + r.title + '</div>' +
+                                '<div class="result-desc">' + r.description + '</div>' +
+                                '</a>';
+                        }
+                    }
+                    resultsEl.innerHTML = html;
+                    resultsEl.classList.add("show");
+                });
+
+                input.addEventListener("blur", function() {
+                    setTimeout(function() { resultsEl.classList.remove("show"); }, 200);
+                });
+                input.addEventListener("focus", function() {
+                    if (input.value.trim().length >= 2) resultsEl.classList.add("show");
+                });
 
                 // Ctrl+K / Cmd+K focus
                 document.addEventListener("keydown", function(e) {

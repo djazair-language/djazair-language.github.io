@@ -76,6 +76,7 @@ LAYOUT = """<!DOCTYPE html>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <link rel="stylesheet" href="{root_prefix}assets/style.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/7.0.0/fuse.min.js"></script>
+    <script id="search-index-data" type="application/json">{search_index_json}</script>
     <style>
         .feature-icon {{
             width: 48px; height: 48px;
@@ -246,50 +247,48 @@ LAYOUT = """<!DOCTYPE html>
                 }});
             }})();
 
-            // --- Full-text search via Fuse.js ---
+            // --- Full-text search via Fuse.js (inline index, no fetch) ---
             (function() {{
                 var input = document.getElementById("search-input");
                 var resultsEl = document.getElementById("search-results");
-                if (!input || !resultsEl || typeof Fuse === "undefined") return;
+                var indexScript = document.getElementById("search-index-data");
+                if (!input || !resultsEl || !indexScript || typeof Fuse === "undefined") return;
 
-                var fuse;
-                fetch(input.getAttribute("data-index") || "assets/search-index.json")
-                    .then(function(r) {{ return r.json(); }})
-                    .then(function(data) {{
-                        fuse = new Fuse(data, {{
-                            keys: ["title", "description", "text"],
-                            threshold: 0.4,
-                            includeScore: true,
-                            minMatchCharLength: 2
-                        }});
-                        // restore sidebar filter as fallback
-                        var oldFilter = input.onkeyup;
-                        input.onkeyup = function() {{
-                            var query = input.value.trim();
-                            if (query.length < 2) {{ resultsEl.classList.remove("show"); return; }}
-                            var results = fuse.search(query);
-                            var html = "";
-                            if (results.length === 0) {{
-                                html = '<div class="result-empty">No results found</div>';
-                            }} else {{
-                                for (var i = 0; i < Math.min(results.length, 10); i++) {{
-                                    var r = results[i].item;
-                                    html += '<a href="' + r.path + '" class="result-item">' +
-                                        '<div class="result-title">' + r.title + '</div>' +
-                                        '<div class="result-desc">' + r.description + '</div>' +
-                                        '</a>';
-                                }}
-                            }}
-                            resultsEl.innerHTML = html;
-                            resultsEl.classList.add("show");
-                        }};
-                        input.addEventListener("blur", function() {{
-                            setTimeout(function() {{ resultsEl.classList.remove("show"); }}, 200);
-                        }});
-                        input.addEventListener("focus", function() {{
-                            if (input.value.trim().length >= 2) resultsEl.classList.add("show");
-                        }});
-                    }});
+                var data;
+                try {{ data = JSON.parse(indexScript.textContent); }} catch(e) {{ return; }}
+                var fuse = new Fuse(data, {{
+                    keys: ["title", "description", "text"],
+                    threshold: 0.4,
+                    includeScore: true,
+                    minMatchCharLength: 2
+                }});
+
+                input.addEventListener("input", function() {{
+                    var query = input.value.trim();
+                    if (query.length < 2) {{ resultsEl.classList.remove("show"); return; }}
+                    var results = fuse.search(query);
+                    var html = "";
+                    if (results.length === 0) {{
+                        html = '<div class="result-empty">No results found</div>';
+                    }} else {{
+                        for (var i = 0; i < Math.min(results.length, 10); i++) {{
+                            var r = results[i].item;
+                            html += '<a href="' + r.path + '" class="result-item">' +
+                                '<div class="result-title">' + r.title + '</div>' +
+                                '<div class="result-desc">' + r.description + '</div>' +
+                                '</a>';
+                        }}
+                    }}
+                    resultsEl.innerHTML = html;
+                    resultsEl.classList.add("show");
+                }});
+
+                input.addEventListener("blur", function() {{
+                    setTimeout(function() {{ resultsEl.classList.remove("show"); }}, 200);
+                }});
+                input.addEventListener("focus", function() {{
+                    if (input.value.trim().length >= 2) resultsEl.classList.add("show");
+                }});
 
                 // Ctrl+K / Cmd+K focus
                 document.addEventListener("keydown", function(e) {{
@@ -1593,6 +1592,23 @@ PAGES_CONTENT["faq.html"] = """
 """
 
 
+# Build search index once
+def build_search_index():
+    def strip_html(text):
+        return re.sub(r'<[^>]+>', '', text).strip()
+    index = []
+    for page in FLAT_PAGES:
+        raw = PAGES_CONTENT.get(page["path"], "")
+        index.append({
+            "title": page["title"],
+            "path": page["path"],
+            "description": page["description"],
+            "text": strip_html(raw)[:300]
+        })
+    return json.dumps(index, ensure_ascii=False)
+
+SEARCH_INDEX_JSON = build_search_index()
+
 # Function to generate individual pages
 def generate_all_pages():
     for page in FLAT_PAGES:
@@ -1734,7 +1750,8 @@ def generate_all_pages():
             breadcrumbs=breadcrumbs,
             content=modified_body,
             page_nav=page_nav_html,
-            toc_items=toc_html
+            toc_items=toc_html,
+            search_index_json=SEARCH_INDEX_JSON
         )
 
         # Create target directories
