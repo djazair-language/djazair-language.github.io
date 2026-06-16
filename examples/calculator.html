@@ -5,8 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Implement a fully featured command-line calculator in Djazair.">
     <title>Calculator | Djazair Documentation</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><rect width=%22100%22 height=%22100%22 rx=%2220%22 fill=%22%2310b981%22/><text x=%2250%22 y=%2268%22 font-size=%2250%22 font-weight=%22800%22 fill=%22white%22 text-anchor=%22middle%22 font-family=%22system-ui%22>Dz</text></svg>">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <link rel="stylesheet" href="../assets/style.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/7.0.0/fuse.min.js"></script>
     <style>
         .feature-icon {
             width: 48px; height: 48px;
@@ -40,46 +42,37 @@
             from { opacity: 0; transform: translateY(-20px); }
             to   { opacity: 1; transform: translateY(0); }
         }
+        .search-container { position: relative; }
+        #search-results {
+            position: absolute; top: calc(100% + 8px); right: 0; width: 380px;
+            max-height: 400px; overflow-y: auto;
+            background: var(--bg-card); border: 1px solid var(--border-color);
+            border-radius: 12px; box-shadow: 0 8px 32px rgba(0,0,0,0.4);
+            display: none; z-index: 200;
+        }
+        #search-results.show { display: block; }
+        #search-results .result-item {
+            display: block; padding: 0.75rem 1rem; border-bottom: 1px solid var(--border-color);
+            color: var(--text-primary); text-decoration: none; transition: background 0.15s;
+        }
+        #search-results .result-item:last-child { border-bottom: none; }
+        #search-results .result-item:hover { background: rgba(16,185,129,0.08); }
+        #search-results .result-item .result-title { font-weight: 600; font-size: 0.9rem; }
+        #search-results .result-item .result-desc { color: var(--text-muted); font-size: 0.8rem; margin-top: 2px; }
+        #search-results .result-empty { padding: 1.5rem; text-align: center; color: var(--text-muted); font-size: 0.9rem; }
+        .pre-wrapper { position: relative; }
+        .copy-btn {
+            position: absolute; top: 8px; right: 8px;
+            background: rgba(255,255,255,0.06); border: 1px solid var(--border-color);
+            color: var(--text-secondary); border-radius: 6px; padding: 4px 10px;
+            font-size: 0.75rem; cursor: pointer; opacity: 0;
+            transition: opacity 0.2s, background 0.2s;
+        }
+        .pre-wrapper:hover .copy-btn { opacity: 1; }
+        .copy-btn:hover { background: var(--color-primary); color: #fff; border-color: var(--color-primary); }
+        .copy-btn.copied { background: var(--color-primary); color: #fff; border-color: var(--color-primary); }
+        .toc-links li.active a { color: var(--color-primary); font-weight: 600; }
     </style>
-    <script>
-        function filterNavigation() {
-            const query = document.getElementById("search-input").value.toLowerCase();
-            const links = document.querySelectorAll(".sidebar-links a");
-            links.forEach(link => {
-                const text = link.textContent.toLowerCase();
-                const parent = link.parentElement;
-                if (text.includes(query)) {
-                    parent.style.display = "";
-                    let hasSub = parent.closest("li.has-submenu");
-                    if (hasSub) { hasSub.style.display = ""; }
-                    let sub = parent.closest(".submenu");
-                    if (sub) { sub.setAttribute("data-expanded", "true"); }
-                } else {
-                    parent.style.display = "none";
-                }
-            });
-        }
-        function toggleSubmenu(event, el) {
-            const li = el.closest("li.has-submenu");
-            const submenu = li.querySelector(".submenu");
-            const expanded = submenu.getAttribute("data-expanded") === "true";
-            submenu.setAttribute("data-expanded", !expanded);
-            const arrow = el.querySelector(".arrow");
-            if (arrow) arrow.textContent = expanded ? ">" : "v";
-            if (!expanded) {
-                event.preventDefault();
-            }
-        }
-        document.addEventListener("DOMContentLoaded", function() {
-            document.querySelectorAll(".has-submenu > a").forEach(function(el) {
-                let li = el.closest("li");
-                let sm = li.querySelector(".submenu");
-                if (sm.getAttribute("data-expanded") === "true") {
-                    el.querySelector(".arrow").textContent = "v";
-                }
-            });
-        });
-    </script>
 </head>
 <body>
     <header>
@@ -98,7 +91,8 @@
         </nav>
         <div class="search-container">
             <span class="search-icon">🔍</span>
-            <input type="text" id="search-input" class="search-input" placeholder="Search docs..." onkeyup="filterNavigation()">
+            <input type="text" id="search-input" class="search-input" placeholder="Search docs...  (Ctrl+K)">
+            <div id="search-results"></div>
         </div>
     </header>
 
@@ -237,17 +231,130 @@
 
     <script>
         document.addEventListener("DOMContentLoaded", function() {
-            const observer = new IntersectionObserver(function(entries) {
-                entries.forEach(function(entry) {
-                    if (entry.isIntersecting) {
-                        entry.target.classList.add("reveal");
+            // --- Scroll-reveal for feature cards ---
+            (function() {
+                var observer = new IntersectionObserver(function(entries) {
+                    entries.forEach(function(entry) {
+                        if (entry.isIntersecting) {
+                            entry.target.classList.add("reveal");
+                            observer.unobserve(entry.target);
+                        }
+                    });
+                }, { threshold: 0.1 });
+                var cards = document.querySelectorAll(".feature-card");
+                for (var i = 0; i < cards.length; i++) observer.observe(cards[i]);
+            })();
+
+            // --- Submenu arrow state ---
+            (function() {
+                document.querySelectorAll(".has-submenu > a").forEach(function(el) {
+                    var li = el.closest("li");
+                    var sm = li.querySelector(".submenu");
+                    if (sm && sm.getAttribute("data-expanded") === "true") {
+                        el.querySelector(".arrow").textContent = "v";
                     }
                 });
-            }, { threshold: 0.1 });
-            var cards = document.querySelectorAll(".feature-card");
-            for (var i = 0; i < cards.length; i++) {
-                observer.observe(cards[i]);
-            }
+            })();
+
+            // --- Code copy buttons ---
+            (function() {
+                document.querySelectorAll("pre > code").forEach(function(code) {
+                    var pre = code.parentElement;
+                    if (pre.classList.contains("pre-wrapper")) return;
+                    pre.classList.add("pre-wrapper");
+                    var btn = document.createElement("button");
+                    btn.className = "copy-btn";
+                    btn.textContent = "Copy";
+                    btn.setAttribute("aria-label", "Copy code to clipboard");
+                    btn.addEventListener("click", function() {
+                        var text = code.textContent;
+                        navigator.clipboard.writeText(text).then(function() {
+                            btn.textContent = "Copied!";
+                            btn.classList.add("copied");
+                            setTimeout(function() { btn.textContent = "Copy"; btn.classList.remove("copied"); }, 2000);
+                        });
+                    });
+                    pre.appendChild(btn);
+                });
+            })();
+
+            // --- Full-text search via Fuse.js ---
+            (function() {
+                var input = document.getElementById("search-input");
+                var resultsEl = document.getElementById("search-results");
+                if (!input || !resultsEl || typeof Fuse === "undefined") return;
+
+                var fuse;
+                fetch(input.getAttribute("data-index") || "assets/search-index.json")
+                    .then(function(r) { return r.json(); })
+                    .then(function(data) {
+                        fuse = new Fuse(data, {
+                            keys: ["title", "description", "text"],
+                            threshold: 0.4,
+                            includeScore: true,
+                            minMatchCharLength: 2
+                        });
+                        // restore sidebar filter as fallback
+                        var oldFilter = input.onkeyup;
+                        input.onkeyup = function() {
+                            var query = input.value.trim();
+                            if (query.length < 2) { resultsEl.classList.remove("show"); return; }
+                            var results = fuse.search(query);
+                            var html = "";
+                            if (results.length === 0) {
+                                html = '<div class="result-empty">No results found</div>';
+                            } else {
+                                for (var i = 0; i < Math.min(results.length, 10); i++) {
+                                    var r = results[i].item;
+                                    html += '<a href="' + r.path + '" class="result-item">' +
+                                        '<div class="result-title">' + r.title + '</div>' +
+                                        '<div class="result-desc">' + r.description + '</div>' +
+                                        '</a>';
+                                }
+                            }
+                            resultsEl.innerHTML = html;
+                            resultsEl.classList.add("show");
+                        };
+                        input.addEventListener("blur", function() {
+                            setTimeout(function() { resultsEl.classList.remove("show"); }, 200);
+                        });
+                        input.addEventListener("focus", function() {
+                            if (input.value.trim().length >= 2) resultsEl.classList.add("show");
+                        });
+                    });
+
+                // Ctrl+K / Cmd+K focus
+                document.addEventListener("keydown", function(e) {
+                    if ((e.ctrlKey || e.metaKey) && e.key === "k") {
+                        e.preventDefault();
+                        input.focus();
+                        input.select();
+                    }
+                });
+            })();
+
+            // --- Scroll-spy TOC ---
+            (function() {
+                var tocLinks = document.querySelectorAll(".toc-links a");
+                if (tocLinks.length === 0) return;
+                var headings = [];
+                tocLinks.forEach(function(a) {
+                    var id = a.getAttribute("href").slice(1);
+                    var el = document.getElementById(id);
+                    if (el) headings.push({ el: el, link: a.parentElement });
+                });
+                if (headings.length === 0) return;
+                var observer = new IntersectionObserver(function(entries) {
+                    entries.forEach(function(entry) {
+                        if (entry.isIntersecting) {
+                            headings.forEach(function(h) { h.link.classList.remove("active"); });
+                            var found = headings.find(function(h) { return h.el === entry.target; });
+                            if (found) found.link.classList.add("active");
+                        }
+                    });
+                }, { rootMargin: "-80px 0px -60% 0px" });
+                headings.forEach(function(h) { observer.observe(h.el); });
+            })();
         });
     </script>
 </body>
