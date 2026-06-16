@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Write and run your very first hello world program in Djazair.">
+    <title>First Program | Djazair Documentation</title>
+    <link rel="stylesheet" href="../assets/style.css">
+    <script>
+        function filterNavigation() {
+            const query = document.getElementById("search-input").value.toLowerCase();
+            const links = document.querySelectorAll(".sidebar-links a");
+            links.forEach(link => {
+                const text = link.textContent.toLowerCase();
+                const parent = link.parentElement;
+                if (text.includes(query)) {
+                    parent.style.display = "";
+                    let hasSub = parent.closest("li.has-submenu");
+                    if (hasSub) { hasSub.style.display = ""; }
+                    let sub = parent.closest(".submenu");
+                    if (sub) { sub.setAttribute("data-expanded", "true"); }
+                } else {
+                    parent.style.display = "none";
+                }
+            });
+        }
+        function toggleSubmenu(event, el) {
+            const li = el.closest("li.has-submenu");
+            const submenu = li.querySelector(".submenu");
+            const expanded = submenu.getAttribute("data-expanded") === "true";
+            submenu.setAttribute("data-expanded", !expanded);
+            const arrow = el.querySelector(".arrow");
+            if (arrow) arrow.textContent = expanded ? ">" : "v";
+            if (!expanded) {
+                event.preventDefault();
+            }
+        }
+        document.addEventListener("DOMContentLoaded", function() {
+            document.querySelectorAll(".has-submenu > a").forEach(function(el) {
+                let li = el.closest("li");
+                let sm = li.querySelector(".submenu");
+                if (sm.getAttribute("data-expanded") === "true") {
+                    el.querySelector(".arrow").textContent = "v";
+                }
+            });
+        });
+    </script>
+</head>
+<body>
+    <header>
+        <div class="logo-container">
+            <div class="logo-icon">Dz</div>
+            <div class="logo-text">Djazair</div>
+            <div class="logo-version">v1.0.5</div>
+        </div>
+        <nav class="top-nav">
+            <a href="../index.html" >Home</a>
+            <a href="../getting-started/installation.html" class="active">Getting Started</a>
+            <a href="../language-guide/comments.html" >Language Guide</a>
+            <a href="../examples/hello-world.html" >Examples</a>
+            <a href="../reference/keywords.html" >Reference</a>
+            <a href="../faq.html" >FAQ</a>
+        </nav>
+        <div class="search-container">
+            <span class="search-icon">🔍</span>
+            <input type="text" id="search-input" class="search-input" placeholder="Search docs..." onkeyup="filterNavigation()">
+        </div>
+    </header>
+
+    <div class="app-container">
+        <aside class="sidebar">
+            <div class="sidebar-section">
+  <div class="sidebar-title">Getting Started</div>
+  <ul class="sidebar-links">
+    <li><a href="../getting-started/installation.html" >Installation</a></li>
+    <li><a href="../getting-started/first-program.html" class="active">First Program</a></li>
+    <li><a href="../getting-started/running-programs.html" >Running Programs</a></li>
+  </ul>
+</div>
+<div class="sidebar-section">
+  <div class="sidebar-title">Language Guide</div>
+  <ul class="sidebar-links">
+    <li><a href="../language-guide/comments.html" >Comments</a></li>
+    <li><a href="../language-guide/variables.html" >Variables</a></li>
+    <li><a href="../language-guide/data-types.html" >Data Types</a></li>
+    <li><a href="../language-guide/input-output.html" >Input & Output</a></li>
+    <li><a href="../language-guide/operators.html" >Operators</a></li>
+    <li><a href="../language-guide/conditions.html" >Conditions</a></li>
+    <li><a href="../language-guide/loops.html" >Loops</a></li>
+    <li><a href="../language-guide/arrays.html" >Arrays</a></li>
+    <li><a href="../language-guide/strings.html" >Strings</a></li>
+    <li><a href="../language-guide/maps.html" >Maps</a></li>
+    <li><a href="../language-guide/functions.html" >Functions</a></li>
+    <li><a href="../language-guide/modules.html" >Modules</a></li>
+    <li><a href="../language-guide/classes.html" >Classes</a></li>
+    <li><a href="../language-guide/error-handling.html" >Error Handling</a></li>
+    <li><a href="../language-guide/async-await.html" >Async / Await</a></li>
+  </ul>
+</div>
+<div class="sidebar-section">
+  <div class="sidebar-title">Examples</div>
+  <ul class="sidebar-links">
+    <li><a href="../examples/hello-world.html" >Hello World</a></li>
+    <li><a href="../examples/calculator.html" >Calculator</a></li>
+    <li><a href="../examples/todo-app.html" >Todo App</a></li>
+    <li><a href="../examples/file-processing.html" >File Processing</a></li>
+  </ul>
+</div>
+<div class="sidebar-section">
+  <div class="sidebar-title">Reference</div>
+  <ul class="sidebar-links">
+    <li><a href="../reference/embedding.html" >Embedding API</a></li>
+  </ul>
+</div>
+        </aside>
+
+        <main class="content-wrapper">
+            <div class="content-body">
+                <div class="breadcrumbs">
+                    <a href="../index.html">Home</a>
+<span class="separator">/</span>
+<span>Getting Started</span>
+<span class="separator">/</span>
+<span class="active">First Program</span>
+                </div>
+                
+                <article>
+                    
+<h1>Your First Djazair Program</h1>
+<p>In this guide, we will write, structure, and run our very first program in Djazair.</p>
+
+<h2 id="writing-the-script">Writing the Script</h2>
+<p>Create a file named <code>hello.dz</code> in your preferred editor. Paste the following line of code into it:</p>
+<pre><code><span class="comment"># Hello world in Djazair</span>
+<span class="nd">print</span>(<span class="str">"Hello from Djazair!"</span>)</code></pre>
+
+<h2 id="running-the-script">Running the Script</h2>
+<p>Invoke the Djazair interpreter pointing to the script file:</p>
+<pre class="bash"><code># Executing hello.dz
+./build/bin/djazair hello.dz
+</code></pre>
+<p>You should see the output printed to the terminal console:</p>
+<pre class="text"><code>Hello from Djazair!</code></pre>
+
+<h2 id="interactive-expression-testing">Interactive Expression Testing</h2>
+<p>Djazair also supports running inline code snippets without a file by utilizing the <code>-c</code> CLI command option:</p>
+<pre class="bash"><code>djazair -c 'print("Inline: " + str(10 + 20))'
+# Output => Inline: 30
+</code></pre>
+
+                </article>
+
+                <div class="page-navigation">
+                    
+            <a href="../getting-started/installation.html" class="nav-card">
+                <span class="nav-label">Previous</span>
+                <span class="nav-title">Installation</span>
+            </a>
+            
+            <a href="../getting-started/running-programs.html" class="nav-card next">
+                <span class="nav-label">Next</span>
+                <span class="nav-title">Running Programs</span>
+            </a>
+            
+                </div>
+
+                <footer>
+                    <div>&copy; 2026 Harizi Riyadh. Released under the MIT License.</div>
+                    <div>Official Documentation Website for Djazair.</div>
+                </footer>
+            </div>
+        </main>
+
+        <aside class="toc-wrapper">
+            <div class="toc-title">On this page</div>
+            <ul class="toc-links">
+                <li class=""><a href="#writing-the-script">Writing the Script</a></li>
+<li class=""><a href="#running-the-script">Running the Script</a></li>
+<li class=""><a href="#interactive-expression-testing">Interactive Expression Testing</a></li>
+            </ul>
+        </aside>
+    </div>
+</body>
+</html>

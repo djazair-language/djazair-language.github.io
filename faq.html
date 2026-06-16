@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Frequently Asked Questions about Djazair syntax, internals, and performance.">
+    <title>FAQ | Djazair Documentation</title>
+    <link rel="stylesheet" href="assets/style.css">
+    <script>
+        function filterNavigation() {
+            const query = document.getElementById("search-input").value.toLowerCase();
+            const links = document.querySelectorAll(".sidebar-links a");
+            links.forEach(link => {
+                const text = link.textContent.toLowerCase();
+                const parent = link.parentElement;
+                if (text.includes(query)) {
+                    parent.style.display = "";
+                    let hasSub = parent.closest("li.has-submenu");
+                    if (hasSub) { hasSub.style.display = ""; }
+                    let sub = parent.closest(".submenu");
+                    if (sub) { sub.setAttribute("data-expanded", "true"); }
+                } else {
+                    parent.style.display = "none";
+                }
+            });
+        }
+        function toggleSubmenu(event, el) {
+            const li = el.closest("li.has-submenu");
+            const submenu = li.querySelector(".submenu");
+            const expanded = submenu.getAttribute("data-expanded") === "true";
+            submenu.setAttribute("data-expanded", !expanded);
+            const arrow = el.querySelector(".arrow");
+            if (arrow) arrow.textContent = expanded ? ">" : "v";
+            if (!expanded) {
+                event.preventDefault();
+            }
+        }
+        document.addEventListener("DOMContentLoaded", function() {
+            document.querySelectorAll(".has-submenu > a").forEach(function(el) {
+                let li = el.closest("li");
+                let sm = li.querySelector(".submenu");
+                if (sm.getAttribute("data-expanded") === "true") {
+                    el.querySelector(".arrow").textContent = "v";
+                }
+            });
+        });
+    </script>
+</head>
+<body>
+    <header>
+        <div class="logo-container">
+            <div class="logo-icon">Dz</div>
+            <div class="logo-text">Djazair</div>
+            <div class="logo-version">v1.0.5</div>
+        </div>
+        <nav class="top-nav">
+            <a href="index.html" >Home</a>
+            <a href="getting-started/installation.html" >Getting Started</a>
+            <a href="language-guide/comments.html" >Language Guide</a>
+            <a href="examples/hello-world.html" >Examples</a>
+            <a href="reference/keywords.html" >Reference</a>
+            <a href="faq.html" class="active">FAQ</a>
+        </nav>
+        <div class="search-container">
+            <span class="search-icon">🔍</span>
+            <input type="text" id="search-input" class="search-input" placeholder="Search docs..." onkeyup="filterNavigation()">
+        </div>
+    </header>
+
+    <div class="app-container">
+        <aside class="sidebar">
+            <div class="sidebar-section">
+  <div class="sidebar-title">Getting Started</div>
+  <ul class="sidebar-links">
+    <li><a href="getting-started/installation.html" >Installation</a></li>
+    <li><a href="getting-started/first-program.html" >First Program</a></li>
+    <li><a href="getting-started/running-programs.html" >Running Programs</a></li>
+  </ul>
+</div>
+<div class="sidebar-section">
+  <div class="sidebar-title">Language Guide</div>
+  <ul class="sidebar-links">
+    <li><a href="language-guide/comments.html" >Comments</a></li>
+    <li><a href="language-guide/variables.html" >Variables</a></li>
+    <li><a href="language-guide/data-types.html" >Data Types</a></li>
+    <li><a href="language-guide/input-output.html" >Input & Output</a></li>
+    <li><a href="language-guide/operators.html" >Operators</a></li>
+    <li><a href="language-guide/conditions.html" >Conditions</a></li>
+    <li><a href="language-guide/loops.html" >Loops</a></li>
+    <li><a href="language-guide/arrays.html" >Arrays</a></li>
+    <li><a href="language-guide/strings.html" >Strings</a></li>
+    <li><a href="language-guide/maps.html" >Maps</a></li>
+    <li><a href="language-guide/functions.html" >Functions</a></li>
+    <li><a href="language-guide/modules.html" >Modules</a></li>
+    <li><a href="language-guide/classes.html" >Classes</a></li>
+    <li><a href="language-guide/error-handling.html" >Error Handling</a></li>
+    <li><a href="language-guide/async-await.html" >Async / Await</a></li>
+  </ul>
+</div>
+<div class="sidebar-section">
+  <div class="sidebar-title">Examples</div>
+  <ul class="sidebar-links">
+    <li><a href="examples/hello-world.html" >Hello World</a></li>
+    <li><a href="examples/calculator.html" >Calculator</a></li>
+    <li><a href="examples/todo-app.html" >Todo App</a></li>
+    <li><a href="examples/file-processing.html" >File Processing</a></li>
+  </ul>
+</div>
+<div class="sidebar-section">
+  <div class="sidebar-title">Reference</div>
+  <ul class="sidebar-links">
+    <li><a href="reference/embedding.html" >Embedding API</a></li>
+  </ul>
+</div>
+        </aside>
+
+        <main class="content-wrapper">
+            <div class="content-body">
+                <div class="breadcrumbs">
+                    <a href="index.html">Home</a>
+<span class="separator">/</span>
+<span class="active">FAQ</span>
+                </div>
+                
+                <article>
+                    
+<h1>Frequently Asked Questions</h1>
+
+<h2 id="1--is-djazair-compiled-or-interpreted">1. Is Djazair compiled or interpreted?</h2>
+<p>Djazair features a hybrid design inspired by modern byte-oriented engines. The compiler parses your code, resolves scopes, compiles variables and functions into streamlined bytecode instruction chunks, and executes them on a fast virtual stack-based VM.</p>
+
+<h2 id="2--how-does-the-memory-management-work">2. How does the memory management work?</h2>
+<p>Djazair features an automated Mark-and-Sweep garbage collector (GC). Local allocations, strings, dynamic array buffers, map nodes, closures, and object instances are tracked dynamically. The garbage collector triggers automatically once memory usage thresholds are crossed.</p>
+
+<h2 id="3--can-i-use-djazair-within-c-applications">3. Can I use Djazair within C applications?</h2>
+<p>Absolutely! Djazair is designed to be easily embeddable. A single include header <code>djazair.h</code> provides all API bindings to instantiate multiple isolated VM stacks, pass command-line arguments, set search folders, register custom callback logs, and execute file routines.</p>
+
+<h2 id="4--what-concurrency-paradigms-does-djazair-implement">4. What concurrency paradigms does Djazair implement?</h2>
+<p>Djazair utilizes coroutines. Asynchronous functions declared with <code>async fn</code> return coroutine pointers. Invoking <code>await [coroutine]</code> yields evaluation control back to the VM scheduler, allowing concurrent non-blocking execution streams.</p>
+
+<h2 id="5--does-the-ternary-operator-need-an-end-keyword">5. Does the ternary operator need an end keyword?</h2>
+<p>No. The ternary <code>if condition ? value else value</code> does not use an <code>end</code> keyword. Only block-level constructs like <code>if/elif/else/end</code> require <code>end</code>.</p>
+
+<h2 id="6--what-does-string-index---return-on-not-found">6. What does string.index() return on not found?</h2>
+<p>The <code>index()</code> method returns <code>-1</code> when the substring is not found — not <code>Null</code>. Check the return value with <code>== -1</code>, not <code>isNull()</code>.</p>
+
+<h2 id="7--what-is-the-difference-between-split---and-split">7. What is the difference between split() and split("")?</h2>
+<p><code>split()</code> without arguments splits on whitespace and removes empty tokens. <code>split("")</code> splits on every empty position, effectively returning an array of individual characters.</p>
+
+                </article>
+
+                <div class="page-navigation">
+                    
+            <a href="reference/embedding.html" class="nav-card">
+                <span class="nav-label">Previous</span>
+                <span class="nav-title">Embedding API</span>
+            </a>
+            <div></div>
+                </div>
+
+                <footer>
+                    <div>&copy; 2026 Harizi Riyadh. Released under the MIT License.</div>
+                    <div>Official Documentation Website for Djazair.</div>
+                </footer>
+            </div>
+        </main>
+
+        <aside class="toc-wrapper">
+            <div class="toc-title">On this page</div>
+            <ul class="toc-links">
+                <li class=""><a href="#1--is-djazair-compiled-or-interpreted">1. Is Djazair compiled or interpreted?</a></li>
+<li class=""><a href="#2--how-does-the-memory-management-work">2. How does the memory management work?</a></li>
+<li class=""><a href="#3--can-i-use-djazair-within-c-applications">3. Can I use Djazair within C applications?</a></li>
+<li class=""><a href="#4--what-concurrency-paradigms-does-djazair-implement">4. What concurrency paradigms does Djazair implement?</a></li>
+<li class=""><a href="#5--does-the-ternary-operator-need-an-end-keyword">5. Does the ternary operator need an end keyword?</a></li>
+<li class=""><a href="#6--what-does-string-index---return-on-not-found">6. What does string.index() return on not found?</a></li>
+<li class=""><a href="#7--what-is-the-difference-between-split---and-split">7. What is the difference between split() and split("")?</a></li>
+            </ul>
+        </aside>
+    </div>
+</body>
+</html>

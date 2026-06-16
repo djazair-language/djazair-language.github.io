@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Write reusable code blocks, closures, arrow functions, and default arguments.">
+    <title>Functions | Djazair Documentation</title>
+    <link rel="stylesheet" href="../assets/style.css">
+    <script>
+        function filterNavigation() {
+            const query = document.getElementById("search-input").value.toLowerCase();
+            const links = document.querySelectorAll(".sidebar-links a");
+            links.forEach(link => {
+                const text = link.textContent.toLowerCase();
+                const parent = link.parentElement;
+                if (text.includes(query)) {
+                    parent.style.display = "";
+                    let hasSub = parent.closest("li.has-submenu");
+                    if (hasSub) { hasSub.style.display = ""; }
+                    let sub = parent.closest(".submenu");
+                    if (sub) { sub.setAttribute("data-expanded", "true"); }
+                } else {
+                    parent.style.display = "none";
+                }
+            });
+        }
+        function toggleSubmenu(event, el) {
+            const li = el.closest("li.has-submenu");
+            const submenu = li.querySelector(".submenu");
+            const expanded = submenu.getAttribute("data-expanded") === "true";
+            submenu.setAttribute("data-expanded", !expanded);
+            const arrow = el.querySelector(".arrow");
+            if (arrow) arrow.textContent = expanded ? ">" : "v";
+            if (!expanded) {
+                event.preventDefault();
+            }
+        }
+        document.addEventListener("DOMContentLoaded", function() {
+            document.querySelectorAll(".has-submenu > a").forEach(function(el) {
+                let li = el.closest("li");
+                let sm = li.querySelector(".submenu");
+                if (sm.getAttribute("data-expanded") === "true") {
+                    el.querySelector(".arrow").textContent = "v";
+                }
+            });
+        });
+    </script>
+</head>
+<body>
+    <header>
+        <div class="logo-container">
+            <div class="logo-icon">Dz</div>
+            <div class="logo-text">Djazair</div>
+            <div class="logo-version">v1.0.5</div>
+        </div>
+        <nav class="top-nav">
+            <a href="../index.html" >Home</a>
+            <a href="../getting-started/installation.html" >Getting Started</a>
+            <a href="../language-guide/comments.html" class="active">Language Guide</a>
+            <a href="../examples/hello-world.html" >Examples</a>
+            <a href="../reference/keywords.html" >Reference</a>
+            <a href="../faq.html" >FAQ</a>
+        </nav>
+        <div class="search-container">
+            <span class="search-icon">🔍</span>
+            <input type="text" id="search-input" class="search-input" placeholder="Search docs..." onkeyup="filterNavigation()">
+        </div>
+    </header>
+
+    <div class="app-container">
+        <aside class="sidebar">
+            <div class="sidebar-section">
+  <div class="sidebar-title">Getting Started</div>
+  <ul class="sidebar-links">
+    <li><a href="../getting-started/installation.html" >Installation</a></li>
+    <li><a href="../getting-started/first-program.html" >First Program</a></li>
+    <li><a href="../getting-started/running-programs.html" >Running Programs</a></li>
+  </ul>
+</div>
+<div class="sidebar-section">
+  <div class="sidebar-title">Language Guide</div>
+  <ul class="sidebar-links">
+    <li><a href="../language-guide/comments.html" >Comments</a></li>
+    <li><a href="../language-guide/variables.html" >Variables</a></li>
+    <li><a href="../language-guide/data-types.html" >Data Types</a></li>
+    <li><a href="../language-guide/input-output.html" >Input & Output</a></li>
+    <li><a href="../language-guide/operators.html" >Operators</a></li>
+    <li><a href="../language-guide/conditions.html" >Conditions</a></li>
+    <li><a href="../language-guide/loops.html" >Loops</a></li>
+    <li><a href="../language-guide/arrays.html" >Arrays</a></li>
+    <li><a href="../language-guide/strings.html" >Strings</a></li>
+    <li><a href="../language-guide/maps.html" >Maps</a></li>
+    <li><a href="../language-guide/functions.html" class="active">Functions</a></li>
+    <li><a href="../language-guide/modules.html" >Modules</a></li>
+    <li><a href="../language-guide/classes.html" >Classes</a></li>
+    <li><a href="../language-guide/error-handling.html" >Error Handling</a></li>
+    <li><a href="../language-guide/async-await.html" >Async / Await</a></li>
+  </ul>
+</div>
+<div class="sidebar-section">
+  <div class="sidebar-title">Examples</div>
+  <ul class="sidebar-links">
+    <li><a href="../examples/hello-world.html" >Hello World</a></li>
+    <li><a href="../examples/calculator.html" >Calculator</a></li>
+    <li><a href="../examples/todo-app.html" >Todo App</a></li>
+    <li><a href="../examples/file-processing.html" >File Processing</a></li>
+  </ul>
+</div>
+<div class="sidebar-section">
+  <div class="sidebar-title">Reference</div>
+  <ul class="sidebar-links">
+    <li><a href="../reference/embedding.html" >Embedding API</a></li>
+  </ul>
+</div>
+        </aside>
+
+        <main class="content-wrapper">
+            <div class="content-body">
+                <div class="breadcrumbs">
+                    <a href="../index.html">Home</a>
+<span class="separator">/</span>
+<span>Language Guide</span>
+<span class="separator">/</span>
+<span class="active">Functions</span>
+                </div>
+                
+                <article>
+                    
+<h1>Functions</h1>
+<p>Functions are declared using the <code>fn</code> keyword and terminated with <code>end</code>. They are first-class citizen objects in Djazair.</p>
+
+<h2 id="standard-declaration">Standard Declaration</h2>
+<pre><code><span class="kw">fn</span> <span class="fn">calculateSum</span>(a, b)
+    <span class="kw">return</span> a <span class="op">+</span> b
+<span class="kw">end</span>
+
+<span class="nd">print</span>(<span class="fn">calculateSum</span>(<span class="num">10</span>, <span class="num">20</span>)) <span class="comment"># =&gt; 30</span></code></pre>
+
+<h2 id="default-arguments">Default Arguments</h2>
+<p>Djazair allows function parameters to have default values, which are evaluated if the argument is omitted:</p>
+<pre><code><span class="kw">fn</span> <span class="fn">greet</span>(name <span class="op">=</span> <span class="str">"Guest"</span>, prefix <span class="op">=</span> <span class="str">"Hello"</span>)
+    <span class="kw">return</span> <span class="str">"${prefix}, ${name}!"</span>
+<span class="kw">end</span>
+
+<span class="nd">print</span>(<span class="fn">greet</span>())             <span class="comment"># =&gt; Hello, Guest!</span>
+<span class="nd">print</span>(<span class="fn">greet</span>(<span class="str">"Riad"</span>, <span class="str">"Hi"</span>)) <span class="comment"># =&gt; Hi, Riad!</span></code></pre>
+
+<h2 id="rest-parameters">Rest Parameters</h2>
+<p>Collect variable amounts of arguments into a single array using the <code>...</code> syntax prefix:</p>
+<pre><code><span class="kw">fn</span> <span class="fn">printLog</span>(level, <span class="op">...</span>messages)
+    <span class="nd">print</span>(<span class="str">"[${level}]"</span>, messages<span class="op">.</span><span class="fn">join</span>(<span class="str">" "</span>))
+<span class="kw">end</span>
+
+<span class="fn">printLog</span>(<span class="str">"INFO"</span>, <span class="str">"Server started on"</span>, <span class="str">"port"</span>, <span class="num">8080</span>)
+<span class="comment"># Output =&gt; [INFO] Server started on port 8080</span></code></pre>
+
+<h2 id="arrow-functions---expressions">Arrow Functions & Expressions</h2>
+<p>Write compact lambdas using the arrow symbol (<code>=></code>):</p>
+<pre><code><span class="kw">let</span> square <span class="op">=</span> <span class="kw">fn</span>(x) <span class="op">=&</span>gt; x <span class="op">*</span> x
+<span class="nd">print</span>(<span class="fn">square</span>(<span class="num">4</span>)) <span class="comment"># =&gt; 16</span>
+
+<span class="comment"># Named function with arrow syntax</span>
+<span class="kw">fn</span> <span class="fn">double</span>(x) <span class="op">=&</span>gt; x <span class="op">*</span> <span class="num">2</span>
+<span class="nd">print</span>(<span class="fn">double</span>(<span class="num">5</span>)) <span class="comment"># =&gt; 10</span></code></pre>
+
+<h2 id="closures">Closures</h2>
+<p>Functions capture their surrounding lexical scope. Inner functions can access and modify outer variables:</p>
+<pre><code><span class="kw">fn</span> <span class="fn">makeCounter</span>()
+    <span class="kw">let</span> count <span class="op">=</span> <span class="num">0</span>
+    <span class="kw">return</span> <span class="kw">fn</span>()
+        count <span class="op">+=</span> <span class="num">1</span>
+        <span class="kw">return</span> count
+    <span class="kw">end</span>
+<span class="kw">end</span>
+<span class="kw">let</span> c <span class="op">=</span> <span class="fn">makeCounter</span>()
+<span class="nd">print</span>(<span class="fn">c</span>())  <span class="comment"># =&gt; 1</span>
+<span class="nd">print</span>(<span class="fn">c</span>())  <span class="comment"># =&gt; 2</span>
+<span class="nd">print</span>(<span class="fn">c</span>())  <span class="comment"># =&gt; 3</span></code></pre>
+
+<h2 id="higher-order-functions">Higher-Order Functions</h2>
+<p>Pass functions to array methods for transformation, filtering, and reduction:</p>
+<pre><code><span class="kw">let</span> nums <span class="op">=</span> [<span class="num">1</span>, <span class="num">2</span>, <span class="num">3</span>, <span class="num">4</span>, <span class="num">5</span>]
+<span class="nd">print</span>(nums<span class="op">.</span><span class="fn">map</span>(<span class="kw">fn</span>(x) <span class="op">=&</span>gt; x <span class="op">*</span> <span class="num">2</span>))       <span class="comment"># =&gt; [2, 4, 6, 8, 10]</span>
+<span class="nd">print</span>(nums<span class="op">.</span><span class="fn">filter</span>(<span class="kw">fn</span>(x) <span class="op">=&</span>gt; x <span class="op">&</span>gt; <span class="num">2</span>))    <span class="comment"># =&gt; [3, 4, 5]</span>
+<span class="nd">print</span>(nums<span class="op">.</span><span class="fn">reduce</span>(<span class="kw">fn</span>(a, x) <span class="op">=&</span>gt; a <span class="op">+</span> x, <span class="num">0</span>)) <span class="comment"># =&gt; 15</span>
+
+<span class="comment"># Method chaining</span>
+<span class="kw">let</span> result <span class="op">=</span> [<span class="num">1</span>, <span class="num">2</span>, <span class="num">3</span>, <span class="num">4</span>, <span class="num">5</span>]
+    <span class="op">.</span><span class="fn">filter</span>(<span class="kw">fn</span>(x) <span class="op">=&</span>gt; x <span class="op">%</span> <span class="num">2</span> <span class="op">==</span> <span class="num">0</span>)
+    <span class="op">.</span><span class="fn">map</span>(<span class="kw">fn</span>(x) <span class="op">=&</span>gt; x <span class="op">*</span> <span class="num">10</span>)
+    <span class="op">.</span><span class="fn">reduce</span>(<span class="kw">fn</span>(acc, x) <span class="op">=&</span>gt; acc <span class="op">+</span> x, <span class="num">0</span>)
+<span class="nd">print</span>(result) <span class="comment"># =&gt; 60</span></code></pre>
+
+<h2 id="async-functions">Async Functions</h2>
+<p>Declare asynchronous functions using <code>async fn</code>. They return coroutines that can be awaited:</p>
+<pre><code><span class="kw">async</span> <span class="kw">fn</span> <span class="fn">fetchData</span>()
+    <span class="comment"># Simulate async work</span>
+    <span class="kw">return</span> <span class="num">42</span>
+<span class="kw">end</span>
+
+<span class="kw">let</span> task <span class="op">=</span> <span class="fn">fetchData</span>()
+<span class="kw">let</span> result <span class="op">=</span> <span class="kw">await</span> task
+<span class="nd">print</span>(result) <span class="comment"># =&gt; 42</span></code></pre>
+
+                </article>
+
+                <div class="page-navigation">
+                    
+            <a href="../language-guide/maps.html" class="nav-card">
+                <span class="nav-label">Previous</span>
+                <span class="nav-title">Maps</span>
+            </a>
+            
+            <a href="../language-guide/modules.html" class="nav-card next">
+                <span class="nav-label">Next</span>
+                <span class="nav-title">Modules</span>
+            </a>
+            
+                </div>
+
+                <footer>
+                    <div>&copy; 2026 Harizi Riyadh. Released under the MIT License.</div>
+                    <div>Official Documentation Website for Djazair.</div>
+                </footer>
+            </div>
+        </main>
+
+        <aside class="toc-wrapper">
+            <div class="toc-title">On this page</div>
+            <ul class="toc-links">
+                <li class=""><a href="#standard-declaration">Standard Declaration</a></li>
+<li class=""><a href="#default-arguments">Default Arguments</a></li>
+<li class=""><a href="#rest-parameters">Rest Parameters</a></li>
+<li class=""><a href="#arrow-functions---expressions">Arrow Functions & Expressions</a></li>
+<li class=""><a href="#closures">Closures</a></li>
+<li class=""><a href="#higher-order-functions">Higher-Order Functions</a></li>
+<li class=""><a href="#async-functions">Async Functions</a></li>
+            </ul>
+        </aside>
+    </div>
+</body>
+</html>

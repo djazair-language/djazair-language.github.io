@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Concurrent programming with coroutines using async and await.">
+    <title>Async / Await | Djazair Documentation</title>
+    <link rel="stylesheet" href="../assets/style.css">
+    <script>
+        function filterNavigation() {
+            const query = document.getElementById("search-input").value.toLowerCase();
+            const links = document.querySelectorAll(".sidebar-links a");
+            links.forEach(link => {
+                const text = link.textContent.toLowerCase();
+                const parent = link.parentElement;
+                if (text.includes(query)) {
+                    parent.style.display = "";
+                    let hasSub = parent.closest("li.has-submenu");
+                    if (hasSub) { hasSub.style.display = ""; }
+                    let sub = parent.closest(".submenu");
+                    if (sub) { sub.setAttribute("data-expanded", "true"); }
+                } else {
+                    parent.style.display = "none";
+                }
+            });
+        }
+        function toggleSubmenu(event, el) {
+            const li = el.closest("li.has-submenu");
+            const submenu = li.querySelector(".submenu");
+            const expanded = submenu.getAttribute("data-expanded") === "true";
+            submenu.setAttribute("data-expanded", !expanded);
+            const arrow = el.querySelector(".arrow");
+            if (arrow) arrow.textContent = expanded ? ">" : "v";
+            if (!expanded) {
+                event.preventDefault();
+            }
+        }
+        document.addEventListener("DOMContentLoaded", function() {
+            document.querySelectorAll(".has-submenu > a").forEach(function(el) {
+                let li = el.closest("li");
+                let sm = li.querySelector(".submenu");
+                if (sm.getAttribute("data-expanded") === "true") {
+                    el.querySelector(".arrow").textContent = "v";
+                }
+            });
+        });
+    </script>
+</head>
+<body>
+    <header>
+        <div class="logo-container">
+            <div class="logo-icon">Dz</div>
+            <div class="logo-text">Djazair</div>
+            <div class="logo-version">v1.0.5</div>
+        </div>
+        <nav class="top-nav">
+            <a href="../index.html" >Home</a>
+            <a href="../getting-started/installation.html" >Getting Started</a>
+            <a href="../language-guide/comments.html" class="active">Language Guide</a>
+            <a href="../examples/hello-world.html" >Examples</a>
+            <a href="../reference/keywords.html" >Reference</a>
+            <a href="../faq.html" >FAQ</a>
+        </nav>
+        <div class="search-container">
+            <span class="search-icon">🔍</span>
+            <input type="text" id="search-input" class="search-input" placeholder="Search docs..." onkeyup="filterNavigation()">
+        </div>
+    </header>
+
+    <div class="app-container">
+        <aside class="sidebar">
+            <div class="sidebar-section">
+  <div class="sidebar-title">Getting Started</div>
+  <ul class="sidebar-links">
+    <li><a href="../getting-started/installation.html" >Installation</a></li>
+    <li><a href="../getting-started/first-program.html" >First Program</a></li>
+    <li><a href="../getting-started/running-programs.html" >Running Programs</a></li>
+  </ul>
+</div>
+<div class="sidebar-section">
+  <div class="sidebar-title">Language Guide</div>
+  <ul class="sidebar-links">
+    <li><a href="../language-guide/comments.html" >Comments</a></li>
+    <li><a href="../language-guide/variables.html" >Variables</a></li>
+    <li><a href="../language-guide/data-types.html" >Data Types</a></li>
+    <li><a href="../language-guide/input-output.html" >Input & Output</a></li>
+    <li><a href="../language-guide/operators.html" >Operators</a></li>
+    <li><a href="../language-guide/conditions.html" >Conditions</a></li>
+    <li><a href="../language-guide/loops.html" >Loops</a></li>
+    <li><a href="../language-guide/arrays.html" >Arrays</a></li>
+    <li><a href="../language-guide/strings.html" >Strings</a></li>
+    <li><a href="../language-guide/maps.html" >Maps</a></li>
+    <li><a href="../language-guide/functions.html" >Functions</a></li>
+    <li><a href="../language-guide/modules.html" >Modules</a></li>
+    <li><a href="../language-guide/classes.html" >Classes</a></li>
+    <li><a href="../language-guide/error-handling.html" >Error Handling</a></li>
+    <li><a href="../language-guide/async-await.html" class="active">Async / Await</a></li>
+  </ul>
+</div>
+<div class="sidebar-section">
+  <div class="sidebar-title">Examples</div>
+  <ul class="sidebar-links">
+    <li><a href="../examples/hello-world.html" >Hello World</a></li>
+    <li><a href="../examples/calculator.html" >Calculator</a></li>
+    <li><a href="../examples/todo-app.html" >Todo App</a></li>
+    <li><a href="../examples/file-processing.html" >File Processing</a></li>
+  </ul>
+</div>
+<div class="sidebar-section">
+  <div class="sidebar-title">Reference</div>
+  <ul class="sidebar-links">
+    <li><a href="../reference/embedding.html" >Embedding API</a></li>
+  </ul>
+</div>
+        </aside>
+
+        <main class="content-wrapper">
+            <div class="content-body">
+                <div class="breadcrumbs">
+                    <a href="../index.html">Home</a>
+<span class="separator">/</span>
+<span>Language Guide</span>
+<span class="separator">/</span>
+<span class="active">Async / Await</span>
+                </div>
+                
+                <article>
+                    
+<h1>Async / Await</h1>
+<p>Djazair supports coroutine-based concurrency using <code>async fn</code> and <code>await</code>.</p>
+
+<h2 id="async-functions">Async Functions</h2>
+<p>Declare with <code>async fn</code>. They return a coroutine instead of executing immediately:</p>
+<pre><code><span class="kw">async</span> <span class="kw">fn</span> <span class="fn">fetchData</span>()
+    <span class="comment"># Simulate async work</span>
+    <span class="kw">return</span> <span class="num">42</span>
+<span class="kw">end</span>
+
+<span class="kw">let</span> task <span class="op">=</span> <span class="fn">fetchData</span>()
+<span class="nd">print</span>(task)  <span class="comment"># Coroutine object</span></code></pre>
+
+<h2 id="awaiting-results">Awaiting Results</h2>
+<p>Use <code>await</code> to block until the coroutine completes and get its return value:</p>
+<pre><code><span class="kw">let</span> result <span class="op">=</span> <span class="kw">await</span> task
+<span class="nd">print</span>(result)  <span class="comment"># =&gt; 42</span></code></pre>
+
+<h2 id="multiple-async-calls">Multiple Async Calls</h2>
+<p>Launch several coroutines and await them:</p>
+<pre><code><span class="kw">async</span> <span class="kw">fn</span> <span class="fn">getValue</span>(n)
+    <span class="kw">return</span> n <span class="op">*</span> <span class="num">2</span>
+<span class="kw">end</span>
+
+<span class="kw">let</span> t1 <span class="op">=</span> <span class="fn">getValue</span>(<span class="num">10</span>)
+<span class="kw">let</span> t2 <span class="op">=</span> <span class="fn">getValue</span>(<span class="num">20</span>)
+<span class="kw">let</span> r1 <span class="op">=</span> <span class="kw">await</span> t1
+<span class="kw">let</span> r2 <span class="op">=</span> <span class="kw">await</span> t2
+<span class="nd">print</span>(r1 <span class="op">+</span> r2)  <span class="comment"># =&gt; 60</span></code></pre>
+
+<h2 id="async-methods-in-classes">Async Methods in Classes</h2>
+<p>Async methods in classes do not use the <code>fn</code> keyword — just <code>async</code> directly:</p>
+<pre><code><span class="kw">class</span> Fetcher
+    <span class="kw">async</span> <span class="fn">load</span>(id)
+        <span class="kw">return</span> <span class="str">"data_"</span> <span class="op">+</span> <span class="nd">str</span>(id)
+    <span class="kw">end</span>
+<span class="kw">end</span>
+
+<span class="kw">let</span> f <span class="op">=</span> <span class="fn">Fetcher</span>()
+<span class="kw">let</span> result <span class="op">=</span> <span class="kw">await</span> f<span class="op">.</span><span class="fn">load</span>(<span class="num">42</span>)
+<span class="nd">print</span>(result)  <span class="comment"># =&gt; "data_42"</span></code></pre>
+
+<div class="alert alert-note">
+    <p><strong>Note:</strong> Exceptions inside async coroutines propagate when <code>await</code>ed in the parent context.</p>
+</div>
+
+                </article>
+
+                <div class="page-navigation">
+                    
+            <a href="../language-guide/error-handling.html" class="nav-card">
+                <span class="nav-label">Previous</span>
+                <span class="nav-title">Error Handling</span>
+            </a>
+            
+            <a href="../examples/hello-world.html" class="nav-card next">
+                <span class="nav-label">Next</span>
+                <span class="nav-title">Hello World</span>
+            </a>
+            
+                </div>
+
+                <footer>
+                    <div>&copy; 2026 Harizi Riyadh. Released under the MIT License.</div>
+                    <div>Official Documentation Website for Djazair.</div>
+                </footer>
+            </div>
+        </main>
+
+        <aside class="toc-wrapper">
+            <div class="toc-title">On this page</div>
+            <ul class="toc-links">
+                <li class=""><a href="#async-functions">Async Functions</a></li>
+<li class=""><a href="#awaiting-results">Awaiting Results</a></li>
+<li class=""><a href="#multiple-async-calls">Multiple Async Calls</a></li>
+<li class=""><a href="#async-methods-in-classes">Async Methods in Classes</a></li>
+            </ul>
+        </aside>
+    </div>
+</body>
+</html>

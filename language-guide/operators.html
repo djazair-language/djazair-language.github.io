@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Examine mathematical, comparison, logical, assignment, and membership operators.">
+    <title>Operators | Djazair Documentation</title>
+    <link rel="stylesheet" href="../assets/style.css">
+    <script>
+        function filterNavigation() {
+            const query = document.getElementById("search-input").value.toLowerCase();
+            const links = document.querySelectorAll(".sidebar-links a");
+            links.forEach(link => {
+                const text = link.textContent.toLowerCase();
+                const parent = link.parentElement;
+                if (text.includes(query)) {
+                    parent.style.display = "";
+                    let hasSub = parent.closest("li.has-submenu");
+                    if (hasSub) { hasSub.style.display = ""; }
+                    let sub = parent.closest(".submenu");
+                    if (sub) { sub.setAttribute("data-expanded", "true"); }
+                } else {
+                    parent.style.display = "none";
+                }
+            });
+        }
+        function toggleSubmenu(event, el) {
+            const li = el.closest("li.has-submenu");
+            const submenu = li.querySelector(".submenu");
+            const expanded = submenu.getAttribute("data-expanded") === "true";
+            submenu.setAttribute("data-expanded", !expanded);
+            const arrow = el.querySelector(".arrow");
+            if (arrow) arrow.textContent = expanded ? ">" : "v";
+            if (!expanded) {
+                event.preventDefault();
+            }
+        }
+        document.addEventListener("DOMContentLoaded", function() {
+            document.querySelectorAll(".has-submenu > a").forEach(function(el) {
+                let li = el.closest("li");
+                let sm = li.querySelector(".submenu");
+                if (sm.getAttribute("data-expanded") === "true") {
+                    el.querySelector(".arrow").textContent = "v";
+                }
+            });
+        });
+    </script>
+</head>
+<body>
+    <header>
+        <div class="logo-container">
+            <div class="logo-icon">Dz</div>
+            <div class="logo-text">Djazair</div>
+            <div class="logo-version">v1.0.5</div>
+        </div>
+        <nav class="top-nav">
+            <a href="../index.html" >Home</a>
+            <a href="../getting-started/installation.html" >Getting Started</a>
+            <a href="../language-guide/comments.html" class="active">Language Guide</a>
+            <a href="../examples/hello-world.html" >Examples</a>
+            <a href="../reference/keywords.html" >Reference</a>
+            <a href="../faq.html" >FAQ</a>
+        </nav>
+        <div class="search-container">
+            <span class="search-icon">🔍</span>
+            <input type="text" id="search-input" class="search-input" placeholder="Search docs..." onkeyup="filterNavigation()">
+        </div>
+    </header>
+
+    <div class="app-container">
+        <aside class="sidebar">
+            <div class="sidebar-section">
+  <div class="sidebar-title">Getting Started</div>
+  <ul class="sidebar-links">
+    <li><a href="../getting-started/installation.html" >Installation</a></li>
+    <li><a href="../getting-started/first-program.html" >First Program</a></li>
+    <li><a href="../getting-started/running-programs.html" >Running Programs</a></li>
+  </ul>
+</div>
+<div class="sidebar-section">
+  <div class="sidebar-title">Language Guide</div>
+  <ul class="sidebar-links">
+    <li><a href="../language-guide/comments.html" >Comments</a></li>
+    <li><a href="../language-guide/variables.html" >Variables</a></li>
+    <li><a href="../language-guide/data-types.html" >Data Types</a></li>
+    <li><a href="../language-guide/input-output.html" >Input & Output</a></li>
+    <li><a href="../language-guide/operators.html" class="active">Operators</a></li>
+    <li><a href="../language-guide/conditions.html" >Conditions</a></li>
+    <li><a href="../language-guide/loops.html" >Loops</a></li>
+    <li><a href="../language-guide/arrays.html" >Arrays</a></li>
+    <li><a href="../language-guide/strings.html" >Strings</a></li>
+    <li><a href="../language-guide/maps.html" >Maps</a></li>
+    <li><a href="../language-guide/functions.html" >Functions</a></li>
+    <li><a href="../language-guide/modules.html" >Modules</a></li>
+    <li><a href="../language-guide/classes.html" >Classes</a></li>
+    <li><a href="../language-guide/error-handling.html" >Error Handling</a></li>
+    <li><a href="../language-guide/async-await.html" >Async / Await</a></li>
+  </ul>
+</div>
+<div class="sidebar-section">
+  <div class="sidebar-title">Examples</div>
+  <ul class="sidebar-links">
+    <li><a href="../examples/hello-world.html" >Hello World</a></li>
+    <li><a href="../examples/calculator.html" >Calculator</a></li>
+    <li><a href="../examples/todo-app.html" >Todo App</a></li>
+    <li><a href="../examples/file-processing.html" >File Processing</a></li>
+  </ul>
+</div>
+<div class="sidebar-section">
+  <div class="sidebar-title">Reference</div>
+  <ul class="sidebar-links">
+    <li><a href="../reference/embedding.html" >Embedding API</a></li>
+  </ul>
+</div>
+        </aside>
+
+        <main class="content-wrapper">
+            <div class="content-body">
+                <div class="breadcrumbs">
+                    <a href="../index.html">Home</a>
+<span class="separator">/</span>
+<span>Language Guide</span>
+<span class="separator">/</span>
+<span class="active">Operators</span>
+                </div>
+                
+                <article>
+                    
+<h1>Operators Reference</h1>
+<p>Djazair provides standard arithmetic, comparison, logical, bitwise, assignment, increment/decrement, and identity operators.</p>
+
+<h2 id="arithmetic-operators">Arithmetic Operators</h2>
+<p>Basic mathematical calculations:</p>
+<pre><code><span class="kw">let</span> sum <span class="op">=</span> <span class="num">10</span> <span class="op">+</span> <span class="num">5</span>    <span class="comment"># Addition =&gt; 15</span>
+<span class="kw">let</span> diff <span class="op">=</span> <span class="num">10</span> <span class="op">-</span> <span class="num">5</span>   <span class="comment"># Subtraction =&gt; 5</span>
+<span class="kw">let</span> prod <span class="op">=</span> <span class="num">10</span> <span class="op">*</span> <span class="num">5</span>   <span class="comment"># Multiplication =&gt; 50</span>
+<span class="kw">let</span> div <span class="op">=</span> <span class="num">10</span> <span class="op">/</span> <span class="num">4</span>    <span class="comment"># Division =&gt; 2.5</span>
+<span class="kw">let</span> fdiv <span class="op">=</span> <span class="num">10</span> <span class="op">//</span> <span class="num">4</span>  <span class="comment"># Floor division =&gt; 2</span>
+<span class="kw">let</span> power <span class="op">=</span> <span class="num">2</span> <span class="op">**</span> <span class="num">3</span>  <span class="comment"># Exponentiation =&gt; 8</span>
+<span class="kw">let</span> rem <span class="op">=</span> <span class="num">10</span> <span class="op">%</span> <span class="num">3</span>    <span class="comment"># Modulo =&gt; 1</span></code></pre>
+
+<h2 id="increment---decrement">Increment & Decrement</h2>
+<p>Both prefix and postfix forms are supported:</p>
+<pre><code><span class="kw">let</span> n <span class="op">=</span> <span class="num">5</span>
+<span class="nd">print</span>(n<span class="op">++</span>)  <span class="comment"># Postfix: prints 5, then increments to 6</span>
+<span class="nd">print</span>(<span class="op">++</span>n)  <span class="comment"># Prefix: increments to 7, prints 7</span>
+<span class="nd">print</span>(n<span class="op">--</span>)  <span class="comment"># Postfix: prints 7, then decrements to 6</span>
+<span class="nd">print</span>(<span class="op">--</span>n)  <span class="comment"># Prefix: decrements to 5, prints 5</span></code></pre>
+
+<h2 id="logical-operators">Logical Operators</h2>
+<p>Logical chaining uses descriptive keywords: <code>and</code>, <code>or</code>, and <code>not</code>:</p>
+<pre><code><span class="kw">let</span> condition1 <span class="op">=</span> <span class="kw">True</span>
+<span class="kw">let</span> condition2 <span class="op">=</span> <span class="kw">False</span>
+
+<span class="nd">print</span>(condition1 <span class="kw">and</span> condition2) <span class="comment"># =&gt; False</span>
+<span class="nd">print</span>(condition1 <span class="kw">or</span> condition2)  <span class="comment"># =&gt; True</span>
+<span class="nd">print</span>(<span class="kw">not</span> condition1)            <span class="comment"># =&gt; False</span></code></pre>
+
+<h2 id="identity-operators--is---is-not">Identity Operators (is / is not)</h2>
+<p>Check if two variables reference the same object in memory:</p>
+<pre><code><span class="kw">let</span> a <span class="op">=</span> [<span class="num">1</span>, <span class="num">2</span>]
+<span class="kw">let</span> b <span class="op">=</span> a
+<span class="kw">let</span> c <span class="op">=</span> [<span class="num">1</span>, <span class="num">2</span>]
+<span class="nd">print</span>(a <span class="kw">is</span> b)      <span class="comment"># =&gt; True  (same reference)</span>
+<span class="nd">print</span>(a <span class="kw">is</span> c)      <span class="comment"># =&gt; False (different objects)</span>
+<span class="nd">print</span>(a <span class="kw">is</span> <span class="kw">not</span> c)  <span class="comment"># =&gt; True</span>
+<span class="nd">print</span>(<span class="kw">Null</span> <span class="kw">is</span> <span class="kw">Null</span>) <span class="comment"># =&gt; True</span></code></pre>
+
+<h2 id="type-checking--instanceof">Type Checking (instanceof)</h2>
+<p>Check if a value is an instance of a given type (pass type name as a string):</p>
+<pre><code><span class="nd">print</span>(<span class="num">42</span> <span class="kw">instanceof</span> <span class="str">"Number"</span>)    <span class="comment"># =&gt; True</span>
+<span class="nd">print</span>(<span class="str">"hi"</span> <span class="kw">instanceof</span> <span class="str">"String"</span>)  <span class="comment"># =&gt; True</span>
+<span class="nd">print</span>(<span class="kw">True</span> <span class="kw">instanceof</span> <span class="str">"Bool"</span>)    <span class="comment"># =&gt; True</span>
+<span class="nd">print</span>(<span class="kw">Null</span> <span class="kw">instanceof</span> <span class="str">"Null"</span>)    <span class="comment"># =&gt; True</span>
+<span class="nd">print</span>([<span class="num">1</span>,<span class="num">2</span>] <span class="kw">instanceof</span> <span class="str">"Array"</span>)  <span class="comment"># =&gt; True</span>
+<span class="nd">print</span>({<span class="str">"a"</span><span class="op">:</span><span class="num">1</span>} <span class="kw">instanceof</span> <span class="str">"Map"</span>)  <span class="comment"># =&gt; True</span>
+
+<span class="kw">class</span> Animal <span class="kw">end</span>
+<span class="kw">class</span> Dog <span class="kw">is</span> Animal <span class="kw">end</span>
+<span class="kw">let</span> d <span class="op">=</span> <span class="fn">Dog</span>()
+<span class="nd">print</span>(d <span class="kw">instanceof</span> Dog)     <span class="comment"># =&gt; True</span>
+<span class="nd">print</span>(d <span class="kw">instanceof</span> Animal)  <span class="comment"># =&gt; True (inheritance)</span></code></pre>
+
+<h2 id="membership-operators--in---not-in">Membership Operators (in / not in)</h2>
+<p>Check if items exist in strings, arrays, or maps:</p>
+<pre><code><span class="nd">print</span>(<span class="num">2</span> <span class="kw">in</span> [<span class="num">1</span>, <span class="num">2</span>, <span class="num">3</span>])       <span class="comment"># =&gt; True</span>
+<span class="nd">print</span>(<span class="num">5</span> <span class="kw">not</span> <span class="kw">in</span> [<span class="num">1</span>, <span class="num">2</span>, <span class="num">3</span>])   <span class="comment"># =&gt; True</span>
+<span class="nd">print</span>(<span class="str">"name"</span> <span class="kw">in</span> {<span class="str">"name"</span><span class="op">:</span> <span class="str">"A"</span>}) <span class="comment"># =&gt; True (key exists)</span>
+<span class="nd">print</span>(<span class="str">"orld"</span> <span class="kw">in</span> <span class="str">"Hello World"</span>) <span class="comment"># =&gt; True (substring)</span></code></pre>
+
+                </article>
+
+                <div class="page-navigation">
+                    
+            <a href="../language-guide/input-output.html" class="nav-card">
+                <span class="nav-label">Previous</span>
+                <span class="nav-title">Input & Output</span>
+            </a>
+            
+            <a href="../language-guide/conditions.html" class="nav-card next">
+                <span class="nav-label">Next</span>
+                <span class="nav-title">Conditions</span>
+            </a>
+            
+                </div>
+
+                <footer>
+                    <div>&copy; 2026 Harizi Riyadh. Released under the MIT License.</div>
+                    <div>Official Documentation Website for Djazair.</div>
+                </footer>
+            </div>
+        </main>
+
+        <aside class="toc-wrapper">
+            <div class="toc-title">On this page</div>
+            <ul class="toc-links">
+                <li class=""><a href="#arithmetic-operators">Arithmetic Operators</a></li>
+<li class=""><a href="#increment---decrement">Increment & Decrement</a></li>
+<li class=""><a href="#logical-operators">Logical Operators</a></li>
+<li class=""><a href="#identity-operators--is---is-not">Identity Operators (is / is not)</a></li>
+<li class=""><a href="#type-checking--instanceof">Type Checking (instanceof)</a></li>
+<li class=""><a href="#membership-operators--in---not-in">Membership Operators (in / not in)</a></li>
+            </ul>
+        </aside>
+    </div>
+</body>
+</html>

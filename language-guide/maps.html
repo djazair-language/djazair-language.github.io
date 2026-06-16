@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Create and manipulate key-value hash maps with built-in methods.">
+    <title>Maps | Djazair Documentation</title>
+    <link rel="stylesheet" href="../assets/style.css">
+    <script>
+        function filterNavigation() {
+            const query = document.getElementById("search-input").value.toLowerCase();
+            const links = document.querySelectorAll(".sidebar-links a");
+            links.forEach(link => {
+                const text = link.textContent.toLowerCase();
+                const parent = link.parentElement;
+                if (text.includes(query)) {
+                    parent.style.display = "";
+                    let hasSub = parent.closest("li.has-submenu");
+                    if (hasSub) { hasSub.style.display = ""; }
+                    let sub = parent.closest(".submenu");
+                    if (sub) { sub.setAttribute("data-expanded", "true"); }
+                } else {
+                    parent.style.display = "none";
+                }
+            });
+        }
+        function toggleSubmenu(event, el) {
+            const li = el.closest("li.has-submenu");
+            const submenu = li.querySelector(".submenu");
+            const expanded = submenu.getAttribute("data-expanded") === "true";
+            submenu.setAttribute("data-expanded", !expanded);
+            const arrow = el.querySelector(".arrow");
+            if (arrow) arrow.textContent = expanded ? ">" : "v";
+            if (!expanded) {
+                event.preventDefault();
+            }
+        }
+        document.addEventListener("DOMContentLoaded", function() {
+            document.querySelectorAll(".has-submenu > a").forEach(function(el) {
+                let li = el.closest("li");
+                let sm = li.querySelector(".submenu");
+                if (sm.getAttribute("data-expanded") === "true") {
+                    el.querySelector(".arrow").textContent = "v";
+                }
+            });
+        });
+    </script>
+</head>
+<body>
+    <header>
+        <div class="logo-container">
+            <div class="logo-icon">Dz</div>
+            <div class="logo-text">Djazair</div>
+            <div class="logo-version">v1.0.5</div>
+        </div>
+        <nav class="top-nav">
+            <a href="../index.html" >Home</a>
+            <a href="../getting-started/installation.html" >Getting Started</a>
+            <a href="../language-guide/comments.html" class="active">Language Guide</a>
+            <a href="../examples/hello-world.html" >Examples</a>
+            <a href="../reference/keywords.html" >Reference</a>
+            <a href="../faq.html" >FAQ</a>
+        </nav>
+        <div class="search-container">
+            <span class="search-icon">🔍</span>
+            <input type="text" id="search-input" class="search-input" placeholder="Search docs..." onkeyup="filterNavigation()">
+        </div>
+    </header>
+
+    <div class="app-container">
+        <aside class="sidebar">
+            <div class="sidebar-section">
+  <div class="sidebar-title">Getting Started</div>
+  <ul class="sidebar-links">
+    <li><a href="../getting-started/installation.html" >Installation</a></li>
+    <li><a href="../getting-started/first-program.html" >First Program</a></li>
+    <li><a href="../getting-started/running-programs.html" >Running Programs</a></li>
+  </ul>
+</div>
+<div class="sidebar-section">
+  <div class="sidebar-title">Language Guide</div>
+  <ul class="sidebar-links">
+    <li><a href="../language-guide/comments.html" >Comments</a></li>
+    <li><a href="../language-guide/variables.html" >Variables</a></li>
+    <li><a href="../language-guide/data-types.html" >Data Types</a></li>
+    <li><a href="../language-guide/input-output.html" >Input & Output</a></li>
+    <li><a href="../language-guide/operators.html" >Operators</a></li>
+    <li><a href="../language-guide/conditions.html" >Conditions</a></li>
+    <li><a href="../language-guide/loops.html" >Loops</a></li>
+    <li><a href="../language-guide/arrays.html" >Arrays</a></li>
+    <li><a href="../language-guide/strings.html" >Strings</a></li>
+    <li><a href="../language-guide/maps.html" class="active">Maps</a></li>
+    <li><a href="../language-guide/functions.html" >Functions</a></li>
+    <li><a href="../language-guide/modules.html" >Modules</a></li>
+    <li><a href="../language-guide/classes.html" >Classes</a></li>
+    <li><a href="../language-guide/error-handling.html" >Error Handling</a></li>
+    <li><a href="../language-guide/async-await.html" >Async / Await</a></li>
+  </ul>
+</div>
+<div class="sidebar-section">
+  <div class="sidebar-title">Examples</div>
+  <ul class="sidebar-links">
+    <li><a href="../examples/hello-world.html" >Hello World</a></li>
+    <li><a href="../examples/calculator.html" >Calculator</a></li>
+    <li><a href="../examples/todo-app.html" >Todo App</a></li>
+    <li><a href="../examples/file-processing.html" >File Processing</a></li>
+  </ul>
+</div>
+<div class="sidebar-section">
+  <div class="sidebar-title">Reference</div>
+  <ul class="sidebar-links">
+    <li><a href="../reference/embedding.html" >Embedding API</a></li>
+  </ul>
+</div>
+        </aside>
+
+        <main class="content-wrapper">
+            <div class="content-body">
+                <div class="breadcrumbs">
+                    <a href="../index.html">Home</a>
+<span class="separator">/</span>
+<span>Language Guide</span>
+<span class="separator">/</span>
+<span class="active">Maps</span>
+                </div>
+                
+                <article>
+                    
+<h1>Maps</h1>
+<p>Maps (dictionaries) are unordered key-value hash tables. Keys can be any type.</p>
+
+<h2 id="creating-maps">Creating Maps</h2>
+<pre><code><span class="kw">let</span> empty <span class="op">=</span> {}
+<span class="kw">let</span> user <span class="op">=</span> {<span class="str">"name"</span><span class="op">:</span> <span class="str">"Riad"</span>, <span class="str">"age"</span><span class="op">:</span> <span class="num">30</span>, <span class="str">"active"</span><span class="op">:</span> <span class="kw">True</span>}
+<span class="nd">print</span>(user[<span class="str">"name"</span>])  <span class="comment"># =&gt; Riad</span></code></pre>
+
+<h2 id="map-methods">Map Methods</h2>
+<table>
+    <thead><tr><th>Method</th><th>Description</th></tr></thead>
+    <tbody>
+        <tr><td><code>length()</code></td><td>Number of entries</td></tr>
+        <tr><td><code>keys()</code></td><td>Array of keys</td></tr>
+        <tr><td><code>values()</code></td><td>Array of values</td></tr>
+        <tr><td><code>items()</code></td><td>Array of [key, value] pairs</td></tr>
+        <tr><td><code>has(key)</code></td><td>Check if key exists</td></tr>
+        <tr><td><code>get(key)</code></td><td>Get value (Null if missing)</td></tr>
+        <tr><td><code>copy()</code></td><td>Shallow copy of map</td></tr>
+        <tr><td><code>clear()</code></td><td>Remove all entries</td></tr>
+        <tr><td><code>pop(key)</code></td><td>Remove key and return value</td></tr>
+        <tr><td><code>setDefault(k, v)</code></td><td>Set only if key missing</td></tr>
+        <tr><td><code>update(other)</code></td><td>Merge entries from another map</td></tr>
+    </tbody>
+</table>
+
+<h2 id="examples">Examples</h2>
+<pre><code><span class="kw">let</span> m <span class="op">=</span> {<span class="str">"a"</span><span class="op">:</span> <span class="num">1</span>, <span class="str">"b"</span><span class="op">:</span> <span class="num">2</span>}
+<span class="nd">print</span>(m<span class="op">.</span><span class="fn">length</span>())          <span class="comment"># =&gt; 2</span>
+<span class="nd">print</span>(m<span class="op">.</span><span class="fn">has</span>(<span class="str">"a"</span>))          <span class="comment"># =&gt; True</span>
+<span class="nd">print</span>(m<span class="op">.</span><span class="fn">keys</span>())            <span class="comment"># =&gt; ["a", "b"]</span>
+<span class="nd">print</span>(m<span class="op">.</span><span class="fn">values</span>())          <span class="comment"># =&gt; [1, 2]</span>
+<span class="nd">print</span>(m<span class="op">.</span><span class="fn">get</span>(<span class="str">"a"</span>))          <span class="comment"># =&gt; 1</span>
+<span class="nd">print</span>(m<span class="op">.</span><span class="fn">get</span>(<span class="str">"x"</span>))          <span class="comment"># =&gt; Null</span>
+m<span class="op">.</span><span class="fn">setDefault</span>(<span class="str">"c"</span>, <span class="num">3</span>)       <span class="comment"># adds {"c": 3}</span>
+<span class="nd">print</span>(m<span class="op">.</span><span class="fn">pop</span>(<span class="str">"a"</span>))          <span class="comment"># =&gt; 1  (removes "a")</span>
+m<span class="op">.</span><span class="fn">update</span>({<span class="str">"d"</span><span class="op">:</span> <span class="num">4</span>})         <span class="comment"># adds {"d": 4}</span></code></pre>
+
+<h2 id="iteration">Iteration</h2>
+<pre><code><span class="kw">for</span> key, value <span class="kw">in</span> {<span class="str">"name"</span><span class="op">:</span> <span class="str">"John"</span>, <span class="str">"age"</span><span class="op">:</span> <span class="num">30</span>}
+    <span class="nd">print</span>(<span class="str">"${key}: ${value}"</span>)
+<span class="kw">end</span></code></pre>
+
+                </article>
+
+                <div class="page-navigation">
+                    
+            <a href="../language-guide/strings.html" class="nav-card">
+                <span class="nav-label">Previous</span>
+                <span class="nav-title">Strings</span>
+            </a>
+            
+            <a href="../language-guide/functions.html" class="nav-card next">
+                <span class="nav-label">Next</span>
+                <span class="nav-title">Functions</span>
+            </a>
+            
+                </div>
+
+                <footer>
+                    <div>&copy; 2026 Harizi Riyadh. Released under the MIT License.</div>
+                    <div>Official Documentation Website for Djazair.</div>
+                </footer>
+            </div>
+        </main>
+
+        <aside class="toc-wrapper">
+            <div class="toc-title">On this page</div>
+            <ul class="toc-links">
+                <li class=""><a href="#creating-maps">Creating Maps</a></li>
+<li class=""><a href="#map-methods">Map Methods</a></li>
+<li class=""><a href="#examples">Examples</a></li>
+<li class=""><a href="#iteration">Iteration</a></li>
+            </ul>
+        </aside>
+    </div>
+</body>
+</html>

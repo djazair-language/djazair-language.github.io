@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Develop using Object-Oriented paradigms: classes, inheritance, super, and self.">
+    <title>Classes | Djazair Documentation</title>
+    <link rel="stylesheet" href="../assets/style.css">
+    <script>
+        function filterNavigation() {
+            const query = document.getElementById("search-input").value.toLowerCase();
+            const links = document.querySelectorAll(".sidebar-links a");
+            links.forEach(link => {
+                const text = link.textContent.toLowerCase();
+                const parent = link.parentElement;
+                if (text.includes(query)) {
+                    parent.style.display = "";
+                    let hasSub = parent.closest("li.has-submenu");
+                    if (hasSub) { hasSub.style.display = ""; }
+                    let sub = parent.closest(".submenu");
+                    if (sub) { sub.setAttribute("data-expanded", "true"); }
+                } else {
+                    parent.style.display = "none";
+                }
+            });
+        }
+        function toggleSubmenu(event, el) {
+            const li = el.closest("li.has-submenu");
+            const submenu = li.querySelector(".submenu");
+            const expanded = submenu.getAttribute("data-expanded") === "true";
+            submenu.setAttribute("data-expanded", !expanded);
+            const arrow = el.querySelector(".arrow");
+            if (arrow) arrow.textContent = expanded ? ">" : "v";
+            if (!expanded) {
+                event.preventDefault();
+            }
+        }
+        document.addEventListener("DOMContentLoaded", function() {
+            document.querySelectorAll(".has-submenu > a").forEach(function(el) {
+                let li = el.closest("li");
+                let sm = li.querySelector(".submenu");
+                if (sm.getAttribute("data-expanded") === "true") {
+                    el.querySelector(".arrow").textContent = "v";
+                }
+            });
+        });
+    </script>
+</head>
+<body>
+    <header>
+        <div class="logo-container">
+            <div class="logo-icon">Dz</div>
+            <div class="logo-text">Djazair</div>
+            <div class="logo-version">v1.0.5</div>
+        </div>
+        <nav class="top-nav">
+            <a href="../index.html" >Home</a>
+            <a href="../getting-started/installation.html" >Getting Started</a>
+            <a href="../language-guide/comments.html" class="active">Language Guide</a>
+            <a href="../examples/hello-world.html" >Examples</a>
+            <a href="../reference/keywords.html" >Reference</a>
+            <a href="../faq.html" >FAQ</a>
+        </nav>
+        <div class="search-container">
+            <span class="search-icon">🔍</span>
+            <input type="text" id="search-input" class="search-input" placeholder="Search docs..." onkeyup="filterNavigation()">
+        </div>
+    </header>
+
+    <div class="app-container">
+        <aside class="sidebar">
+            <div class="sidebar-section">
+  <div class="sidebar-title">Getting Started</div>
+  <ul class="sidebar-links">
+    <li><a href="../getting-started/installation.html" >Installation</a></li>
+    <li><a href="../getting-started/first-program.html" >First Program</a></li>
+    <li><a href="../getting-started/running-programs.html" >Running Programs</a></li>
+  </ul>
+</div>
+<div class="sidebar-section">
+  <div class="sidebar-title">Language Guide</div>
+  <ul class="sidebar-links">
+    <li><a href="../language-guide/comments.html" >Comments</a></li>
+    <li><a href="../language-guide/variables.html" >Variables</a></li>
+    <li><a href="../language-guide/data-types.html" >Data Types</a></li>
+    <li><a href="../language-guide/input-output.html" >Input & Output</a></li>
+    <li><a href="../language-guide/operators.html" >Operators</a></li>
+    <li><a href="../language-guide/conditions.html" >Conditions</a></li>
+    <li><a href="../language-guide/loops.html" >Loops</a></li>
+    <li><a href="../language-guide/arrays.html" >Arrays</a></li>
+    <li><a href="../language-guide/strings.html" >Strings</a></li>
+    <li><a href="../language-guide/maps.html" >Maps</a></li>
+    <li><a href="../language-guide/functions.html" >Functions</a></li>
+    <li><a href="../language-guide/modules.html" >Modules</a></li>
+    <li><a href="../language-guide/classes.html" class="active">Classes</a></li>
+    <li><a href="../language-guide/error-handling.html" >Error Handling</a></li>
+    <li><a href="../language-guide/async-await.html" >Async / Await</a></li>
+  </ul>
+</div>
+<div class="sidebar-section">
+  <div class="sidebar-title">Examples</div>
+  <ul class="sidebar-links">
+    <li><a href="../examples/hello-world.html" >Hello World</a></li>
+    <li><a href="../examples/calculator.html" >Calculator</a></li>
+    <li><a href="../examples/todo-app.html" >Todo App</a></li>
+    <li><a href="../examples/file-processing.html" >File Processing</a></li>
+  </ul>
+</div>
+<div class="sidebar-section">
+  <div class="sidebar-title">Reference</div>
+  <ul class="sidebar-links">
+    <li><a href="../reference/embedding.html" >Embedding API</a></li>
+  </ul>
+</div>
+        </aside>
+
+        <main class="content-wrapper">
+            <div class="content-body">
+                <div class="breadcrumbs">
+                    <a href="../index.html">Home</a>
+<span class="separator">/</span>
+<span>Language Guide</span>
+<span class="separator">/</span>
+<span class="active">Classes</span>
+                </div>
+                
+                <article>
+                    
+<h1>Classes & OOP</h1>
+<p>Djazair implements fully featured Object-Oriented programming including classes, constructors, methods, and single inheritance.</p>
+
+<h2 id="class-declaration">Class Declaration</h2>
+<p>Declare classes, instantiate objects, and refer to properties inside methods via the <code>self</code> prefix:</p>
+<pre><code><span class="kw">class</span> User
+    <span class="kw">init</span>(name, email)
+        <span class="kw">self</span><span class="op">.</span>name <span class="op">=</span> name
+        <span class="kw">self</span><span class="op">.</span>email <span class="op">=</span> email
+    <span class="kw">end</span>
+
+    <span class="fn">describe</span>()
+        <span class="kw">return</span> <span class="str">"${self.name} &amp;lt;${self.email}&amp;gt;"</span>
+    <span class="kw">end</span>
+<span class="kw">end</span>
+
+<span class="kw">let</span> admin <span class="op">=</span> <span class="fn">User</span>(<span class="str">"Riad"</span>, <span class="str">"riad@djazair.org"</span>)
+<span class="nd">print</span>(admin<span class="op">.</span><span class="fn">describe</span>())</code></pre>
+
+<h2 id="inheritance">Inheritance</h2>
+<p>Inherit classes using the <code>is</code> keyword. Override parent functions and trigger parent constructors using the <code>super</code> namespace keyword:</p>
+<pre><code><span class="kw">class</span> Staff <span class="kw">is</span> User
+    <span class="kw">init</span>(name, email, role)
+        <span class="kw">super</span><span class="op">.</span><span class="kw">init</span>(name, email)
+        <span class="kw">self</span><span class="op">.</span>role <span class="op">=</span> role
+    <span class="kw">end</span>
+
+    <span class="fn">describe</span>()
+        <span class="kw">return</span> <span class="str">"${super.describe()} [Role: ${self.role}]"</span>
+    <span class="kw">end</span>
+<span class="kw">end</span>
+
+<span class="kw">let</span> mod <span class="op">=</span> <span class="fn">Staff</span>(<span class="str">"Sara"</span>, <span class="str">"sara@djazair.org"</span>, <span class="str">"Moderator"</span>)
+<span class="nd">print</span>(mod<span class="op">.</span><span class="fn">describe</span>())</code></pre>
+
+                </article>
+
+                <div class="page-navigation">
+                    
+            <a href="../language-guide/modules.html" class="nav-card">
+                <span class="nav-label">Previous</span>
+                <span class="nav-title">Modules</span>
+            </a>
+            
+            <a href="../language-guide/error-handling.html" class="nav-card next">
+                <span class="nav-label">Next</span>
+                <span class="nav-title">Error Handling</span>
+            </a>
+            
+                </div>
+
+                <footer>
+                    <div>&copy; 2026 Harizi Riyadh. Released under the MIT License.</div>
+                    <div>Official Documentation Website for Djazair.</div>
+                </footer>
+            </div>
+        </main>
+
+        <aside class="toc-wrapper">
+            <div class="toc-title">On this page</div>
+            <ul class="toc-links">
+                <li class=""><a href="#class-declaration">Class Declaration</a></li>
+<li class=""><a href="#inheritance">Inheritance</a></li>
+            </ul>
+        </aside>
+    </div>
+</body>
+</html>

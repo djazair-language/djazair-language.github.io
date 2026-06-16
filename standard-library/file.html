@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Read, write, append, and query files and directories.">
+    <title>file Module | Djazair Documentation</title>
+    <link rel="stylesheet" href="../assets/style.css">
+    <script>
+        function filterNavigation() {
+            const query = document.getElementById("search-input").value.toLowerCase();
+            const links = document.querySelectorAll(".sidebar-links a");
+            links.forEach(link => {
+                const text = link.textContent.toLowerCase();
+                const parent = link.parentElement;
+                if (text.includes(query)) {
+                    parent.style.display = "";
+                    let hasSub = parent.closest("li.has-submenu");
+                    if (hasSub) { hasSub.style.display = ""; }
+                    let sub = parent.closest(".submenu");
+                    if (sub) { sub.setAttribute("data-expanded", "true"); }
+                } else {
+                    parent.style.display = "none";
+                }
+            });
+        }
+        function toggleSubmenu(event, el) {
+            const li = el.closest("li.has-submenu");
+            const submenu = li.querySelector(".submenu");
+            const expanded = submenu.getAttribute("data-expanded") === "true";
+            submenu.setAttribute("data-expanded", !expanded);
+            const arrow = el.querySelector(".arrow");
+            if (arrow) arrow.textContent = expanded ? ">" : "v";
+            if (!expanded) {
+                event.preventDefault();
+            }
+        }
+        document.addEventListener("DOMContentLoaded", function() {
+            document.querySelectorAll(".has-submenu > a").forEach(function(el) {
+                let li = el.closest("li");
+                let sm = li.querySelector(".submenu");
+                if (sm.getAttribute("data-expanded") === "true") {
+                    el.querySelector(".arrow").textContent = "v";
+                }
+            });
+        });
+    </script>
+</head>
+<body>
+    <header>
+        <div class="logo-container">
+            <div class="logo-icon">Dz</div>
+            <div class="logo-text">Djazair</div>
+            <div class="logo-version">v1.0.5</div>
+        </div>
+        <nav class="top-nav">
+            <a href="../index.html" >Home</a>
+            <a href="../getting-started/installation.html" >Getting Started</a>
+            <a href="../language-guide/comments.html" >Language Guide</a>
+            <a href="../standard-library/index.html" class="active">Std Library</a>
+            <a href="../examples/hello-world.html" >Examples</a>
+            <a href="../reference/keywords.html" >Reference</a>
+            <a href="../faq.html" >FAQ</a>
+        </nav>
+        <div class="search-container">
+            <span class="search-icon">🔍</span>
+            <input type="text" id="search-input" class="search-input" placeholder="Search docs..." onkeyup="filterNavigation()">
+        </div>
+    </header>
+
+    <div class="app-container">
+        <aside class="sidebar">
+            <div class="sidebar-section">
+  <div class="sidebar-title">Getting Started</div>
+  <ul class="sidebar-links">
+    <li><a href="../getting-started/installation.html" >Installation</a></li>
+    <li><a href="../getting-started/first-program.html" >First Program</a></li>
+    <li><a href="../getting-started/running-programs.html" >Running Programs</a></li>
+  </ul>
+</div>
+<div class="sidebar-section">
+  <div class="sidebar-title">Language Guide</div>
+  <ul class="sidebar-links">
+    <li><a href="../language-guide/comments.html" >Comments</a></li>
+    <li><a href="../language-guide/variables.html" >Variables</a></li>
+    <li><a href="../language-guide/data-types.html" >Data Types</a></li>
+    <li><a href="../language-guide/input-output.html" >Input & Output</a></li>
+    <li><a href="../language-guide/operators.html" >Operators</a></li>
+    <li><a href="../language-guide/conditions.html" >Conditions</a></li>
+    <li><a href="../language-guide/loops.html" >Loops</a></li>
+    <li><a href="../language-guide/arrays.html" >Arrays</a></li>
+    <li><a href="../language-guide/strings.html" >Strings</a></li>
+    <li><a href="../language-guide/maps.html" >Maps</a></li>
+    <li><a href="../language-guide/functions.html" >Functions</a></li>
+    <li><a href="../language-guide/modules.html" >Modules</a></li>
+    <li><a href="../language-guide/classes.html" >Classes</a></li>
+    <li><a href="../language-guide/error-handling.html" >Error Handling</a></li>
+    <li><a href="../language-guide/async-await.html" >Async / Await</a></li>
+  </ul>
+</div>
+<div class="sidebar-section">
+  <div class="sidebar-title">Standard Library</div>
+  <ul class="sidebar-links">
+    <li><a href="../standard-library/index.html" >Overview</a></li>
+    <li class="has-submenu"><a href="../standard-library/assert.html" class="submenu-toggle" onclick="toggleSubmenu(event, this)">assert Module <span class="arrow">></span></a>
+      <ul class="submenu" data-expanded="false">
+        <li><a href="../standard-library/assert.html#truthiness-assertions" class="sub-link">Truthiness Assertions</a></li>
+        <li><a href="../standard-library/assert.html#value-assertions" class="sub-link">Value Assertions</a></li>
+        <li><a href="../standard-library/assert.html#type-assertions" class="sub-link">Type Assertions</a></li>
+      </ul>
+    </li>
+    <li class="has-submenu"><a href="../standard-library/bytes.html" class="submenu-toggle" onclick="toggleSubmenu(event, this)">bytes Module <span class="arrow">></span></a>
+      <ul class="submenu" data-expanded="false">
+        <li><a href="../standard-library/bytes.html#creation--conversion" class="sub-link">Creation & Conversion</a></li>
+        <li><a href="../standard-library/bytes.html#manipulation" class="sub-link">Manipulation</a></li>
+      </ul>
+    </li>
+    <li><a href="../standard-library/collections.html" >collections Module</a></li>
+    <li><a href="../standard-library/crypto.html" >crypto Module</a></li>
+    <li class="has-submenu"><a href="../standard-library/datetime.html" class="submenu-toggle" onclick="toggleSubmenu(event, this)">datetime Module <span class="arrow">></span></a>
+      <ul class="submenu" data-expanded="false">
+        <li><a href="../standard-library/datetime.html#time-functions" class="sub-link">Time Functions</a></li>
+        <li><a href="../standard-library/datetime.html#date-class" class="sub-link">Date Class</a></li>
+      </ul>
+    </li>
+    <li><a href="../standard-library/dir.html" >dir Module</a></li>
+    <li><a href="../standard-library/env.html" >env Module</a></li>
+    <li class="has-submenu"><a href="../standard-library/file.html" class="submenu-toggle active" onclick="toggleSubmenu(event, this)">file Module <span class="arrow">v</span></a>
+      <ul class="submenu" data-expanded="true">
+        <li><a href="../standard-library/file.html#read--write-operations" class="sub-link">Read & Write</a></li>
+        <li><a href="../standard-library/file.html#file-manipulation" class="sub-link">File Manipulation</a></li>
+        <li><a href="../standard-library/file.html#status-query" class="sub-link">Status Query</a></li>
+      </ul>
+    </li>
+    <li class="has-submenu"><a href="../standard-library/http.html" class="submenu-toggle" onclick="toggleSubmenu(event, this)">http Module <span class="arrow">></span></a>
+      <ul class="submenu" data-expanded="false">
+        <li><a href="../standard-library/http.html#http-client" class="sub-link">HTTP Client</a></li>
+        <li><a href="../standard-library/http.html#http-server" class="sub-link">HTTP Server</a></li>
+        <li><a href="../standard-library/http.html#classes--helpers" class="sub-link">Classes & Helpers</a></li>
+      </ul>
+    </li>
+    <li><a href="../standard-library/json.html" >json Module</a></li>
+    <li class="has-submenu"><a href="../standard-library/lang.html" class="submenu-toggle" onclick="toggleSubmenu(event, this)">lang Module <span class="arrow">></span></a>
+      <ul class="submenu" data-expanded="false">
+        <li><a href="../standard-library/lang.html#runtime-info" class="sub-link">Runtime Info</a></li>
+        <li><a href="../standard-library/lang.html#control" class="sub-link">Control</a></li>
+        <li><a href="../standard-library/lang.html#introspection" class="sub-link">Introspection</a></li>
+        <li><a href="../standard-library/lang.html#library-paths--queries" class="sub-link">Library Paths</a></li>
+      </ul>
+    </li>
+    <li class="has-submenu"><a href="../standard-library/math.html" class="submenu-toggle" onclick="toggleSubmenu(event, this)">math Module <span class="arrow">></span></a>
+      <ul class="submenu" data-expanded="false">
+        <li><a href="../standard-library/math.html#constants" class="sub-link">Constants</a></li>
+        <li><a href="../standard-library/math.html#trigonometry" class="sub-link">Trigonometry</a></li>
+        <li><a href="../standard-library/math.html#exponentiation--logs" class="sub-link">Exponentiation & Logs</a></li>
+        <li><a href="../standard-library/math.html#rounding--absolute" class="sub-link">Rounding</a></li>
+        <li><a href="../standard-library/math.html#comparison--statistics" class="sub-link">Statistics</a></li>
+      </ul>
+    </li>
+    <li class="has-submenu"><a href="../standard-library/net.html" class="submenu-toggle" onclick="toggleSubmenu(event, this)">net Module <span class="arrow">></span></a>
+      <ul class="submenu" data-expanded="false">
+        <li><a href="../standard-library/net.html#classes--exports" class="sub-link">Classes & Exports</a></li>
+        <li><a href="../standard-library/net.html#tcp-server-example" class="sub-link">TCP Server</a></li>
+        <li><a href="../standard-library/net.html#tcp-client-example" class="sub-link">TCP Client</a></li>
+      </ul>
+    </li>
+    <li class="has-submenu"><a href="../standard-library/os.html" class="submenu-toggle" onclick="toggleSubmenu(event, this)">os Module <span class="arrow">></span></a>
+      <ul class="submenu" data-expanded="false">
+        <li><a href="../standard-library/os.html#platform-detection" class="sub-link">Platform Detection</a></li>
+        <li><a href="../standard-library/os.html#system-information" class="sub-link">System Information</a></li>
+        <li><a href="../standard-library/os.html#user--temporary-files" class="sub-link">User & Temp Files</a></li>
+      </ul>
+    </li>
+    <li class="has-submenu"><a href="../standard-library/path.html" class="submenu-toggle" onclick="toggleSubmenu(event, this)">path Module <span class="arrow">></span></a>
+      <ul class="submenu" data-expanded="false">
+        <li><a href="../standard-library/path.html#constants" class="sub-link">Constants</a></li>
+        <li><a href="../standard-library/path.html#join--resolve" class="sub-link">Join & Resolve</a></li>
+        <li><a href="../standard-library/path.html#decomposition" class="sub-link">Decomposition</a></li>
+        <li><a href="../standard-library/path.html#query--security" class="sub-link">Query & Security</a></li>
+      </ul>
+    </li>
+    <li class="has-submenu"><a href="../standard-library/process.html" class="submenu-toggle" onclick="toggleSubmenu(event, this)">process Module <span class="arrow">></span></a>
+      <ul class="submenu" data-expanded="false">
+        <li><a href="../standard-library/process.html#process-identification" class="sub-link">Identification</a></li>
+        <li><a href="../standard-library/process.html#process-control" class="sub-link">Process Control</a></li>
+        <li><a href="../standard-library/process.html#working-directory" class="sub-link">Working Directory</a></li>
+        <li><a href="../standard-library/process.html#command-execution" class="sub-link">Command Execution</a></li>
+        <li><a href="../standard-library/process.html#cli-arguments--script-location" class="sub-link">CLI & Script</a></li>
+        <li><a href="../standard-library/process.html#asynchronous-spawning" class="sub-link">Async Spawning</a></li>
+      </ul>
+    </li>
+    <li><a href="../standard-library/random.html" >random Module</a></li>
+    <li class="has-submenu"><a href="../standard-library/regex.html" class="submenu-toggle" onclick="toggleSubmenu(event, this)">regex Module <span class="arrow">></span></a>
+      <ul class="submenu" data-expanded="false">
+        <li><a href="../standard-library/regex.html#flags" class="sub-link">Flags</a></li>
+        <li><a href="../standard-library/regex.html#pattern-class" class="sub-link">Pattern Class</a></li>
+        <li><a href="../standard-library/regex.html#match-class" class="sub-link">Match Class</a></li>
+        <li><a href="../standard-library/regex.html#convenience-functions" class="sub-link">Convenience Functions</a></li>
+      </ul>
+    </li>
+    <li class="has-submenu"><a href="../standard-library/thread.html" class="submenu-toggle" onclick="toggleSubmenu(event, this)">thread Module <span class="arrow">></span></a>
+      <ul class="submenu" data-expanded="false">
+        <li><a href="../standard-library/thread.html#thread-class" class="sub-link">Thread Class</a></li>
+        <li><a href="../standard-library/thread.html#worker-side-functions" class="sub-link">Worker Functions</a></li>
+        <li><a href="../standard-library/thread.html#convenience-functions" class="sub-link">Convenience</a></li>
+      </ul>
+    </li>
+    <li><a href="../standard-library/uuid.html" >uuid Module</a></li>
+  </ul>
+</div>
+<div class="sidebar-section">
+  <div class="sidebar-title">Examples</div>
+  <ul class="sidebar-links">
+    <li><a href="../examples/hello-world.html" >Hello World</a></li>
+    <li><a href="../examples/calculator.html" >Calculator</a></li>
+    <li><a href="../examples/todo-app.html" >Todo App</a></li>
+    <li><a href="../examples/file-processing.html" >File Processing</a></li>
+  </ul>
+</div>
+<div class="sidebar-section">
+  <div class="sidebar-title">Reference</div>
+  <ul class="sidebar-links">
+    <li><a href="../reference/keywords.html" >Keywords</a></li>
+    <li><a href="../reference/operators.html" >Operators</a></li>
+    <li><a href="../reference/builtins.html" >Built-in Functions</a></li>
+    <li><a href="../reference/methods.html" >Methods</a></li>
+    <li><a href="../reference/syntax-reference.html" >Syntax Reference</a></li>
+    <li><a href="../reference/embedding.html" >Embedding API</a></li>
+  </ul>
+</div>
+        </aside>
+
+        <main class="content-wrapper">
+            <div class="content-body">
+                <div class="breadcrumbs">
+                    <a href="../index.html">Home</a>
+<span class="separator">/</span>
+<span>Standard Library</span>
+<span class="separator">/</span>
+<span class="active">file Module</span>
+                </div>
+                
+                <article>
+                    
+<h1>File Module</h1>
+<p>Import using: <code>use file</code></p>
+
+<h2 id="read--amp--write-operations">Read &amp; Write Operations</h2>
+<ul>
+    <li><code>file.read(path)</code> - Read entire file as string.</li>
+    <li><code>file.readLines(path)</code> - Read file as array of lines.</li>
+    <li><code>file.readBytes(path)</code> - Read file as byte array (0-255).</li>
+    <li><code>file.write(path, text)</code> - Write text, replacing existing content. Returns True.</li>
+    <li><code>file.writeBytes(path, data)</code> - Write byte array in binary mode. Returns True.</li>
+    <li><code>file.writeLines(path, lines)</code> - Write array of lines, each followed by newline. Returns True.</li>
+    <li><code>file.append(path, text)</code> - Append text to end of file. Returns True.</li>
+    <li><code>file.appendLines(path, lines)</code> - Append lines to file. Returns True.</li>
+    <li><code>file.truncate(path, size)</code> - Truncate file to given byte size. Returns True.</li>
+</ul>
+<pre><code><span class="kw">use</span> file
+<span class="comment"># Write and read text</span>
+file<span class="op">.</span><span class="fn">write</span>(<span class="str">"sample.txt"</span>, <span class="str">"Hello World\nLine 2"</span>)
+<span class="kw">let</span> data <span class="op">=</span> file<span class="op">.</span><span class="fn">read</span>(<span class="str">"sample.txt"</span>)
+<span class="nd">print</span>(data)
+<span class="kw">let</span> lines <span class="op">=</span> file<span class="op">.</span><span class="fn">readLines</span>(<span class="str">"sample.txt"</span>)
+<span class="nd">print</span>(<span class="nd">str</span>(lines<span class="op">.</span><span class="fn">length</span>()))  <span class="comment"># 2</span>
+
+<span class="comment"># Binary read/write</span>
+file<span class="op">.</span><span class="fn">writeBytes</span>(<span class="str">"data.bin"</span>, [<span class="num">72</span>, <span class="num">101</span>, <span class="num">108</span>])
+<span class="kw">let</span> bytes <span class="op">=</span> file<span class="op">.</span><span class="fn">readBytes</span>(<span class="str">"data.bin"</span>)
+<span class="nd">print</span>(<span class="nd">str</span>(bytes))  <span class="comment"># [72, 101, 108]</span>
+
+<span class="comment"># Append</span>
+file<span class="op">.</span><span class="fn">append</span>(<span class="str">"sample.txt"</span>, <span class="str">"\nAppended line"</span>)
+
+<span class="comment"># WriteLines</span>
+file<span class="op">.</span><span class="fn">writeLines</span>(<span class="str">"lines.txt"</span>, [<span class="str">"a"</span>, <span class="str">"b"</span>, <span class="str">"c"</span>])</code></pre>
+
+<h2 id="advanced-file-controls--filehandle">Advanced File Controls (FileHandle)</h2>
+<p>Open files using <code>file.open(path, mode)</code> to get a stream object: Modes are "r", "w", "a", "rb", "wb":</p>
+<pre><code><span class="kw">use</span> file
+<span class="kw">let</span> handle <span class="op">=</span> file<span class="op">.</span><span class="fn">open</span>(<span class="str">"output.dat"</span>, <span class="str">"w"</span>)
+handle<span class="op">.</span><span class="fn">write</span>(<span class="str">"Raw data stream"</span>)
+handle<span class="op">.</span><span class="fn">flush</span>()
+handle<span class="op">.</span><span class="fn">close</span>()</code></pre>
+
+<h2 id="file-manipulation">File Manipulation</h2>
+<ul>
+    <li><code>file.create(path)</code> - Create empty file. Returns True.</li>
+    <li><code>file.copy(src, dest)</code> - Copy file. Returns True.</li>
+    <li><code>file.move(src, dest)</code> - Move/rename file. Returns True.</li>
+    <li><code>file.rename(old, new)</code> - Rename file (alias for move).</li>
+    <li><code>file.delete(path)</code> - Delete file. Returns True.</li>
+    <li><code>file.symlink(target, linkpath)</code> - Create symbolic link. Returns True.</li>
+    <li><code>file.readlink(path)</code> - Read symlink target (string or Null).</li>
+</ul>
+<pre><code><span class="kw">use</span> file
+file<span class="op">.</span><span class="fn">create</span>(<span class="str">"newfile.txt"</span>)
+file<span class="op">.</span><span class="fn">copy</span>(<span class="str">"newfile.txt"</span>, <span class="str">"copy.txt"</span>)
+file<span class="op">.</span><span class="fn">rename</span>(<span class="str">"copy.txt"</span>, <span class="str">"renamed.txt"</span>)
+<span class="nd">print</span>(<span class="nd">str</span>(file<span class="op">.</span><span class="fn">exists</span>(<span class="str">"renamed.txt"</span>)))  <span class="comment"># True</span>
+file<span class="op">.</span><span class="fn">delete</span>(<span class="str">"renamed.txt"</span>)
+file<span class="op">.</span><span class="fn">delete</span>(<span class="str">"newfile.txt"</span>)</code></pre>
+
+<h2 id="status-query">Status Query</h2>
+<ul>
+    <li><code>file.exists(path)</code> - Check path presence.</li>
+    <li><code>file.isDir(path)</code> - Returns True if target is directory.</li>
+    <li><code>file.isFile(path)</code> - Returns True if target is regular file.</li>
+    <li><code>file.size(path)</code> - File size in bytes.</li>
+    <li><code>file.modified(path)</code> - Last modification timestamp (Unix epoch seconds).</li>
+    <li><code>file.permissions(path)</code> - File permission mode (numeric).</li>
+    <li><code>file.stat(path)</code> - Complete stat Map (size, mtime, mode, isFile, isDir, etc.).</li>
+    <li><code>file.chmod(path, mode)</code> - Change permission mode. Returns True.</li>
+</ul>
+<pre><code><span class="kw">use</span> file
+file<span class="op">.</span><span class="fn">write</span>(<span class="str">"test.txt"</span>, <span class="str">"content"</span>)
+<span class="nd">print</span>(<span class="nd">str</span>(file<span class="op">.</span><span class="fn">exists</span>(<span class="str">"test.txt"</span>)))     <span class="comment"># True</span>
+<span class="nd">print</span>(<span class="nd">str</span>(file<span class="op">.</span><span class="fn">isFile</span>(<span class="str">"test.txt"</span>)))     <span class="comment"># True</span>
+<span class="nd">print</span>(<span class="nd">str</span>(file<span class="op">.</span><span class="fn">isDir</span>(<span class="str">"test.txt"</span>)))      <span class="comment"># False</span>
+<span class="nd">print</span>(<span class="nd">str</span>(file<span class="op">.</span><span class="fn">size</span>(<span class="str">"test.txt"</span>)))       <span class="comment"># 7</span>
+<span class="kw">let</span> s <span class="op">=</span> file<span class="op">.</span><span class="fn">stat</span>(<span class="str">"test.txt"</span>)
+<span class="nd">print</span>(s[<span class="str">"size"</span>])  <span class="comment"># 7</span>
+file<span class="op">.</span><span class="fn">delete</span>(<span class="str">"test.txt"</span>)</code></pre>
+
+                </article>
+
+                <div class="page-navigation">
+                    
+            <a href="../standard-library/env.html" class="nav-card">
+                <span class="nav-label">Previous</span>
+                <span class="nav-title">env Module</span>
+            </a>
+            
+            <a href="../standard-library/http.html" class="nav-card next">
+                <span class="nav-label">Next</span>
+                <span class="nav-title">http Module</span>
+            </a>
+            
+                </div>
+
+                <footer>
+                    <div>&copy; 2026 Harizi Riyadh. Released under the MIT License.</div>
+                    <div>Official Documentation Website for Djazair.</div>
+                </footer>
+            </div>
+        </main>
+
+        <aside class="toc-wrapper">
+            <div class="toc-title">On this page</div>
+            <ul class="toc-links">
+                <li class=""><a href="#read--amp--write-operations">Read &amp; Write Operations</a></li>
+<li class=""><a href="#advanced-file-controls--filehandle">Advanced File Controls (FileHandle)</a></li>
+<li class=""><a href="#file-manipulation">File Manipulation</a></li>
+<li class=""><a href="#status-query">Status Query</a></li>
+            </ul>
+        </aside>
+    </div>
+</body>
+</html>

@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="The Djazair Programming Language official documentation home page.">
+    <title>Home | Djazair Documentation</title>
+    <link rel="stylesheet" href="assets/style.css">
+    <script>
+        function filterNavigation() {
+            const query = document.getElementById("search-input").value.toLowerCase();
+            const links = document.querySelectorAll(".sidebar-links a");
+            links.forEach(link => {
+                const text = link.textContent.toLowerCase();
+                const parent = link.parentElement;
+                if (text.includes(query)) {
+                    parent.style.display = "";
+                    let hasSub = parent.closest("li.has-submenu");
+                    if (hasSub) { hasSub.style.display = ""; }
+                    let sub = parent.closest(".submenu");
+                    if (sub) { sub.setAttribute("data-expanded", "true"); }
+                } else {
+                    parent.style.display = "none";
+                }
+            });
+        }
+        function toggleSubmenu(event, el) {
+            const li = el.closest("li.has-submenu");
+            const submenu = li.querySelector(".submenu");
+            const expanded = submenu.getAttribute("data-expanded") === "true";
+            submenu.setAttribute("data-expanded", !expanded);
+            const arrow = el.querySelector(".arrow");
+            if (arrow) arrow.textContent = expanded ? ">" : "v";
+            if (!expanded) {
+                event.preventDefault();
+            }
+        }
+        document.addEventListener("DOMContentLoaded", function() {
+            document.querySelectorAll(".has-submenu > a").forEach(function(el) {
+                let li = el.closest("li");
+                let sm = li.querySelector(".submenu");
+                if (sm.getAttribute("data-expanded") === "true") {
+                    el.querySelector(".arrow").textContent = "v";
+                }
+            });
+        });
+    </script>
+</head>
+<body>
+    <header>
+        <div class="logo-container">
+            <div class="logo-icon">Dz</div>
+            <div class="logo-text">Djazair</div>
+            <div class="logo-version">v1.0.5</div>
+        </div>
+        <nav class="top-nav">
+            <a href="index.html" class="active">Home</a>
+            <a href="getting-started/installation.html" >Getting Started</a>
+            <a href="language-guide/comments.html" >Language Guide</a>
+            <a href="examples/hello-world.html" >Examples</a>
+            <a href="reference/keywords.html" >Reference</a>
+            <a href="faq.html" >FAQ</a>
+        </nav>
+        <div class="search-container">
+            <span class="search-icon">🔍</span>
+            <input type="text" id="search-input" class="search-input" placeholder="Search docs..." onkeyup="filterNavigation()">
+        </div>
+    </header>
+
+    <div class="app-container">
+        <aside class="sidebar">
+            <div class="sidebar-section">
+  <div class="sidebar-title">Getting Started</div>
+  <ul class="sidebar-links">
+    <li><a href="getting-started/installation.html" >Installation</a></li>
+    <li><a href="getting-started/first-program.html" >First Program</a></li>
+    <li><a href="getting-started/running-programs.html" >Running Programs</a></li>
+  </ul>
+</div>
+<div class="sidebar-section">
+  <div class="sidebar-title">Language Guide</div>
+  <ul class="sidebar-links">
+    <li><a href="language-guide/comments.html" >Comments</a></li>
+    <li><a href="language-guide/variables.html" >Variables</a></li>
+    <li><a href="language-guide/data-types.html" >Data Types</a></li>
+    <li><a href="language-guide/input-output.html" >Input & Output</a></li>
+    <li><a href="language-guide/operators.html" >Operators</a></li>
+    <li><a href="language-guide/conditions.html" >Conditions</a></li>
+    <li><a href="language-guide/loops.html" >Loops</a></li>
+    <li><a href="language-guide/arrays.html" >Arrays</a></li>
+    <li><a href="language-guide/strings.html" >Strings</a></li>
+    <li><a href="language-guide/maps.html" >Maps</a></li>
+    <li><a href="language-guide/functions.html" >Functions</a></li>
+    <li><a href="language-guide/modules.html" >Modules</a></li>
+    <li><a href="language-guide/classes.html" >Classes</a></li>
+    <li><a href="language-guide/error-handling.html" >Error Handling</a></li>
+    <li><a href="language-guide/async-await.html" >Async / Await</a></li>
+  </ul>
+</div>
+<div class="sidebar-section">
+  <div class="sidebar-title">Examples</div>
+  <ul class="sidebar-links">
+    <li><a href="examples/hello-world.html" >Hello World</a></li>
+    <li><a href="examples/calculator.html" >Calculator</a></li>
+    <li><a href="examples/todo-app.html" >Todo App</a></li>
+    <li><a href="examples/file-processing.html" >File Processing</a></li>
+  </ul>
+</div>
+<div class="sidebar-section">
+  <div class="sidebar-title">Reference</div>
+  <ul class="sidebar-links">
+    <li><a href="reference/embedding.html" >Embedding API</a></li>
+  </ul>
+</div>
+        </aside>
+
+        <main class="content-wrapper">
+            <div class="content-body">
+                <div class="breadcrumbs">
+                    <a href="index.html">Home</a>
+<span class="separator">/</span>
+<span class="active">Home</span>
+                </div>
+                
+                <article>
+                    
+<div class="hero-section">
+    <h1 class="hero-title">The Djazair Programming Language</h1>
+    <p class="hero-subtitle">A modern, expressive scripting language inspired by the soul of North Africa. Blends the expressiveness of high-level scripting with C performance.</p>
+    <div class="hero-buttons">
+        <a href="getting-started/installation.html" class="btn btn-primary">Get Started</a>
+        <a href="language-guide/comments.html" class="btn btn-secondary">Learn the Language</a>
+    </div>
+</div>
+
+<h2 id="why-djazair">Why Djazair?</h2>
+<p>Djazair is a lightweight, embeddable, dynamic scripting engine built in pure C. It features automatic memory management (garbage collection), first-class functions, robust OOP capabilities, async/await coroutines, pattern matching, and a comprehensive standard library. It is designed to be easily embedded in C/C++ projects, or run as a standalone interpreter for automation, tooling, game development, or web scripting.</p>
+
+<div class="features-grid">
+    <div class="feature-card">
+        <div class="feature-icon">⚡</div>
+        <div class="feature-title">Dynamic Scoping & Types</div>
+        <div class="feature-desc">Automatic type inference via <code>let</code> declarations, with native collections (Arrays & Maps) ready out-of-the-box.</div>
+    </div>
+    <div class="feature-card">
+        <div class="feature-icon">🚀</div>
+        <div class="feature-title">Asynchronous Concurrency</div>
+        <div class="feature-desc">First-class async/await coroutines. Run concurrent workflows, networking tasks, and file operations efficiently.</div>
+    </div>
+    <div class="feature-card">
+        <div class="feature-icon">🏛️</div>
+        <div class="feature-title">Object-Oriented Programming</div>
+        <div class="feature-desc">Fully supports OOP paradigms including classes, single inheritance, constructors, superclasses, and polymorphism.</div>
+    </div>
+    <div class="feature-card">
+        <div class="feature-icon">🔋</div>
+        <div class="feature-title">Batteries Included</div>
+        <div class="feature-desc">Rich standard library including regular expressions, cryptography (SHA-256), TCP/UDP networking, directories, threads, and math.</div>
+    </div>
+</div>
+
+<h2 id="quick-snippet-preview">Quick Snippet Preview</h2>
+<p>Here is a taste of Djazair showing functions, dynamic string interpolation, and standard library modules:</p>
+<pre><code><span class="kw">use</span> math
+
+<span class="kw">fn</span> <span class="fn">computeArea</span>(radius)
+    <span class="kw">return</span> math<span class="op">.</span>PI <span class="op">*</span> math<span class="op">.</span><span class="fn">pow</span>(radius, <span class="num">2</span>)
+<span class="kw">end</span>
+
+<span class="kw">let</span> r <span class="op">=</span> <span class="num">5</span>
+<span class="nd">print</span>(<span class="str">"The area of a circle with radius ${r} is ${computeArea(r)}"</span>)
+<span class="comment"># Output =&gt; The area of a circle with radius 5 is 78.5398</span></code></pre>
+
+                </article>
+
+                <div class="page-navigation">
+                    <div></div>
+            <a href="getting-started/installation.html" class="nav-card next">
+                <span class="nav-label">Next</span>
+                <span class="nav-title">Installation</span>
+            </a>
+            
+                </div>
+
+                <footer>
+                    <div>&copy; 2026 Harizi Riyadh. Released under the MIT License.</div>
+                    <div>Official Documentation Website for Djazair.</div>
+                </footer>
+            </div>
+        </main>
+
+        <aside class="toc-wrapper">
+            <div class="toc-title">On this page</div>
+            <ul class="toc-links">
+                <li class=""><a href="#why-djazair">Why Djazair?</a></li>
+<li class=""><a href="#quick-snippet-preview">Quick Snippet Preview</a></li>
+            </ul>
+        </aside>
+    </div>
+</body>
+</html>

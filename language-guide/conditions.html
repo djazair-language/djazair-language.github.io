@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Control execution flow using if-elif-else statements and ternary expressions.">
+    <title>Conditions | Djazair Documentation</title>
+    <link rel="stylesheet" href="../assets/style.css">
+    <script>
+        function filterNavigation() {
+            const query = document.getElementById("search-input").value.toLowerCase();
+            const links = document.querySelectorAll(".sidebar-links a");
+            links.forEach(link => {
+                const text = link.textContent.toLowerCase();
+                const parent = link.parentElement;
+                if (text.includes(query)) {
+                    parent.style.display = "";
+                    let hasSub = parent.closest("li.has-submenu");
+                    if (hasSub) { hasSub.style.display = ""; }
+                    let sub = parent.closest(".submenu");
+                    if (sub) { sub.setAttribute("data-expanded", "true"); }
+                } else {
+                    parent.style.display = "none";
+                }
+            });
+        }
+        function toggleSubmenu(event, el) {
+            const li = el.closest("li.has-submenu");
+            const submenu = li.querySelector(".submenu");
+            const expanded = submenu.getAttribute("data-expanded") === "true";
+            submenu.setAttribute("data-expanded", !expanded);
+            const arrow = el.querySelector(".arrow");
+            if (arrow) arrow.textContent = expanded ? ">" : "v";
+            if (!expanded) {
+                event.preventDefault();
+            }
+        }
+        document.addEventListener("DOMContentLoaded", function() {
+            document.querySelectorAll(".has-submenu > a").forEach(function(el) {
+                let li = el.closest("li");
+                let sm = li.querySelector(".submenu");
+                if (sm.getAttribute("data-expanded") === "true") {
+                    el.querySelector(".arrow").textContent = "v";
+                }
+            });
+        });
+    </script>
+</head>
+<body>
+    <header>
+        <div class="logo-container">
+            <div class="logo-icon">Dz</div>
+            <div class="logo-text">Djazair</div>
+            <div class="logo-version">v1.0.5</div>
+        </div>
+        <nav class="top-nav">
+            <a href="../index.html" >Home</a>
+            <a href="../getting-started/installation.html" >Getting Started</a>
+            <a href="../language-guide/comments.html" class="active">Language Guide</a>
+            <a href="../examples/hello-world.html" >Examples</a>
+            <a href="../reference/keywords.html" >Reference</a>
+            <a href="../faq.html" >FAQ</a>
+        </nav>
+        <div class="search-container">
+            <span class="search-icon">🔍</span>
+            <input type="text" id="search-input" class="search-input" placeholder="Search docs..." onkeyup="filterNavigation()">
+        </div>
+    </header>
+
+    <div class="app-container">
+        <aside class="sidebar">
+            <div class="sidebar-section">
+  <div class="sidebar-title">Getting Started</div>
+  <ul class="sidebar-links">
+    <li><a href="../getting-started/installation.html" >Installation</a></li>
+    <li><a href="../getting-started/first-program.html" >First Program</a></li>
+    <li><a href="../getting-started/running-programs.html" >Running Programs</a></li>
+  </ul>
+</div>
+<div class="sidebar-section">
+  <div class="sidebar-title">Language Guide</div>
+  <ul class="sidebar-links">
+    <li><a href="../language-guide/comments.html" >Comments</a></li>
+    <li><a href="../language-guide/variables.html" >Variables</a></li>
+    <li><a href="../language-guide/data-types.html" >Data Types</a></li>
+    <li><a href="../language-guide/input-output.html" >Input & Output</a></li>
+    <li><a href="../language-guide/operators.html" >Operators</a></li>
+    <li><a href="../language-guide/conditions.html" class="active">Conditions</a></li>
+    <li><a href="../language-guide/loops.html" >Loops</a></li>
+    <li><a href="../language-guide/arrays.html" >Arrays</a></li>
+    <li><a href="../language-guide/strings.html" >Strings</a></li>
+    <li><a href="../language-guide/maps.html" >Maps</a></li>
+    <li><a href="../language-guide/functions.html" >Functions</a></li>
+    <li><a href="../language-guide/modules.html" >Modules</a></li>
+    <li><a href="../language-guide/classes.html" >Classes</a></li>
+    <li><a href="../language-guide/error-handling.html" >Error Handling</a></li>
+    <li><a href="../language-guide/async-await.html" >Async / Await</a></li>
+  </ul>
+</div>
+<div class="sidebar-section">
+  <div class="sidebar-title">Examples</div>
+  <ul class="sidebar-links">
+    <li><a href="../examples/hello-world.html" >Hello World</a></li>
+    <li><a href="../examples/calculator.html" >Calculator</a></li>
+    <li><a href="../examples/todo-app.html" >Todo App</a></li>
+    <li><a href="../examples/file-processing.html" >File Processing</a></li>
+  </ul>
+</div>
+<div class="sidebar-section">
+  <div class="sidebar-title">Reference</div>
+  <ul class="sidebar-links">
+    <li><a href="../reference/embedding.html" >Embedding API</a></li>
+  </ul>
+</div>
+        </aside>
+
+        <main class="content-wrapper">
+            <div class="content-body">
+                <div class="breadcrumbs">
+                    <a href="../index.html">Home</a>
+<span class="separator">/</span>
+<span>Language Guide</span>
+<span class="separator">/</span>
+<span class="active">Conditions</span>
+                </div>
+                
+                <article>
+                    
+<h1>Conditions (If-Else & Match)</h1>
+<p>Control flow structures let your script make decisions depending on boolean expressions or value patterns.</p>
+
+<h2 id="if--elif--else">If, Elif, Else</h2>
+<p>The conditional syntax uses <code>if</code>, <code>elif</code>, <code>else</code>, and concludes with the <code>end</code> keyword:</p>
+<pre><code><span class="kw">let</span> score <span class="op">=</span> <span class="num">85</span>
+
+<span class="kw">if</span> score <span class="op">&</span>gt;<span class="op">=</span> <span class="num">90</span>
+    <span class="nd">print</span>(<span class="str">"Grade: A"</span>)
+<span class="kw">elif</span> score <span class="op">&</span>gt;<span class="op">=</span> <span class="num">80</span>
+    <span class="nd">print</span>(<span class="str">"Grade: B"</span>)
+<span class="kw">elif</span> score <span class="op">&</span>gt;<span class="op">=</span> <span class="num">70</span>
+    <span class="nd">print</span>(<span class="str">"Grade: C"</span>)
+<span class="kw">else</span>
+    <span class="nd">print</span>(<span class="str">"Grade: F"</span>)
+<span class="kw">end</span></code></pre>
+
+<h2 id="ternary-conditional-expression">Ternary Conditional Expression</h2>
+<p>Djazair supports a ternary operator syntax that begins with an <code>if</code> statement inline:</p>
+<pre><code><span class="kw">let</span> age <span class="op">=</span> <span class="num">19</span>
+<span class="kw">let</span> category <span class="op">=</span> <span class="kw">if</span> age <span class="op">&</span>gt;<span class="op">=</span> <span class="num">18</span> <span class="op">?</span> <span class="str">"Adult"</span> <span class="kw">else</span> <span class="str">"Minor"</span>
+<span class="nd">print</span>(category) <span class="comment"># =&gt; Adult</span></code></pre>
+
+
+
+<h2 id="match---case---default">Match / Case / Default</h2>
+<p>Pattern matching for multi-way branching. Case values are literal comparisons with no fall-through:</p>
+<pre><code><span class="kw">let</span> day <span class="op">=</span> <span class="num">6</span>
+<span class="kw">match</span> day
+<span class="kw">case</span> <span class="num">6</span>
+    <span class="nd">print</span>(<span class="str">"Saturday"</span>)
+<span class="kw">case</span> <span class="num">7</span>
+    <span class="nd">print</span>(<span class="str">"Sunday"</span>)
+<span class="kw">default</span>
+    <span class="nd">print</span>(<span class="str">"Weekday"</span>)
+<span class="kw">end</span></code></pre>
+
+                </article>
+
+                <div class="page-navigation">
+                    
+            <a href="../language-guide/operators.html" class="nav-card">
+                <span class="nav-label">Previous</span>
+                <span class="nav-title">Operators</span>
+            </a>
+            
+            <a href="../language-guide/loops.html" class="nav-card next">
+                <span class="nav-label">Next</span>
+                <span class="nav-title">Loops</span>
+            </a>
+            
+                </div>
+
+                <footer>
+                    <div>&copy; 2026 Harizi Riyadh. Released under the MIT License.</div>
+                    <div>Official Documentation Website for Djazair.</div>
+                </footer>
+            </div>
+        </main>
+
+        <aside class="toc-wrapper">
+            <div class="toc-title">On this page</div>
+            <ul class="toc-links">
+                <li class=""><a href="#if--elif--else">If, Elif, Else</a></li>
+<li class=""><a href="#ternary-conditional-expression">Ternary Conditional Expression</a></li>
+<li class=""><a href="#match---case---default">Match / Case / Default</a></li>
+            </ul>
+        </aside>
+    </div>
+</body>
+</html>

@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Process execution and management.">
+    <title>process Module | Djazair Documentation</title>
+    <link rel="stylesheet" href="../assets/style.css">
+    <script>
+        function filterNavigation() {
+            const query = document.getElementById("search-input").value.toLowerCase();
+            const links = document.querySelectorAll(".sidebar-links a");
+            links.forEach(link => {
+                const text = link.textContent.toLowerCase();
+                const parent = link.parentElement;
+                if (text.includes(query)) {
+                    parent.style.display = "";
+                    let hasSub = parent.closest("li.has-submenu");
+                    if (hasSub) { hasSub.style.display = ""; }
+                    let sub = parent.closest(".submenu");
+                    if (sub) { sub.setAttribute("data-expanded", "true"); }
+                } else {
+                    parent.style.display = "none";
+                }
+            });
+        }
+        function toggleSubmenu(event, el) {
+            const li = el.closest("li.has-submenu");
+            const submenu = li.querySelector(".submenu");
+            const expanded = submenu.getAttribute("data-expanded") === "true";
+            submenu.setAttribute("data-expanded", !expanded);
+            const arrow = el.querySelector(".arrow");
+            if (arrow) arrow.textContent = expanded ? ">" : "v";
+            if (!expanded) {
+                event.preventDefault();
+            }
+        }
+        document.addEventListener("DOMContentLoaded", function() {
+            document.querySelectorAll(".has-submenu > a").forEach(function(el) {
+                let li = el.closest("li");
+                let sm = li.querySelector(".submenu");
+                if (sm.getAttribute("data-expanded") === "true") {
+                    el.querySelector(".arrow").textContent = "v";
+                }
+            });
+        });
+    </script>
+</head>
+<body>
+    <header>
+        <div class="logo-container">
+            <div class="logo-icon">Dz</div>
+            <div class="logo-text">Djazair</div>
+            <div class="logo-version">v1.0.5</div>
+        </div>
+        <nav class="top-nav">
+            <a href="../index.html" >Home</a>
+            <a href="../getting-started/installation.html" >Getting Started</a>
+            <a href="../language-guide/comments.html" >Language Guide</a>
+            <a href="../standard-library/index.html" class="active">Std Library</a>
+            <a href="../examples/hello-world.html" >Examples</a>
+            <a href="../reference/keywords.html" >Reference</a>
+            <a href="../faq.html" >FAQ</a>
+        </nav>
+        <div class="search-container">
+            <span class="search-icon">🔍</span>
+            <input type="text" id="search-input" class="search-input" placeholder="Search docs..." onkeyup="filterNavigation()">
+        </div>
+    </header>
+
+    <div class="app-container">
+        <aside class="sidebar">
+            <div class="sidebar-section">
+  <div class="sidebar-title">Getting Started</div>
+  <ul class="sidebar-links">
+    <li><a href="../getting-started/installation.html" >Installation</a></li>
+    <li><a href="../getting-started/first-program.html" >First Program</a></li>
+    <li><a href="../getting-started/running-programs.html" >Running Programs</a></li>
+  </ul>
+</div>
+<div class="sidebar-section">
+  <div class="sidebar-title">Language Guide</div>
+  <ul class="sidebar-links">
+    <li><a href="../language-guide/comments.html" >Comments</a></li>
+    <li><a href="../language-guide/variables.html" >Variables</a></li>
+    <li><a href="../language-guide/data-types.html" >Data Types</a></li>
+    <li><a href="../language-guide/input-output.html" >Input & Output</a></li>
+    <li><a href="../language-guide/operators.html" >Operators</a></li>
+    <li><a href="../language-guide/conditions.html" >Conditions</a></li>
+    <li><a href="../language-guide/loops.html" >Loops</a></li>
+    <li><a href="../language-guide/arrays.html" >Arrays</a></li>
+    <li><a href="../language-guide/strings.html" >Strings</a></li>
+    <li><a href="../language-guide/maps.html" >Maps</a></li>
+    <li><a href="../language-guide/functions.html" >Functions</a></li>
+    <li><a href="../language-guide/modules.html" >Modules</a></li>
+    <li><a href="../language-guide/classes.html" >Classes</a></li>
+    <li><a href="../language-guide/error-handling.html" >Error Handling</a></li>
+    <li><a href="../language-guide/async-await.html" >Async / Await</a></li>
+  </ul>
+</div>
+<div class="sidebar-section">
+  <div class="sidebar-title">Standard Library</div>
+  <ul class="sidebar-links">
+    <li><a href="../standard-library/index.html" >Overview</a></li>
+    <li class="has-submenu"><a href="../standard-library/assert.html" class="submenu-toggle" onclick="toggleSubmenu(event, this)">assert Module <span class="arrow">></span></a>
+      <ul class="submenu" data-expanded="false">
+        <li><a href="../standard-library/assert.html#truthiness-assertions" class="sub-link">Truthiness Assertions</a></li>
+        <li><a href="../standard-library/assert.html#value-assertions" class="sub-link">Value Assertions</a></li>
+        <li><a href="../standard-library/assert.html#type-assertions" class="sub-link">Type Assertions</a></li>
+      </ul>
+    </li>
+    <li class="has-submenu"><a href="../standard-library/bytes.html" class="submenu-toggle" onclick="toggleSubmenu(event, this)">bytes Module <span class="arrow">></span></a>
+      <ul class="submenu" data-expanded="false">
+        <li><a href="../standard-library/bytes.html#creation--conversion" class="sub-link">Creation & Conversion</a></li>
+        <li><a href="../standard-library/bytes.html#manipulation" class="sub-link">Manipulation</a></li>
+      </ul>
+    </li>
+    <li><a href="../standard-library/collections.html" >collections Module</a></li>
+    <li><a href="../standard-library/crypto.html" >crypto Module</a></li>
+    <li class="has-submenu"><a href="../standard-library/datetime.html" class="submenu-toggle" onclick="toggleSubmenu(event, this)">datetime Module <span class="arrow">></span></a>
+      <ul class="submenu" data-expanded="false">
+        <li><a href="../standard-library/datetime.html#time-functions" class="sub-link">Time Functions</a></li>
+        <li><a href="../standard-library/datetime.html#date-class" class="sub-link">Date Class</a></li>
+      </ul>
+    </li>
+    <li><a href="../standard-library/dir.html" >dir Module</a></li>
+    <li><a href="../standard-library/env.html" >env Module</a></li>
+    <li class="has-submenu"><a href="../standard-library/file.html" class="submenu-toggle" onclick="toggleSubmenu(event, this)">file Module <span class="arrow">></span></a>
+      <ul class="submenu" data-expanded="false">
+        <li><a href="../standard-library/file.html#read--write-operations" class="sub-link">Read & Write</a></li>
+        <li><a href="../standard-library/file.html#file-manipulation" class="sub-link">File Manipulation</a></li>
+        <li><a href="../standard-library/file.html#status-query" class="sub-link">Status Query</a></li>
+      </ul>
+    </li>
+    <li class="has-submenu"><a href="../standard-library/http.html" class="submenu-toggle" onclick="toggleSubmenu(event, this)">http Module <span class="arrow">></span></a>
+      <ul class="submenu" data-expanded="false">
+        <li><a href="../standard-library/http.html#http-client" class="sub-link">HTTP Client</a></li>
+        <li><a href="../standard-library/http.html#http-server" class="sub-link">HTTP Server</a></li>
+        <li><a href="../standard-library/http.html#classes--helpers" class="sub-link">Classes & Helpers</a></li>
+      </ul>
+    </li>
+    <li><a href="../standard-library/json.html" >json Module</a></li>
+    <li class="has-submenu"><a href="../standard-library/lang.html" class="submenu-toggle" onclick="toggleSubmenu(event, this)">lang Module <span class="arrow">></span></a>
+      <ul class="submenu" data-expanded="false">
+        <li><a href="../standard-library/lang.html#runtime-info" class="sub-link">Runtime Info</a></li>
+        <li><a href="../standard-library/lang.html#control" class="sub-link">Control</a></li>
+        <li><a href="../standard-library/lang.html#introspection" class="sub-link">Introspection</a></li>
+        <li><a href="../standard-library/lang.html#library-paths--queries" class="sub-link">Library Paths</a></li>
+      </ul>
+    </li>
+    <li class="has-submenu"><a href="../standard-library/math.html" class="submenu-toggle" onclick="toggleSubmenu(event, this)">math Module <span class="arrow">></span></a>
+      <ul class="submenu" data-expanded="false">
+        <li><a href="../standard-library/math.html#constants" class="sub-link">Constants</a></li>
+        <li><a href="../standard-library/math.html#trigonometry" class="sub-link">Trigonometry</a></li>
+        <li><a href="../standard-library/math.html#exponentiation--logs" class="sub-link">Exponentiation & Logs</a></li>
+        <li><a href="../standard-library/math.html#rounding--absolute" class="sub-link">Rounding</a></li>
+        <li><a href="../standard-library/math.html#comparison--statistics" class="sub-link">Statistics</a></li>
+      </ul>
+    </li>
+    <li class="has-submenu"><a href="../standard-library/net.html" class="submenu-toggle" onclick="toggleSubmenu(event, this)">net Module <span class="arrow">></span></a>
+      <ul class="submenu" data-expanded="false">
+        <li><a href="../standard-library/net.html#classes--exports" class="sub-link">Classes & Exports</a></li>
+        <li><a href="../standard-library/net.html#tcp-server-example" class="sub-link">TCP Server</a></li>
+        <li><a href="../standard-library/net.html#tcp-client-example" class="sub-link">TCP Client</a></li>
+      </ul>
+    </li>
+    <li class="has-submenu"><a href="../standard-library/os.html" class="submenu-toggle" onclick="toggleSubmenu(event, this)">os Module <span class="arrow">></span></a>
+      <ul class="submenu" data-expanded="false">
+        <li><a href="../standard-library/os.html#platform-detection" class="sub-link">Platform Detection</a></li>
+        <li><a href="../standard-library/os.html#system-information" class="sub-link">System Information</a></li>
+        <li><a href="../standard-library/os.html#user--temporary-files" class="sub-link">User & Temp Files</a></li>
+      </ul>
+    </li>
+    <li class="has-submenu"><a href="../standard-library/path.html" class="submenu-toggle" onclick="toggleSubmenu(event, this)">path Module <span class="arrow">></span></a>
+      <ul class="submenu" data-expanded="false">
+        <li><a href="../standard-library/path.html#constants" class="sub-link">Constants</a></li>
+        <li><a href="../standard-library/path.html#join--resolve" class="sub-link">Join & Resolve</a></li>
+        <li><a href="../standard-library/path.html#decomposition" class="sub-link">Decomposition</a></li>
+        <li><a href="../standard-library/path.html#query--security" class="sub-link">Query & Security</a></li>
+      </ul>
+    </li>
+    <li class="has-submenu"><a href="../standard-library/process.html" class="submenu-toggle active" onclick="toggleSubmenu(event, this)">process Module <span class="arrow">v</span></a>
+      <ul class="submenu" data-expanded="true">
+        <li><a href="../standard-library/process.html#process-identification" class="sub-link">Identification</a></li>
+        <li><a href="../standard-library/process.html#process-control" class="sub-link">Process Control</a></li>
+        <li><a href="../standard-library/process.html#working-directory" class="sub-link">Working Directory</a></li>
+        <li><a href="../standard-library/process.html#command-execution" class="sub-link">Command Execution</a></li>
+        <li><a href="../standard-library/process.html#cli-arguments--script-location" class="sub-link">CLI & Script</a></li>
+        <li><a href="../standard-library/process.html#asynchronous-spawning" class="sub-link">Async Spawning</a></li>
+      </ul>
+    </li>
+    <li><a href="../standard-library/random.html" >random Module</a></li>
+    <li class="has-submenu"><a href="../standard-library/regex.html" class="submenu-toggle" onclick="toggleSubmenu(event, this)">regex Module <span class="arrow">></span></a>
+      <ul class="submenu" data-expanded="false">
+        <li><a href="../standard-library/regex.html#flags" class="sub-link">Flags</a></li>
+        <li><a href="../standard-library/regex.html#pattern-class" class="sub-link">Pattern Class</a></li>
+        <li><a href="../standard-library/regex.html#match-class" class="sub-link">Match Class</a></li>
+        <li><a href="../standard-library/regex.html#convenience-functions" class="sub-link">Convenience Functions</a></li>
+      </ul>
+    </li>
+    <li class="has-submenu"><a href="../standard-library/thread.html" class="submenu-toggle" onclick="toggleSubmenu(event, this)">thread Module <span class="arrow">></span></a>
+      <ul class="submenu" data-expanded="false">
+        <li><a href="../standard-library/thread.html#thread-class" class="sub-link">Thread Class</a></li>
+        <li><a href="../standard-library/thread.html#worker-side-functions" class="sub-link">Worker Functions</a></li>
+        <li><a href="../standard-library/thread.html#convenience-functions" class="sub-link">Convenience</a></li>
+      </ul>
+    </li>
+    <li><a href="../standard-library/uuid.html" >uuid Module</a></li>
+  </ul>
+</div>
+<div class="sidebar-section">
+  <div class="sidebar-title">Examples</div>
+  <ul class="sidebar-links">
+    <li><a href="../examples/hello-world.html" >Hello World</a></li>
+    <li><a href="../examples/calculator.html" >Calculator</a></li>
+    <li><a href="../examples/todo-app.html" >Todo App</a></li>
+    <li><a href="../examples/file-processing.html" >File Processing</a></li>
+  </ul>
+</div>
+<div class="sidebar-section">
+  <div class="sidebar-title">Reference</div>
+  <ul class="sidebar-links">
+    <li><a href="../reference/keywords.html" >Keywords</a></li>
+    <li><a href="../reference/operators.html" >Operators</a></li>
+    <li><a href="../reference/builtins.html" >Built-in Functions</a></li>
+    <li><a href="../reference/methods.html" >Methods</a></li>
+    <li><a href="../reference/syntax-reference.html" >Syntax Reference</a></li>
+    <li><a href="../reference/embedding.html" >Embedding API</a></li>
+  </ul>
+</div>
+        </aside>
+
+        <main class="content-wrapper">
+            <div class="content-body">
+                <div class="breadcrumbs">
+                    <a href="../index.html">Home</a>
+<span class="separator">/</span>
+<span>Standard Library</span>
+<span class="separator">/</span>
+<span class="active">process Module</span>
+                </div>
+                
+                <article>
+                    
+<h1>Process Module</h1>
+<p>Import using: <code>use process</code></p>
+
+<h2 id="process-identification">Process Identification</h2>
+<ul>
+    <li><code>process.pid()</code> - Current process ID.</li>
+    <li><code>process.ppid()</code> - Parent process ID.</li>
+</ul>
+<pre><code><span class="kw">use</span> process
+<span class="nd">print</span>(<span class="str">"PID: "</span> <span class="op">+</span> process<span class="op">.</span><span class="fn">pid</span>())
+<span class="nd">print</span>(<span class="str">"PPID: "</span> <span class="op">+</span> process<span class="op">.</span><span class="fn">ppid</span>())</code></pre>
+
+<h2 id="process-control">Process Control</h2>
+<ul>
+    <li><code>process.exit(code)</code> - Terminate script with exit code.</li>
+    <li><code>process.kill(pid, signal?)</code> - Send signal to process (default SIGTERM=15).</li>
+</ul>
+<pre><code><span class="kw">use</span> process
+<span class="comment"># process.exit(0)  # terminates immediately</span>
+<span class="comment"># process.kill(12345, 15)  # send SIGTERM</span></code></pre>
+
+<h2 id="working-directory">Working Directory</h2>
+<ul>
+    <li><code>process.cwd()</code> - Current working directory path.</li>
+    <li><code>process.chdir(path)</code> - Change current working directory.</li>
+</ul>
+<pre><code><span class="kw">use</span> process
+<span class="kw">let</span> cwd <span class="op">=</span> process<span class="op">.</span><span class="fn">cwd</span>()
+<span class="nd">print</span>(cwd)
+process<span class="op">.</span><span class="fn">chdir</span>(<span class="str">".."</span>)
+<span class="nd">print</span>(process<span class="op">.</span><span class="fn">cwd</span>())
+process<span class="op">.</span><span class="fn">chdir</span>(cwd)</code></pre>
+
+<h2 id="command-execution">Command Execution</h2>
+<ul>
+    <li><code>process.exec(command)</code> - Execute shell command. Returns Map with "stdout", "stderr", "exit_code".</li>
+</ul>
+<pre><code><span class="kw">use</span> process
+<span class="kw">let</span> result <span class="op">=</span> process<span class="op">.</span><span class="fn">exec</span>(<span class="str">"echo Hello"</span>)
+<span class="nd">print</span>(<span class="str">"Exit: "</span> <span class="op">+</span> result[<span class="str">"exit_code"</span>])
+<span class="nd">print</span>(<span class="str">"Out: "</span> <span class="op">+</span> result[<span class="str">"stdout"</span>])</code></pre>
+
+<h2 id="cli-arguments--amp--script-location">CLI Arguments &amp; Script Location</h2>
+<ul>
+    <li><code>process.args()</code> - Command-line arguments (array of strings).</li>
+    <li><code>process.scriptDir()</code> - Directory of the currently executing script.</li>
+</ul>
+<pre><code><span class="kw">use</span> process
+<span class="nd">print</span>(process<span class="op">.</span><span class="fn">scriptDir</span>())
+<span class="nd">print</span>(<span class="nd">str</span>(process<span class="op">.</span><span class="fn">args</span>()))</code></pre>
+
+<h2 id="asynchronous-spawning">Asynchronous Spawning</h2>
+<ul>
+    <li><code>process.spawn(command)</code> - Spawn background command, returns ProcessHandle.</li>
+    <li><code>process.read(handle)</code> - Non-blocking read from process handle.</li>
+    <li><code>process.close(handle)</code> - Close process handle, returns exit code.</li>
+</ul>
+<pre><code><span class="kw">use</span> process
+<span class="kw">let</span> handle <span class="op">=</span> process<span class="op">.</span><span class="fn">spawn</span>(<span class="str">"echo async"</span>)
+<span class="nd">print</span>(<span class="nd">str</span>(process<span class="op">.</span><span class="fn">read</span>(handle)))
+<span class="kw">let</span> code <span class="op">=</span> process<span class="op">.</span><span class="fn">close</span>(handle)
+<span class="nd">print</span>(<span class="str">"Exit: "</span> <span class="op">+</span> <span class="nd">str</span>(code))</code></pre>
+
+                </article>
+
+                <div class="page-navigation">
+                    
+            <a href="../standard-library/path.html" class="nav-card">
+                <span class="nav-label">Previous</span>
+                <span class="nav-title">path Module</span>
+            </a>
+            
+            <a href="../standard-library/random.html" class="nav-card next">
+                <span class="nav-label">Next</span>
+                <span class="nav-title">random Module</span>
+            </a>
+            
+                </div>
+
+                <footer>
+                    <div>&copy; 2026 Harizi Riyadh. Released under the MIT License.</div>
+                    <div>Official Documentation Website for Djazair.</div>
+                </footer>
+            </div>
+        </main>
+
+        <aside class="toc-wrapper">
+            <div class="toc-title">On this page</div>
+            <ul class="toc-links">
+                <li class=""><a href="#process-identification">Process Identification</a></li>
+<li class=""><a href="#process-control">Process Control</a></li>
+<li class=""><a href="#working-directory">Working Directory</a></li>
+<li class=""><a href="#command-execution">Command Execution</a></li>
+<li class=""><a href="#cli-arguments--amp--script-location">CLI Arguments &amp; Script Location</a></li>
+<li class=""><a href="#asynchronous-spawning">Asynchronous Spawning</a></li>
+            </ul>
+        </aside>
+    </div>
+</body>
+</html>

@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Full cheatsheet of built-in methods on Strings, Arrays, and Maps.">
+    <title>Methods | Djazair Documentation</title>
+    <link rel="stylesheet" href="../assets/style.css">
+    <script>
+        function filterNavigation() {
+            const query = document.getElementById("search-input").value.toLowerCase();
+            const links = document.querySelectorAll(".sidebar-links a");
+            links.forEach(link => {
+                const text = link.textContent.toLowerCase();
+                const parent = link.parentElement;
+                if (text.includes(query)) {
+                    parent.style.display = "";
+                    let hasSub = parent.closest("li.has-submenu");
+                    if (hasSub) { hasSub.style.display = ""; }
+                    let sub = parent.closest(".submenu");
+                    if (sub) { sub.setAttribute("data-expanded", "true"); }
+                } else {
+                    parent.style.display = "none";
+                }
+            });
+        }
+        function toggleSubmenu(event, el) {
+            const li = el.closest("li.has-submenu");
+            const submenu = li.querySelector(".submenu");
+            const expanded = submenu.getAttribute("data-expanded") === "true";
+            submenu.setAttribute("data-expanded", !expanded);
+            const arrow = el.querySelector(".arrow");
+            if (arrow) arrow.textContent = expanded ? ">" : "v";
+            if (!expanded) {
+                event.preventDefault();
+            }
+        }
+        document.addEventListener("DOMContentLoaded", function() {
+            document.querySelectorAll(".has-submenu > a").forEach(function(el) {
+                let li = el.closest("li");
+                let sm = li.querySelector(".submenu");
+                if (sm.getAttribute("data-expanded") === "true") {
+                    el.querySelector(".arrow").textContent = "v";
+                }
+            });
+        });
+    </script>
+</head>
+<body>
+    <header>
+        <div class="logo-container">
+            <div class="logo-icon">Dz</div>
+            <div class="logo-text">Djazair</div>
+            <div class="logo-version">v1.0.5</div>
+        </div>
+        <nav class="top-nav">
+            <a href="../index.html" >Home</a>
+            <a href="../getting-started/installation.html" >Getting Started</a>
+            <a href="../language-guide/comments.html" >Language Guide</a>
+            <a href="../standard-library/index.html" >Std Library</a>
+            <a href="../examples/hello-world.html" >Examples</a>
+            <a href="../reference/keywords.html" class="active">Reference</a>
+            <a href="../faq.html" >FAQ</a>
+        </nav>
+        <div class="search-container">
+            <span class="search-icon">🔍</span>
+            <input type="text" id="search-input" class="search-input" placeholder="Search docs..." onkeyup="filterNavigation()">
+        </div>
+    </header>
+
+    <div class="app-container">
+        <aside class="sidebar">
+            <div class="sidebar-section">
+  <div class="sidebar-title">Getting Started</div>
+  <ul class="sidebar-links">
+    <li><a href="../getting-started/installation.html" >Installation</a></li>
+    <li><a href="../getting-started/first-program.html" >First Program</a></li>
+    <li><a href="../getting-started/running-programs.html" >Running Programs</a></li>
+  </ul>
+</div>
+<div class="sidebar-section">
+  <div class="sidebar-title">Language Guide</div>
+  <ul class="sidebar-links">
+    <li><a href="../language-guide/comments.html" >Comments</a></li>
+    <li><a href="../language-guide/variables.html" >Variables</a></li>
+    <li><a href="../language-guide/data-types.html" >Data Types</a></li>
+    <li><a href="../language-guide/input-output.html" >Input & Output</a></li>
+    <li><a href="../language-guide/operators.html" >Operators</a></li>
+    <li><a href="../language-guide/conditions.html" >Conditions</a></li>
+    <li><a href="../language-guide/loops.html" >Loops</a></li>
+    <li><a href="../language-guide/arrays.html" >Arrays</a></li>
+    <li><a href="../language-guide/strings.html" >Strings</a></li>
+    <li><a href="../language-guide/maps.html" >Maps</a></li>
+    <li><a href="../language-guide/functions.html" >Functions</a></li>
+    <li><a href="../language-guide/modules.html" >Modules</a></li>
+    <li><a href="../language-guide/classes.html" >Classes</a></li>
+    <li><a href="../language-guide/error-handling.html" >Error Handling</a></li>
+    <li><a href="../language-guide/async-await.html" >Async / Await</a></li>
+  </ul>
+</div>
+<div class="sidebar-section">
+  <div class="sidebar-title">Standard Library</div>
+  <ul class="sidebar-links">
+    <li><a href="../standard-library/index.html" >Overview</a></li>
+    <li class="has-submenu"><a href="../standard-library/assert.html" class="submenu-toggle" onclick="toggleSubmenu(event, this)">assert Module <span class="arrow">></span></a>
+      <ul class="submenu" data-expanded="false">
+        <li><a href="../standard-library/assert.html#truthiness-assertions" class="sub-link">Truthiness Assertions</a></li>
+        <li><a href="../standard-library/assert.html#value-assertions" class="sub-link">Value Assertions</a></li>
+        <li><a href="../standard-library/assert.html#type-assertions" class="sub-link">Type Assertions</a></li>
+      </ul>
+    </li>
+    <li class="has-submenu"><a href="../standard-library/bytes.html" class="submenu-toggle" onclick="toggleSubmenu(event, this)">bytes Module <span class="arrow">></span></a>
+      <ul class="submenu" data-expanded="false">
+        <li><a href="../standard-library/bytes.html#creation--conversion" class="sub-link">Creation & Conversion</a></li>
+        <li><a href="../standard-library/bytes.html#manipulation" class="sub-link">Manipulation</a></li>
+      </ul>
+    </li>
+    <li><a href="../standard-library/collections.html" >collections Module</a></li>
+    <li><a href="../standard-library/crypto.html" >crypto Module</a></li>
+    <li class="has-submenu"><a href="../standard-library/datetime.html" class="submenu-toggle" onclick="toggleSubmenu(event, this)">datetime Module <span class="arrow">></span></a>
+      <ul class="submenu" data-expanded="false">
+        <li><a href="../standard-library/datetime.html#time-functions" class="sub-link">Time Functions</a></li>
+        <li><a href="../standard-library/datetime.html#date-class" class="sub-link">Date Class</a></li>
+      </ul>
+    </li>
+    <li><a href="../standard-library/dir.html" >dir Module</a></li>
+    <li><a href="../standard-library/env.html" >env Module</a></li>
+    <li class="has-submenu"><a href="../standard-library/file.html" class="submenu-toggle" onclick="toggleSubmenu(event, this)">file Module <span class="arrow">></span></a>
+      <ul class="submenu" data-expanded="false">
+        <li><a href="../standard-library/file.html#read--write-operations" class="sub-link">Read & Write</a></li>
+        <li><a href="../standard-library/file.html#file-manipulation" class="sub-link">File Manipulation</a></li>
+        <li><a href="../standard-library/file.html#status-query" class="sub-link">Status Query</a></li>
+      </ul>
+    </li>
+    <li class="has-submenu"><a href="../standard-library/http.html" class="submenu-toggle" onclick="toggleSubmenu(event, this)">http Module <span class="arrow">></span></a>
+      <ul class="submenu" data-expanded="false">
+        <li><a href="../standard-library/http.html#http-client" class="sub-link">HTTP Client</a></li>
+        <li><a href="../standard-library/http.html#http-server" class="sub-link">HTTP Server</a></li>
+        <li><a href="../standard-library/http.html#classes--helpers" class="sub-link">Classes & Helpers</a></li>
+      </ul>
+    </li>
+    <li><a href="../standard-library/json.html" >json Module</a></li>
+    <li class="has-submenu"><a href="../standard-library/lang.html" class="submenu-toggle" onclick="toggleSubmenu(event, this)">lang Module <span class="arrow">></span></a>
+      <ul class="submenu" data-expanded="false">
+        <li><a href="../standard-library/lang.html#runtime-info" class="sub-link">Runtime Info</a></li>
+        <li><a href="../standard-library/lang.html#control" class="sub-link">Control</a></li>
+        <li><a href="../standard-library/lang.html#introspection" class="sub-link">Introspection</a></li>
+        <li><a href="../standard-library/lang.html#library-paths--queries" class="sub-link">Library Paths</a></li>
+      </ul>
+    </li>
+    <li class="has-submenu"><a href="../standard-library/math.html" class="submenu-toggle" onclick="toggleSubmenu(event, this)">math Module <span class="arrow">></span></a>
+      <ul class="submenu" data-expanded="false">
+        <li><a href="../standard-library/math.html#constants" class="sub-link">Constants</a></li>
+        <li><a href="../standard-library/math.html#trigonometry" class="sub-link">Trigonometry</a></li>
+        <li><a href="../standard-library/math.html#exponentiation--logs" class="sub-link">Exponentiation & Logs</a></li>
+        <li><a href="../standard-library/math.html#rounding--absolute" class="sub-link">Rounding</a></li>
+        <li><a href="../standard-library/math.html#comparison--statistics" class="sub-link">Statistics</a></li>
+      </ul>
+    </li>
+    <li class="has-submenu"><a href="../standard-library/net.html" class="submenu-toggle" onclick="toggleSubmenu(event, this)">net Module <span class="arrow">></span></a>
+      <ul class="submenu" data-expanded="false">
+        <li><a href="../standard-library/net.html#classes--exports" class="sub-link">Classes & Exports</a></li>
+        <li><a href="../standard-library/net.html#tcp-server-example" class="sub-link">TCP Server</a></li>
+        <li><a href="../standard-library/net.html#tcp-client-example" class="sub-link">TCP Client</a></li>
+      </ul>
+    </li>
+    <li class="has-submenu"><a href="../standard-library/os.html" class="submenu-toggle" onclick="toggleSubmenu(event, this)">os Module <span class="arrow">></span></a>
+      <ul class="submenu" data-expanded="false">
+        <li><a href="../standard-library/os.html#platform-detection" class="sub-link">Platform Detection</a></li>
+        <li><a href="../standard-library/os.html#system-information" class="sub-link">System Information</a></li>
+        <li><a href="../standard-library/os.html#user--temporary-files" class="sub-link">User & Temp Files</a></li>
+      </ul>
+    </li>
+    <li class="has-submenu"><a href="../standard-library/path.html" class="submenu-toggle" onclick="toggleSubmenu(event, this)">path Module <span class="arrow">></span></a>
+      <ul class="submenu" data-expanded="false">
+        <li><a href="../standard-library/path.html#constants" class="sub-link">Constants</a></li>
+        <li><a href="../standard-library/path.html#join--resolve" class="sub-link">Join & Resolve</a></li>
+        <li><a href="../standard-library/path.html#decomposition" class="sub-link">Decomposition</a></li>
+        <li><a href="../standard-library/path.html#query--security" class="sub-link">Query & Security</a></li>
+      </ul>
+    </li>
+    <li class="has-submenu"><a href="../standard-library/process.html" class="submenu-toggle" onclick="toggleSubmenu(event, this)">process Module <span class="arrow">></span></a>
+      <ul class="submenu" data-expanded="false">
+        <li><a href="../standard-library/process.html#process-identification" class="sub-link">Identification</a></li>
+        <li><a href="../standard-library/process.html#process-control" class="sub-link">Process Control</a></li>
+        <li><a href="../standard-library/process.html#working-directory" class="sub-link">Working Directory</a></li>
+        <li><a href="../standard-library/process.html#command-execution" class="sub-link">Command Execution</a></li>
+        <li><a href="../standard-library/process.html#cli-arguments--script-location" class="sub-link">CLI & Script</a></li>
+        <li><a href="../standard-library/process.html#asynchronous-spawning" class="sub-link">Async Spawning</a></li>
+      </ul>
+    </li>
+    <li><a href="../standard-library/random.html" >random Module</a></li>
+    <li class="has-submenu"><a href="../standard-library/regex.html" class="submenu-toggle" onclick="toggleSubmenu(event, this)">regex Module <span class="arrow">></span></a>
+      <ul class="submenu" data-expanded="false">
+        <li><a href="../standard-library/regex.html#flags" class="sub-link">Flags</a></li>
+        <li><a href="../standard-library/regex.html#pattern-class" class="sub-link">Pattern Class</a></li>
+        <li><a href="../standard-library/regex.html#match-class" class="sub-link">Match Class</a></li>
+        <li><a href="../standard-library/regex.html#convenience-functions" class="sub-link">Convenience Functions</a></li>
+      </ul>
+    </li>
+    <li class="has-submenu"><a href="../standard-library/thread.html" class="submenu-toggle" onclick="toggleSubmenu(event, this)">thread Module <span class="arrow">></span></a>
+      <ul class="submenu" data-expanded="false">
+        <li><a href="../standard-library/thread.html#thread-class" class="sub-link">Thread Class</a></li>
+        <li><a href="../standard-library/thread.html#worker-side-functions" class="sub-link">Worker Functions</a></li>
+        <li><a href="../standard-library/thread.html#convenience-functions" class="sub-link">Convenience</a></li>
+      </ul>
+    </li>
+    <li><a href="../standard-library/uuid.html" >uuid Module</a></li>
+  </ul>
+</div>
+<div class="sidebar-section">
+  <div class="sidebar-title">Examples</div>
+  <ul class="sidebar-links">
+    <li><a href="../examples/hello-world.html" >Hello World</a></li>
+    <li><a href="../examples/calculator.html" >Calculator</a></li>
+    <li><a href="../examples/todo-app.html" >Todo App</a></li>
+    <li><a href="../examples/file-processing.html" >File Processing</a></li>
+  </ul>
+</div>
+<div class="sidebar-section">
+  <div class="sidebar-title">Reference</div>
+  <ul class="sidebar-links">
+    <li><a href="../reference/keywords.html" >Keywords</a></li>
+    <li><a href="../reference/operators.html" >Operators</a></li>
+    <li><a href="../reference/builtins.html" >Built-in Functions</a></li>
+    <li><a href="../reference/methods.html" class="active">Methods</a></li>
+    <li><a href="../reference/syntax-reference.html" >Syntax Reference</a></li>
+    <li><a href="../reference/embedding.html" >Embedding API</a></li>
+  </ul>
+</div>
+        </aside>
+
+        <main class="content-wrapper">
+            <div class="content-body">
+                <div class="breadcrumbs">
+                    <a href="../index.html">Home</a>
+<span class="separator">/</span>
+<span>Reference</span>
+<span class="separator">/</span>
+<span class="active">Methods</span>
+                </div>
+                
+                <article>
+                    
+<h1>Built-in Object Methods</h1>
+<p>Djazair allows calling methods directly on primitive arrays, maps, and strings using standard dot syntax.</p>
+
+<h2 id="string-methods">String Methods</h2>
+<table>
+    <thead><tr><th>Method</th><th>Description</th></tr></thead>
+    <tbody>
+        <tr><td><code>length()</code></td><td>Character count</td></tr>
+        <tr><td><code>upper()</code></td><td>Uppercase conversion</td></tr>
+        <tr><td><code>lower()</code></td><td>Lowercase conversion</td></tr>
+        <tr><td><code>strip()</code></td><td>Trim whitespace both ends</td></tr>
+        <tr><td><code>lStrip()</code></td><td>Trim left whitespace</td></tr>
+        <tr><td><code>rStrip()</code></td><td>Trim right whitespace</td></tr>
+        <tr><td><code>contains(sub)</code></td><td>Check substring existence</td></tr>
+        <tr><td><code>count(sub)</code></td><td>Count occurrences of substring</td></tr>
+        <tr><td><code>index(needle)</code></td><td>First index (-1 if not found)</td></tr>
+        <tr><td><code>split(sep?)</code></td><td>Split into array (default: whitespace)</td></tr>
+        <tr><td><code>join(list)</code></td><td>Join array using string as separator</td></tr>
+        <tr><td><code>slice(start, end?)</code></td><td>Extract substring</td></tr>
+        <tr><td><code>subStr(start, length?)</code></td><td>Extract by start and length</td></tr>
+        <tr><td><code>replace(old, new)</code></td><td>Replace all occurrences</td></tr>
+        <tr><td><code>reverse()</code></td><td>Return reversed string</td></tr>
+        <tr><td><code>repeat(n)</code></td><td>Return string repeated n times</td></tr>
+        <tr><td><code>zFill(width)</code></td><td>Zero-pad to width</td></tr>
+        <tr><td><code>center(width)</code></td><td>Center string in field of given width</td></tr>
+        <tr><td><code>lJust(width)</code></td><td>Left-justify in field of given width</td></tr>
+        <tr><td><code>rJust(width)</code></td><td>Right-justify in field of given width</td></tr>
+        <tr><td><code>startsWith(prefix)</code></td><td>Check prefix</td></tr>
+        <tr><td><code>endsWith(suffix)</code></td><td>Check suffix</td></tr>
+        <tr><td><code>capitalize()</code></td><td>First char uppercase</td></tr>
+        <tr><td><code>title()</code></td><td>Title case</td></tr>
+        <tr><td><code>swapCase()</code></td><td>Swap uppercase/lowercase</td></tr>
+        <tr><td><code>charCodeAt(i)</code></td><td>Character code at index</td></tr>
+        <tr><td><code>isAlpha()</code></td><td>Check if alphabetic</td></tr>
+        <tr><td><code>isAlnum()</code></td><td>Check if alphanumeric</td></tr>
+        <tr><td><code>isDigit()</code></td><td>Check if digit</td></tr>
+        <tr><td><code>isLower()</code></td><td>Check if lowercase</td></tr>
+        <tr><td><code>isUpper()</code></td><td>Check if uppercase</td></tr>
+        <tr><td><code>isSpace()</code></td><td>Check if whitespace</td></tr>
+        <tr><td><code>concat(...)</code></td><td>Concatenate multiple strings</td></tr>
+    </tbody>
+</table>
+
+<h2 id="array-methods">Array Methods</h2>
+<table>
+    <thead><tr><th>Method</th><th>Description</th></tr></thead>
+    <tbody>
+        <tr><td><code>length()</code></td><td>Number of elements</td></tr>
+        <tr><td><code>append(v)</code></td><td>Add at end</td></tr>
+        <tr><td><code>pop(index?)</code></td><td>Remove and return last element (or at index)</td></tr>
+        <tr><td><code>insert(i, v)</code></td><td>Insert at index</td></tr>
+        <tr><td><code>remove(v)</code></td><td>Remove first occurrence of value</td></tr>
+        <tr><td><code>reverse()</code></td><td>Reverse array <strong>in-place</strong></td></tr>
+        <tr><td><code>reversed()</code></td><td>Return reversed copy (original unchanged)</td></tr>
+        <tr><td><code>index(val)</code></td><td>Index of value (-1 if not found)</td></tr>
+        <tr><td><code>extend(arr)</code></td><td>Append all elements from another array</td></tr>
+        <tr><td><code>sort(desc?)</code></td><td>Sort in-place</td></tr>
+        <tr><td><code>sorted(desc?)</code></td><td>Return sorted copy (original unchanged)</td></tr>
+        <tr><td><code>copy()</code></td><td>Shallow copy</td></tr>
+        <tr><td><code>clear()</code></td><td>Remove all elements</td></tr>
+        <tr><td><code>contains(v)</code></td><td>Check membership</td></tr>
+        <tr><td><code>count(v)</code></td><td>Count occurrences of value</td></tr>
+        <tr><td><code>concat(other)</code></td><td>Merge arrays</td></tr>
+        <tr><td><code>slice(s, e?)</code></td><td>Extract sub-array</td></tr>
+                <tr><td><code>join(sep)</code></td><td>Join elements into string with separator</td></tr>
+        <tr><td><code>flatten()</code></td><td>Flatten one level</td></tr>
+        <tr><td><code>unique()</code></td><td>Remove duplicate values</td></tr>
+        <tr><td><code>all()</code></td><td>All elements are truthy</td></tr>
+        <tr><td><code>any()</code></td><td>Any element is truthy</td></tr>
+        <tr><td><code>min()</code></td><td>Minimum value</td></tr>
+        <tr><td><code>max()</code></td><td>Maximum value</td></tr>
+        <tr><td><code>sum()</code></td><td>Sum of numeric elements</td></tr>
+        <tr><td><code>map(fn)</code></td><td>Transform each element</td></tr>
+        <tr><td><code>filter(fn)</code></td><td>Keep elements where callback returns truthy</td></tr>
+        <tr><td><code>reduce(fn, init)</code></td><td>Accumulate using callback</td></tr>
+        <tr><td><code>find(val)</code></td><td>Find first element matching value or callback (Null if not found)</td></tr>
+        <tr><td><code>every(fn)</code></td><td>All elements pass callback</td></tr>
+        <tr><td><code>some(fn)</code></td><td>Any element passes callback</td></tr>
+    </tbody>
+</table>
+
+<h2 id="map-methods">Map Methods</h2>
+<table>
+    <thead><tr><th>Method</th><th>Description</th></tr></thead>
+    <tbody>
+        <tr><td><code>length()</code></td><td>Number of entries</td></tr>
+        <tr><td><code>keys()</code></td><td>Array of keys</td></tr>
+        <tr><td><code>values()</code></td><td>Array of values</td></tr>
+        <tr><td><code>items()</code></td><td>Array of [key, value] pairs</td></tr>
+        <tr><td><code>has(key)</code></td><td>Check key existence</td></tr>
+        <tr><td><code>get(key)</code></td><td>Get value (Null if missing)</td></tr>
+        <tr><td><code>copy()</code></td><td>Shallow copy</td></tr>
+        <tr><td><code>clear()</code></td><td>Remove all entries</td></tr>
+        <tr><td><code>pop(key)</code></td><td>Remove and return value</td></tr>
+        <tr><td><code>setDefault(k, v)</code></td><td>Set only if key missing</td></tr>
+        <tr><td><code>update(other)</code></td><td>Merge entries from another map</td></tr>
+    </tbody>
+</table>
+
+                </article>
+
+                <div class="page-navigation">
+                    
+            <a href="../reference/builtins.html" class="nav-card">
+                <span class="nav-label">Previous</span>
+                <span class="nav-title">Built-in Functions</span>
+            </a>
+            
+            <a href="../reference/syntax-reference.html" class="nav-card next">
+                <span class="nav-label">Next</span>
+                <span class="nav-title">Syntax Reference</span>
+            </a>
+            
+                </div>
+
+                <footer>
+                    <div>&copy; 2026 Harizi Riyadh. Released under the MIT License.</div>
+                    <div>Official Documentation Website for Djazair.</div>
+                </footer>
+            </div>
+        </main>
+
+        <aside class="toc-wrapper">
+            <div class="toc-title">On this page</div>
+            <ul class="toc-links">
+                <li class=""><a href="#string-methods">String Methods</a></li>
+<li class=""><a href="#array-methods">Array Methods</a></li>
+<li class=""><a href="#map-methods">Map Methods</a></li>
+            </ul>
+        </aside>
+    </div>
+</body>
+</html>

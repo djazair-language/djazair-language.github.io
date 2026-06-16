@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Understand primitive and object types, dynamic typing, and memory model.">
+    <title>Data Types | Djazair Documentation</title>
+    <link rel="stylesheet" href="../assets/style.css">
+    <script>
+        function filterNavigation() {
+            const query = document.getElementById("search-input").value.toLowerCase();
+            const links = document.querySelectorAll(".sidebar-links a");
+            links.forEach(link => {
+                const text = link.textContent.toLowerCase();
+                const parent = link.parentElement;
+                if (text.includes(query)) {
+                    parent.style.display = "";
+                    let hasSub = parent.closest("li.has-submenu");
+                    if (hasSub) { hasSub.style.display = ""; }
+                    let sub = parent.closest(".submenu");
+                    if (sub) { sub.setAttribute("data-expanded", "true"); }
+                } else {
+                    parent.style.display = "none";
+                }
+            });
+        }
+        function toggleSubmenu(event, el) {
+            const li = el.closest("li.has-submenu");
+            const submenu = li.querySelector(".submenu");
+            const expanded = submenu.getAttribute("data-expanded") === "true";
+            submenu.setAttribute("data-expanded", !expanded);
+            const arrow = el.querySelector(".arrow");
+            if (arrow) arrow.textContent = expanded ? ">" : "v";
+            if (!expanded) {
+                event.preventDefault();
+            }
+        }
+        document.addEventListener("DOMContentLoaded", function() {
+            document.querySelectorAll(".has-submenu > a").forEach(function(el) {
+                let li = el.closest("li");
+                let sm = li.querySelector(".submenu");
+                if (sm.getAttribute("data-expanded") === "true") {
+                    el.querySelector(".arrow").textContent = "v";
+                }
+            });
+        });
+    </script>
+</head>
+<body>
+    <header>
+        <div class="logo-container">
+            <div class="logo-icon">Dz</div>
+            <div class="logo-text">Djazair</div>
+            <div class="logo-version">v1.0.5</div>
+        </div>
+        <nav class="top-nav">
+            <a href="../index.html" >Home</a>
+            <a href="../getting-started/installation.html" >Getting Started</a>
+            <a href="../language-guide/comments.html" class="active">Language Guide</a>
+            <a href="../examples/hello-world.html" >Examples</a>
+            <a href="../reference/keywords.html" >Reference</a>
+            <a href="../faq.html" >FAQ</a>
+        </nav>
+        <div class="search-container">
+            <span class="search-icon">🔍</span>
+            <input type="text" id="search-input" class="search-input" placeholder="Search docs..." onkeyup="filterNavigation()">
+        </div>
+    </header>
+
+    <div class="app-container">
+        <aside class="sidebar">
+            <div class="sidebar-section">
+  <div class="sidebar-title">Getting Started</div>
+  <ul class="sidebar-links">
+    <li><a href="../getting-started/installation.html" >Installation</a></li>
+    <li><a href="../getting-started/first-program.html" >First Program</a></li>
+    <li><a href="../getting-started/running-programs.html" >Running Programs</a></li>
+  </ul>
+</div>
+<div class="sidebar-section">
+  <div class="sidebar-title">Language Guide</div>
+  <ul class="sidebar-links">
+    <li><a href="../language-guide/comments.html" >Comments</a></li>
+    <li><a href="../language-guide/variables.html" >Variables</a></li>
+    <li><a href="../language-guide/data-types.html" class="active">Data Types</a></li>
+    <li><a href="../language-guide/input-output.html" >Input & Output</a></li>
+    <li><a href="../language-guide/operators.html" >Operators</a></li>
+    <li><a href="../language-guide/conditions.html" >Conditions</a></li>
+    <li><a href="../language-guide/loops.html" >Loops</a></li>
+    <li><a href="../language-guide/arrays.html" >Arrays</a></li>
+    <li><a href="../language-guide/strings.html" >Strings</a></li>
+    <li><a href="../language-guide/maps.html" >Maps</a></li>
+    <li><a href="../language-guide/functions.html" >Functions</a></li>
+    <li><a href="../language-guide/modules.html" >Modules</a></li>
+    <li><a href="../language-guide/classes.html" >Classes</a></li>
+    <li><a href="../language-guide/error-handling.html" >Error Handling</a></li>
+    <li><a href="../language-guide/async-await.html" >Async / Await</a></li>
+  </ul>
+</div>
+<div class="sidebar-section">
+  <div class="sidebar-title">Examples</div>
+  <ul class="sidebar-links">
+    <li><a href="../examples/hello-world.html" >Hello World</a></li>
+    <li><a href="../examples/calculator.html" >Calculator</a></li>
+    <li><a href="../examples/todo-app.html" >Todo App</a></li>
+    <li><a href="../examples/file-processing.html" >File Processing</a></li>
+  </ul>
+</div>
+<div class="sidebar-section">
+  <div class="sidebar-title">Reference</div>
+  <ul class="sidebar-links">
+    <li><a href="../reference/embedding.html" >Embedding API</a></li>
+  </ul>
+</div>
+        </aside>
+
+        <main class="content-wrapper">
+            <div class="content-body">
+                <div class="breadcrumbs">
+                    <a href="../index.html">Home</a>
+<span class="separator">/</span>
+<span>Language Guide</span>
+<span class="separator">/</span>
+<span class="active">Data Types</span>
+                </div>
+                
+                <article>
+                    
+<h1>Data Types</h1>
+<p>Djazair features a rich set of built-in data types. It uses dynamic typing, but every value has a concrete runtime type.</p>
+
+<h2 id="summary-of-types">Summary of Types</h2>
+<table>
+    <thead>
+        <tr>
+            <th>Type</th>
+            <th>Sample Literals</th>
+            <th>Description</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td><strong>Number</strong></td>
+            <td><code>42</code>, <code>3.14</code>, <code>100_000</code></td>
+            <td>64-bit floating point number (double-precision). Underscores as thousands separators.</td>
+        </tr>
+        <tr>
+            <td><strong>String</strong></td>
+            <td><code>"hello"</code>, <code>`multi`</code></td>
+            <td>UTF-8 immutable text sequences. Supports multiline blocks and interpolation.</td>
+        </tr>
+        <tr>
+            <td><strong>Bool</strong></td>
+            <td><code>True</code>, <code>False</code></td>
+            <td>Boolean truth values. Note the capitalization.</td>
+        </tr>
+        <tr>
+            <td><strong>Null</strong></td>
+            <td><code>Null</code></td>
+            <td>Representing the absence of value.</td>
+        </tr>
+        <tr>
+            <td><strong>Array</strong></td>
+            <td><code>[1, "two", True]</code></td>
+            <td>Dynamically sized ordered lists. Can hold mixed types.</td>
+        </tr>
+        <tr>
+            <td><strong>Map</strong></td>
+            <td><code>{"key": "value"}</code></td>
+            <td>Hash tables associating keys with values. Keys can be any type.</td>
+        </tr>
+        <tr>
+            <td><strong>Range</strong></td>
+            <td><code>1..5</code>, <code>0 to 10</code></td>
+            <td>Inclusive sequences of numeric values, ideal for iteration.</td>
+        </tr>
+        <tr>
+            <td><strong>Function</strong></td>
+            <td><code>fn() ... end</code></td>
+            <td>First-class callable closures. Can be stored and passed around.</td>
+        </tr>
+    </tbody>
+</table>
+
+<h2 id="type-casting">Type Casting</h2>
+<p>Convert between types using built-in casting functions:</p>
+<pre><code><span class="kw">let</span> n <span class="op">=</span> <span class="nd">int</span>(<span class="num">3.14</span>)       <span class="comment"># =&gt; 3</span>
+<span class="kw">let</span> f <span class="op">=</span> <span class="nd">float</span>(<span class="str">"2.5"</span>)    <span class="comment"># =&gt; 2.5</span>
+<span class="kw">let</span> s <span class="op">=</span> <span class="nd">str</span>(<span class="num">42</span>)         <span class="comment"># =&gt; "42"</span>
+<span class="kw">let</span> b <span class="op">=</span> <span class="nd">bool</span>(<span class="num">1</span>)         <span class="comment"># =&gt; True</span>
+<span class="kw">let</span> x <span class="op">=</span> <span class="nd">num</span>(<span class="str">"10.5"</span>)     <span class="comment"># =&gt; 10.5 (generic number conversion)</span></code></pre>
+<p>Falsy values (convert to <code>False</code>): <code>Null</code>, <code>False</code>, <code>0</code>, <code>0.0</code>, empty string <code>""</code>, empty array <code>[]</code>, empty map <code>{}</code>.</p>
+
+<h2 id="querying-types">Querying Types</h2>
+<p>Use the built-in <code>type()</code> function or type assertions to inspect variables at runtime:</p>
+<pre><code><span class="kw">let</span> val <span class="op">=</span> <span class="num">123.45</span>
+<span class="nd">print</span>(<span class="nd">type</span>(val)) <span class="comment"># =&gt; Number</span>
+<span class="nd">print</span>(<span class="nd">isNumber</span>(val)) <span class="comment"># =&gt; True</span>
+<span class="nd">print</span>(<span class="nd">isString</span>(val)) <span class="comment"># =&gt; False</span></code></pre>
+
+                </article>
+
+                <div class="page-navigation">
+                    
+            <a href="../language-guide/variables.html" class="nav-card">
+                <span class="nav-label">Previous</span>
+                <span class="nav-title">Variables</span>
+            </a>
+            
+            <a href="../language-guide/input-output.html" class="nav-card next">
+                <span class="nav-label">Next</span>
+                <span class="nav-title">Input & Output</span>
+            </a>
+            
+                </div>
+
+                <footer>
+                    <div>&copy; 2026 Harizi Riyadh. Released under the MIT License.</div>
+                    <div>Official Documentation Website for Djazair.</div>
+                </footer>
+            </div>
+        </main>
+
+        <aside class="toc-wrapper">
+            <div class="toc-title">On this page</div>
+            <ul class="toc-links">
+                <li class=""><a href="#summary-of-types">Summary of Types</a></li>
+<li class=""><a href="#type-casting">Type Casting</a></li>
+<li class=""><a href="#querying-types">Querying Types</a></li>
+            </ul>
+        </aside>
+    </div>
+</body>
+</html>

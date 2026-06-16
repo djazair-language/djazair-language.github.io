@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Read files line-by-line, parse data structures, and output logs.">
+    <title>File Processing | Djazair Documentation</title>
+    <link rel="stylesheet" href="../assets/style.css">
+    <script>
+        function filterNavigation() {
+            const query = document.getElementById("search-input").value.toLowerCase();
+            const links = document.querySelectorAll(".sidebar-links a");
+            links.forEach(link => {
+                const text = link.textContent.toLowerCase();
+                const parent = link.parentElement;
+                if (text.includes(query)) {
+                    parent.style.display = "";
+                    let hasSub = parent.closest("li.has-submenu");
+                    if (hasSub) { hasSub.style.display = ""; }
+                    let sub = parent.closest(".submenu");
+                    if (sub) { sub.setAttribute("data-expanded", "true"); }
+                } else {
+                    parent.style.display = "none";
+                }
+            });
+        }
+        function toggleSubmenu(event, el) {
+            const li = el.closest("li.has-submenu");
+            const submenu = li.querySelector(".submenu");
+            const expanded = submenu.getAttribute("data-expanded") === "true";
+            submenu.setAttribute("data-expanded", !expanded);
+            const arrow = el.querySelector(".arrow");
+            if (arrow) arrow.textContent = expanded ? ">" : "v";
+            if (!expanded) {
+                event.preventDefault();
+            }
+        }
+        document.addEventListener("DOMContentLoaded", function() {
+            document.querySelectorAll(".has-submenu > a").forEach(function(el) {
+                let li = el.closest("li");
+                let sm = li.querySelector(".submenu");
+                if (sm.getAttribute("data-expanded") === "true") {
+                    el.querySelector(".arrow").textContent = "v";
+                }
+            });
+        });
+    </script>
+</head>
+<body>
+    <header>
+        <div class="logo-container">
+            <div class="logo-icon">Dz</div>
+            <div class="logo-text">Djazair</div>
+            <div class="logo-version">v1.0.5</div>
+        </div>
+        <nav class="top-nav">
+            <a href="../index.html" >Home</a>
+            <a href="../getting-started/installation.html" >Getting Started</a>
+            <a href="../language-guide/comments.html" >Language Guide</a>
+            <a href="../examples/hello-world.html" class="active">Examples</a>
+            <a href="../reference/keywords.html" >Reference</a>
+            <a href="../faq.html" >FAQ</a>
+        </nav>
+        <div class="search-container">
+            <span class="search-icon">🔍</span>
+            <input type="text" id="search-input" class="search-input" placeholder="Search docs..." onkeyup="filterNavigation()">
+        </div>
+    </header>
+
+    <div class="app-container">
+        <aside class="sidebar">
+            <div class="sidebar-section">
+  <div class="sidebar-title">Getting Started</div>
+  <ul class="sidebar-links">
+    <li><a href="../getting-started/installation.html" >Installation</a></li>
+    <li><a href="../getting-started/first-program.html" >First Program</a></li>
+    <li><a href="../getting-started/running-programs.html" >Running Programs</a></li>
+  </ul>
+</div>
+<div class="sidebar-section">
+  <div class="sidebar-title">Language Guide</div>
+  <ul class="sidebar-links">
+    <li><a href="../language-guide/comments.html" >Comments</a></li>
+    <li><a href="../language-guide/variables.html" >Variables</a></li>
+    <li><a href="../language-guide/data-types.html" >Data Types</a></li>
+    <li><a href="../language-guide/input-output.html" >Input & Output</a></li>
+    <li><a href="../language-guide/operators.html" >Operators</a></li>
+    <li><a href="../language-guide/conditions.html" >Conditions</a></li>
+    <li><a href="../language-guide/loops.html" >Loops</a></li>
+    <li><a href="../language-guide/arrays.html" >Arrays</a></li>
+    <li><a href="../language-guide/strings.html" >Strings</a></li>
+    <li><a href="../language-guide/maps.html" >Maps</a></li>
+    <li><a href="../language-guide/functions.html" >Functions</a></li>
+    <li><a href="../language-guide/modules.html" >Modules</a></li>
+    <li><a href="../language-guide/classes.html" >Classes</a></li>
+    <li><a href="../language-guide/error-handling.html" >Error Handling</a></li>
+    <li><a href="../language-guide/async-await.html" >Async / Await</a></li>
+  </ul>
+</div>
+<div class="sidebar-section">
+  <div class="sidebar-title">Examples</div>
+  <ul class="sidebar-links">
+    <li><a href="../examples/hello-world.html" >Hello World</a></li>
+    <li><a href="../examples/calculator.html" >Calculator</a></li>
+    <li><a href="../examples/todo-app.html" >Todo App</a></li>
+    <li><a href="../examples/file-processing.html" class="active">File Processing</a></li>
+  </ul>
+</div>
+<div class="sidebar-section">
+  <div class="sidebar-title">Reference</div>
+  <ul class="sidebar-links">
+    <li><a href="../reference/embedding.html" >Embedding API</a></li>
+  </ul>
+</div>
+        </aside>
+
+        <main class="content-wrapper">
+            <div class="content-body">
+                <div class="breadcrumbs">
+                    <a href="../index.html">Home</a>
+<span class="separator">/</span>
+<span>Examples</span>
+<span class="separator">/</span>
+<span class="active">File Processing</span>
+                </div>
+                
+                <article>
+                    
+<h1>Example: File Processing</h1>
+<p>A script that parses a log file and extracts formatted records:</p>
+<pre><code><span class="kw">use</span> file
+<span class="kw">use</span> regex
+
+<span class="kw">let</span> logFile <span class="op">=</span> <span class="str">"app.log"</span>
+<span class="kw">if</span> <span class="kw">not</span> file<span class="op">.</span><span class="fn">exists</span>(logFile)
+    <span class="comment"># Seed dummy log</span>
+    file<span class="op">.</span><span class="fn">write</span>(logFile, <span class="str">"[INFO] Started\n[ERROR] DB Connection failed\n[INFO] Retrying\n"</span>)
+<span class="kw">end</span>
+
+<span class="kw">let</span> pattern <span class="op">=</span> regex<span class="op">.</span><span class="fn">compile</span>(<span class="str">"\\[(INFO|ERROR)\\] (.*)"</span>)
+<span class="kw">let</span> lines <span class="op">=</span> file<span class="op">.</span><span class="fn">readLines</span>(logFile)
+
+<span class="kw">for</span> idx, line <span class="kw">in</span> <span class="nd">enumerate</span>(lines)
+    <span class="kw">let</span> <span class="kw">match</span> <span class="op">=</span> pattern<span class="op">.</span><span class="fn">search</span>(line)
+    <span class="kw">if</span> <span class="op">!</span><span class="nd">isNull</span>(<span class="kw">match</span>)
+        <span class="kw">let</span> level <span class="op">=</span> <span class="kw">match</span><span class="op">.</span><span class="fn">group</span>(<span class="num">1</span>)
+        <span class="kw">let</span> msg <span class="op">=</span> <span class="kw">match</span><span class="op">.</span><span class="fn">group</span>(<span class="num">2</span>)
+        <span class="nd">print</span>(<span class="str">"Line ${idx + 1}: [${level}] - Message: ${msg}"</span>)
+    <span class="kw">end</span>
+<span class="kw">end</span></code></pre>
+
+                </article>
+
+                <div class="page-navigation">
+                    
+            <a href="../examples/todo-app.html" class="nav-card">
+                <span class="nav-label">Previous</span>
+                <span class="nav-title">Todo App</span>
+            </a>
+            
+            <a href="../reference/embedding.html" class="nav-card next">
+                <span class="nav-label">Next</span>
+                <span class="nav-title">Embedding API</span>
+            </a>
+            
+                </div>
+
+                <footer>
+                    <div>&copy; 2026 Harizi Riyadh. Released under the MIT License.</div>
+                    <div>Official Documentation Website for Djazair.</div>
+                </footer>
+            </div>
+        </main>
+
+        <aside class="toc-wrapper">
+            <div class="toc-title">On this page</div>
+            <ul class="toc-links">
+                <li><a href="#">Back to top</a></li>
+            </ul>
+        </aside>
+    </div>
+</body>
+</html>

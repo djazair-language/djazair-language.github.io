@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Install and build Djazair from source code on Windows, Linux, and macOS.">
+    <title>Installation | Djazair Documentation</title>
+    <link rel="stylesheet" href="../assets/style.css">
+    <script>
+        function filterNavigation() {
+            const query = document.getElementById("search-input").value.toLowerCase();
+            const links = document.querySelectorAll(".sidebar-links a");
+            links.forEach(link => {
+                const text = link.textContent.toLowerCase();
+                const parent = link.parentElement;
+                if (text.includes(query)) {
+                    parent.style.display = "";
+                    let hasSub = parent.closest("li.has-submenu");
+                    if (hasSub) { hasSub.style.display = ""; }
+                    let sub = parent.closest(".submenu");
+                    if (sub) { sub.setAttribute("data-expanded", "true"); }
+                } else {
+                    parent.style.display = "none";
+                }
+            });
+        }
+        function toggleSubmenu(event, el) {
+            const li = el.closest("li.has-submenu");
+            const submenu = li.querySelector(".submenu");
+            const expanded = submenu.getAttribute("data-expanded") === "true";
+            submenu.setAttribute("data-expanded", !expanded);
+            const arrow = el.querySelector(".arrow");
+            if (arrow) arrow.textContent = expanded ? ">" : "v";
+            if (!expanded) {
+                event.preventDefault();
+            }
+        }
+        document.addEventListener("DOMContentLoaded", function() {
+            document.querySelectorAll(".has-submenu > a").forEach(function(el) {
+                let li = el.closest("li");
+                let sm = li.querySelector(".submenu");
+                if (sm.getAttribute("data-expanded") === "true") {
+                    el.querySelector(".arrow").textContent = "v";
+                }
+            });
+        });
+    </script>
+</head>
+<body>
+    <header>
+        <div class="logo-container">
+            <div class="logo-icon">Dz</div>
+            <div class="logo-text">Djazair</div>
+            <div class="logo-version">v1.0.5</div>
+        </div>
+        <nav class="top-nav">
+            <a href="../index.html" >Home</a>
+            <a href="../getting-started/installation.html" class="active">Getting Started</a>
+            <a href="../language-guide/comments.html" >Language Guide</a>
+            <a href="../examples/hello-world.html" >Examples</a>
+            <a href="../reference/keywords.html" >Reference</a>
+            <a href="../faq.html" >FAQ</a>
+        </nav>
+        <div class="search-container">
+            <span class="search-icon">🔍</span>
+            <input type="text" id="search-input" class="search-input" placeholder="Search docs..." onkeyup="filterNavigation()">
+        </div>
+    </header>
+
+    <div class="app-container">
+        <aside class="sidebar">
+            <div class="sidebar-section">
+  <div class="sidebar-title">Getting Started</div>
+  <ul class="sidebar-links">
+    <li><a href="../getting-started/installation.html" class="active">Installation</a></li>
+    <li><a href="../getting-started/first-program.html" >First Program</a></li>
+    <li><a href="../getting-started/running-programs.html" >Running Programs</a></li>
+  </ul>
+</div>
+<div class="sidebar-section">
+  <div class="sidebar-title">Language Guide</div>
+  <ul class="sidebar-links">
+    <li><a href="../language-guide/comments.html" >Comments</a></li>
+    <li><a href="../language-guide/variables.html" >Variables</a></li>
+    <li><a href="../language-guide/data-types.html" >Data Types</a></li>
+    <li><a href="../language-guide/input-output.html" >Input & Output</a></li>
+    <li><a href="../language-guide/operators.html" >Operators</a></li>
+    <li><a href="../language-guide/conditions.html" >Conditions</a></li>
+    <li><a href="../language-guide/loops.html" >Loops</a></li>
+    <li><a href="../language-guide/arrays.html" >Arrays</a></li>
+    <li><a href="../language-guide/strings.html" >Strings</a></li>
+    <li><a href="../language-guide/maps.html" >Maps</a></li>
+    <li><a href="../language-guide/functions.html" >Functions</a></li>
+    <li><a href="../language-guide/modules.html" >Modules</a></li>
+    <li><a href="../language-guide/classes.html" >Classes</a></li>
+    <li><a href="../language-guide/error-handling.html" >Error Handling</a></li>
+    <li><a href="../language-guide/async-await.html" >Async / Await</a></li>
+  </ul>
+</div>
+<div class="sidebar-section">
+  <div class="sidebar-title">Examples</div>
+  <ul class="sidebar-links">
+    <li><a href="../examples/hello-world.html" >Hello World</a></li>
+    <li><a href="../examples/calculator.html" >Calculator</a></li>
+    <li><a href="../examples/todo-app.html" >Todo App</a></li>
+    <li><a href="../examples/file-processing.html" >File Processing</a></li>
+  </ul>
+</div>
+<div class="sidebar-section">
+  <div class="sidebar-title">Reference</div>
+  <ul class="sidebar-links">
+    <li><a href="../reference/embedding.html" >Embedding API</a></li>
+  </ul>
+</div>
+        </aside>
+
+        <main class="content-wrapper">
+            <div class="content-body">
+                <div class="breadcrumbs">
+                    <a href="../index.html">Home</a>
+<span class="separator">/</span>
+<span>Getting Started</span>
+<span class="separator">/</span>
+<span class="active">Installation</span>
+                </div>
+                
+                <article>
+                    
+<h1>Installing Djazair</h1>
+<p>Djazair is built to compile cleanly on Linux, macOS, and Windows. It relies on standard compiler environments and has minimal external dependencies.</p>
+
+<h2 id="linux---macos-compilation">Linux & macOS Compilation</h2>
+<p>Ensure you have GCC or Clang and <code>make</code> installed. Open a terminal and run the following commands:</p>
+<pre class="bash"><code># Clone the repository
+git clone https://github.com/djazair-language/djazair.git
+cd djazair
+
+# Build the interpreter using Makefile (very fast!)
+make
+
+# Optionally install it system-wide (requires root/sudo)
+sudo make install
+</code></pre>
+<p>The build outputs will be placed under <code>build/bin/djazair</code>.</p>
+
+<h2 id="windows-compilation">Windows Compilation</h2>
+<p>To compile on Windows, you must have a MinGW-w64 compiler environment installed, along with <code>libregex</code> (specifically <code>mingw-w64-x86_64-libgnurx</code>) for pattern matching capabilities. Run the automated build script in PowerShell:</p>
+<pre class="powershell"><code># Navigate to workspace directory
+cd djazair-language
+
+# Run build script
+tools\build.ps1
+</code></pre>
+<p>The compiler will output <code>build\bin\djazair.exe</code>.</p>
+
+<div class="alert alert-note">
+    <p><strong>MinGW Dependency Tip:</strong> If you receive linker errors regarding regular expressions on Windows, ensure that <code>libgnurx</code> or a compatible regex library is installed in your MSYS2 / MinGW installation.</p>
+</div>
+
+                </article>
+
+                <div class="page-navigation">
+                    
+            <a href="../index.html" class="nav-card">
+                <span class="nav-label">Previous</span>
+                <span class="nav-title">Home</span>
+            </a>
+            
+            <a href="../getting-started/first-program.html" class="nav-card next">
+                <span class="nav-label">Next</span>
+                <span class="nav-title">First Program</span>
+            </a>
+            
+                </div>
+
+                <footer>
+                    <div>&copy; 2026 Harizi Riyadh. Released under the MIT License.</div>
+                    <div>Official Documentation Website for Djazair.</div>
+                </footer>
+            </div>
+        </main>
+
+        <aside class="toc-wrapper">
+            <div class="toc-title">On this page</div>
+            <ul class="toc-links">
+                <li class=""><a href="#linux---macos-compilation">Linux & macOS Compilation</a></li>
+<li class=""><a href="#windows-compilation">Windows Compilation</a></li>
+            </ul>
+        </aside>
+    </div>
+</body>
+</html>

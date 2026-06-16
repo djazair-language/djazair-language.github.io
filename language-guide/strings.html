@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Learn string interpolation, multi-line blocks, and comprehensive string methods.">
+    <title>Strings | Djazair Documentation</title>
+    <link rel="stylesheet" href="../assets/style.css">
+    <script>
+        function filterNavigation() {
+            const query = document.getElementById("search-input").value.toLowerCase();
+            const links = document.querySelectorAll(".sidebar-links a");
+            links.forEach(link => {
+                const text = link.textContent.toLowerCase();
+                const parent = link.parentElement;
+                if (text.includes(query)) {
+                    parent.style.display = "";
+                    let hasSub = parent.closest("li.has-submenu");
+                    if (hasSub) { hasSub.style.display = ""; }
+                    let sub = parent.closest(".submenu");
+                    if (sub) { sub.setAttribute("data-expanded", "true"); }
+                } else {
+                    parent.style.display = "none";
+                }
+            });
+        }
+        function toggleSubmenu(event, el) {
+            const li = el.closest("li.has-submenu");
+            const submenu = li.querySelector(".submenu");
+            const expanded = submenu.getAttribute("data-expanded") === "true";
+            submenu.setAttribute("data-expanded", !expanded);
+            const arrow = el.querySelector(".arrow");
+            if (arrow) arrow.textContent = expanded ? ">" : "v";
+            if (!expanded) {
+                event.preventDefault();
+            }
+        }
+        document.addEventListener("DOMContentLoaded", function() {
+            document.querySelectorAll(".has-submenu > a").forEach(function(el) {
+                let li = el.closest("li");
+                let sm = li.querySelector(".submenu");
+                if (sm.getAttribute("data-expanded") === "true") {
+                    el.querySelector(".arrow").textContent = "v";
+                }
+            });
+        });
+    </script>
+</head>
+<body>
+    <header>
+        <div class="logo-container">
+            <div class="logo-icon">Dz</div>
+            <div class="logo-text">Djazair</div>
+            <div class="logo-version">v1.0.5</div>
+        </div>
+        <nav class="top-nav">
+            <a href="../index.html" >Home</a>
+            <a href="../getting-started/installation.html" >Getting Started</a>
+            <a href="../language-guide/comments.html" class="active">Language Guide</a>
+            <a href="../examples/hello-world.html" >Examples</a>
+            <a href="../reference/keywords.html" >Reference</a>
+            <a href="../faq.html" >FAQ</a>
+        </nav>
+        <div class="search-container">
+            <span class="search-icon">🔍</span>
+            <input type="text" id="search-input" class="search-input" placeholder="Search docs..." onkeyup="filterNavigation()">
+        </div>
+    </header>
+
+    <div class="app-container">
+        <aside class="sidebar">
+            <div class="sidebar-section">
+  <div class="sidebar-title">Getting Started</div>
+  <ul class="sidebar-links">
+    <li><a href="../getting-started/installation.html" >Installation</a></li>
+    <li><a href="../getting-started/first-program.html" >First Program</a></li>
+    <li><a href="../getting-started/running-programs.html" >Running Programs</a></li>
+  </ul>
+</div>
+<div class="sidebar-section">
+  <div class="sidebar-title">Language Guide</div>
+  <ul class="sidebar-links">
+    <li><a href="../language-guide/comments.html" >Comments</a></li>
+    <li><a href="../language-guide/variables.html" >Variables</a></li>
+    <li><a href="../language-guide/data-types.html" >Data Types</a></li>
+    <li><a href="../language-guide/input-output.html" >Input & Output</a></li>
+    <li><a href="../language-guide/operators.html" >Operators</a></li>
+    <li><a href="../language-guide/conditions.html" >Conditions</a></li>
+    <li><a href="../language-guide/loops.html" >Loops</a></li>
+    <li><a href="../language-guide/arrays.html" >Arrays</a></li>
+    <li><a href="../language-guide/strings.html" class="active">Strings</a></li>
+    <li><a href="../language-guide/maps.html" >Maps</a></li>
+    <li><a href="../language-guide/functions.html" >Functions</a></li>
+    <li><a href="../language-guide/modules.html" >Modules</a></li>
+    <li><a href="../language-guide/classes.html" >Classes</a></li>
+    <li><a href="../language-guide/error-handling.html" >Error Handling</a></li>
+    <li><a href="../language-guide/async-await.html" >Async / Await</a></li>
+  </ul>
+</div>
+<div class="sidebar-section">
+  <div class="sidebar-title">Examples</div>
+  <ul class="sidebar-links">
+    <li><a href="../examples/hello-world.html" >Hello World</a></li>
+    <li><a href="../examples/calculator.html" >Calculator</a></li>
+    <li><a href="../examples/todo-app.html" >Todo App</a></li>
+    <li><a href="../examples/file-processing.html" >File Processing</a></li>
+  </ul>
+</div>
+<div class="sidebar-section">
+  <div class="sidebar-title">Reference</div>
+  <ul class="sidebar-links">
+    <li><a href="../reference/embedding.html" >Embedding API</a></li>
+  </ul>
+</div>
+        </aside>
+
+        <main class="content-wrapper">
+            <div class="content-body">
+                <div class="breadcrumbs">
+                    <a href="../index.html">Home</a>
+<span class="separator">/</span>
+<span>Language Guide</span>
+<span class="separator">/</span>
+<span class="active">Strings</span>
+                </div>
+                
+                <article>
+                    
+<h1>Strings</h1>
+<p>Djazair Strings are immutable, UTF-8 encoded, and packed with formatting, trimming, and searching APIs.</p>
+
+<h2 id="string-literals">String Literals</h2>
+<p>Use double quotes for standard strings. Strings support variable interpolation using <code>${expression}</code>:</p>
+<pre><code><span class="kw">let</span> user <span class="op">=</span> <span class="str">"Riyadh"</span>
+<span class="kw">let</span> greet <span class="op">=</span> <span class="str">"Hello, ${user}! The time is ${getLine()}"</span>
+<span class="nd">print</span>(greet)</code></pre>
+
+<h2 id="multiline-strings">Multiline Strings</h2>
+<p>Use backticks (<code>`</code>) to construct multiline blocks. Interpolation operates inside backticks as well:</p>
+<pre><code><span class="kw">let</span> val <span class="op">=</span> <span class="num">42</span>
+<span class="kw">let</span> query <span class="op">=</span> <span class="str">`
+    SELECT * 
+    FROM users 
+    WHERE id = ${val};
+`</span>
+<span class="nd">print</span>(query)</code></pre>
+
+<h2 id="string-methods">String Methods</h2>
+<table>
+    <thead>
+        <tr>
+            <th>Method</th>
+            <th>Description</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr><td><code>length()</code></td><td>Character count</td></tr>
+        <tr><td><code>upper()</code></td><td>Uppercase conversion</td></tr>
+        <tr><td><code>lower()</code></td><td>Lowercase conversion</td></tr>
+        <tr><td><code>strip()</code></td><td>Trim whitespace from both ends</td></tr>
+        <tr><td><code>lStrip()</code></td><td>Trim whitespace from left</td></tr>
+        <tr><td><code>rStrip()</code></td><td>Trim whitespace from right</td></tr>
+        <tr><td><code>contains(substr)</code></td><td>Check if substring exists</td></tr>
+        <tr><td><code>count(substr)</code></td><td>Count occurrences of substring</td></tr>
+        <tr><td><code>index(needle)</code></td><td>First index of needle (returns -1 if not found)</td></tr>
+        <tr><td><code>split(sep?)</code></td><td>Split into array (default: whitespace)</td></tr>
+        <tr><td><code>join(list)</code></td><td>Join array elements with this string as separator</td></tr>
+        <tr><td><code>slice(start, end?)</code></td><td>Extract substring</td></tr>
+        <tr><td><code>subStr(start, length?)</code></td><td>Extract by start and length</td></tr>
+        <tr><td><code>replace(old, new)</code></td><td>Replace all occurrences</td></tr>
+        <tr><td><code>reverse()</code></td><td>Return reversed string</td></tr>
+        <tr><td><code>repeat(n)</code></td><td>Return string repeated n times</td></tr>
+        <tr><td><code>zFill(width)</code></td><td>Zero-pad to given width</td></tr>
+        <tr><td><code>center(width)</code></td><td>Center string in field of given width</td></tr>
+        <tr><td><code>lJust(width)</code></td><td>Left-justify in field of given width</td></tr>
+        <tr><td><code>rJust(width)</code></td><td>Right-justify in field of given width</td></tr>
+        <tr><td><code>startsWith(prefix)</code></td><td>Check if starts with prefix</td></tr>
+        <tr><td><code>endsWith(suffix)</code></td><td>Check if ends with suffix</td></tr>
+        <tr><td><code>capitalize()</code></td><td>First character uppercase, rest lowercase</td></tr>
+        <tr><td><code>title()</code></td><td>Title case</td></tr>
+        <tr><td><code>swapCase()</code></td><td>Swap uppercase/lowercase</td></tr>
+        <tr><td><code>charCodeAt(i)</code></td><td>Character code at index</td></tr>
+        <tr><td><code>isAlpha()</code></td><td>Check if all alphabetic</td></tr>
+        <tr><td><code>isAlnum()</code></td><td>Check if all alphanumeric</td></tr>
+        <tr><td><code>isDigit()</code></td><td>Check if all digits</td></tr>
+        <tr><td><code>isLower()</code></td><td>Check if all lowercase</td></tr>
+        <tr><td><code>isUpper()</code></td><td>Check if all uppercase</td></tr>
+        <tr><td><code>isSpace()</code></td><td>Check if all whitespace</td></tr>
+        <tr><td><code>concat(...)</code></td><td>Concatenate multiple strings</td></tr>
+    </tbody>
+</table>
+
+<h2 id="string-method-examples">String Method Examples</h2>
+<pre><code><span class="kw">let</span> s <span class="op">=</span> <span class="str">"  Hello World  "</span>
+<span class="nd">print</span>(s<span class="op">.</span><span class="fn">length</span>())          <span class="comment"># =&gt; 15</span>
+<span class="nd">print</span>(s<span class="op">.</span><span class="fn">strip</span>())           <span class="comment"># =&gt; "Hello World"</span>
+<span class="nd">print</span>(s<span class="op">.</span><span class="fn">upper</span>())           <span class="comment"># =&gt; "  HELLO WORLD  "</span>
+<span class="nd">print</span>(s<span class="op">.</span><span class="fn">contains</span>(<span class="str">"World"</span>)) <span class="comment"># =&gt; True</span>
+<span class="nd">print</span>(s<span class="op">.</span><span class="fn">replace</span>(<span class="str">"World"</span>, <span class="str">"Djazair"</span>)) <span class="comment"># =&gt; "  Hello Djazair  "</span>
+<span class="nd">print</span>(<span class="str">"a,b,c"</span><span class="op">.</span><span class="fn">split</span>(<span class="str">","</span>))  <span class="comment"># =&gt; ["a", "b", "c"]</span>
+<span class="nd">print</span>(<span class="str">", "</span><span class="op">.</span><span class="fn">join</span>([<span class="str">"a"</span>, <span class="str">"b"</span>, <span class="str">"c"</span>])) <span class="comment"># =&gt; "a, b, c"</span>
+<span class="nd">print</span>(<span class="str">"hello"</span><span class="op">.</span><span class="fn">index</span>(<span class="str">"l"</span>))  <span class="comment"># =&gt; 2</span>
+<span class="nd">print</span>(<span class="str">"hello"</span><span class="op">.</span><span class="fn">index</span>(<span class="str">"x"</span>))  <span class="comment"># =&gt; -1 (not found)</span>
+<span class="nd">print</span>(<span class="str">"42"</span><span class="op">.</span><span class="fn">zFill</span>(<span class="num">5</span>))       <span class="comment"># =&gt; "00042"</span></code></pre>
+
+                </article>
+
+                <div class="page-navigation">
+                    
+            <a href="../language-guide/arrays.html" class="nav-card">
+                <span class="nav-label">Previous</span>
+                <span class="nav-title">Arrays</span>
+            </a>
+            
+            <a href="../language-guide/maps.html" class="nav-card next">
+                <span class="nav-label">Next</span>
+                <span class="nav-title">Maps</span>
+            </a>
+            
+                </div>
+
+                <footer>
+                    <div>&copy; 2026 Harizi Riyadh. Released under the MIT License.</div>
+                    <div>Official Documentation Website for Djazair.</div>
+                </footer>
+            </div>
+        </main>
+
+        <aside class="toc-wrapper">
+            <div class="toc-title">On this page</div>
+            <ul class="toc-links">
+                <li class=""><a href="#string-literals">String Literals</a></li>
+<li class=""><a href="#multiline-strings">Multiline Strings</a></li>
+<li class=""><a href="#string-methods">String Methods</a></li>
+<li class=""><a href="#string-method-examples">String Method Examples</a></li>
+            </ul>
+        </aside>
+    </div>
+</body>
+</html>

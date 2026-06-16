@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Handle runtime issues gracefully using try-catch-finally blocks and throw statements.">
+    <title>Error Handling | Djazair Documentation</title>
+    <link rel="stylesheet" href="../assets/style.css">
+    <script>
+        function filterNavigation() {
+            const query = document.getElementById("search-input").value.toLowerCase();
+            const links = document.querySelectorAll(".sidebar-links a");
+            links.forEach(link => {
+                const text = link.textContent.toLowerCase();
+                const parent = link.parentElement;
+                if (text.includes(query)) {
+                    parent.style.display = "";
+                    let hasSub = parent.closest("li.has-submenu");
+                    if (hasSub) { hasSub.style.display = ""; }
+                    let sub = parent.closest(".submenu");
+                    if (sub) { sub.setAttribute("data-expanded", "true"); }
+                } else {
+                    parent.style.display = "none";
+                }
+            });
+        }
+        function toggleSubmenu(event, el) {
+            const li = el.closest("li.has-submenu");
+            const submenu = li.querySelector(".submenu");
+            const expanded = submenu.getAttribute("data-expanded") === "true";
+            submenu.setAttribute("data-expanded", !expanded);
+            const arrow = el.querySelector(".arrow");
+            if (arrow) arrow.textContent = expanded ? ">" : "v";
+            if (!expanded) {
+                event.preventDefault();
+            }
+        }
+        document.addEventListener("DOMContentLoaded", function() {
+            document.querySelectorAll(".has-submenu > a").forEach(function(el) {
+                let li = el.closest("li");
+                let sm = li.querySelector(".submenu");
+                if (sm.getAttribute("data-expanded") === "true") {
+                    el.querySelector(".arrow").textContent = "v";
+                }
+            });
+        });
+    </script>
+</head>
+<body>
+    <header>
+        <div class="logo-container">
+            <div class="logo-icon">Dz</div>
+            <div class="logo-text">Djazair</div>
+            <div class="logo-version">v1.0.5</div>
+        </div>
+        <nav class="top-nav">
+            <a href="../index.html" >Home</a>
+            <a href="../getting-started/installation.html" >Getting Started</a>
+            <a href="../language-guide/comments.html" class="active">Language Guide</a>
+            <a href="../examples/hello-world.html" >Examples</a>
+            <a href="../reference/keywords.html" >Reference</a>
+            <a href="../faq.html" >FAQ</a>
+        </nav>
+        <div class="search-container">
+            <span class="search-icon">🔍</span>
+            <input type="text" id="search-input" class="search-input" placeholder="Search docs..." onkeyup="filterNavigation()">
+        </div>
+    </header>
+
+    <div class="app-container">
+        <aside class="sidebar">
+            <div class="sidebar-section">
+  <div class="sidebar-title">Getting Started</div>
+  <ul class="sidebar-links">
+    <li><a href="../getting-started/installation.html" >Installation</a></li>
+    <li><a href="../getting-started/first-program.html" >First Program</a></li>
+    <li><a href="../getting-started/running-programs.html" >Running Programs</a></li>
+  </ul>
+</div>
+<div class="sidebar-section">
+  <div class="sidebar-title">Language Guide</div>
+  <ul class="sidebar-links">
+    <li><a href="../language-guide/comments.html" >Comments</a></li>
+    <li><a href="../language-guide/variables.html" >Variables</a></li>
+    <li><a href="../language-guide/data-types.html" >Data Types</a></li>
+    <li><a href="../language-guide/input-output.html" >Input & Output</a></li>
+    <li><a href="../language-guide/operators.html" >Operators</a></li>
+    <li><a href="../language-guide/conditions.html" >Conditions</a></li>
+    <li><a href="../language-guide/loops.html" >Loops</a></li>
+    <li><a href="../language-guide/arrays.html" >Arrays</a></li>
+    <li><a href="../language-guide/strings.html" >Strings</a></li>
+    <li><a href="../language-guide/maps.html" >Maps</a></li>
+    <li><a href="../language-guide/functions.html" >Functions</a></li>
+    <li><a href="../language-guide/modules.html" >Modules</a></li>
+    <li><a href="../language-guide/classes.html" >Classes</a></li>
+    <li><a href="../language-guide/error-handling.html" class="active">Error Handling</a></li>
+    <li><a href="../language-guide/async-await.html" >Async / Await</a></li>
+  </ul>
+</div>
+<div class="sidebar-section">
+  <div class="sidebar-title">Examples</div>
+  <ul class="sidebar-links">
+    <li><a href="../examples/hello-world.html" >Hello World</a></li>
+    <li><a href="../examples/calculator.html" >Calculator</a></li>
+    <li><a href="../examples/todo-app.html" >Todo App</a></li>
+    <li><a href="../examples/file-processing.html" >File Processing</a></li>
+  </ul>
+</div>
+<div class="sidebar-section">
+  <div class="sidebar-title">Reference</div>
+  <ul class="sidebar-links">
+    <li><a href="../reference/embedding.html" >Embedding API</a></li>
+  </ul>
+</div>
+        </aside>
+
+        <main class="content-wrapper">
+            <div class="content-body">
+                <div class="breadcrumbs">
+                    <a href="../index.html">Home</a>
+<span class="separator">/</span>
+<span>Language Guide</span>
+<span class="separator">/</span>
+<span class="active">Error Handling</span>
+                </div>
+                
+                <article>
+                    
+<h1>Error Handling</h1>
+<p>Runtime faults are caught and mitigated gracefully via structured exception blocks.</p>
+
+<h2 id="try-catch-finally-blocks">Try-Catch-Finally Blocks</h2>
+<p>The error handling block uses <code>try</code>, <code>catch [variable]</code>, <code>finally</code>, and finishes with <code>end</code>:</p>
+<pre><code><span class="kw">try</span>
+    <span class="kw">let</span> <span class="nd">num</span> <span class="op">=</span> <span class="num">1</span> <span class="op">/</span> <span class="num">0</span>
+<span class="kw">catch</span> error
+    <span class="nd">print</span>(<span class="str">"Caught an error: "</span> <span class="op">+</span> <span class="nd">str</span>(error))
+<span class="kw">finally</span>
+    <span class="nd">print</span>(<span class="str">"Cleanup: This block always executes."</span>)
+<span class="kw">end</span></code></pre>
+
+<h2 id="try-finally--no-catch">Try-Finally (No Catch)</h2>
+<p>You can omit the <code>catch</code> block and just use <code>try/finally</code> for resource cleanup:</p>
+<pre><code><span class="kw">try</span>
+    <span class="kw">let</span> f <span class="op">=</span> <span class="str">"file_handle"</span>
+    <span class="comment"># use resource...</span>
+<span class="kw">finally</span>
+    <span class="nd">print</span>(<span class="str">"cleaned"</span>)
+<span class="kw">end</span></code></pre>
+
+<h2 id="finally-with-return">Finally with Return</h2>
+<p>The <code>finally</code> block runs even when a <code>return</code> statement is executed in the <code>try</code> block:</p>
+<pre><code><span class="kw">fn</span> <span class="fn">testReturn</span>()
+    <span class="kw">try</span>
+        <span class="kw">return</span> <span class="num">42</span>
+    <span class="kw">finally</span>
+        <span class="nd">print</span>(<span class="str">"cleanup runs before return"</span>)
+    <span class="kw">end</span>
+<span class="kw">end</span>
+<span class="nd">print</span>(<span class="fn">testReturn</span>()) <span class="comment"># prints "cleanup runs before return" then 42</span></code></pre>
+
+<h2 id="nested-try-catch-order">Nested Try-Catch Order</h2>
+<p>When nesting try-catch blocks, the inner catch handles the error first. If it re-throws, the outer catch handles it:</p>
+<pre><code><span class="kw">try</span>
+    <span class="kw">try</span>
+        <span class="kw">throw</span> <span class="str">"inner error"</span>
+    <span class="kw">catch</span> e
+        <span class="nd">print</span>(<span class="str">"Inner caught: ${e}"</span>)
+        <span class="kw">throw</span> e  <span class="comment"># re-throw to outer</span>
+    <span class="kw">end</span>
+<span class="kw">catch</span> e
+    <span class="nd">print</span>(<span class="str">"Outer caught: ${e}"</span>)
+<span class="kw">end</span></code></pre>
+
+<h2 id="throwing-exceptions">Throwing Exceptions</h2>
+<p>Raise custom errors using the <code>throw</code> keyword. You can throw simple strings or complex payload Maps:</p>
+<pre><code><span class="kw">fn</span> <span class="fn">validateAge</span>(age)
+    <span class="kw">if</span> age <span class="op">&</span>lt; <span class="num">0</span>
+        <span class="kw">throw</span> {<span class="str">"error"</span><span class="op">:</span> <span class="str">"InvalidAge"</span>, <span class="str">"message"</span><span class="op">:</span> <span class="str">"Age cannot be negative"</span>}
+    <span class="kw">end</span>
+<span class="kw">end</span>
+
+<span class="kw">try</span>
+    <span class="fn">validateAge</span>(<span class="op">-</span><span class="num">1</span>)
+<span class="kw">catch</span> err
+    <span class="nd">print</span>(<span class="str">"Error Code: "</span> <span class="op">+</span> err[<span class="str">"error"</span>]) <span class="comment"># =&gt; InvalidAge</span>
+<span class="kw">end</span></code></pre>
+
+
+
+                </article>
+
+                <div class="page-navigation">
+                    
+            <a href="../language-guide/classes.html" class="nav-card">
+                <span class="nav-label">Previous</span>
+                <span class="nav-title">Classes</span>
+            </a>
+            
+            <a href="../language-guide/async-await.html" class="nav-card next">
+                <span class="nav-label">Next</span>
+                <span class="nav-title">Async / Await</span>
+            </a>
+            
+                </div>
+
+                <footer>
+                    <div>&copy; 2026 Harizi Riyadh. Released under the MIT License.</div>
+                    <div>Official Documentation Website for Djazair.</div>
+                </footer>
+            </div>
+        </main>
+
+        <aside class="toc-wrapper">
+            <div class="toc-title">On this page</div>
+            <ul class="toc-links">
+                <li class=""><a href="#try-catch-finally-blocks">Try-Catch-Finally Blocks</a></li>
+<li class=""><a href="#try-finally--no-catch">Try-Finally (No Catch)</a></li>
+<li class=""><a href="#finally-with-return">Finally with Return</a></li>
+<li class=""><a href="#nested-try-catch-order">Nested Try-Catch Order</a></li>
+<li class=""><a href="#throwing-exceptions">Throwing Exceptions</a></li>
+            </ul>
+        </aside>
+    </div>
+</body>
+</html>

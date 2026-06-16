@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Write loops using while, do-while, and for-in iterators over collections and ranges.">
+    <title>Loops | Djazair Documentation</title>
+    <link rel="stylesheet" href="../assets/style.css">
+    <script>
+        function filterNavigation() {
+            const query = document.getElementById("search-input").value.toLowerCase();
+            const links = document.querySelectorAll(".sidebar-links a");
+            links.forEach(link => {
+                const text = link.textContent.toLowerCase();
+                const parent = link.parentElement;
+                if (text.includes(query)) {
+                    parent.style.display = "";
+                    let hasSub = parent.closest("li.has-submenu");
+                    if (hasSub) { hasSub.style.display = ""; }
+                    let sub = parent.closest(".submenu");
+                    if (sub) { sub.setAttribute("data-expanded", "true"); }
+                } else {
+                    parent.style.display = "none";
+                }
+            });
+        }
+        function toggleSubmenu(event, el) {
+            const li = el.closest("li.has-submenu");
+            const submenu = li.querySelector(".submenu");
+            const expanded = submenu.getAttribute("data-expanded") === "true";
+            submenu.setAttribute("data-expanded", !expanded);
+            const arrow = el.querySelector(".arrow");
+            if (arrow) arrow.textContent = expanded ? ">" : "v";
+            if (!expanded) {
+                event.preventDefault();
+            }
+        }
+        document.addEventListener("DOMContentLoaded", function() {
+            document.querySelectorAll(".has-submenu > a").forEach(function(el) {
+                let li = el.closest("li");
+                let sm = li.querySelector(".submenu");
+                if (sm.getAttribute("data-expanded") === "true") {
+                    el.querySelector(".arrow").textContent = "v";
+                }
+            });
+        });
+    </script>
+</head>
+<body>
+    <header>
+        <div class="logo-container">
+            <div class="logo-icon">Dz</div>
+            <div class="logo-text">Djazair</div>
+            <div class="logo-version">v1.0.5</div>
+        </div>
+        <nav class="top-nav">
+            <a href="../index.html" >Home</a>
+            <a href="../getting-started/installation.html" >Getting Started</a>
+            <a href="../language-guide/comments.html" class="active">Language Guide</a>
+            <a href="../examples/hello-world.html" >Examples</a>
+            <a href="../reference/keywords.html" >Reference</a>
+            <a href="../faq.html" >FAQ</a>
+        </nav>
+        <div class="search-container">
+            <span class="search-icon">🔍</span>
+            <input type="text" id="search-input" class="search-input" placeholder="Search docs..." onkeyup="filterNavigation()">
+        </div>
+    </header>
+
+    <div class="app-container">
+        <aside class="sidebar">
+            <div class="sidebar-section">
+  <div class="sidebar-title">Getting Started</div>
+  <ul class="sidebar-links">
+    <li><a href="../getting-started/installation.html" >Installation</a></li>
+    <li><a href="../getting-started/first-program.html" >First Program</a></li>
+    <li><a href="../getting-started/running-programs.html" >Running Programs</a></li>
+  </ul>
+</div>
+<div class="sidebar-section">
+  <div class="sidebar-title">Language Guide</div>
+  <ul class="sidebar-links">
+    <li><a href="../language-guide/comments.html" >Comments</a></li>
+    <li><a href="../language-guide/variables.html" >Variables</a></li>
+    <li><a href="../language-guide/data-types.html" >Data Types</a></li>
+    <li><a href="../language-guide/input-output.html" >Input & Output</a></li>
+    <li><a href="../language-guide/operators.html" >Operators</a></li>
+    <li><a href="../language-guide/conditions.html" >Conditions</a></li>
+    <li><a href="../language-guide/loops.html" class="active">Loops</a></li>
+    <li><a href="../language-guide/arrays.html" >Arrays</a></li>
+    <li><a href="../language-guide/strings.html" >Strings</a></li>
+    <li><a href="../language-guide/maps.html" >Maps</a></li>
+    <li><a href="../language-guide/functions.html" >Functions</a></li>
+    <li><a href="../language-guide/modules.html" >Modules</a></li>
+    <li><a href="../language-guide/classes.html" >Classes</a></li>
+    <li><a href="../language-guide/error-handling.html" >Error Handling</a></li>
+    <li><a href="../language-guide/async-await.html" >Async / Await</a></li>
+  </ul>
+</div>
+<div class="sidebar-section">
+  <div class="sidebar-title">Examples</div>
+  <ul class="sidebar-links">
+    <li><a href="../examples/hello-world.html" >Hello World</a></li>
+    <li><a href="../examples/calculator.html" >Calculator</a></li>
+    <li><a href="../examples/todo-app.html" >Todo App</a></li>
+    <li><a href="../examples/file-processing.html" >File Processing</a></li>
+  </ul>
+</div>
+<div class="sidebar-section">
+  <div class="sidebar-title">Reference</div>
+  <ul class="sidebar-links">
+    <li><a href="../reference/embedding.html" >Embedding API</a></li>
+  </ul>
+</div>
+        </aside>
+
+        <main class="content-wrapper">
+            <div class="content-body">
+                <div class="breadcrumbs">
+                    <a href="../index.html">Home</a>
+<span class="separator">/</span>
+<span>Language Guide</span>
+<span class="separator">/</span>
+<span class="active">Loops</span>
+                </div>
+                
+                <article>
+                    
+<h1>Loops</h1>
+<p>Perform repeated executions using <code>while</code>, <code>do-while</code>, and <code>for-in</code> constructs.</p>
+
+<h2 id="while-loop">While Loop</h2>
+<p>Runs as long as a boolean expression evaluates to <code>True</code>:</p>
+<pre><code><span class="kw">let</span> i <span class="op">=</span> <span class="num">1</span>
+<span class="kw">while</span> i <span class="op">&</span>lt;<span class="op">=</span> <span class="num">5</span>
+    <span class="nd">print</span>(<span class="str">"Count: ${i}"</span>)
+    i <span class="op">=</span> i <span class="op">+</span> <span class="num">1</span>
+<span class="kw">end</span></code></pre>
+
+<h2 id="do-while-loop">Do-While Loop</h2>
+<p>Executes the body block at least once, then continues while the condition matches:</p>
+<pre><code><span class="kw">let</span> x <span class="op">=</span> <span class="num">10</span>
+<span class="kw">do</span>
+    <span class="nd">print</span>(<span class="str">"Runs at least once: ${x}"</span>)
+    x<span class="op">--</span>
+<span class="kw">while</span> x <span class="op">&</span>gt; <span class="num">5</span></code></pre>
+
+<h2 id="for-in-iteration">For-In Iteration</h2>
+<p>Iterate over items in arrays, strings, ranges, or key-value entries in maps:</p>
+<pre><code><span class="comment"># Array iteration</span>
+<span class="kw">for</span> fruit <span class="kw">in</span> [<span class="str">"apple"</span>, <span class="str">"banana"</span>]
+    <span class="nd">print</span>(fruit)
+<span class="kw">end</span>
+
+<span class="comment"># String iteration (character by character)</span>
+<span class="kw">for</span> char <span class="kw">in</span> <span class="str">"Hi"</span>
+    <span class="nd">print</span>(char)
+<span class="kw">end</span>
+
+<span class="comment"># Range iteration (.. syntax)</span>
+<span class="kw">for</span> idx <span class="kw">in</span> <span class="num">1</span><span class="op">..</span><span class="num">4</span>
+    <span class="nd">print</span>(<span class="str">"Index: ${idx}"</span>)
+<span class="kw">end</span>
+
+<span class="comment"># Range iteration (to syntax)</span>
+<span class="kw">for</span> i <span class="kw">in</span> <span class="num">0</span> <span class="kw">to</span> <span class="num">3</span>
+    <span class="nd">print</span>(<span class="str">"i: ${i}"</span>)
+<span class="kw">end</span>
+
+<span class="comment"># Map iteration (unpacking key, value)</span>
+<span class="kw">let</span> scores <span class="op">=</span> {<span class="str">"Riad"</span><span class="op">:</span> <span class="num">95</span>, <span class="str">"Sarah"</span><span class="op">:</span> <span class="num">99</span>}
+<span class="kw">for</span> name, score <span class="kw">in</span> scores
+    <span class="nd">print</span>(<span class="str">"${name} scored ${score}"</span>)
+<span class="kw">end</span></code></pre>
+
+<h2 id="break---continue">Break & Continue</h2>
+<p>Standard loop directives are fully supported: <code>break</code> immediately terminates the loop, while <code>continue</code> skips to the next iteration:</p>
+<pre><code><span class="kw">for</span> i <span class="kw">in</span> <span class="num">0</span><span class="op">..</span><span class="num">5</span>
+    <span class="kw">if</span> i <span class="op">==</span> <span class="num">3</span>
+        <span class="kw">break</span>  <span class="comment"># stops at 3</span>
+    <span class="kw">end</span>
+    <span class="kw">if</span> i <span class="op">==</span> <span class="num">1</span>
+        <span class="kw">continue</span>  <span class="comment"># skips printing 1</span>
+    <span class="kw">end</span>
+    <span class="nd">print</span>(i)
+<span class="kw">end</span>
+<span class="comment"># Output: 0 2</span></code></pre>
+
+                </article>
+
+                <div class="page-navigation">
+                    
+            <a href="../language-guide/conditions.html" class="nav-card">
+                <span class="nav-label">Previous</span>
+                <span class="nav-title">Conditions</span>
+            </a>
+            
+            <a href="../language-guide/arrays.html" class="nav-card next">
+                <span class="nav-label">Next</span>
+                <span class="nav-title">Arrays</span>
+            </a>
+            
+                </div>
+
+                <footer>
+                    <div>&copy; 2026 Harizi Riyadh. Released under the MIT License.</div>
+                    <div>Official Documentation Website for Djazair.</div>
+                </footer>
+            </div>
+        </main>
+
+        <aside class="toc-wrapper">
+            <div class="toc-title">On this page</div>
+            <ul class="toc-links">
+                <li class=""><a href="#while-loop">While Loop</a></li>
+<li class=""><a href="#do-while-loop">Do-While Loop</a></li>
+<li class=""><a href="#for-in-iteration">For-In Iteration</a></li>
+<li class=""><a href="#break---continue">Break & Continue</a></li>
+            </ul>
+        </aside>
+    </div>
+</body>
+</html>

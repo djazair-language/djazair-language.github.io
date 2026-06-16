@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Create dynamic lists and manipulate them using standard array methods.">
+    <title>Arrays | Djazair Documentation</title>
+    <link rel="stylesheet" href="../assets/style.css">
+    <script>
+        function filterNavigation() {
+            const query = document.getElementById("search-input").value.toLowerCase();
+            const links = document.querySelectorAll(".sidebar-links a");
+            links.forEach(link => {
+                const text = link.textContent.toLowerCase();
+                const parent = link.parentElement;
+                if (text.includes(query)) {
+                    parent.style.display = "";
+                    let hasSub = parent.closest("li.has-submenu");
+                    if (hasSub) { hasSub.style.display = ""; }
+                    let sub = parent.closest(".submenu");
+                    if (sub) { sub.setAttribute("data-expanded", "true"); }
+                } else {
+                    parent.style.display = "none";
+                }
+            });
+        }
+        function toggleSubmenu(event, el) {
+            const li = el.closest("li.has-submenu");
+            const submenu = li.querySelector(".submenu");
+            const expanded = submenu.getAttribute("data-expanded") === "true";
+            submenu.setAttribute("data-expanded", !expanded);
+            const arrow = el.querySelector(".arrow");
+            if (arrow) arrow.textContent = expanded ? ">" : "v";
+            if (!expanded) {
+                event.preventDefault();
+            }
+        }
+        document.addEventListener("DOMContentLoaded", function() {
+            document.querySelectorAll(".has-submenu > a").forEach(function(el) {
+                let li = el.closest("li");
+                let sm = li.querySelector(".submenu");
+                if (sm.getAttribute("data-expanded") === "true") {
+                    el.querySelector(".arrow").textContent = "v";
+                }
+            });
+        });
+    </script>
+</head>
+<body>
+    <header>
+        <div class="logo-container">
+            <div class="logo-icon">Dz</div>
+            <div class="logo-text">Djazair</div>
+            <div class="logo-version">v1.0.5</div>
+        </div>
+        <nav class="top-nav">
+            <a href="../index.html" >Home</a>
+            <a href="../getting-started/installation.html" >Getting Started</a>
+            <a href="../language-guide/comments.html" class="active">Language Guide</a>
+            <a href="../examples/hello-world.html" >Examples</a>
+            <a href="../reference/keywords.html" >Reference</a>
+            <a href="../faq.html" >FAQ</a>
+        </nav>
+        <div class="search-container">
+            <span class="search-icon">🔍</span>
+            <input type="text" id="search-input" class="search-input" placeholder="Search docs..." onkeyup="filterNavigation()">
+        </div>
+    </header>
+
+    <div class="app-container">
+        <aside class="sidebar">
+            <div class="sidebar-section">
+  <div class="sidebar-title">Getting Started</div>
+  <ul class="sidebar-links">
+    <li><a href="../getting-started/installation.html" >Installation</a></li>
+    <li><a href="../getting-started/first-program.html" >First Program</a></li>
+    <li><a href="../getting-started/running-programs.html" >Running Programs</a></li>
+  </ul>
+</div>
+<div class="sidebar-section">
+  <div class="sidebar-title">Language Guide</div>
+  <ul class="sidebar-links">
+    <li><a href="../language-guide/comments.html" >Comments</a></li>
+    <li><a href="../language-guide/variables.html" >Variables</a></li>
+    <li><a href="../language-guide/data-types.html" >Data Types</a></li>
+    <li><a href="../language-guide/input-output.html" >Input & Output</a></li>
+    <li><a href="../language-guide/operators.html" >Operators</a></li>
+    <li><a href="../language-guide/conditions.html" >Conditions</a></li>
+    <li><a href="../language-guide/loops.html" >Loops</a></li>
+    <li><a href="../language-guide/arrays.html" class="active">Arrays</a></li>
+    <li><a href="../language-guide/strings.html" >Strings</a></li>
+    <li><a href="../language-guide/maps.html" >Maps</a></li>
+    <li><a href="../language-guide/functions.html" >Functions</a></li>
+    <li><a href="../language-guide/modules.html" >Modules</a></li>
+    <li><a href="../language-guide/classes.html" >Classes</a></li>
+    <li><a href="../language-guide/error-handling.html" >Error Handling</a></li>
+    <li><a href="../language-guide/async-await.html" >Async / Await</a></li>
+  </ul>
+</div>
+<div class="sidebar-section">
+  <div class="sidebar-title">Examples</div>
+  <ul class="sidebar-links">
+    <li><a href="../examples/hello-world.html" >Hello World</a></li>
+    <li><a href="../examples/calculator.html" >Calculator</a></li>
+    <li><a href="../examples/todo-app.html" >Todo App</a></li>
+    <li><a href="../examples/file-processing.html" >File Processing</a></li>
+  </ul>
+</div>
+<div class="sidebar-section">
+  <div class="sidebar-title">Reference</div>
+  <ul class="sidebar-links">
+    <li><a href="../reference/embedding.html" >Embedding API</a></li>
+  </ul>
+</div>
+        </aside>
+
+        <main class="content-wrapper">
+            <div class="content-body">
+                <div class="breadcrumbs">
+                    <a href="../index.html">Home</a>
+<span class="separator">/</span>
+<span>Language Guide</span>
+<span class="separator">/</span>
+<span class="active">Arrays</span>
+                </div>
+                
+                <article>
+                    
+<h1>Arrays</h1>
+<p>Arrays are dynamic, ordered lists. They can hold mixed data types, resize automatically, and feature an extensive collection of utility methods.</p>
+
+<h2 id="instantiation">Instantiation</h2>
+<pre><code><span class="kw">let</span> list <span class="op">=</span> [<span class="num">10</span>, <span class="str">"apple"</span>, <span class="kw">True</span>, [<span class="num">3</span>, <span class="num">4</span>]]
+<span class="nd">print</span>(list[<span class="num">0</span>])    <span class="comment"># =&gt; 10</span>
+<span class="nd">print</span>(list[<span class="num">3</span>][<span class="num">1</span>]) <span class="comment"># =&gt; 4</span></code></pre>
+
+<h2 id="full-methods-catalog">Full Methods Catalog</h2>
+<table>
+    <thead>
+        <tr>
+            <th>Method</th>
+            <th>Description</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr><td><code>length()</code></td><td>Number of elements</td></tr>
+        <tr><td><code>append(value)</code></td><td>Add value at end</td></tr>
+        <tr><td><code>pop(index?)</code></td><td>Remove and return element (last or at index)</td></tr>
+        <tr><td><code>insert(index, val)</code></td><td>Insert at position, shifting elements</td></tr>
+        <tr><td><code>remove(value)</code></td><td>Remove first occurrence of value</td></tr>
+        <tr><td><code>reverse()</code></td><td>Reverse array <b>in-place</b></td></tr>
+        <tr><td><code>reversed()</code></td><td>Return new array in reverse order (original unchanged)</td></tr>
+        <tr><td><code>index(value)</code></td><td>Index of value (-1 if not found)</td></tr>
+        <tr><td><code>extend(array)</code></td><td>Append all elements from another array</td></tr>
+        <tr><td><code>sort(descOrCmp?)</code></td><td>Sort array; accepts bool (descending) or comparator function</td></tr>
+        <tr><td><code>sorted(desc?)</code></td><td>Return sorted copy (original unchanged)</td></tr>
+        <tr><td><code>copy()</code></td><td>Return shallow copy of array</td></tr>
+        <tr><td><code>clear()</code></td><td>Remove all elements</td></tr>
+        <tr><td><code>contains(value)</code></td><td>Check if value exists in array</td></tr>
+        <tr><td><code>count(value)</code></td><td>Count occurrences of value</td></tr>
+        <tr><td><code>concat(other)</code></td><td>Return new array with elements from both</td></tr>
+        <tr><td><code>slice(start, end?)</code></td><td>Extract sub-array</td></tr>
+        <tr><td><code>join(sep)</code></td><td>Join elements into string with separator</td></tr>
+        <tr><td><code>flatten()</code></td><td>Flatten nested arrays one level</td></tr>
+        <tr><td><code>unique()</code></td><td>Return new array with duplicate values removed</td></tr>
+        <tr><td><code>all()</code></td><td>All elements are truthy</td></tr>
+        <tr><td><code>any()</code></td><td>Any element is truthy</td></tr>
+        <tr><td><code>min()</code></td><td>Minimum value in array</td></tr>
+        <tr><td><code>max()</code></td><td>Maximum value in array</td></tr>
+        <tr><td><code>sum()</code></td><td>Sum of all numeric elements</td></tr>
+        <tr><td><code>map(callback)</code></td><td>Transform each element, return new array</td></tr>
+        <tr><td><code>filter(callback)</code></td><td>Keep elements where callback returns truthy</td></tr>
+        <tr><td><code>reduce(callback, init)</code></td><td>Accumulate values into single result</td></tr>
+                <tr><td><code>find(value)</code></td><td>Find first element matching value or callback (Null if not found)</td></tr>
+        <tr><td><code>every(callback)</code></td><td>Check if all elements pass callback</td></tr>
+        <tr><td><code>some(callback)</code></td><td>Check if any element passes callback</td></tr>
+    </tbody>
+</table>
+
+<h2 id="method-chaining-example">Method Chaining Example</h2>
+<pre><code><span class="kw">let</span> numbers <span class="op">=</span> [<span class="num">1</span>, <span class="num">2</span>, <span class="num">3</span>, <span class="num">4</span>, <span class="num">5</span>, <span class="num">6</span>]
+<span class="kw">let</span> result <span class="op">=</span> numbers
+    <span class="op">.</span><span class="fn">filter</span>(<span class="kw">fn</span>(x) <span class="op">=&</span>gt; x <span class="op">%</span> <span class="num">2</span> <span class="op">==</span> <span class="num">0</span>)
+    <span class="op">.</span><span class="fn">map</span>(<span class="kw">fn</span>(x) <span class="op">=&</span>gt; x <span class="op">*</span> <span class="num">10</span>)
+    <span class="op">.</span><span class="fn">sum</span>()
+
+<span class="nd">print</span>(result) <span class="comment"># (2*10) + (4*10) + (6*10) =&gt; 120</span></code></pre>
+
+<h2 id="sort-variants">Sort Variants</h2>
+<pre><code><span class="kw">let</span> arr <span class="op">=</span> [<span class="num">5</span>, <span class="num">1</span>, <span class="num">9</span>, <span class="num">3</span>]
+arr<span class="op">.</span><span class="fn">sort</span>()                 <span class="comment"># ascending: [1, 3, 5, 9]</span>
+arr<span class="op">.</span><span class="fn">sort</span>(<span class="kw">True</span>)             <span class="comment"># descending: [9, 5, 3, 1]</span>
+arr<span class="op">.</span><span class="fn">sort</span>(<span class="kw">fn</span>(x, y) <span class="op">=&</span>gt; y <span class="op">-</span> x) <span class="comment"># custom comparator: [9, 5, 3, 1]</span></code></pre>
+
+                </article>
+
+                <div class="page-navigation">
+                    
+            <a href="../language-guide/loops.html" class="nav-card">
+                <span class="nav-label">Previous</span>
+                <span class="nav-title">Loops</span>
+            </a>
+            
+            <a href="../language-guide/strings.html" class="nav-card next">
+                <span class="nav-label">Next</span>
+                <span class="nav-title">Strings</span>
+            </a>
+            
+                </div>
+
+                <footer>
+                    <div>&copy; 2026 Harizi Riyadh. Released under the MIT License.</div>
+                    <div>Official Documentation Website for Djazair.</div>
+                </footer>
+            </div>
+        </main>
+
+        <aside class="toc-wrapper">
+            <div class="toc-title">On this page</div>
+            <ul class="toc-links">
+                <li class=""><a href="#instantiation">Instantiation</a></li>
+<li class=""><a href="#full-methods-catalog">Full Methods Catalog</a></li>
+<li class=""><a href="#method-chaining-example">Method Chaining Example</a></li>
+<li class=""><a href="#sort-variants">Sort Variants</a></li>
+            </ul>
+        </aside>
+    </div>
+</body>
+</html>
