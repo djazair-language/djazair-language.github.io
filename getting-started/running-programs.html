@@ -5,7 +5,42 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Learn the various CLI commands to execute your scripts inline or via files.">
     <title>Running Programs | Djazair Documentation</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <link rel="stylesheet" href="../assets/style.css">
+    <style>
+        .feature-icon {
+            width: 48px; height: 48px;
+            display: flex; align-items: center; justify-content: center;
+            border-radius: 12px;
+            background: rgba(16, 185, 129, 0.1);
+            color: var(--color-primary);
+            font-size: 1.25rem;
+            margin-bottom: 1rem;
+            transition: all 0.3s ease;
+        }
+        .feature-card:hover .feature-icon {
+            background: var(--color-primary);
+            color: #fff;
+            transform: scale(1.05) translateY(-1px);
+            box-shadow: 0 4px 14px rgba(16, 185, 129, 0.3);
+        }
+        .feature-card {
+            opacity: 0;
+            transform: translateY(24px);
+            transition: opacity 0.5s ease, transform 0.5s ease;
+        }
+        .feature-card.reveal {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .hero-section {
+            animation: fadeInDown 0.6s ease;
+        }
+        @keyframes fadeInDown {
+            from { opacity: 0; transform: translateY(-20px); }
+            to   { opacity: 1; transform: translateY(0); }
+        }
+    </style>
     <script>
         function filterNavigation() {
             const query = document.getElementById("search-input").value.toLowerCase();
@@ -162,13 +197,10 @@
 </table>
 
 <h2 id="script-arguments">Script Arguments</h2>
-<p>Any arguments passed after the script file path are collected and accessible via <code>process.args()</code>:</p>
-<pre><code><span class="kw">use</span> process
-
-<span class="comment"># script.dz</span>
+<p>Any arguments passed after the script file path are automatically collected and made available inside your code as a list named <code>args</code>:</p>
+<pre><code><span class="comment"># script.dz</span>
 <span class="nd">print</span>(<span class="str">"Supplied Arguments:"</span>)
-<span class="kw">let</span> scriptArgs <span class="op">=</span> process<span class="op">.</span><span class="fn">args</span>()
-<span class="kw">for</span> arg <span class="kw">in</span> scriptArgs
+<span class="kw">for</span> arg <span class="kw">in</span> args
     <span class="nd">print</span>(<span class="str">" - "</span> <span class="op">+</span> arg)
 <span class="kw">end</span></code></pre>
 <p>Run it like this:</p>
@@ -206,5 +238,21 @@
             </ul>
         </aside>
     </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const observer = new IntersectionObserver(function(entries) {
+                entries.forEach(function(entry) {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add("reveal");
+                    }
+                });
+            }, { threshold: 0.1 });
+            var cards = document.querySelectorAll(".feature-card");
+            for (var i = 0; i < cards.length; i++) {
+                observer.observe(cards[i]);
+            }
+        });
+    </script>
 </body>
 </html>

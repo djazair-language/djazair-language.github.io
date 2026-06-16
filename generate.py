@@ -71,7 +71,42 @@ LAYOUT = """<!DOCTYPE html>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="{description}">
     <title>{title} | Djazair Documentation</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <link rel="stylesheet" href="{root_prefix}assets/style.css">
+    <style>
+        .feature-icon {{
+            width: 48px; height: 48px;
+            display: flex; align-items: center; justify-content: center;
+            border-radius: 12px;
+            background: rgba(16, 185, 129, 0.1);
+            color: var(--color-primary);
+            font-size: 1.25rem;
+            margin-bottom: 1rem;
+            transition: all 0.3s ease;
+        }}
+        .feature-card:hover .feature-icon {{
+            background: var(--color-primary);
+            color: #fff;
+            transform: scale(1.05) translateY(-1px);
+            box-shadow: 0 4px 14px rgba(16, 185, 129, 0.3);
+        }}
+        .feature-card {{
+            opacity: 0;
+            transform: translateY(24px);
+            transition: opacity 0.5s ease, transform 0.5s ease;
+        }}
+        .feature-card.reveal {{
+            opacity: 1;
+            transform: translateY(0);
+        }}
+        .hero-section {{
+            animation: fadeInDown 0.6s ease;
+        }}
+        @keyframes fadeInDown {{
+            from {{ opacity: 0; transform: translateY(-20px); }}
+            to   {{ opacity: 1; transform: translateY(0); }}
+        }}
+    </style>
     <script>
         function filterNavigation() {{
             const query = document.getElementById("search-input").value.toLowerCase();
@@ -166,6 +201,22 @@ LAYOUT = """<!DOCTYPE html>
             </ul>
         </aside>
     </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {{
+            const observer = new IntersectionObserver(function(entries) {{
+                entries.forEach(function(entry) {{
+                    if (entry.isIntersecting) {{
+                        entry.target.classList.add("reveal");
+                    }}
+                }});
+            }}, {{ threshold: 0.1 }});
+            var cards = document.querySelectorAll(".feature-card");
+            for (var i = 0; i < cards.length; i++) {{
+                observer.observe(cards[i]);
+            }}
+        }});
+    </script>
 </body>
 </html>
 """
@@ -244,42 +295,42 @@ PAGES_CONTENT["index.html"] = """
 
 <div class="features-grid">
     <div class="feature-card">
-        <div class="feature-icon">⚡</div>
+        <div class="feature-icon"><i class="fa-solid fa-bolt"></i></div>
         <div class="feature-title">Dynamic Typing & Inference</div>
         <div class="feature-desc">Write less boilerplate with <code>let</code> declarations, native Arrays and Maps, first-class functions, and closures — productive from the first line.</div>
     </div>
     <div class="feature-card">
-        <div class="feature-icon">🚀</div>
+        <div class="feature-icon"><i class="fa-solid fa-rocket"></i></div>
         <div class="feature-title">Async/Await Coroutines</div>
         <div class="feature-desc">First-class coroutines for non-blocking I/O, concurrent workflows, and efficient async scripting — no callback spaghetti, no external event loop.</div>
     </div>
     <div class="feature-card">
-        <div class="feature-icon">🏛️</div>
+        <div class="feature-icon"><i class="fa-solid fa-landmark"></i></div>
         <div class="feature-title">Object-Oriented Programming</div>
         <div class="feature-desc">Full OOP with <code>class</code>, single inheritance, constructors (<code>init</code>), <code>super</code>, and polymorphism — build organised, maintainable code at any scale.</div>
     </div>
     <div class="feature-card">
-        <div class="feature-icon">🎯</div>
+        <div class="feature-icon"><i class="fa-solid fa-bullseye"></i></div>
         <div class="feature-title">Pattern Matching</div>
         <div class="feature-desc">Expressive <code>match</code>/<code>case</code>/<code>default</code> constructs for clean, declarative branching — more readable than chains of <code>elif</code>.</div>
     </div>
     <div class="feature-card">
-        <div class="feature-icon">🔌</div>
+        <div class="feature-icon"><i class="fa-solid fa-plug"></i></div>
         <div class="feature-title">Embedding-First C API</div>
         <div class="feature-desc">Pure C with zero external dependencies. Embed into any C/C++ project via a minimal, documented API — ideal for extending applications with scripting.</div>
     </div>
     <div class="feature-card">
-        <div class="feature-icon">🔋</div>
+        <div class="feature-icon"><i class="fa-solid fa-battery-full"></i></div>
         <div class="feature-title">Batteries Included</div>
         <div class="feature-desc">Comprehensive standard library: regex, TCP/UDP networking, JSON, crypto (SHA-256), threads, file I/O, date/time, math, UUID, and more — ready out of the box.</div>
     </div>
     <div class="feature-card">
-        <div class="feature-icon">🛡️</div>
+        <div class="feature-icon"><i class="fa-solid fa-shield-halved"></i></div>
         <div class="feature-title">Robust Error Handling</div>
         <div class="feature-desc">Structured <code>try</code>/<code>catch</code>/<code>finally</code> with <code>throw</code> for reliable error recovery — write production-ready scripts with confidence.</div>
     </div>
     <div class="feature-card">
-        <div class="feature-icon">🧩</div>
+        <div class="feature-icon"><i class="fa-solid fa-puzzle-piece"></i></div>
         <div class="feature-title">Automatic Memory Management</div>
         <div class="feature-desc">Precise tracing garbage collector — no reference counting, no manual <code>free()</code>. Focus on your logic, not memory.</div>
     </div>
