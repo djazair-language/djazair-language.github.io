@@ -126,7 +126,7 @@
                     
 <div class="hero-section">
     <h1 class="hero-title">The Djazair Programming Language</h1>
-    <p class="hero-subtitle">A modern, expressive scripting language inspired by the soul of North Africa. Blends the expressiveness of high-level scripting with C performance.</p>
+    <p class="hero-subtitle">A modern, embeddable scripting language — written in pure C, featuring async coroutines, pattern matching, OOP, and a rich standard library. Designed for automation, tooling, game development, and seamless C/C++ embedding.</p>
     <div class="hero-buttons">
         <a href="getting-started/installation.html" class="btn btn-primary">Get Started</a>
         <a href="language-guide/comments.html" class="btn btn-secondary">Learn the Language</a>
@@ -134,28 +134,48 @@
 </div>
 
 <h2 id="why-djazair">Why Djazair?</h2>
-<p>Djazair is a lightweight, embeddable, dynamic scripting engine built in pure C. It features automatic memory management (garbage collection), first-class functions, robust OOP capabilities, async/await coroutines, pattern matching, and a comprehensive standard library. It is designed to be easily embedded in C/C++ projects, or run as a standalone interpreter for automation, tooling, game development, or web scripting.</p>
+<p>Djazair is a lightweight, zero-dependency scripting engine written in pure C, designed from the ground up for <strong>embeddability and expressiveness</strong>. Whether you are adding scripting to a C/C++ application, writing automation scripts, building game logic, or prototyping ideas, Djazair gives you a modern, familiar syntax with first-class <strong>async/await coroutines</strong>, <strong>pattern matching</strong>, <strong>full OOP</strong>, and automatic memory management — all in a single portable library.</p>
 
 <div class="features-grid">
     <div class="feature-card">
         <div class="feature-icon">⚡</div>
-        <div class="feature-title">Dynamic Scoping & Types</div>
-        <div class="feature-desc">Automatic type inference via <code>let</code> declarations, with native collections (Arrays & Maps) ready out-of-the-box.</div>
+        <div class="feature-title">Dynamic Typing & Inference</div>
+        <div class="feature-desc">Write less boilerplate with <code>let</code> declarations, native Arrays and Maps, first-class functions, and closures — productive from the first line.</div>
     </div>
     <div class="feature-card">
         <div class="feature-icon">🚀</div>
-        <div class="feature-title">Asynchronous Concurrency</div>
-        <div class="feature-desc">First-class async/await coroutines. Run concurrent workflows, networking tasks, and file operations efficiently.</div>
+        <div class="feature-title">Async/Await Coroutines</div>
+        <div class="feature-desc">First-class coroutines for non-blocking I/O, concurrent workflows, and efficient async scripting — no callback spaghetti, no external event loop.</div>
     </div>
     <div class="feature-card">
         <div class="feature-icon">🏛️</div>
         <div class="feature-title">Object-Oriented Programming</div>
-        <div class="feature-desc">Fully supports OOP paradigms including classes, single inheritance, constructors, superclasses, and polymorphism.</div>
+        <div class="feature-desc">Full OOP with <code>class</code>, single inheritance, constructors (<code>init</code>), <code>super</code>, and polymorphism — build organised, maintainable code at any scale.</div>
+    </div>
+    <div class="feature-card">
+        <div class="feature-icon">🎯</div>
+        <div class="feature-title">Pattern Matching</div>
+        <div class="feature-desc">Expressive <code>match</code>/<code>case</code>/<code>default</code> constructs for clean, declarative branching — more readable than chains of <code>elif</code>.</div>
+    </div>
+    <div class="feature-card">
+        <div class="feature-icon">🔌</div>
+        <div class="feature-title">Embedding-First C API</div>
+        <div class="feature-desc">Pure C with zero external dependencies. Embed into any C/C++ project via a minimal, documented API — ideal for extending applications with scripting.</div>
     </div>
     <div class="feature-card">
         <div class="feature-icon">🔋</div>
         <div class="feature-title">Batteries Included</div>
-        <div class="feature-desc">Rich standard library including regular expressions, cryptography (SHA-256), TCP/UDP networking, directories, threads, and math.</div>
+        <div class="feature-desc">Comprehensive standard library: regex, TCP/UDP networking, JSON, crypto (SHA-256), threads, file I/O, date/time, math, UUID, and more — ready out of the box.</div>
+    </div>
+    <div class="feature-card">
+        <div class="feature-icon">🛡️</div>
+        <div class="feature-title">Robust Error Handling</div>
+        <div class="feature-desc">Structured <code>try</code>/<code>catch</code>/<code>finally</code> with <code>throw</code> for reliable error recovery — write production-ready scripts with confidence.</div>
+    </div>
+    <div class="feature-card">
+        <div class="feature-icon">🧩</div>
+        <div class="feature-title">Automatic Memory Management</div>
+        <div class="feature-desc">Precise tracing garbage collector — no reference counting, no manual <code>free()</code>. Focus on your logic, not memory.</div>
     </div>
 </div>
 
