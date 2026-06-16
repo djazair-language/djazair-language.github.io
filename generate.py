@@ -360,6 +360,90 @@ STRUCTURE = [
         ]
     },
     {
+        "category": "Standard Library",
+        "pages": [
+            {"title": "Overview", "path": "standard-library/index.html", "description": "A comprehensive index of all standard library modules."},
+            {"title": "assert Module", "path": "standard-library/assert.html", "description": "Debugging and unit-testing assertion functions for validating values.", "subs": [
+                {"title": "Truthiness Assertions", "anchor": "truthiness-assertions"},
+                {"title": "Value Assertions", "anchor": "value-assertions"},
+                {"title": "Type Assertions", "anchor": "type-assertions"}
+            ]},
+            {"title": "bytes Module", "path": "standard-library/bytes.html", "description": "Binary data manipulation and conversion utilities.", "subs": [
+                {"title": "Creation & Conversion", "anchor": "creation--conversion"},
+                {"title": "Manipulation", "anchor": "manipulation"}
+            ]},
+            {"title": "collections Module", "path": "standard-library/collections.html", "description": "Specialized container data types beyond built-in Array and Map."},
+            {"title": "crypto Module", "path": "standard-library/crypto.html", "description": "Cryptographic hashing algorithms (SHA-256, etc.) and HMAC operations."},
+            {"title": "datetime Module", "path": "standard-library/datetime.html", "description": "Date, time, and timezone manipulation functions and the Date class.", "subs": [
+                {"title": "Time Functions", "anchor": "time-functions"},
+                {"title": "Date Class", "anchor": "date-class"}
+            ]},
+            {"title": "dir Module", "path": "standard-library/dir.html", "description": "Directory traversal, creation, removal, and listing operations."},
+            {"title": "env Module", "path": "standard-library/env.html", "description": "Access and manipulate environment variables at runtime."},
+            {"title": "file Module", "path": "standard-library/file.html", "description": "File reading, writing, manipulation, and status query operations.", "subs": [
+                {"title": "Read & Write", "anchor": "read--write-operations"},
+                {"title": "File Manipulation", "anchor": "file-manipulation"},
+                {"title": "Status Query", "anchor": "status-query"}
+            ]},
+            {"title": "http Module", "path": "standard-library/http.html", "description": "HTTP client and server implementations for web communication.", "subs": [
+                {"title": "HTTP Client", "anchor": "http-client"},
+                {"title": "HTTP Server", "anchor": "http-server"},
+                {"title": "Classes & Helpers", "anchor": "classes--helpers"}
+            ]},
+            {"title": "json Module", "path": "standard-library/json.html", "description": "JSON parsing and stringification for data interchange."},
+            {"title": "lang Module", "path": "standard-library/lang.html", "description": "Runtime introspection, control, and library path management.", "subs": [
+                {"title": "Runtime Info", "anchor": "runtime-info"},
+                {"title": "Control", "anchor": "control"},
+                {"title": "Introspection", "anchor": "introspection"},
+                {"title": "Library Paths", "anchor": "library-paths--queries"}
+            ]},
+            {"title": "math Module", "path": "standard-library/math.html", "description": "Mathematical constants, trigonometry, exponentiation, and statistics.", "subs": [
+                {"title": "Constants", "anchor": "constants"},
+                {"title": "Trigonometry", "anchor": "trigonometry"},
+                {"title": "Exponentiation & Logs", "anchor": "exponentiation--logs"},
+                {"title": "Rounding", "anchor": "rounding--absolute"},
+                {"title": "Statistics", "anchor": "comparison--statistics"}
+            ]},
+            {"title": "net Module", "path": "standard-library/net.html", "description": "TCP networking: server and client classes for socket communication.", "subs": [
+                {"title": "Classes & Exports", "anchor": "classes--exports"},
+                {"title": "TCP Server", "anchor": "tcp-server-example"},
+                {"title": "TCP Client", "anchor": "tcp-client-example"}
+            ]},
+            {"title": "os Module", "path": "standard-library/os.html", "description": "Platform detection, system information, and user/temp file paths.", "subs": [
+                {"title": "Platform Detection", "anchor": "platform-detection"},
+                {"title": "System Information", "anchor": "system-information"},
+                {"title": "User & Temp Files", "anchor": "user--temporary-files"}
+            ]},
+            {"title": "path Module", "path": "standard-library/path.html", "description": "Cross-platform path joining, resolution, decomposition, and security checks.", "subs": [
+                {"title": "Constants", "anchor": "constants"},
+                {"title": "Join & Resolve", "anchor": "join--resolve"},
+                {"title": "Decomposition", "anchor": "decomposition"},
+                {"title": "Query & Security", "anchor": "query--security"}
+            ]},
+            {"title": "process Module", "path": "standard-library/process.html", "description": "Process identification, control, working directory, CLI args, and command execution.", "subs": [
+                {"title": "Identification", "anchor": "process-identification"},
+                {"title": "Process Control", "anchor": "process-control"},
+                {"title": "Working Directory", "anchor": "working-directory"},
+                {"title": "Command Execution", "anchor": "command-execution"},
+                {"title": "CLI & Script", "anchor": "cli-arguments--script-location"},
+                {"title": "Async Spawning", "anchor": "asynchronous-spawning"}
+            ]},
+            {"title": "random Module", "path": "standard-library/random.html", "description": "Random number generation and sampling utilities."},
+            {"title": "regex Module", "path": "standard-library/regex.html", "description": "Regular expression pattern matching, search, and replace operations.", "subs": [
+                {"title": "Flags", "anchor": "flags"},
+                {"title": "Pattern Class", "anchor": "pattern-class"},
+                {"title": "Match Class", "anchor": "match-class"},
+                {"title": "Convenience Functions", "anchor": "convenience-functions"}
+            ]},
+            {"title": "thread Module", "path": "standard-library/thread.html", "description": "Parallel execution via threads, workers, and synchronization.", "subs": [
+                {"title": "Thread Class", "anchor": "thread-class"},
+                {"title": "Worker Functions", "anchor": "worker-side-functions"},
+                {"title": "Convenience", "anchor": "convenience-functions"}
+            ]},
+            {"title": "uuid Module", "path": "standard-library/uuid.html", "description": "Generate universally unique identifiers (UUID v4)."},
+        ]
+    },
+    {
         "category": "Examples",
         "pages": [
             {"title": "Hello World", "path": "examples/hello-world.html", "description": "Standard hello world code snippet and explanation."},
@@ -371,6 +455,11 @@ STRUCTURE = [
     {
         "category": "Reference",
         "pages": [
+            {"title": "Keywords", "path": "reference/keywords.html", "description": "Complete list of reserved keywords in the Djazair language."},
+            {"title": "Operators", "path": "reference/operators.html", "description": "Arithmetic, comparison, logical, bitwise, and other operators."},
+            {"title": "Built-in Functions", "path": "reference/builtins.html", "description": "Globally available functions for type conversion, I/O, and utilities."},
+            {"title": "Methods", "path": "reference/methods.html", "description": "Built-in methods on Strings, Arrays, and Maps."},
+            {"title": "Syntax Reference", "path": "reference/syntax-reference.html", "description": "Formal grammar and syntax rules of the Djazair language."},
             {"title": "Embedding API", "path": "reference/embedding.html", "description": "C/C++ API for embedding Djazair in applications."},
         ]
     }
@@ -1616,6 +1705,11 @@ def generate_all_pages():
         title = page["title"]
         desc = page["description"]
         
+        # Only regenerate pages that have content in PAGES_CONTENT
+        # (preserves manually crafted HTML for reference/ and standard-library/)
+        if file_path not in PAGES_CONTENT:
+            continue
+        
         # Calculate relative prefix
         root_prefix = get_root_prefix(file_path)
         
@@ -1673,7 +1767,7 @@ def generate_all_pages():
         breadcrumbs = '\n'.join(breadcrumbs_list)
 
         # Main content body
-        raw_body = PAGES_CONTENT.get(file_path, "<h1>Under Construction</h1><p>This page is currently being compiled.</p>")
+        raw_body = PAGES_CONTENT[file_path]
         processed_body = process_code_blocks(raw_body)
 
         # Compute Table of Contents (TOC) dynamically by parsing H2 and H3 tags
@@ -1760,25 +1854,7 @@ def generate_all_pages():
         
         with open(target_file_path, "w", encoding="utf-8") as f:
             f.write(rendered_html)
-             
-    # Generate search index JSON
-    def strip_html(text):
-        return re.sub(r'<[^>]+>', '', text).strip()
-    search_index = []
-    for page in FLAT_PAGES:
-        fp = page["path"]
-        raw = PAGES_CONTENT.get(fp, "")
-        plain = strip_html(raw)[:300]
-        search_index.append({
-            "title": page["title"],
-            "path": fp,
-            "description": page["description"],
-            "text": plain
-        })
-    index_path = os.path.join(BASE_DIR, "assets", "search-index.json")
-    os.makedirs(os.path.dirname(index_path), exist_ok=True)
-    with open(index_path, "w", encoding="utf-8") as f:
-        json.dump(search_index, f, ensure_ascii=False)
+            
     print("Static website generated successfully!")
 
 if __name__ == "__main__":
