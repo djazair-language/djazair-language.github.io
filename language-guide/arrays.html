@@ -325,8 +325,8 @@
 <h2 id="method-chaining-example">Method Chaining Example</h2>
 <pre><code><span class="kw">let</span> numbers <span class="op">=</span> [<span class="num">1</span>, <span class="num">2</span>, <span class="num">3</span>, <span class="num">4</span>, <span class="num">5</span>, <span class="num">6</span>]
 <span class="kw">let</span> result <span class="op">=</span> numbers
-    <span class="op">.</span><span class="fn">filter</span>(<span class="kw">fn</span>(x) <span class="op">=&</span>gt; x <span class="op">%</span> <span class="num">2</span> <span class="op">==</span> <span class="num">0</span>)
-    <span class="op">.</span><span class="fn">map</span>(<span class="kw">fn</span>(x) <span class="op">=&</span>gt; x <span class="op">*</span> <span class="num">10</span>)
+    <span class="op">.</span><span class="fn">filter</span>(<span class="kw">fn</span>(x) <span class="op">=&gt;</span> x <span class="op">%</span> <span class="num">2</span> <span class="op">==</span> <span class="num">0</span>)
+    <span class="op">.</span><span class="fn">map</span>(<span class="kw">fn</span>(x) <span class="op">=&gt;</span> x <span class="op">*</span> <span class="num">10</span>)
     <span class="op">.</span><span class="fn">sum</span>()
 
 <span class="nd">print</span>(result) <span class="comment"># (2*10) + (4*10) + (6*10) =&gt; 120</span></code></pre>
@@ -335,7 +335,7 @@
 <pre><code><span class="kw">let</span> arr <span class="op">=</span> [<span class="num">5</span>, <span class="num">1</span>, <span class="num">9</span>, <span class="num">3</span>]
 arr<span class="op">.</span><span class="fn">sort</span>()                 <span class="comment"># ascending: [1, 3, 5, 9]</span>
 arr<span class="op">.</span><span class="fn">sort</span>(<span class="kw">True</span>)             <span class="comment"># descending: [9, 5, 3, 1]</span>
-arr<span class="op">.</span><span class="fn">sort</span>(<span class="kw">fn</span>(x, y) <span class="op">=&</span>gt; y <span class="op">-</span> x) <span class="comment"># custom comparator: [9, 5, 3, 1]</span></code></pre>
+arr<span class="op">.</span><span class="fn">sort</span>(<span class="kw">fn</span>(x, y) <span class="op">=&gt;</span> y <span class="op">-</span> x) <span class="comment"># custom comparator: [9, 5, 3, 1]</span></code></pre>
 
                 </article>
 

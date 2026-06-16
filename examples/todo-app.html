@@ -307,7 +307,7 @@
         <span class="nd">print</span>(<span class="str">"Task added!"</span>)
     <span class="kw">elif</span> choice <span class="op">==</span> <span class="str">"3"</span>
         <span class="kw">let</span> deleteIdx <span class="op">=</span> <span class="nd">num</span>(<span class="nd">input</span>(<span class="str">"Enter task number to delete: "</span>)) <span class="op">-</span> <span class="num">1</span>
-        <span class="kw">if</span> deleteIdx <span class="op">&</span>gt;<span class="op">=</span> <span class="num">0</span> <span class="kw">and</span> deleteIdx <span class="op">&</span>lt; todos<span class="op">.</span><span class="fn">length</span>()
+        <span class="kw">if</span> deleteIdx <span class="op">&gt;=</span> <span class="num">0</span> <span class="kw">and</span> deleteIdx <span class="op">&lt;</span> todos<span class="op">.</span><span class="fn">length</span>()
             todos<span class="op">.</span><span class="fn">remove</span>(todos[deleteIdx])
             <span class="fn">saveTodos</span>()
             <span class="nd">print</span>(<span class="str">"Task deleted!"</span>)

@@ -278,11 +278,11 @@
 <p>The conditional syntax uses <code>if</code>, <code>elif</code>, <code>else</code>, and concludes with the <code>end</code> keyword:</p>
 <pre><code><span class="kw">let</span> score <span class="op">=</span> <span class="num">85</span>
 
-<span class="kw">if</span> score <span class="op">&</span>gt;<span class="op">=</span> <span class="num">90</span>
+<span class="kw">if</span> score <span class="op">&gt;=</span> <span class="num">90</span>
     <span class="nd">print</span>(<span class="str">"Grade: A"</span>)
-<span class="kw">elif</span> score <span class="op">&</span>gt;<span class="op">=</span> <span class="num">80</span>
+<span class="kw">elif</span> score <span class="op">&gt;=</span> <span class="num">80</span>
     <span class="nd">print</span>(<span class="str">"Grade: B"</span>)
-<span class="kw">elif</span> score <span class="op">&</span>gt;<span class="op">=</span> <span class="num">70</span>
+<span class="kw">elif</span> score <span class="op">&gt;=</span> <span class="num">70</span>
     <span class="nd">print</span>(<span class="str">"Grade: C"</span>)
 <span class="kw">else</span>
     <span class="nd">print</span>(<span class="str">"Grade: F"</span>)
@@ -291,7 +291,7 @@
 <h2 id="ternary-conditional-expression">Ternary Conditional Expression</h2>
 <p>Djazair supports a ternary operator syntax that begins with an <code>if</code> statement inline:</p>
 <pre><code><span class="kw">let</span> age <span class="op">=</span> <span class="num">19</span>
-<span class="kw">let</span> category <span class="op">=</span> <span class="kw">if</span> age <span class="op">&</span>gt;<span class="op">=</span> <span class="num">18</span> <span class="op">?</span> <span class="str">"Adult"</span> <span class="kw">else</span> <span class="str">"Minor"</span>
+<span class="kw">let</span> category <span class="op">=</span> <span class="kw">if</span> age <span class="op">&gt;=</span> <span class="num">18</span> <span class="op">?</span> <span class="str">"Adult"</span> <span class="kw">else</span> <span class="str">"Minor"</span>
 <span class="nd">print</span>(category) <span class="comment"># =&gt; Adult</span></code></pre>
 
 

@@ -301,11 +301,11 @@
 
 <h2 id="arrow-functions---expressions">Arrow Functions & Expressions</h2>
 <p>Write compact lambdas using the arrow symbol (<code>=></code>):</p>
-<pre><code><span class="kw">let</span> square <span class="op">=</span> <span class="kw">fn</span>(x) <span class="op">=&</span>gt; x <span class="op">*</span> x
+<pre><code><span class="kw">let</span> square <span class="op">=</span> <span class="kw">fn</span>(x) <span class="op">=&gt;</span> x <span class="op">*</span> x
 <span class="nd">print</span>(<span class="fn">square</span>(<span class="num">4</span>)) <span class="comment"># =&gt; 16</span>
 
 <span class="comment"># Named function with arrow syntax</span>
-<span class="kw">fn</span> <span class="fn">double</span>(x) <span class="op">=&</span>gt; x <span class="op">*</span> <span class="num">2</span>
+<span class="kw">fn</span> <span class="fn">double</span>(x) <span class="op">=&gt;</span> x <span class="op">*</span> <span class="num">2</span>
 <span class="nd">print</span>(<span class="fn">double</span>(<span class="num">5</span>)) <span class="comment"># =&gt; 10</span></code></pre>
 
 <h2 id="closures">Closures</h2>
@@ -325,15 +325,15 @@
 <h2 id="higher-order-functions">Higher-Order Functions</h2>
 <p>Pass functions to array methods for transformation, filtering, and reduction:</p>
 <pre><code><span class="kw">let</span> nums <span class="op">=</span> [<span class="num">1</span>, <span class="num">2</span>, <span class="num">3</span>, <span class="num">4</span>, <span class="num">5</span>]
-<span class="nd">print</span>(nums<span class="op">.</span><span class="fn">map</span>(<span class="kw">fn</span>(x) <span class="op">=&</span>gt; x <span class="op">*</span> <span class="num">2</span>))       <span class="comment"># =&gt; [2, 4, 6, 8, 10]</span>
-<span class="nd">print</span>(nums<span class="op">.</span><span class="fn">filter</span>(<span class="kw">fn</span>(x) <span class="op">=&</span>gt; x <span class="op">&</span>gt; <span class="num">2</span>))    <span class="comment"># =&gt; [3, 4, 5]</span>
-<span class="nd">print</span>(nums<span class="op">.</span><span class="fn">reduce</span>(<span class="kw">fn</span>(a, x) <span class="op">=&</span>gt; a <span class="op">+</span> x, <span class="num">0</span>)) <span class="comment"># =&gt; 15</span>
+<span class="nd">print</span>(nums<span class="op">.</span><span class="fn">map</span>(<span class="kw">fn</span>(x) <span class="op">=&gt;</span> x <span class="op">*</span> <span class="num">2</span>))       <span class="comment"># =&gt; [2, 4, 6, 8, 10]</span>
+<span class="nd">print</span>(nums<span class="op">.</span><span class="fn">filter</span>(<span class="kw">fn</span>(x) <span class="op">=&gt;</span> x <span class="op">&gt;</span> <span class="num">2</span>))    <span class="comment"># =&gt; [3, 4, 5]</span>
+<span class="nd">print</span>(nums<span class="op">.</span><span class="fn">reduce</span>(<span class="kw">fn</span>(a, x) <span class="op">=&gt;</span> a <span class="op">+</span> x, <span class="num">0</span>)) <span class="comment"># =&gt; 15</span>
 
 <span class="comment"># Method chaining</span>
 <span class="kw">let</span> result <span class="op">=</span> [<span class="num">1</span>, <span class="num">2</span>, <span class="num">3</span>, <span class="num">4</span>, <span class="num">5</span>]
-    <span class="op">.</span><span class="fn">filter</span>(<span class="kw">fn</span>(x) <span class="op">=&</span>gt; x <span class="op">%</span> <span class="num">2</span> <span class="op">==</span> <span class="num">0</span>)
-    <span class="op">.</span><span class="fn">map</span>(<span class="kw">fn</span>(x) <span class="op">=&</span>gt; x <span class="op">*</span> <span class="num">10</span>)
-    <span class="op">.</span><span class="fn">reduce</span>(<span class="kw">fn</span>(acc, x) <span class="op">=&</span>gt; acc <span class="op">+</span> x, <span class="num">0</span>)
+    <span class="op">.</span><span class="fn">filter</span>(<span class="kw">fn</span>(x) <span class="op">=&gt;</span> x <span class="op">%</span> <span class="num">2</span> <span class="op">==</span> <span class="num">0</span>)
+    <span class="op">.</span><span class="fn">map</span>(<span class="kw">fn</span>(x) <span class="op">=&gt;</span> x <span class="op">*</span> <span class="num">10</span>)
+    <span class="op">.</span><span class="fn">reduce</span>(<span class="kw">fn</span>(acc, x) <span class="op">=&gt;</span> acc <span class="op">+</span> x, <span class="num">0</span>)
 <span class="nd">print</span>(result) <span class="comment"># =&gt; 60</span></code></pre>
 
 <h2 id="async-functions">Async Functions</h2>

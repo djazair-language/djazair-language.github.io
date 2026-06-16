@@ -11,10 +11,6 @@ def get_root_prefix(file_path):
 
 # Custom syntax highlighter for code snippets
 def highlight_djazair(code):
-    # Escape HTML special characters
-    code = code.replace('&', '&amp;').replace('<', '&lt;').replace('>', '&gt;')
-    
-    # Tokenizer specification
     token_spec = [
         ('COMMENT_MULTI', r'#![\s\S]*?!#'),
         ('COMMENT_SINGLE', r'#[^\n]*'),
@@ -32,26 +28,30 @@ def highlight_djazair(code):
     
     tok_regex = '|'.join(f'(?P<{name}>{pattern})' for name, pattern in token_spec)
     
+    def esc(s):
+        return s.replace('&', '&amp;').replace('<', '&lt;').replace('>', '&gt;')
+    
     highlighted = []
     for mo in re.finditer(tok_regex, code):
         kind = mo.lastgroup
         value = mo.group()
+        escaped = esc(value)
         if kind in ('COMMENT_MULTI', 'COMMENT_SINGLE'):
-            highlighted.append(f'<span class="comment">{value}</span>')
+            highlighted.append(f'<span class="comment">{escaped}</span>')
         elif kind in ('STRING_DOUBLE', 'STRING_BACKTICK'):
-            highlighted.append(f'<span class="str">{value}</span>')
+            highlighted.append(f'<span class="str">{escaped}</span>')
         elif kind == 'KEYWORD':
-            highlighted.append(f'<span class="kw">{value}</span>')
+            highlighted.append(f'<span class="kw">{escaped}</span>')
         elif kind == 'BUILTIN':
-            highlighted.append(f'<span class="nd">{value}</span>')
+            highlighted.append(f'<span class="nd">{escaped}</span>')
         elif kind == 'NUMBER':
-            highlighted.append(f'<span class="num">{value}</span>')
+            highlighted.append(f'<span class="num">{escaped}</span>')
         elif kind == 'FN_NAME':
-            highlighted.append(f'<span class="fn">{value}</span>')
+            highlighted.append(f'<span class="fn">{escaped}</span>')
         elif kind == 'OP':
-            highlighted.append(f'<span class="op">{value}</span>')
+            highlighted.append(f'<span class="op">{escaped}</span>')
         else:
-            highlighted.append(value)
+            highlighted.append(escaped)
             
     return ''.join(highlighted)
 

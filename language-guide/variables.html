@@ -286,7 +286,7 @@ balance <span class="op">=</span> <span class="num">450.75</span></code></pre>
 <h2 id="scoping-rules">Scoping Rules</h2>
 <p>Djazair uses lexical block scoping. Variables declared inside a block (such as an <code>if</code> block, loop, or function body) are local to that block and cannot be accessed outside of it:</p>
 <pre><code><span class="kw">let</span> x <span class="op">=</span> <span class="num">10</span>
-<span class="kw">if</span> x <span class="op">&</span>gt; <span class="num">5</span>
+<span class="kw">if</span> x <span class="op">&gt;</span> <span class="num">5</span>
     <span class="kw">let</span> y <span class="op">=</span> <span class="num">20</span> <span class="comment"># local to this if-block</span>
     <span class="nd">print</span>(x <span class="op">+</span> y) <span class="comment"># =&gt; 30</span>
 <span class="kw">end</span>

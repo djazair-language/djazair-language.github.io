@@ -320,7 +320,7 @@
 <h2 id="throwing-exceptions">Throwing Exceptions</h2>
 <p>Raise custom errors using the <code>throw</code> keyword. You can throw simple strings or complex payload Maps:</p>
 <pre><code><span class="kw">fn</span> <span class="fn">validateAge</span>(age)
-    <span class="kw">if</span> age <span class="op">&</span>lt; <span class="num">0</span>
+    <span class="kw">if</span> age <span class="op">&lt;</span> <span class="num">0</span>
         <span class="kw">throw</span> {<span class="str">"error"</span><span class="op">:</span> <span class="str">"InvalidAge"</span>, <span class="str">"message"</span><span class="op">:</span> <span class="str">"Age cannot be negative"</span>}
     <span class="kw">end</span>
 <span class="kw">end</span>
