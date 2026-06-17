@@ -278,28 +278,32 @@
 
 <h2 id="http-server">HTTP Server</h2>
 <ul>
-    <li><code>http.createServer(handler)</code> - Create HTTP server. Handler receives request and returns response Map.</li>
+    <li><code>http.createServer(handler)</code> - Create HTTP server. Handler receives <code>fn(req, res)</code> with request object and response object.</li>
 </ul>
 <p>Server instance methods: <code>server.listen(port)</code>, <code>server.close()</code>.</p>
+<p>Request properties: <code>req.method</code>, <code>req.path</code>, <code>req.body</code>, <code>req.headers</code> (Map). Methods: <code>req.isMethod(name)</code>, <code>req.header(name)</code>, <code>req.toString()</code>.</p>
+<p>Response methods: <code>res.send(body)</code>, <code>res.sendStatus(code)</code>, <code>res.sendJson(obj)</code>, <code>res.redirect(path)</code>, <code>res.status(code, text)</code>, <code>res.setHeader(name, value)</code>.</p>
 <pre><code><span class="kw">use</span> http
-<span class="kw">let</span> server <span class="op">=</span> http<span class="op">.</span><span class="fn">createServer</span>(<span class="kw">fn</span>(request)
-    <span class="nd">print</span>(<span class="str">"Method: "</span> <span class="op">+</span> request[<span class="str">"method"</span>])
-    <span class="nd">print</span>(<span class="str">"Path: "</span> <span class="op">+</span> request[<span class="str">"path"</span>])
-    <span class="kw">return</span> {
-        <span class="str">"status"</span><span class="op">:</span> <span class="num">200</span>,
-        <span class="str">"headers"</span><span class="op">:</span> {<span class="str">"Content-Type"</span><span class="op">:</span> <span class="str">"text/plain"</span>},
-        <span class="str">"body"</span><span class="op">:</span> <span class="str">"Hello from Djazair"</span>
-    }
+<span class="kw">let</span> srv <span class="op">=</span> http<span class="op">.</span><span class="fn">createServer</span>(<span class="kw">fn</span>(req, res)
+    <span class="kw">if</span> req<span class="op">.</span>path <span class="op">==</span> <span class="str">"/hello"</span>
+        res<span class="op">.</span><span class="fn">send</span>(<span class="str">"Hello from Djazair"</span>)
+    <span class="kw">elif</span> req<span class="op">.</span>path <span class="op">==</span> <span class="str">"/json"</span>
+        res<span class="op">.</span><span class="fn">sendJson</span>({<span class="str">"name"</span><span class="op">:</span> <span class="str">"Djazair"</span>, <span class="str">"type"</span><span class="op">:</span> <span class="str">"language"</span>})
+    <span class="kw">elif</span> req<span class="op">.</span>path <span class="op">==</span> <span class="str">"/status"</span>
+        res<span class="op">.</span><span class="fn">sendStatus</span>(<span class="num">404</span>)
+    <span class="kw">elif</span> req<span class="op">.</span>path <span class="op">==</span> <span class="str">"/redirect"</span>
+        res<span class="op">.</span><span class="fn">redirect</span>(<span class="str">"/hello"</span>)
+    <span class="kw">else</span>
+        res<span class="op">.</span><span class="fn">send</span>(<span class="str">"OK"</span>)
+    <span class="kw">end</span>
 <span class="kw">end</span>)
-server<span class="op">.</span><span class="fn">listen</span>(<span class="num">8080</span>)
-<span class="comment"># server.close() to stop</span></code></pre>
+srv<span class="op">.</span><span class="fn">listen</span>(<span class="num">8080</span>)
+<span class="comment"># srv.close() to stop</span></code></pre>
 
 <h2 id="classes--amp--helpers">Classes &amp; Helpers</h2>
 <ul>
-    <li><code>http.HttpRequest</code> - Request class with properties: method, path, headers, body, query.</li>
-    <li><code>http.HttpResponse</code> - Response class.</li>
-    <li><code>http.ResponseBuilder</code> - Builder for constructing responses.</li>
-    <li><code>http.HttpParser</code> - HTTP protocol parser.</li>
+    <li><code>http.HttpParser</code> - HTTP protocol parser. Methods: <code>split(raw)</code>, <code>parseHeaders(lines)</code>, <code>parseRequest(raw)</code>, <code>parseResponse(raw)</code>.</li>
+    <li><code>http.ResponseBuilder</code> - Builder for constructing raw HTTP responses. Methods: <code>status(code, text)</code>, <code>setHeader(name, value)</code>, <code>build(body)</code>, <code>buildStatus(code)</code>, <code>buildJson(obj)</code>, <code>buildRedirect(path)</code>.</li>
     <li><code>http.STATUS_TEXTS</code> - Map of HTTP status codes to reason phrases.</li>
     <li><code>http.statusText(code)</code> - Get status text for a status code.</li>
 </ul>
