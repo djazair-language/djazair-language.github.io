@@ -4,6 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Create dynamic lists and manipulate them using standard array methods.">
+    <meta property="og:title" content="Arrays | Djazair Documentation">
+    <meta property="og:description" content="Create dynamic lists and manipulate them using standard array methods.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://djazair-language.github.io/">
+    <meta name="twitter:card" content="summary_large_image">
     <title>Arrays | Djazair Documentation</title>
     <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><rect width=%22100%22 height=%22100%22 rx=%2220%22 fill=%22%2310b981%22/><text x=%2250%22 y=%2268%22 font-size=%2250%22 font-weight=%22800%22 fill=%22white%22 text-anchor=%22middle%22 font-family=%22system-ui%22>Dz</text></svg>">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
@@ -77,6 +82,11 @@
 </head>
 <body>
     <header>
+        <button class="menu-toggle" aria-label="Toggle navigation menu">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
         <div class="logo-container">
             <div class="logo-icon">Dz</div>
             <div class="logo-text">Djazair</div>
@@ -498,6 +508,38 @@ arr<span class="op">.</span><span class="fn">sort</span>(<span class="kw">fn</sp
                 headings.forEach(function(h) { observer.observe(h.el); });
             })();
         });
+
+        // --- Hamburger menu toggle ---
+        (function() {
+            var toggle = document.querySelector(".menu-toggle");
+            var nav = document.querySelector(".top-nav");
+            if (toggle && nav) {
+                toggle.addEventListener("click", function() {
+                    nav.classList.toggle("open");
+                    toggle.classList.toggle("active");
+                });
+                document.addEventListener("click", function(e) {
+                    if (!toggle.contains(e.target) && !nav.contains(e.target)) {
+                        nav.classList.remove("open");
+                        toggle.classList.remove("active");
+                    }
+                });
+            }
+        })();
+
+        // --- Back to top button ---
+        (function() {
+            var btn = document.getElementById("back-to-top");
+            if (!btn) return;
+            window.addEventListener("scroll", function() {
+                btn.classList.toggle("visible", window.scrollY > 400);
+            });
+            btn.addEventListener("click", function() {
+                window.scrollTo({ top: 0, behavior: "smooth" });
+            });
+        })();
     </script>
+
+    <button id="back-to-top" aria-label="Back to top"><i class="fa-solid fa-arrow-up"></i></button>
 </body>
 </html>

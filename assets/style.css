@@ -655,6 +655,48 @@ footer {
     font-size: 0.9rem;
 }
 
+/* Hamburger menu toggle */
+.menu-toggle {
+    display: none;
+    flex-direction: column;
+    gap: 5px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 4px;
+    z-index: 110;
+}
+.menu-toggle span {
+    display: block;
+    width: 24px;
+    height: 2px;
+    background: var(--text-secondary);
+    border-radius: 2px;
+    transition: all 0.3s ease;
+}
+.menu-toggle.active span:nth-child(1) {
+    transform: rotate(45deg) translate(5px, 5px);
+}
+.menu-toggle.active span:nth-child(2) {
+    opacity: 0;
+}
+.menu-toggle.active span:nth-child(3) {
+    transform: rotate(-45deg) translate(5px, -5px);
+}
+
+/* Back to top button */
+#back-to-top {
+    position: fixed; bottom: 2rem; right: 2rem;
+    width: 44px; height: 44px; border-radius: 50%;
+    background: var(--color-primary); color: #fff; border: none;
+    cursor: pointer; display: flex; align-items: center; justify-content: center;
+    font-size: 1.2rem; opacity: 0; visibility: hidden;
+    transition: all 0.3s ease; z-index: 999;
+    box-shadow: 0 4px 16px rgba(16,185,129,0.3);
+}
+#back-to-top.visible { opacity: 1; visibility: visible; }
+#back-to-top:hover { background: var(--color-primary-hover); transform: translateY(-3px); }
+
 /* Responsiveness */
 @media (max-width: 1400px) {
     aside.toc-wrapper {
@@ -689,16 +731,44 @@ footer {
     .features-grid {
         grid-template-columns: 1fr;
     }
+    .menu-toggle {
+        display: flex;
+    }
     .top-nav {
-        display: none; /* Hide header menu on mobile */
+        display: none;
+        position: absolute;
+        top: var(--header-height);
+        left: 0;
+        right: 0;
+        background: var(--bg-sidebar);
+        border-bottom: 1px solid var(--border-color);
+        flex-direction: column;
+        gap: 0;
+        padding: 0.5rem 0;
+        box-shadow: 0 8px 24px rgba(0,0,0,0.3);
+    }
+    .top-nav.open {
+        display: flex;
+    }
+    .top-nav a {
+        padding: 0.75rem 1.5rem;
+        border-bottom: 1px solid var(--border-color);
+    }
+    .top-nav a:last-child {
+        border-bottom: none;
     }
     .search-container {
-        display: none; /* Hide search bar on mobile */
+        display: none;
     }
     header {
         padding: 0 1rem;
     }
     .hero-title {
         font-size: 2.5rem;
+    }
+    #back-to-top {
+        bottom: 1rem; right: 1rem;
+        width: 38px; height: 38px;
+        font-size: 1rem;
     }
 }
