@@ -151,11 +151,12 @@ LAYOUT = """<!DOCTYPE html>
         </div>
         <nav class="top-nav">
             <a href="{root_prefix}index.html" {active_home}>Home</a>
-            <a href="{root_prefix}getting-started/installation.html" {active_getting}>Getting Started</a>
-            <a href="{root_prefix}language-guide/comments.html" {active_guide}>Language Guide</a>
-            <a href="{root_prefix}examples/hello-world.html" {active_examples}>Examples</a>
-            <a href="{root_prefix}reference/keywords.html" {active_ref}>Reference</a>
-            <a href="{root_prefix}faq.html" {active_faq}>FAQ</a>
+            <a href="{root_prefix}docs/getting-started/installation.html" {active_getting}>Getting Started</a>
+            <a href="{root_prefix}docs/language-guide/comments.html" {active_guide}>Language Guide</a>
+            <a href="{root_prefix}docs/standard-library/index.html" {active_std}>Std Library</a>
+            <a href="{root_prefix}docs/examples/hello-world.html" {active_examples}>Examples</a>
+            <a href="{root_prefix}docs/reference/keywords.html" {active_ref}>Reference</a>
+            <a href="{root_prefix}docs/faq.html" {active_faq}>FAQ</a>
         </nav>
         <div class="search-container">
             <span class="search-icon">🔍</span>
@@ -334,93 +335,94 @@ STRUCTURE = [
     {
         "category": "Getting Started",
         "pages": [
-            {"title": "Installation", "path": "getting-started/installation.html", "description": "Install and build Djazair from source code on Windows, Linux, and macOS."},
-            {"title": "First Program", "path": "getting-started/first-program.html", "description": "Write and run your very first hello world program in Djazair."},
-            {"title": "Running Programs", "path": "getting-started/running-programs.html", "description": "Learn the various CLI commands to execute your scripts inline or via files."},
+            {"title": "Docs Home", "path": "docs/index.html", "description": "Djazair documentation home page."},
+            {"title": "Installation", "path": "docs/getting-started/installation.html", "description": "Install and build Djazair from source code on Windows, Linux, and macOS."},
+            {"title": "First Program", "path": "docs/getting-started/first-program.html", "description": "Write and run your very first hello world program in Djazair."},
+            {"title": "Running Programs", "path": "docs/getting-started/running-programs.html", "description": "Learn the various CLI commands to execute your scripts inline or via files."},
         ]
     },
     {
         "category": "Language Guide",
         "pages": [
-            {"title": "Comments", "path": "language-guide/comments.html", "description": "Learn how to document your Djazair code with single and multi-line comments."},
-            {"title": "Variables", "path": "language-guide/variables.html", "description": "Declare variables with let and understand lexical block scoping."},
-            {"title": "Data Types", "path": "language-guide/data-types.html", "description": "Understand primitive and object types, dynamic typing, and memory model."},
-            {"title": "Input & Output", "path": "language-guide/input-output.html", "description": "Console output, user input, and string formatting in Djazair."},
-            {"title": "Operators", "path": "language-guide/operators.html", "description": "Examine mathematical, comparison, logical, assignment, and membership operators."},
-            {"title": "Conditions", "path": "language-guide/conditions.html", "description": "Control execution flow using if-elif-else statements and ternary expressions."},
-            {"title": "Loops", "path": "language-guide/loops.html", "description": "Write loops using while, do-while, and for-in iterators over collections and ranges."},
-            {"title": "Arrays", "path": "language-guide/arrays.html", "description": "Create dynamic lists and manipulate them using standard array methods."},
-            {"title": "Strings", "path": "language-guide/strings.html", "description": "Learn string interpolation, multi-line blocks, and comprehensive string methods."},
-            {"title": "Maps", "path": "language-guide/maps.html", "description": "Create and manipulate key-value hash maps with built-in methods."},
-            {"title": "Functions", "path": "language-guide/functions.html", "description": "Write reusable code blocks, closures, arrow functions, and default arguments."},
-            {"title": "Modules", "path": "language-guide/modules.html", "description": "Import files and use native modules to organize codebases cleanly."},
-            {"title": "Classes", "path": "language-guide/classes.html", "description": "Develop using Object-Oriented paradigms: classes, inheritance, super, and self."},
-            {"title": "Error Handling", "path": "language-guide/error-handling.html", "description": "Handle runtime issues gracefully using try-catch-finally blocks and throw statements."},
-            {"title": "Async / Await", "path": "language-guide/async-await.html", "description": "Concurrent programming with coroutines using async and await."},
+            {"title": "Comments", "path": "docs/language-guide/comments.html", "description": "Learn how to document your Djazair code with single and multi-line comments."},
+            {"title": "Variables", "path": "docs/language-guide/variables.html", "description": "Declare variables with let and understand lexical block scoping."},
+            {"title": "Data Types", "path": "docs/language-guide/data-types.html", "description": "Understand primitive and object types, dynamic typing, and memory model."},
+            {"title": "Input & Output", "path": "docs/language-guide/input-output.html", "description": "Console output, user input, and string formatting in Djazair."},
+            {"title": "Operators", "path": "docs/language-guide/operators.html", "description": "Examine mathematical, comparison, logical, assignment, and membership operators."},
+            {"title": "Conditions", "path": "docs/language-guide/conditions.html", "description": "Control execution flow using if-elif-else statements and ternary expressions."},
+            {"title": "Loops", "path": "docs/language-guide/loops.html", "description": "Write loops using while, do-while, and for-in iterators over collections and ranges."},
+            {"title": "Arrays", "path": "docs/language-guide/arrays.html", "description": "Create dynamic lists and manipulate them using standard array methods."},
+            {"title": "Strings", "path": "docs/language-guide/strings.html", "description": "Learn string interpolation, multi-line blocks, and comprehensive string methods."},
+            {"title": "Maps", "path": "docs/language-guide/maps.html", "description": "Create and manipulate key-value hash maps with built-in methods."},
+            {"title": "Functions", "path": "docs/language-guide/functions.html", "description": "Write reusable code blocks, closures, arrow functions, and default arguments."},
+            {"title": "Modules", "path": "docs/language-guide/modules.html", "description": "Import files and use native modules to organize codebases cleanly."},
+            {"title": "Classes", "path": "docs/language-guide/classes.html", "description": "Develop using Object-Oriented paradigms: classes, inheritance, super, and self."},
+            {"title": "Error Handling", "path": "docs/language-guide/error-handling.html", "description": "Handle runtime issues gracefully using try-catch-finally blocks and throw statements."},
+            {"title": "Async / Await", "path": "docs/language-guide/async-await.html", "description": "Concurrent programming with coroutines using async and await."},
         ]
     },
     {
         "category": "Standard Library",
         "pages": [
-            {"title": "Overview", "path": "standard-library/index.html", "description": "A comprehensive index of all standard library modules."},
-            {"title": "assert Module", "path": "standard-library/assert.html", "description": "Debugging and unit-testing assertion functions for validating values.", "subs": [
+            {"title": "Overview", "path": "docs/standard-library/index.html", "description": "A comprehensive index of all standard library modules."},
+            {"title": "assert Module", "path": "docs/standard-library/assert.html", "description": "Debugging and unit-testing assertion functions for validating values.", "subs": [
                 {"title": "Truthiness Assertions", "anchor": "truthiness-assertions"},
                 {"title": "Value Assertions", "anchor": "value-assertions"},
                 {"title": "Type Assertions", "anchor": "type-assertions"}
             ]},
-            {"title": "bytes Module", "path": "standard-library/bytes.html", "description": "Binary data manipulation and conversion utilities.", "subs": [
+            {"title": "bytes Module", "path": "docs/standard-library/bytes.html", "description": "Binary data manipulation and conversion utilities.", "subs": [
                 {"title": "Creation & Conversion", "anchor": "creation--conversion"},
                 {"title": "Manipulation", "anchor": "manipulation"}
             ]},
-            {"title": "collections Module", "path": "standard-library/collections.html", "description": "Specialized container data types beyond built-in Array and Map."},
-            {"title": "crypto Module", "path": "standard-library/crypto.html", "description": "Cryptographic hashing algorithms (SHA-256, etc.) and HMAC operations."},
-            {"title": "datetime Module", "path": "standard-library/datetime.html", "description": "Date, time, and timezone manipulation functions and the Date class.", "subs": [
+            {"title": "collections Module", "path": "docs/standard-library/collections.html", "description": "Specialized container data types beyond built-in Array and Map."},
+            {"title": "crypto Module", "path": "docs/standard-library/crypto.html", "description": "Cryptographic hashing algorithms (SHA-256, etc.) and HMAC operations."},
+            {"title": "datetime Module", "path": "docs/standard-library/datetime.html", "description": "Date, time, and timezone manipulation functions and the Date class.", "subs": [
                 {"title": "Time Functions", "anchor": "time-functions"},
                 {"title": "Date Class", "anchor": "date-class"}
             ]},
-            {"title": "dir Module", "path": "standard-library/dir.html", "description": "Directory traversal, creation, removal, and listing operations."},
-            {"title": "env Module", "path": "standard-library/env.html", "description": "Access and manipulate environment variables at runtime."},
-            {"title": "file Module", "path": "standard-library/file.html", "description": "File reading, writing, manipulation, and status query operations.", "subs": [
+            {"title": "dir Module", "path": "docs/standard-library/dir.html", "description": "Directory traversal, creation, removal, and listing operations."},
+            {"title": "env Module", "path": "docs/standard-library/env.html", "description": "Access and manipulate environment variables at runtime."},
+            {"title": "file Module", "path": "docs/standard-library/file.html", "description": "File reading, writing, manipulation, and status query operations.", "subs": [
                 {"title": "Read & Write", "anchor": "read--write-operations"},
                 {"title": "File Manipulation", "anchor": "file-manipulation"},
                 {"title": "Status Query", "anchor": "status-query"}
             ]},
-            {"title": "http Module", "path": "standard-library/http.html", "description": "HTTP client and server implementations for web communication.", "subs": [
+            {"title": "http Module", "path": "docs/standard-library/http.html", "description": "HTTP client and server implementations for web communication.", "subs": [
                 {"title": "HTTP Client", "anchor": "http-client"},
                 {"title": "HTTP Server", "anchor": "http-server"},
                 {"title": "Classes & Helpers", "anchor": "classes--helpers"}
             ]},
-            {"title": "json Module", "path": "standard-library/json.html", "description": "JSON parsing and stringification for data interchange."},
-            {"title": "lang Module", "path": "standard-library/lang.html", "description": "Runtime introspection, control, and library path management.", "subs": [
+            {"title": "json Module", "path": "docs/standard-library/json.html", "description": "JSON parsing and stringification for data interchange."},
+            {"title": "lang Module", "path": "docs/standard-library/lang.html", "description": "Runtime introspection, control, and library path management.", "subs": [
                 {"title": "Runtime Info", "anchor": "runtime-info"},
                 {"title": "Control", "anchor": "control"},
                 {"title": "Introspection", "anchor": "introspection"},
                 {"title": "Library Paths", "anchor": "library-paths--queries"}
             ]},
-            {"title": "math Module", "path": "standard-library/math.html", "description": "Mathematical constants, trigonometry, exponentiation, and statistics.", "subs": [
+            {"title": "math Module", "path": "docs/standard-library/math.html", "description": "Mathematical constants, trigonometry, exponentiation, and statistics.", "subs": [
                 {"title": "Constants", "anchor": "constants"},
                 {"title": "Trigonometry", "anchor": "trigonometry"},
                 {"title": "Exponentiation & Logs", "anchor": "exponentiation--logs"},
                 {"title": "Rounding", "anchor": "rounding--absolute"},
                 {"title": "Statistics", "anchor": "comparison--statistics"}
             ]},
-            {"title": "net Module", "path": "standard-library/net.html", "description": "TCP networking: server and client classes for socket communication.", "subs": [
+            {"title": "net Module", "path": "docs/standard-library/net.html", "description": "TCP networking: server and client classes for socket communication.", "subs": [
                 {"title": "Classes & Exports", "anchor": "classes--exports"},
                 {"title": "TCP Server", "anchor": "tcp-server-example"},
                 {"title": "TCP Client", "anchor": "tcp-client-example"}
             ]},
-            {"title": "os Module", "path": "standard-library/os.html", "description": "Platform detection, system information, and user/temp file paths.", "subs": [
+            {"title": "os Module", "path": "docs/standard-library/os.html", "description": "Platform detection, system information, and user/temp file paths.", "subs": [
                 {"title": "Platform Detection", "anchor": "platform-detection"},
                 {"title": "System Information", "anchor": "system-information"},
                 {"title": "User & Temp Files", "anchor": "user--temporary-files"}
             ]},
-            {"title": "path Module", "path": "standard-library/path.html", "description": "Cross-platform path joining, resolution, decomposition, and security checks.", "subs": [
+            {"title": "path Module", "path": "docs/standard-library/path.html", "description": "Cross-platform path joining, resolution, decomposition, and security checks.", "subs": [
                 {"title": "Constants", "anchor": "constants"},
                 {"title": "Join & Resolve", "anchor": "join--resolve"},
                 {"title": "Decomposition", "anchor": "decomposition"},
                 {"title": "Query & Security", "anchor": "query--security"}
             ]},
-            {"title": "process Module", "path": "standard-library/process.html", "description": "Process identification, control, working directory, CLI args, and command execution.", "subs": [
+            {"title": "process Module", "path": "docs/standard-library/process.html", "description": "Process identification, control, working directory, CLI args, and command execution.", "subs": [
                 {"title": "Identification", "anchor": "process-identification"},
                 {"title": "Process Control", "anchor": "process-control"},
                 {"title": "Working Directory", "anchor": "working-directory"},
@@ -428,55 +430,55 @@ STRUCTURE = [
                 {"title": "CLI & Script", "anchor": "cli-arguments--script-location"},
                 {"title": "Async Spawning", "anchor": "asynchronous-spawning"}
             ]},
-            {"title": "random Module", "path": "standard-library/random.html", "description": "Random number generation and sampling utilities."},
-            {"title": "regex Module", "path": "standard-library/regex.html", "description": "Regular expression pattern matching, search, and replace operations.", "subs": [
+            {"title": "random Module", "path": "docs/standard-library/random.html", "description": "Random number generation and sampling utilities."},
+            {"title": "regex Module", "path": "docs/standard-library/regex.html", "description": "Regular expression pattern matching, search, and replace operations.", "subs": [
                 {"title": "Flags", "anchor": "flags"},
                 {"title": "Pattern Class", "anchor": "pattern-class"},
                 {"title": "Match Class", "anchor": "match-class"},
                 {"title": "Convenience Functions", "anchor": "convenience-functions"}
             ]},
-            {"title": "thread Module", "path": "standard-library/thread.html", "description": "Parallel execution via threads, workers, and synchronization.", "subs": [
+            {"title": "thread Module", "path": "docs/standard-library/thread.html", "description": "Parallel execution via threads, workers, and synchronization.", "subs": [
                 {"title": "Thread Class", "anchor": "thread-class"},
                 {"title": "Worker Functions", "anchor": "worker-side-functions"},
                 {"title": "Convenience", "anchor": "convenience-functions"}
             ]},
-            {"title": "uuid Module", "path": "standard-library/uuid.html", "description": "Generate universally unique identifiers (UUID v4)."},
+            {"title": "uuid Module", "path": "docs/standard-library/uuid.html", "description": "Generate universally unique identifiers (UUID v4)."},
         ]
     },
     {
         "category": "Examples",
         "pages": [
-            {"title": "Hello World", "path": "examples/hello-world.html", "description": "Standard hello world code snippet and explanation."},
-            {"title": "Calculator", "path": "examples/calculator.html", "description": "Implement a fully featured command-line calculator in Djazair."},
-            {"title": "Todo App", "path": "examples/todo-app.html", "description": "A console Todo tracker demonstrating list manipulation and file persistence."},
-            {"title": "File Processing", "path": "examples/file-processing.html", "description": "Read files line-by-line, parse data structures, and output logs."},
+            {"title": "Hello World", "path": "docs/examples/hello-world.html", "description": "Standard hello world code snippet and explanation."},
+            {"title": "Calculator", "path": "docs/examples/calculator.html", "description": "Implement a fully featured command-line calculator in Djazair."},
+            {"title": "Todo App", "path": "docs/examples/todo-app.html", "description": "A console Todo tracker demonstrating list manipulation and file persistence."},
+            {"title": "File Processing", "path": "docs/examples/file-processing.html", "description": "Read files line-by-line, parse data structures, and output logs."},
         ]
     },
     {
         "category": "Reference",
         "pages": [
-            {"title": "Keywords", "path": "reference/keywords.html", "description": "Complete list of reserved keywords in the Djazair language."},
-            {"title": "Operators", "path": "reference/operators.html", "description": "Arithmetic, comparison, logical, bitwise, and other operators."},
-            {"title": "Built-in Functions", "path": "reference/builtins.html", "description": "Globally available functions for type conversion, I/O, and utilities."},
-            {"title": "Methods", "path": "reference/methods.html", "description": "Built-in methods on Strings, Arrays, and Maps."},
-            {"title": "Syntax Reference", "path": "reference/syntax-reference.html", "description": "Formal grammar and syntax rules of the Djazair language."},
-            {"title": "Embedding API", "path": "reference/embedding.html", "description": "C/C++ API for embedding Djazair in applications."},
+            {"title": "Keywords", "path": "docs/reference/keywords.html", "description": "Complete list of reserved keywords in the Djazair language."},
+            {"title": "Operators", "path": "docs/reference/operators.html", "description": "Arithmetic, comparison, logical, bitwise, and other operators."},
+            {"title": "Built-in Functions", "path": "docs/reference/builtins.html", "description": "Globally available functions for type conversion, I/O, and utilities."},
+            {"title": "Methods", "path": "docs/reference/methods.html", "description": "Built-in methods on Strings, Arrays, and Maps."},
+            {"title": "Syntax Reference", "path": "docs/reference/syntax-reference.html", "description": "Formal grammar and syntax rules of the Djazair language."},
+            {"title": "Embedding API", "path": "docs/reference/embedding.html", "description": "C/C++ API for embedding Djazair in applications."},
         ]
     }
 ]
 
 # Flat list for navigation
 FLAT_PAGES = []
-FLAT_PAGES.append({"title": "Home", "path": "index.html", "description": "The Djazair Programming Language official documentation home page."})
+FLAT_PAGES.append({"title": "Home", "path": "docs/index.html", "description": "The Djazair Programming Language official documentation home page."})
 for cat in STRUCTURE:
     for page in cat["pages"]:
         FLAT_PAGES.append(page)
-FLAT_PAGES.append({"title": "FAQ", "path": "faq.html", "description": "Frequently Asked Questions about Djazair syntax, internals, and performance."})
+FLAT_PAGES.append({"title": "FAQ", "path": "docs/faq.html", "description": "Frequently Asked Questions about Djazair syntax, internals, and performance."})
 
 # Page contents dictionary
 PAGES_CONTENT = {}
 
-PAGES_CONTENT["index.html"] = """
+PAGES_CONTENT["docs/index.html"] = """
 <div class="hero-section">
     <h1 class="hero-title">The Djazair Programming Language</h1>
     <p class="hero-subtitle">A modern, embeddable scripting language — written in pure C, featuring async coroutines, pattern matching, OOP, and a rich standard library. Designed for automation, tooling, game development, and seamless C/C++ embedding.</p>
@@ -546,7 +548,7 @@ print("The area of a circle with radius ${r} is ${computeArea(r)}")
 </code></pre>
 """
 
-PAGES_CONTENT["getting-started/installation.html"] = """
+PAGES_CONTENT["docs/getting-started/installation.html"] = """
 <h1>Installing Djazair</h1>
 <p>Djazair is built to compile cleanly on Linux, macOS, and Windows. It relies on standard compiler environments and has minimal external dependencies.</p>
 
@@ -579,7 +581,7 @@ tools\\build.ps1
 </div>
 """
 
-PAGES_CONTENT["getting-started/first-program.html"] = """
+PAGES_CONTENT["docs/getting-started/first-program.html"] = """
 <h1>Your First Djazair Program</h1>
 <p>In this guide, we will write, structure, and run our very first program in Djazair.</p>
 
@@ -604,7 +606,7 @@ print("Hello from Djazair!")
 </code></pre>
 """
 
-PAGES_CONTENT["getting-started/running-programs.html"] = """
+PAGES_CONTENT["docs/getting-started/running-programs.html"] = """
 <h1>Running Djazair Scripts</h1>
 <p>The Djazair interpreter offers a command-line interface (CLI) to execute code, check versions, and configure file paths.</p>
 
@@ -652,7 +654,7 @@ end
 <pre class="bash"><code>djazair script.dz first second third</code></pre>
 """
 
-PAGES_CONTENT["language-guide/comments.html"] = """
+PAGES_CONTENT["docs/language-guide/comments.html"] = """
 <h1>Comments</h1>
 <p>Comments are text entries ignored by the compiler, used to document structures and write explanations.</p>
 
@@ -663,7 +665,7 @@ let score = 100 # Inline comment about score
 </code></pre>
 """
 
-PAGES_CONTENT["language-guide/variables.html"] = """
+PAGES_CONTENT["docs/language-guide/variables.html"] = """
 <h1>Variables & Scope</h1>
 <p>Variables store values. Djazair is dynamically typed, meaning variables can hold any type of value and change types over time.</p>
 
@@ -691,7 +693,7 @@ end
 
 """
 
-PAGES_CONTENT["language-guide/data-types.html"] = """
+PAGES_CONTENT["docs/language-guide/data-types.html"] = """
 <h1>Data Types</h1>
 <p>Djazair features a rich set of built-in data types. It uses dynamic typing, but every value has a concrete runtime type.</p>
 
@@ -767,7 +769,7 @@ print(isString(val)) # => False
 </code></pre>
 """
 
-PAGES_CONTENT["language-guide/input-output.html"] = """
+PAGES_CONTENT["docs/language-guide/input-output.html"] = """
 <h1>Input & Output</h1>
 <p>Djazair provides built-in functions for console output and user input.</p>
 
@@ -793,7 +795,7 @@ print("Hello, ${name}!")
 </code></pre>
 """
 
-PAGES_CONTENT["language-guide/operators.html"] = """
+PAGES_CONTENT["docs/language-guide/operators.html"] = """
 <h1>Operators Reference</h1>
 <p>Djazair provides standard arithmetic, comparison, logical, bitwise, assignment, increment/decrement, and identity operators.</p>
 
@@ -863,7 +865,7 @@ print("orld" in "Hello World") # => True (substring)
 </code></pre>
 """
 
-PAGES_CONTENT["language-guide/conditions.html"] = """
+PAGES_CONTENT["docs/language-guide/conditions.html"] = """
 <h1>Conditions (If-Else & Match)</h1>
 <p>Control flow structures let your script make decisions depending on boolean expressions or value patterns.</p>
 
@@ -905,7 +907,7 @@ end
 </code></pre>
 """
 
-PAGES_CONTENT["language-guide/loops.html"] = """
+PAGES_CONTENT["docs/language-guide/loops.html"] = """
 <h1>Loops</h1>
 <p>Perform repeated executions using <code>while</code>, <code>do-while</code>, and <code>for-in</code> constructs.</p>
 
@@ -971,7 +973,7 @@ end
 </code></pre>
 """
 
-PAGES_CONTENT["language-guide/functions.html"] = """
+PAGES_CONTENT["docs/language-guide/functions.html"] = """
 <h1>Functions</h1>
 <p>Functions are declared using the <code>fn</code> keyword and terminated with <code>end</code>. They are first-class citizen objects in Djazair.</p>
 
@@ -1056,7 +1058,7 @@ print(result) # => 42
 </code></pre>
 """
 
-PAGES_CONTENT["language-guide/async-await.html"] = """
+PAGES_CONTENT["docs/language-guide/async-await.html"] = """
 <h1>Async / Await</h1>
 <p>Djazair supports coroutine-based concurrency using <code>async fn</code> and <code>await</code>.</p>
 
@@ -1108,7 +1110,7 @@ print(result)  # => "data_42"
 </div>
 """
 
-PAGES_CONTENT["language-guide/arrays.html"] = """
+PAGES_CONTENT["docs/language-guide/arrays.html"] = """
 <h1>Arrays</h1>
 <p>Arrays are dynamic, ordered lists. They can hold mixed data types, resize automatically, and feature an extensive collection of utility methods.</p>
 
@@ -1179,7 +1181,7 @@ arr.sort(fn(x, y) => y - x) # custom comparator: [9, 5, 3, 1]
 </code></pre>
 """
 
-PAGES_CONTENT["language-guide/strings.html"] = """
+PAGES_CONTENT["docs/language-guide/strings.html"] = """
 <h1>Strings</h1>
 <p>Djazair Strings are immutable, UTF-8 encoded, and packed with formatting, trimming, and searching APIs.</p>
 
@@ -1261,7 +1263,7 @@ print("42".zFill(5))       # => "00042"
 </code></pre>
 """
 
-PAGES_CONTENT["language-guide/maps.html"] = """
+PAGES_CONTENT["docs/language-guide/maps.html"] = """
 <h1>Maps</h1>
 <p>Maps (dictionaries) are unordered key-value hash tables. Keys can be any type.</p>
 
@@ -1309,7 +1311,7 @@ end
 </code></pre>
 """
 
-PAGES_CONTENT["language-guide/modules.html"] = """
+PAGES_CONTENT["docs/language-guide/modules.html"] = """
 <h1>Modules & Imports</h1>
 <p>Organize and scale your application by breaking it down into discrete script files or leveraging standard libraries.</p>
 
@@ -1350,7 +1352,7 @@ http::server::createServer(...)
 </code></pre>
 """
 
-PAGES_CONTENT["language-guide/classes.html"] = """
+PAGES_CONTENT["docs/language-guide/classes.html"] = """
 <h1>Classes & OOP</h1>
 <p>Djazair implements fully featured Object-Oriented programming including classes, constructors, methods, and single inheritance.</p>
 
@@ -1389,7 +1391,7 @@ print(mod.describe())
 </code></pre>
 """
 
-PAGES_CONTENT["language-guide/error-handling.html"] = """
+PAGES_CONTENT["docs/language-guide/error-handling.html"] = """
 <h1>Error Handling</h1>
 <p>Runtime faults are caught and mitigated gracefully via structured exception blocks.</p>
 
@@ -1460,7 +1462,7 @@ end
 
 # Standard Library Pages
 # Examples pages
-PAGES_CONTENT["examples/hello-world.html"] = """
+PAGES_CONTENT["docs/examples/hello-world.html"] = """
 <h1>Example: Hello World</h1>
 <p>A simple printing execution showing standard Djazair outputs:</p>
 <pre class="dz"><code># The hello world program
@@ -1470,7 +1472,7 @@ print("Hello World from Djazair!")
 <p>The code uses the global built-in <code>print()</code> function to write text streams directly to the terminal stdout. Lines starting with <code>#</code> represent single-line comments.</p>
 """
 
-PAGES_CONTENT["examples/calculator.html"] = """
+PAGES_CONTENT["docs/examples/calculator.html"] = """
 <h1>Example: Calculator</h1>
 <p>An interactive command line calculator script:</p>
 <pre class="dz"><code>print("--- Djazair CLI Calculator ---")
@@ -1516,7 +1518,7 @@ end
 </code></pre>
 """
 
-PAGES_CONTENT["examples/todo-app.html"] = """
+PAGES_CONTENT["docs/examples/todo-app.html"] = """
 <h1>Example: Todo Application</h1>
 <p>A terminal Todo list manager featuring file persistence:</p>
 <pre class="dz"><code>use file
@@ -1567,7 +1569,7 @@ end
 </code></pre>
 """
 
-PAGES_CONTENT["examples/file-processing.html"] = """
+PAGES_CONTENT["docs/examples/file-processing.html"] = """
 <h1>Example: File Processing</h1>
 <p>A script that parses a log file and extracts formatted records:</p>
 <pre class="dz"><code>use file
@@ -1594,7 +1596,7 @@ end
 """
 
 # Reference Pages
-PAGES_CONTENT["reference/embedding.html"] = """
+PAGES_CONTENT["docs/reference/embedding.html"] = """
 <h1>Embedding Djazair in C/C++</h1>
 <p>Djazair is designed to be easily embedded into C/C++ applications via a single header <code>djazair.h</code>.</p>
 
@@ -1655,7 +1657,7 @@ djazair_register_function(vm, "logMessage", my_log);
 </ul>
 """
 
-PAGES_CONTENT["faq.html"] = """
+PAGES_CONTENT["docs/faq.html"] = """
 <h1>Frequently Asked Questions</h1>
 
 <h2>1. Is Djazair compiled or interpreted?</h2>
@@ -1714,13 +1716,13 @@ def generate_all_pages():
         root_prefix = get_root_prefix(file_path)
         
         # Determine top navigation active classes
-        active_home = 'class="active"' if file_path == 'index.html' else ''
-        active_getting = 'class="active"' if file_path.startswith('getting-started/') else ''
-        active_guide = 'class="active"' if file_path.startswith('language-guide/') else ''
-        active_std = 'class="active"' if file_path.startswith('standard-library/') else ''
-        active_examples = 'class="active"' if file_path.startswith('examples/') else ''
-        active_ref = 'class="active"' if file_path.startswith('reference/') else ''
-        active_faq = 'class="active"' if file_path == 'faq.html' else ''
+        active_home = 'class="active"' if file_path == 'docs/index.html' else ''
+        active_getting = 'class="active"' if file_path.startswith('docs/getting-started/') else ''
+        active_guide = 'class="active"' if file_path.startswith('docs/language-guide/') else ''
+        active_std = 'class="active"' if file_path.startswith('docs/standard-library/') else ''
+        active_examples = 'class="active"' if file_path.startswith('docs/examples/') else ''
+        active_ref = 'class="active"' if file_path.startswith('docs/reference/') else ''
+        active_faq = 'class="active"' if file_path == 'docs/faq.html' else ''
 
         # Sidebar navigation compilation
         sidebar_html = []

@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Pattern matching, search, replace, and capture using regular expressions.">
+    <title>regex Module | Djazair Documentation</title>
+    <link rel="stylesheet" href="../../assets/style.css">
+    <script>
+        function filterNavigation() {
+            const query = document.getElementById("search-input").value.toLowerCase();
+            const links = document.querySelectorAll(".sidebar-links a");
+            links.forEach(link => {
+                const text = link.textContent.toLowerCase();
+                const parent = link.parentElement;
+                if (text.includes(query)) {
+                    parent.style.display = "";
+                    let hasSub = parent.closest("li.has-submenu");
+                    if (hasSub) { hasSub.style.display = ""; }
+                    let sub = parent.closest(".submenu");
+                    if (sub) { sub.setAttribute("data-expanded", "true"); }
+                } else {
+                    parent.style.display = "none";
+                }
+            });
+        }
+        function toggleSubmenu(event, el) {
+            const li = el.closest("li.has-submenu");
+            const submenu = li.querySelector(".submenu");
+            const expanded = submenu.getAttribute("data-expanded") === "true";
+            submenu.setAttribute("data-expanded", !expanded);
+            const arrow = el.querySelector(".arrow");
+            if (arrow) arrow.textContent = expanded ? ">" : "v";
+            if (!expanded) {
+                event.preventDefault();
+            }
+        }
+        document.addEventListener("DOMContentLoaded", function() {
+            document.querySelectorAll(".has-submenu > a").forEach(function(el) {
+                let li = el.closest("li");
+                let sm = li.querySelector(".submenu");
+                if (sm.getAttribute("data-expanded") === "true") {
+                    el.querySelector(".arrow").textContent = "v";
+                }
+            });
+        });
+    </script>
+</head>
+<body>
+    <header>
+        <div class="logo-container">
+            <div class="logo-icon">Dz</div>
+            <div class="logo-text">Djazair</div>
+            <div class="logo-version">v1.0.5</div>
+        </div>
+        <nav class="top-nav">
+            <a href="../../index.html" >Home</a>
+            <a href="../getting-started/installation.html" >Getting Started</a>
+            <a href="../language-guide/comments.html" >Language Guide</a>
+            <a href="../standard-library/index.html" class="active">Std Library</a>
+            <a href="../examples/hello-world.html" >Examples</a>
+            <a href="../reference/keywords.html" >Reference</a>
+            <a href="../faq.html" >FAQ</a>
+        </nav>
+        <div class="search-container">
+            <span class="search-icon">🔍</span>
+            <input type="text" id="search-input" class="search-input" placeholder="Search docs..." onkeyup="filterNavigation()">
+        </div>
+    </header>
+
+    <div class="app-container">
+        <aside class="sidebar">
+            <div class="sidebar-section">
+  <div class="sidebar-title">Getting Started</div>
+  <ul class="sidebar-links">
+    <li><a href="../getting-started/installation.html" >Installation</a></li>
+    <li><a href="../getting-started/first-program.html" >First Program</a></li>
+    <li><a href="../getting-started/running-programs.html" >Running Programs</a></li>
+  </ul>
+</div>
+<div class="sidebar-section">
+  <div class="sidebar-title">Language Guide</div>
+  <ul class="sidebar-links">
+    <li><a href="../language-guide/comments.html" >Comments</a></li>
+    <li><a href="../language-guide/variables.html" >Variables</a></li>
+    <li><a href="../language-guide/data-types.html" >Data Types</a></li>
+    <li><a href="../language-guide/input-output.html" >Input & Output</a></li>
+    <li><a href="../language-guide/operators.html" >Operators</a></li>
+    <li><a href="../language-guide/conditions.html" >Conditions</a></li>
+    <li><a href="../language-guide/loops.html" >Loops</a></li>
+    <li><a href="../language-guide/arrays.html" >Arrays</a></li>
+    <li><a href="../language-guide/strings.html" >Strings</a></li>
+    <li><a href="../language-guide/maps.html" >Maps</a></li>
+    <li><a href="../language-guide/functions.html" >Functions</a></li>
+    <li><a href="../language-guide/modules.html" >Modules</a></li>
+    <li><a href="../language-guide/classes.html" >Classes</a></li>
+    <li><a href="../language-guide/error-handling.html" >Error Handling</a></li>
+    <li><a href="../language-guide/async-await.html" >Async / Await</a></li>
+  </ul>
+</div>
+<div class="sidebar-section">
+  <div class="sidebar-title">Standard Library</div>
+  <ul class="sidebar-links">
+    <li><a href="../standard-library/index.html" >Overview</a></li>
+    <li class="has-submenu"><a href="../standard-library/assert.html" class="submenu-toggle" onclick="toggleSubmenu(event, this)">assert Module <span class="arrow">></span></a>
+      <ul class="submenu" data-expanded="false">
+        <li><a href="../standard-library/assert.html#truthiness-assertions" class="sub-link">Truthiness Assertions</a></li>
+        <li><a href="../standard-library/assert.html#value-assertions" class="sub-link">Value Assertions</a></li>
+        <li><a href="../standard-library/assert.html#type-assertions" class="sub-link">Type Assertions</a></li>
+      </ul>
+    </li>
+    <li class="has-submenu"><a href="../standard-library/bytes.html" class="submenu-toggle" onclick="toggleSubmenu(event, this)">bytes Module <span class="arrow">></span></a>
+      <ul class="submenu" data-expanded="false">
+        <li><a href="../standard-library/bytes.html#creation--conversion" class="sub-link">Creation & Conversion</a></li>
+        <li><a href="../standard-library/bytes.html#manipulation" class="sub-link">Manipulation</a></li>
+      </ul>
+    </li>
+    <li><a href="../standard-library/collections.html" >collections Module</a></li>
+    <li><a href="../standard-library/crypto.html" >crypto Module</a></li>
+    <li class="has-submenu"><a href="../standard-library/datetime.html" class="submenu-toggle" onclick="toggleSubmenu(event, this)">datetime Module <span class="arrow">></span></a>
+      <ul class="submenu" data-expanded="false">
+        <li><a href="../standard-library/datetime.html#time-functions" class="sub-link">Time Functions</a></li>
+        <li><a href="../standard-library/datetime.html#date-class" class="sub-link">Date Class</a></li>
+      </ul>
+    </li>
+    <li><a href="../standard-library/dir.html" >dir Module</a></li>
+    <li><a href="../standard-library/env.html" >env Module</a></li>
+    <li class="has-submenu"><a href="../standard-library/file.html" class="submenu-toggle" onclick="toggleSubmenu(event, this)">file Module <span class="arrow">></span></a>
+      <ul class="submenu" data-expanded="false">
+        <li><a href="../standard-library/file.html#read--write-operations" class="sub-link">Read & Write</a></li>
+        <li><a href="../standard-library/file.html#file-manipulation" class="sub-link">File Manipulation</a></li>
+        <li><a href="../standard-library/file.html#status-query" class="sub-link">Status Query</a></li>
+      </ul>
+    </li>
+    <li class="has-submenu"><a href="../standard-library/http.html" class="submenu-toggle" onclick="toggleSubmenu(event, this)">http Module <span class="arrow">></span></a>
+      <ul class="submenu" data-expanded="false">
+        <li><a href="../standard-library/http.html#http-client" class="sub-link">HTTP Client</a></li>
+        <li><a href="../standard-library/http.html#http-server" class="sub-link">HTTP Server</a></li>
+        <li><a href="../standard-library/http.html#classes--helpers" class="sub-link">Classes & Helpers</a></li>
+      </ul>
+    </li>
+    <li><a href="../standard-library/json.html" >json Module</a></li>
+    <li class="has-submenu"><a href="../standard-library/lang.html" class="submenu-toggle" onclick="toggleSubmenu(event, this)">lang Module <span class="arrow">></span></a>
+      <ul class="submenu" data-expanded="false">
+        <li><a href="../standard-library/lang.html#runtime-info" class="sub-link">Runtime Info</a></li>
+        <li><a href="../standard-library/lang.html#control" class="sub-link">Control</a></li>
+        <li><a href="../standard-library/lang.html#introspection" class="sub-link">Introspection</a></li>
+        <li><a href="../standard-library/lang.html#library-paths--queries" class="sub-link">Library Paths</a></li>
+      </ul>
+    </li>
+    <li class="has-submenu"><a href="../standard-library/math.html" class="submenu-toggle" onclick="toggleSubmenu(event, this)">math Module <span class="arrow">></span></a>
+      <ul class="submenu" data-expanded="false">
+        <li><a href="../standard-library/math.html#constants" class="sub-link">Constants</a></li>
+        <li><a href="../standard-library/math.html#trigonometry" class="sub-link">Trigonometry</a></li>
+        <li><a href="../standard-library/math.html#exponentiation--logs" class="sub-link">Exponentiation & Logs</a></li>
+        <li><a href="../standard-library/math.html#rounding--absolute" class="sub-link">Rounding</a></li>
+        <li><a href="../standard-library/math.html#comparison--statistics" class="sub-link">Statistics</a></li>
+      </ul>
+    </li>
+    <li class="has-submenu"><a href="../standard-library/net.html" class="submenu-toggle" onclick="toggleSubmenu(event, this)">net Module <span class="arrow">></span></a>
+      <ul class="submenu" data-expanded="false">
+        <li><a href="../standard-library/net.html#classes--exports" class="sub-link">Classes & Exports</a></li>
+        <li><a href="../standard-library/net.html#tcp-server-example" class="sub-link">TCP Server</a></li>
+        <li><a href="../standard-library/net.html#tcp-client-example" class="sub-link">TCP Client</a></li>
+      </ul>
+    </li>
+    <li class="has-submenu"><a href="../standard-library/os.html" class="submenu-toggle" onclick="toggleSubmenu(event, this)">os Module <span class="arrow">></span></a>
+      <ul class="submenu" data-expanded="false">
+        <li><a href="../standard-library/os.html#platform-detection" class="sub-link">Platform Detection</a></li>
+        <li><a href="../standard-library/os.html#system-information" class="sub-link">System Information</a></li>
+        <li><a href="../standard-library/os.html#user--temporary-files" class="sub-link">User & Temp Files</a></li>
+      </ul>
+    </li>
+    <li class="has-submenu"><a href="../standard-library/path.html" class="submenu-toggle" onclick="toggleSubmenu(event, this)">path Module <span class="arrow">></span></a>
+      <ul class="submenu" data-expanded="false">
+        <li><a href="../standard-library/path.html#constants" class="sub-link">Constants</a></li>
+        <li><a href="../standard-library/path.html#join--resolve" class="sub-link">Join & Resolve</a></li>
+        <li><a href="../standard-library/path.html#decomposition" class="sub-link">Decomposition</a></li>
+        <li><a href="../standard-library/path.html#query--security" class="sub-link">Query & Security</a></li>
+      </ul>
+    </li>
+    <li class="has-submenu"><a href="../standard-library/process.html" class="submenu-toggle" onclick="toggleSubmenu(event, this)">process Module <span class="arrow">></span></a>
+      <ul class="submenu" data-expanded="false">
+        <li><a href="../standard-library/process.html#process-identification" class="sub-link">Identification</a></li>
+        <li><a href="../standard-library/process.html#process-control" class="sub-link">Process Control</a></li>
+        <li><a href="../standard-library/process.html#working-directory" class="sub-link">Working Directory</a></li>
+        <li><a href="../standard-library/process.html#command-execution" class="sub-link">Command Execution</a></li>
+        <li><a href="../standard-library/process.html#cli-arguments--script-location" class="sub-link">CLI & Script</a></li>
+        <li><a href="../standard-library/process.html#asynchronous-spawning" class="sub-link">Async Spawning</a></li>
+      </ul>
+    </li>
+    <li><a href="../standard-library/random.html" >random Module</a></li>
+    <li class="has-submenu"><a href="../standard-library/regex.html" class="submenu-toggle active" onclick="toggleSubmenu(event, this)">regex Module <span class="arrow">v</span></a>
+      <ul class="submenu" data-expanded="true">
+        <li><a href="../standard-library/regex.html#flags" class="sub-link">Flags</a></li>
+        <li><a href="../standard-library/regex.html#pattern-class" class="sub-link">Pattern Class</a></li>
+        <li><a href="../standard-library/regex.html#match-class" class="sub-link">Match Class</a></li>
+        <li><a href="../standard-library/regex.html#convenience-functions" class="sub-link">Convenience Functions</a></li>
+      </ul>
+    </li>
+    <li class="has-submenu"><a href="../standard-library/thread.html" class="submenu-toggle" onclick="toggleSubmenu(event, this)">thread Module <span class="arrow">></span></a>
+      <ul class="submenu" data-expanded="false">
+        <li><a href="../standard-library/thread.html#thread-class" class="sub-link">Thread Class</a></li>
+        <li><a href="../standard-library/thread.html#worker-side-functions" class="sub-link">Worker Functions</a></li>
+        <li><a href="../standard-library/thread.html#convenience-functions" class="sub-link">Convenience</a></li>
+      </ul>
+    </li>
+    <li><a href="../standard-library/uuid.html" >uuid Module</a></li>
+  </ul>
+</div>
+<div class="sidebar-section">
+  <div class="sidebar-title">Examples</div>
+  <ul class="sidebar-links">
+    <li><a href="../examples/hello-world.html" >Hello World</a></li>
+    <li><a href="../examples/calculator.html" >Calculator</a></li>
+    <li><a href="../examples/todo-app.html" >Todo App</a></li>
+    <li><a href="../examples/file-processing.html" >File Processing</a></li>
+  </ul>
+</div>
+<div class="sidebar-section">
+  <div class="sidebar-title">Reference</div>
+  <ul class="sidebar-links">
+    <li><a href="../reference/keywords.html" >Keywords</a></li>
+    <li><a href="../reference/operators.html" >Operators</a></li>
+    <li><a href="../reference/builtins.html" >Built-in Functions</a></li>
+    <li><a href="../reference/methods.html" >Methods</a></li>
+    <li><a href="../reference/syntax-reference.html" >Syntax Reference</a></li>
+    <li><a href="../reference/embedding.html" >Embedding API</a></li>
+  </ul>
+</div>
+        </aside>
+
+        <main class="content-wrapper">
+            <div class="content-body">
+                <div class="breadcrumbs">
+                    <a href="../../index.html">Home</a>
+<span class="separator">/</span>
+<span>Standard Library</span>
+<span class="separator">/</span>
+<span class="active">regex Module</span>
+                </div>
+                
+                <article>
+                    
+<h1>Regex Module</h1>
+<p>Import using: <code>use regex</code></p>
+
+<h2 id="flags">Flags</h2>
+<ul>
+    <li><code>regex.I</code> / <code>regex.IGNORECASE</code> - Case-insensitive matching (value 1).</li>
+    <li><code>regex.M</code> / <code>regex.MULTILINE</code> - Multiline matching (value 2).</li>
+</ul>
+<pre><code><span class="kw">use</span> regex
+<span class="kw">let</span> pat <span class="op">=</span> regex<span class="op">.</span><span class="fn">compileFlags</span>(<span class="str">"hello"</span>, regex<span class="op">.</span>I)
+<span class="nd">print</span>(<span class="str">"Case-insensitive pattern created"</span>)</code></pre>
+
+<h2 id="convenience-functions">Convenience Functions</h2>
+<ul>
+    <li><code>regex.compile(pattern, flags?)</code> - Compile pattern string into Pattern object.</li>
+    <li><code>regex.fullMatch(pattern, text)</code> - Check if entire string matches pattern.</li>
+    <li><code>regex.search(pattern, text)</code> - Find first occurrence. Returns Match or Null.</li>
+    <li><code>regex.findAll(pattern, text)</code> - All non-overlapping matches as array.</li>
+    <li><code>regex.sub(pattern, replacement, text)</code> - Replace all matches.</li>
+    <li><code>regex.split(pattern, text)</code> - Split around matches.</li>
+</ul>
+<pre><code><span class="kw">use</span> regex
+<span class="comment"># fullMatch</span>
+<span class="kw">let</span> fm <span class="op">=</span> regex<span class="op">.</span><span class="fn">fullMatch</span>(<span class="str">"^[a-z]+$"</span>, <span class="str">"djazair"</span>)
+<span class="nd">print</span>(<span class="op">!</span><span class="nd">isNull</span>(fm))  <span class="comment"># True</span>
+
+<span class="comment"># search with groups</span>
+<span class="kw">let</span> text <span class="op">=</span> <span class="str">"Contact: support@djazair.org"</span>
+<span class="kw">let</span> sr <span class="op">=</span> regex<span class="op">.</span><span class="fn">search</span>(<span class="str">"([a-z]+)@([a-z.]+)"</span>, text)
+<span class="kw">if</span> <span class="op">!</span><span class="nd">isNull</span>(sr)
+    <span class="nd">print</span>(sr<span class="op">.</span><span class="fn">group</span>(<span class="num">0</span>))  <span class="comment"># support@djazair.org</span>
+    <span class="nd">print</span>(sr<span class="op">.</span><span class="fn">group</span>(<span class="num">1</span>))  <span class="comment"># support</span>
+    <span class="nd">print</span>(sr<span class="op">.</span><span class="fn">group</span>(<span class="num">2</span>))  <span class="comment"># djazair.org</span>
+<span class="kw">end</span>
+
+<span class="comment"># findAll</span>
+<span class="kw">let</span> emails <span class="op">=</span> regex<span class="op">.</span><span class="fn">findAll</span>(<span class="str">"[a-z]+@[a-z.]+"</span>, text)
+<span class="nd">print</span>(<span class="nd">str</span>(emails<span class="op">.</span><span class="fn">length</span>()))  <span class="comment"># 1</span>
+
+<span class="comment"># sub (replace)</span>
+<span class="kw">let</span> censored <span class="op">=</span> regex<span class="op">.</span><span class="fn">sub</span>(<span class="str">"[a-z]+@[a-z.]+"</span>, <span class="str">"[REDACTED]"</span>, text)
+<span class="nd">print</span>(censored)  <span class="comment"># Contact: [REDACTED]</span>
+
+<span class="comment"># split</span>
+<span class="kw">let</span> parts <span class="op">=</span> regex<span class="op">.</span><span class="fn">split</span>(<span class="str">"\s+"</span>, <span class="str">"one two   three  four"</span>)
+<span class="nd">print</span>(<span class="nd">str</span>(parts<span class="op">.</span><span class="fn">length</span>()))  <span class="comment"># 4</span></code></pre>
+
+<h2 id="pattern-class">Pattern Class</h2>
+<p>Compiled regex pattern. Create via <code>regex.compile(pattern, flags?)</code> or <code>regex.compileFlags(pattern, flags)</code>.</p>
+<ul>
+    <li><code>pattern.fullMatch(text)</code> - Full match from start to end. Returns Match or Null.</li>
+    <li><code>pattern.search(text)</code> - Search for first occurrence. Returns Match or Null.</li>
+    <li><code>pattern.findAll(text)</code> - All non-overlapping matches. Returns array of strings (no groups) or arrays (with groups).</li>
+    <li><code>pattern.sub(replacement, text)</code> - Replace all matches (no backreferences).</li>
+    <li><code>pattern.split(text)</code> - Split around matches (delimiters discarded).</li>
+</ul>
+<pre><code><span class="kw">use</span> regex
+<span class="kw">let</span> pat <span class="op">=</span> regex<span class="op">.</span><span class="fn">compile</span>(<span class="str">"(\d{4})-(\d{2})-(\d{2})"</span>)
+
+<span class="comment"># fullMatch</span>
+<span class="kw">let</span> pfm <span class="op">=</span> pat<span class="op">.</span><span class="fn">fullMatch</span>(<span class="str">"2025-06-15"</span>)
+<span class="nd">print</span>(<span class="op">!</span><span class="nd">isNull</span>(pfm))  <span class="comment"># True</span>
+
+<span class="comment"># search</span>
+<span class="kw">let</span> ps <span class="op">=</span> pat<span class="op">.</span><span class="fn">search</span>(<span class="str">"Today is 2025-06-15"</span>)
+<span class="kw">if</span> <span class="op">!</span><span class="nd">isNull</span>(ps)
+    <span class="nd">print</span>(ps<span class="op">.</span><span class="fn">group</span>(<span class="num">0</span>))  <span class="comment"># 2025-06-15</span>
+<span class="kw">end</span>
+
+<span class="comment"># findAll</span>
+<span class="kw">let</span> pfa <span class="op">=</span> pat<span class="op">.</span><span class="fn">findAll</span>(<span class="str">"2025-01-01, 2025-06-15"</span>)
+<span class="nd">print</span>(<span class="nd">str</span>(pfa<span class="op">.</span><span class="fn">length</span>()))  <span class="comment"># 2</span>
+
+<span class="comment"># sub</span>
+<span class="kw">let</span> replaced <span class="op">=</span> pat<span class="op">.</span><span class="fn">sub</span>(<span class="str">"DATE"</span>, <span class="str">"Born: 1990-04-20"</span>)
+<span class="nd">print</span>(replaced)  <span class="comment"># Born: DATE</span>
+
+<span class="comment"># split</span>
+<span class="kw">let</span> pDigits <span class="op">=</span> regex<span class="op">.</span><span class="fn">compile</span>(<span class="str">"\d"</span>)
+<span class="kw">let</span> pSplit <span class="op">=</span> pDigits<span class="op">.</span><span class="fn">split</span>(<span class="str">"a1b2c3"</span>)
+<span class="nd">print</span>(<span class="nd">str</span>(pSplit<span class="op">.</span><span class="fn">length</span>()))  <span class="comment"># 4</span></code></pre>
+
+<h2 id="match-class">Match Class</h2>
+<ul>
+    <li><code>match.group(n?)</code> - Substring matched by group n (0=entire match). Null if undefined.</li>
+    <li><code>match.groups()</code> - All captured groups (excluding full match).</li>
+    <li><code>match.start(n?)</code> - Start position of group n (-1 if undefined).</li>
+    <li><code>match.endPos(n?)</code> - End position of group n (-1 if undefined).</li>
+    <li><code>match.span(n?)</code> - [start, end] span of group n.</li>
+    <li><code>match.pos()</code> - Start position of entire match (shortcut).</li>
+</ul>
+<pre><code><span class="kw">use</span> regex
+<span class="kw">let</span> m <span class="op">=</span> regex<span class="op">.</span><span class="fn">search</span>(<span class="str">"(\d{4})-(\d{2})-(\d{2})"</span>, <span class="str">"Date: 2025-06-15"</span>)
+<span class="kw">if</span> <span class="op">!</span><span class="nd">isNull</span>(m)
+    <span class="nd">print</span>(m<span class="op">.</span><span class="fn">group</span>(<span class="num">0</span>))  <span class="comment"># 2025-06-15</span>
+    <span class="nd">print</span>(m<span class="op">.</span><span class="fn">group</span>(<span class="num">1</span>))  <span class="comment"># 2025</span>
+    <span class="nd">print</span>(m<span class="op">.</span><span class="fn">group</span>(<span class="num">2</span>))  <span class="comment"># 06</span>
+    <span class="nd">print</span>(m<span class="op">.</span><span class="fn">group</span>(<span class="num">3</span>))  <span class="comment"># 15</span>
+    <span class="comment"># groups() returns captured groups as array</span>
+    <span class="kw">let</span> gs <span class="op">=</span> m<span class="op">.</span><span class="fn">groups</span>()
+    <span class="nd">print</span>(<span class="nd">str</span>(gs[<span class="num">0</span>]))  <span class="comment"># 2025</span>
+    <span class="comment"># Position info</span>
+    <span class="nd">print</span>(<span class="nd">str</span>(m<span class="op">.</span><span class="fn">start</span>(<span class="num">0</span>)))  <span class="comment"># 6</span>
+    <span class="nd">print</span>(<span class="nd">str</span>(m<span class="op">.</span><span class="fn">endPos</span>(<span class="num">0</span>))) <span class="comment"># 16</span>
+    <span class="kw">let</span> sp <span class="op">=</span> m<span class="op">.</span><span class="fn">span</span>(<span class="num">0</span>)
+    <span class="nd">print</span>(<span class="nd">str</span>(sp[<span class="num">0</span>]) <span class="op">+</span> <span class="str">" "</span> <span class="op">+</span> <span class="nd">str</span>(sp[<span class="num">1</span>]))  <span class="comment"># 6 16</span>
+<span class="kw">end</span></code></pre>
+
+                </article>
+
+                <div class="page-navigation">
+                    
+            <a href="../standard-library/random.html" class="nav-card">
+                <span class="nav-label">Previous</span>
+                <span class="nav-title">random Module</span>
+            </a>
+            
+            <a href="../standard-library/thread.html" class="nav-card next">
+                <span class="nav-label">Next</span>
+                <span class="nav-title">thread Module</span>
+            </a>
+            
+                </div>
+
+                <footer>
+                    <div>&copy; 2026 Harizi Riyadh. Released under the MIT License.</div>
+                    <div>Official Documentation Website for Djazair.</div>
+                </footer>
+            </div>
+        </main>
+
+        <aside class="toc-wrapper">
+            <div class="toc-title">On this page</div>
+            <ul class="toc-links">
+                <li class=""><a href="#flags">Flags</a></li>
+<li class=""><a href="#convenience-functions">Convenience Functions</a></li>
+<li class=""><a href="#pattern-class">Pattern Class</a></li>
+<li class=""><a href="#match-class">Match Class</a></li>
+            </ul>
+        </aside>
+    </div>
+</body>
+</html>
