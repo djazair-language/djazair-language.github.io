@@ -2,6 +2,13 @@ import os
 import re
 import json
 
+# Load Components
+with open('components/navbar.html', 'r', encoding='utf-8') as f:
+    NAVBAR_TEMPLATE = f.read()
+
+with open('components/footer.html', 'r', encoding='utf-8') as f:
+    FOOTER_TEMPLATE = f.read()
+
 # Helper to compute root prefix relative path
 def get_root_prefix(file_path):
     parts = file_path.split('/')
@@ -113,11 +120,7 @@ LAYOUT = """<!DOCTYPE html>
             <div class="logo-version">v1.0.5</div>
         </div>
         <nav class="top-nav">
-            <a href="{root_prefix}" {active_home}>Home</a>
-            <a href="{root_prefix}packages.html">Package Manager</a>
-            <a href="{root_prefix}docs/getting-started/installation.html" {active_docs}>Documentation</a>
-            <a href="{root_prefix}docs/standard-library/index.html" {active_std}>Standard Library</a>
-            <a href="{root_prefix}docs/faq.html" {active_faq}>faq</a>
+            {navbar}
         </nav>
         <div class="search-container">
             <span class="search-icon">🔍</span>
@@ -147,8 +150,7 @@ LAYOUT = """<!DOCTYPE html>
                 </div>
 
                 <footer>
-                    <div>&copy; 2026 Harizi Riyadh. Released under the MIT License.</div>
-                    <div>Official Documentation Website for Djazair.</div>
+                    {footer}
                 </footer>
             </div>
         </main>
@@ -1898,10 +1900,10 @@ def generate_all_pages():
         root_prefix = get_root_prefix(file_path)
         
         # Determine top navigation active classes
-        active_home = 'class="active"' if file_path == 'docs/index.html' else ''
-        active_docs = 'class="active"' if file_path.startswith('docs/') and not file_path.startswith('docs/standard-library/') and not file_path == 'docs/faq.html' else ''
-        active_std = 'class="active"' if file_path.startswith('docs/standard-library/') else ''
-        active_faq = 'class="active"' if file_path == 'docs/faq.html' else ''
+        active_home = ' class="active"' if file_path == 'docs/index.html' else ''
+        active_docs = ' class="active"' if file_path.startswith('docs/') and not file_path.startswith('docs/standard-library/') and file_path != 'docs/faq.html' else ''
+        active_std = ' class="active"' if file_path.startswith('docs/standard-library/') else ''
+        active_faq = ' class="active"' if file_path == 'docs/faq.html' else ''
 
         # Sidebar navigation compilation
         sidebar_html = []
@@ -2014,10 +2016,8 @@ def generate_all_pages():
             description=desc,
             title=title,
             root_prefix=root_prefix,
-            active_home=active_home,
-            active_docs=active_docs,
-            active_std=active_std,
-            active_faq=active_faq,
+            navbar=NAVBAR_TEMPLATE.format(root_prefix=root_prefix, active_home=active_home, active_pkg='', active_docs=active_docs, active_std=active_std, active_faq=active_faq),
+            footer=FOOTER_TEMPLATE,
             sidebar=sidebar_nav,
             breadcrumbs=breadcrumbs,
             content=modified_body,
@@ -2033,6 +2033,35 @@ def generate_all_pages():
         with open(target_file_path, "w", encoding="utf-8") as f:
             f.write(rendered_html)
             
+    # Process static templates
+    def compile_template(src, dest):
+        if not os.path.exists(src):
+            return
+        with open(src, 'r', encoding='utf-8') as f:
+            content = f.read()
+        
+        # Determine active classes for root pages
+        active_home = ' class="active"' if src == 'index.template.html' else ''
+        active_pkg = ' class="active"' if src == 'packages.template.html' else ''
+        
+        navbar_rendered = NAVBAR_TEMPLATE.format(
+            root_prefix='',
+            active_home=active_home,
+            active_pkg=active_pkg,
+            active_docs='',
+            active_std='',
+            active_faq=''
+        )
+        
+        content = content.replace('{navbar}', navbar_rendered)
+        content = content.replace('{footer}', FOOTER_TEMPLATE)
+        
+        with open(dest, 'w', encoding='utf-8') as f:
+            f.write(content)
+            
+    compile_template('index.template.html', 'index.html')
+    compile_template('packages.template.html', 'packages.html')
+
     print("Static website generated successfully!")
 
 if __name__ == "__main__":
