@@ -112,6 +112,7 @@ LAYOUT = """<!DOCTYPE html>
             <div class="logo-version">v1.0.5</div>
         </div>
         <nav class="top-nav">
+            <a href="{root_prefix}packages.html">Package Manager</a>
             <a href="{root_prefix}" {active_home}>Home</a>
             <a href="{root_prefix}docs/getting-started/installation" {active_getting}>Getting Started</a>
             <a href="{root_prefix}docs/language-guide/comments" {active_guide}>Language Guide</a>

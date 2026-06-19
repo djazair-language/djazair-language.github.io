@@ -24,6 +24,7 @@
                 <span class="lp-header-logo-text">Djazair</span>
             </a>
             <nav class="lp-header-nav">
+                <a href="packages.html">Package Manager</a>
                 <a href="docs/">Documentation</a>
                 <a href="docs/standard-library/">Std Library</a>
                 <a href="https://github.com/djazair-language/djazair" class="lp-header-github" target="_blank"><i class="fa-brands fa-github"></i> GitHub</a>
@@ -381,27 +382,7 @@ server<span class="op">.</span><span class="fn">listen</span>(<span class="num">
             </div>
         </section>
 
-        <!-- Extensions & Ecosystem Section -->
-        <section class="lp-extensions" id="extensions">
-            <div class="lp-section-header">
-                <span class="lp-section-tag"><i class="fa-solid fa-box-open"></i> Ecosystem & Extensions</span>
-                <h2>Expand Djazair with DPM</h2>
-                <p>Use the Djazair Package Manager (DPM) to seamlessly install community extensions. Browse available packages fetched directly from the official repository.</p>
-            </div>
-            
-            <div class="dpm-commands">
-                <code>dpm install &lt;package&gt;</code>
-                <code>dpm update</code>
-                <code>dpm publish</code>
-            </div>
 
-            <div id="extensions-grid" class="extensions-grid">
-                <!-- Extensions will be dynamically loaded here via JS -->
-                <div class="extensions-loading">
-                    <i class="fa-solid fa-spinner fa-spin"></i> Loading extensions from GitHub...
-                </div>
-            </div>
-        </section>
 
         <!-- Editor Support Section -->
         <section class="lp-editors">
@@ -443,48 +424,6 @@ server<span class="op">.</span><span class="fn">listen</span>(<span class="num">
     <button id="back-to-top" aria-label="Back to top"><i class="fa-solid fa-arrow-up"></i></button>
 
     <script>
-        // Fetch Extensions from GitHub
-        (function() {
-            var grid = document.getElementById("extensions-grid");
-            if (!grid) return;
-
-            fetch("https://api.github.com/repos/djazair-language/djazair-extensions/contents/")
-                .then(function(res) {
-                    if (!res.ok) throw new Error("Failed to fetch");
-                    return res.json();
-                })
-                .then(function(data) {
-                    var html = "";
-                    var extensions = data.filter(function(item) {
-                        return item.type === "dir" && !item.name.startsWith(".");
-                    });
-
-                    if (extensions.length === 0) {
-                        grid.innerHTML = '<div class="extensions-error">No extensions found.</div>';
-                        return;
-                    }
-
-                    extensions.forEach(function(ext) {
-                        html += `
-                        <a href="${ext.html_url}" target="_blank" rel="noopener" class="extension-card">
-                            <div class="ext-header">
-                                <div class="ext-icon"><i class="fa-solid fa-cube"></i></div>
-                                <div class="ext-name">${ext.name}</div>
-                            </div>
-                            <div class="ext-install" onclick="event.preventDefault(); navigator.clipboard.writeText('dpm install github:djazair-language/djazair-extensions/${ext.name}'); this.querySelector('i').className = 'fa-solid fa-check'; setTimeout(() => this.querySelector('i').className = 'fa-regular fa-copy', 2000);">
-                                <span>dpm install ${ext.name}</span>
-                                <i class="fa-regular fa-copy" title="Copy install command"></i>
-                            </div>
-                        </a>
-                        `;
-                    });
-
-                    grid.innerHTML = html;
-                })
-                .catch(function(err) {
-                    grid.innerHTML = '<div class="extensions-error"><i class="fa-solid fa-triangle-exclamation"></i> Could not load extensions from GitHub.</div>';
-                });
-        })();
 
         // Back to top button logic
         (function() {
