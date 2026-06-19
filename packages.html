@@ -74,23 +74,41 @@
                     return res.json();
                 })
                 .then(function(data) {
-                    var html = "";
                     var extensions = data.filter(function(item) {
                         return item.type === "dir" && !item.name.startsWith(".");
                     });
 
                     if (extensions.length === 0) {
                         grid.innerHTML = '<div class="extensions-error">No extensions found.</div>';
-                        return;
+                        throw new Error("Empty");
                     }
 
-                    extensions.forEach(function(ext) {
+                    // Fetch dpm.json for each extension to get the description
+                    var promises = extensions.map(function(ext) {
+                        return fetch("https://raw.githubusercontent.com/djazair-language/djazair-extensions/main/" + ext.name + "/dpm.json")
+                            .then(res => res.ok ? res.json() : {})
+                            .then(dpm => {
+                                ext.description = dpm.description || "An official Djazair extension.";
+                                return ext;
+                            })
+                            .catch(err => {
+                                ext.description = "An official Djazair extension.";
+                                return ext;
+                            });
+                    });
+
+                    return Promise.all(promises);
+                })
+                .then(function(extensionsWithData) {
+                    var html = "";
+                    extensionsWithData.forEach(function(ext) {
                         html += `
                         <a href="${ext.html_url}" target="_blank" rel="noopener" class="extension-card">
                             <div class="ext-header">
                                 <div class="ext-icon"><i class="fa-solid fa-cube"></i></div>
                                 <div class="ext-name">${ext.name}</div>
                             </div>
+                            <div class="ext-desc" style="font-size: 0.95rem; color: var(--text-secondary); line-height: 1.5; flex-grow: 1;">${ext.description}</div>
                             <div class="ext-install" onclick="event.preventDefault(); navigator.clipboard.writeText('dpm install github:djazair-language/djazair-extensions/${ext.name}'); this.querySelector('i').className = 'fa-solid fa-check'; setTimeout(() => this.querySelector('i').className = 'fa-regular fa-copy', 2000);">
                                 <span>dpm install ${ext.name}</span>
                                 <i class="fa-regular fa-copy" title="Copy install command"></i>
@@ -102,7 +120,9 @@
                     grid.innerHTML = html;
                 })
                 .catch(function(err) {
-                    grid.innerHTML = '<div class="extensions-error"><i class="fa-solid fa-triangle-exclamation"></i> Could not load extensions from GitHub.</div>';
+                    if (err.message !== "Empty") {
+                        grid.innerHTML = '<div class="extensions-error"><i class="fa-solid fa-triangle-exclamation"></i> Could not load extensions from GitHub.</div>';
+                    }
                 });
         })();
     </script>
