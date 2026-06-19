@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Djazair Package Manager (DPM) and Extensions Ecosystem.">
+    <meta name="keywords" content="Djazair, Package Manager, DPM, Extensions, Modules, Programming Language, Ecosystem, C, GitHub Packages">
     <title>Package Manager | Djazair Programming Language</title>
     <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><rect width=%22100%22 height=%22100%22 rx=%2220%22 fill=%22%2310b981%22/><text x=%2250%22 y=%2268%22 font-size=%2250%22 font-weight=%22800%22 fill=%22white%22 text-anchor=%22middle%22 font-family=%22system-ui%22>Dz</text></svg>">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
@@ -43,10 +44,35 @@
                 <p>Use the Djazair Package Manager (DPM) to seamlessly install community extensions. Browse available packages fetched directly from the official repository.</p>
             </div>
             
-            <div class="dpm-commands">
-                <code>dpm install &lt;package&gt;</code>
-                <code>dpm update</code>
-                <code>dpm publish</code>
+            <!-- How DPM Works Section -->
+            <div class="dpm-how-it-works" style="max-width: 900px; width: 100%; margin-bottom: 4rem; text-align: left;">
+                <div class="showcase-info-panel" style="margin-bottom: 2rem;">
+                    <h3>How DPM Works</h3>
+                    <p>The Djazair Package Manager (DPM) uses a simple, decentralized architecture. Packages are fetched directly from the official extensions repository or any public GitHub repository. When you install a package, DPM downloads it into a local <code>dpm_modules</code> folder and tracks it in your <code>dpm.json</code> file.</p>
+                </div>
+                
+                <div class="bench-grid" style="gap: 1.5rem;">
+                    <div class="feature-card">
+                        <div class="feature-title" style="color: var(--color-primary);"><i class="fa-solid fa-folder-plus"></i> Initialize Project</div>
+                        <div class="feature-desc" style="margin-bottom: 1rem;">Create a new project and generate a <code>dpm.json</code> tracking file.</div>
+                        <code style="background: rgba(0,0,0,0.2); padding: 0.5rem 1rem; border-radius: 6px; color: #fff; font-family: var(--font-mono); display: block; border: 1px solid rgba(255,255,255,0.05);">dpm init</code>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-title" style="color: var(--color-primary);"><i class="fa-solid fa-download"></i> Install Package</div>
+                        <div class="feature-desc" style="margin-bottom: 1rem;">Fetch a package and save it into <code>dpm_modules</code>.</div>
+                        <code style="background: rgba(0,0,0,0.2); padding: 0.5rem 1rem; border-radius: 6px; color: #fff; font-family: var(--font-mono); display: block; border: 1px solid rgba(255,255,255,0.05);">dpm install &lt;package&gt;</code>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-title" style="color: var(--color-primary);"><i class="fa-solid fa-arrows-rotate"></i> Update Dependencies</div>
+                        <div class="feature-desc" style="margin-bottom: 1rem;">Update all installed packages to their latest versions.</div>
+                        <code style="background: rgba(0,0,0,0.2); padding: 0.5rem 1rem; border-radius: 6px; color: #fff; font-family: var(--font-mono); display: block; border: 1px solid rgba(255,255,255,0.05);">dpm update</code>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-title" style="color: var(--color-primary);"><i class="fa-solid fa-cloud-arrow-up"></i> Publish Your Own</div>
+                        <div class="feature-desc" style="margin-bottom: 1rem;">Publish your library for the Djazair community to use.</div>
+                        <code style="background: rgba(0,0,0,0.2); padding: 0.5rem 1rem; border-radius: 6px; color: #fff; font-family: var(--font-mono); display: block; border: 1px solid rgba(255,255,255,0.05);">dpm publish</code>
+                    </div>
+                </div>
             </div>
 
             <div id="extensions-grid" class="extensions-grid">

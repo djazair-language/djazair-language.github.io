@@ -87,6 +87,7 @@ LAYOUT = """<!DOCTYPE html>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="{description}">
+    <meta name="keywords" content="Djazair, Programming Language, Documentation, Tutorial, Guide, Reference, C, API, Packages, Code">
     <meta property="og:title" content="{title} | Djazair Documentation">
     <meta property="og:description" content="{description}">
     <meta property="og:type" content="website">
