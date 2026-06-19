@@ -554,6 +554,7 @@ STRUCTURE = [
             {"title": "Classes", "path": "docs/language-guide/classes.html", "description": "Develop using Object-Oriented paradigms: classes, inheritance, super, and self."},
             {"title": "Error Handling", "path": "docs/language-guide/error-handling.html", "description": "Handle runtime issues gracefully using try-catch-finally blocks and throw statements."},
             {"title": "Async / Await", "path": "docs/language-guide/async-await.html", "description": "Concurrent programming with coroutines using async and await."},
+            {"title": "Package Manager (DPM)", "path": "docs/language-guide/dpm.html", "description": "Install, manage, and publish packages using the Djazair Package Manager."},
         ]
     },
     {
@@ -1585,6 +1586,90 @@ end
 """
 
 # Standard Library Pages
+PAGES_CONTENT["docs/language-guide/dpm.html"] = """
+<h1>Package Manager (DPM)</h1>
+<p>DPM (Djazair Package Manager) is the official package manager for the Djazair language. It allows you to easily install third-party libraries, manage project dependencies, and publish your own packages to the community.</p>
+
+<div class="alert alert-note">
+    <i class="fa-solid fa-circle-info"></i>
+    <p>DPM is written entirely in Djazair and comes bundled with the standard distribution.</p>
+</div>
+
+<h2>Basic Commands</h2>
+<p>DPM provides a simple command-line interface to interact with packages.</p>
+
+<h3>Initialising a Project</h3>
+<p>To start a new project, use <code>init</code>. This creates a <code>dpm.json</code> file in your current directory.</p>
+<pre class="shell"><code>dpm init</code></pre>
+
+<p>The generated <code>dpm.json</code> will look something like this:</p>
+<pre class="json"><code>{
+  "name": "my-awesome-project",
+  "version": "1.0.0",
+  "dependencies": {}
+}</code></pre>
+
+<h3>Installing Packages</h3>
+<p>To install a package, use the <code>install</code> command. By default, DPM fetches packages from the official Djazair registry or directly from GitHub repositories.</p>
+
+<pre class="shell"><code># Install a package from the official registry
+dpm install http-router
+
+# Install a specific version
+dpm install http-router@1.2.0
+
+# Install directly from a GitHub repository
+dpm install github:username/repo-name</code></pre>
+
+<p>Installed packages are placed in the <code>dpm_modules</code> directory in your project root. DPM automatically adds the installed package to your <code>dpm.json</code> file.</p>
+
+<h3>Using Installed Packages</h3>
+<p>Once a package is installed, you can <code>use</code> it directly in your code without providing a relative path.</p>
+
+<pre class="djazair"><code>use router from "http-router"
+use http
+
+let app = router.new()
+
+app.get("/", fn(req, res)
+    res.send("Hello from DPM package!")
+end)
+
+http.listen(8080, app)</code></pre>
+
+<h3>Updating and Removing</h3>
+<p>To update all installed packages to their latest compatible versions:</p>
+<pre class="shell"><code>dpm update</code></pre>
+
+<p>To remove a package and delete it from <code>dpm.json</code>:</p>
+<pre class="shell"><code>dpm remove http-router</code></pre>
+
+<h2>Creating and Publishing Packages</h2>
+<p>DPM makes it easy to share your code with others.</p>
+
+<h3>Structure of a Package</h3>
+<p>A valid DPM package must contain:</p>
+<ol>
+    <li>A <code>dpm.json</code> file with at least <code>name</code> and <code>version</code> fields.</li>
+    <li>A <code>main.dz</code> file, which acts as the entry point when your package is imported.</li>
+</ol>
+
+<h3>Publishing</h3>
+<p>Once your package is ready and pushed to a public GitHub repository, others can install it using the <code>github:user/repo</code> syntax.</p>
+<p>To publish to the official registry, you can run:</p>
+<pre class="shell"><code>dpm publish</code></pre>
+
+<h2>Global Installation</h2>
+<p>Some packages provide command-line tools. You can install them globally so they are available from anywhere on your system.</p>
+<pre class="shell"><code>dpm install -g dz-linter</code></pre>
+<p>Global packages are installed in your user's home directory. Make sure to add this path to your system's <code>PATH</code> environment variable.</p>
+
+<div class="alert alert-tip">
+    <i class="fa-solid fa-lightbulb"></i>
+    <p>Keep your <code>dpm.json</code> committed to your version control system, but add <code>dpm_modules/</code> to your <code>.gitignore</code>.</p>
+</div>
+"""
+
 # Examples pages
 PAGES_CONTENT["docs/examples/hello-world.html"] = """
 <h1>Example: Hello World</h1>

@@ -3,13 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Create dynamic lists and manipulate them using standard array methods.">
-    <meta property="og:title" content="Arrays | Djazair Documentation">
-    <meta property="og:description" content="Create dynamic lists and manipulate them using standard array methods.">
+    <meta name="description" content="Install, manage, and publish packages using the Djazair Package Manager.">
+    <meta property="og:title" content="Package Manager (DPM) | Djazair Documentation">
+    <meta property="og:description" content="Install, manage, and publish packages using the Djazair Package Manager.">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://djazair-language.github.io/">
     <meta name="twitter:card" content="summary_large_image">
-    <title>Arrays | Djazair Documentation</title>
+    <title>Package Manager (DPM) | Djazair Documentation</title>
     <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><rect width=%22100%22 height=%22100%22 rx=%2220%22 fill=%22%2310b981%22/><text x=%2250%22 y=%2268%22 font-size=%2250%22 font-weight=%22800%22 fill=%22white%22 text-anchor=%22middle%22 font-family=%22system-ui%22>Dz</text></svg>">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <link rel="stylesheet" href="../../assets/style.css">
@@ -64,7 +64,7 @@
     <li><a href="../../docs/language-guide/operators" >Operators</a></li>
     <li><a href="../../docs/language-guide/conditions" >Conditions</a></li>
     <li><a href="../../docs/language-guide/loops" >Loops</a></li>
-    <li><a href="../../docs/language-guide/arrays" class="active">Arrays</a></li>
+    <li><a href="../../docs/language-guide/arrays" >Arrays</a></li>
     <li><a href="../../docs/language-guide/strings" >Strings</a></li>
     <li><a href="../../docs/language-guide/maps" >Maps</a></li>
     <li><a href="../../docs/language-guide/functions" >Functions</a></li>
@@ -72,7 +72,7 @@
     <li><a href="../../docs/language-guide/classes" >Classes</a></li>
     <li><a href="../../docs/language-guide/error-handling" >Error Handling</a></li>
     <li><a href="../../docs/language-guide/async-await" >Async / Await</a></li>
-    <li><a href="../../docs/language-guide/dpm" >Package Manager (DPM)</a></li>
+    <li><a href="../../docs/language-guide/dpm" class="active">Package Manager (DPM)</a></li>
   </ul>
 </div>
 <div class="sidebar-section">
@@ -215,89 +215,105 @@
 <span class="separator">/</span>
 <span>Getting Started</span>
 <span class="separator">/</span>
-<span class="active">Arrays</span>
+<span class="active">Package Manager (DPM)</span>
                 </div>
                 
                 <article>
                     
-<h1>Arrays</h1>
-<p>Arrays are dynamic, ordered lists. They can hold mixed data types, resize automatically, and feature an extensive collection of utility methods.</p>
+<h1>Package Manager (DPM)</h1>
+<p>DPM (Djazair Package Manager) is the official package manager for the Djazair language. It allows you to easily install third-party libraries, manage project dependencies, and publish your own packages to the community.</p>
 
-<h2 id="instantiation">Instantiation</h2>
-<pre><code><span class="kw">let</span> list <span class="op">=</span> [<span class="num">10</span>, <span class="str">"apple"</span>, <span class="kw">True</span>, [<span class="num">3</span>, <span class="num">4</span>]]
-<span class="nd">print</span>(list[<span class="num">0</span>])    <span class="comment"># =&gt; 10</span>
-<span class="nd">print</span>(list[<span class="num">3</span>][<span class="num">1</span>]) <span class="comment"># =&gt; 4</span></code></pre>
+<div class="alert alert-note">
+    <i class="fa-solid fa-circle-info"></i>
+    <p>DPM is written entirely in Djazair and comes bundled with the standard distribution.</p>
+</div>
 
-<h2 id="full-methods-catalog">Full Methods Catalog</h2>
-<table>
-    <thead>
-        <tr>
-            <th>Method</th>
-            <th>Description</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr><td><code>length()</code></td><td>Number of elements</td></tr>
-        <tr><td><code>append(value)</code></td><td>Add value at end</td></tr>
-        <tr><td><code>pop(index?)</code></td><td>Remove and return element (last or at index)</td></tr>
-        <tr><td><code>insert(index, val)</code></td><td>Insert at position, shifting elements</td></tr>
-        <tr><td><code>remove(value)</code></td><td>Remove first occurrence of value</td></tr>
-        <tr><td><code>reverse()</code></td><td>Reverse array <b>in-place</b></td></tr>
-        <tr><td><code>reversed()</code></td><td>Return new array in reverse order (original unchanged)</td></tr>
-        <tr><td><code>index(value)</code></td><td>Index of value (-1 if not found)</td></tr>
-        <tr><td><code>extend(array)</code></td><td>Append all elements from another array</td></tr>
-        <tr><td><code>sort(descOrCmp?)</code></td><td>Sort array; accepts bool (descending) or comparator function</td></tr>
-        <tr><td><code>sorted(desc?)</code></td><td>Return sorted copy (original unchanged)</td></tr>
-        <tr><td><code>copy()</code></td><td>Return shallow copy of array</td></tr>
-        <tr><td><code>clear()</code></td><td>Remove all elements</td></tr>
-        <tr><td><code>contains(value)</code></td><td>Check if value exists in array</td></tr>
-        <tr><td><code>count(value)</code></td><td>Count occurrences of value</td></tr>
-        <tr><td><code>concat(other)</code></td><td>Return new array with elements from both</td></tr>
-        <tr><td><code>slice(start, end?)</code></td><td>Extract sub-array</td></tr>
-        <tr><td><code>join(sep)</code></td><td>Join elements into string with separator</td></tr>
-        <tr><td><code>flatten()</code></td><td>Flatten nested arrays one level</td></tr>
-        <tr><td><code>unique()</code></td><td>Return new array with duplicate values removed</td></tr>
-        <tr><td><code>all()</code></td><td>All elements are truthy</td></tr>
-        <tr><td><code>any()</code></td><td>Any element is truthy</td></tr>
-        <tr><td><code>min()</code></td><td>Minimum value in array</td></tr>
-        <tr><td><code>max()</code></td><td>Maximum value in array</td></tr>
-        <tr><td><code>sum()</code></td><td>Sum of all numeric elements</td></tr>
-        <tr><td><code>map(callback)</code></td><td>Transform each element, return new array</td></tr>
-        <tr><td><code>filter(callback)</code></td><td>Keep elements where callback returns truthy</td></tr>
-        <tr><td><code>reduce(callback, init)</code></td><td>Accumulate values into single result</td></tr>
-                <tr><td><code>find(value)</code></td><td>Find first element matching value or callback (Null if not found)</td></tr>
-        <tr><td><code>every(callback)</code></td><td>Check if all elements pass callback</td></tr>
-        <tr><td><code>some(callback)</code></td><td>Check if any element passes callback</td></tr>
-    </tbody>
-</table>
+<h2 id="basic-commands">Basic Commands</h2>
+<p>DPM provides a simple command-line interface to interact with packages.</p>
 
-<h2 id="method-chaining-example">Method Chaining Example</h2>
-<pre><code><span class="kw">let</span> numbers <span class="op">=</span> [<span class="num">1</span>, <span class="num">2</span>, <span class="num">3</span>, <span class="num">4</span>, <span class="num">5</span>, <span class="num">6</span>]
-<span class="kw">let</span> result <span class="op">=</span> numbers
-    <span class="op">.</span><span class="fn">filter</span>(<span class="kw">fn</span>(x) <span class="op">=&gt;</span> x <span class="op">%</span> <span class="num">2</span> <span class="op">==</span> <span class="num">0</span>)
-    <span class="op">.</span><span class="fn">map</span>(<span class="kw">fn</span>(x) <span class="op">=&gt;</span> x <span class="op">*</span> <span class="num">10</span>)
-    <span class="op">.</span><span class="fn">sum</span>()
+<h3 id="initialising-a-project">Initialising a Project</h3>
+<p>To start a new project, use <code>init</code>. This creates a <code>dpm.json</code> file in your current directory.</p>
+<pre class="shell"><code>dpm init</code></pre>
 
-<span class="nd">print</span>(result) <span class="comment"># (2*10) + (4*10) + (6*10) =&gt; 120</span></code></pre>
+<p>The generated <code>dpm.json</code> will look something like this:</p>
+<pre class="json"><code>{
+  "name": "my-awesome-project",
+  "version": "1.0.0",
+  "dependencies": {}
+}</code></pre>
 
-<h2 id="sort-variants">Sort Variants</h2>
-<pre><code><span class="kw">let</span> arr <span class="op">=</span> [<span class="num">5</span>, <span class="num">1</span>, <span class="num">9</span>, <span class="num">3</span>]
-arr<span class="op">.</span><span class="fn">sort</span>()                 <span class="comment"># ascending: [1, 3, 5, 9]</span>
-arr<span class="op">.</span><span class="fn">sort</span>(<span class="kw">True</span>)             <span class="comment"># descending: [9, 5, 3, 1]</span>
-arr<span class="op">.</span><span class="fn">sort</span>(<span class="kw">fn</span>(x, y) <span class="op">=&gt;</span> y <span class="op">-</span> x) <span class="comment"># custom comparator: [9, 5, 3, 1]</span></code></pre>
+<h3 id="installing-packages">Installing Packages</h3>
+<p>To install a package, use the <code>install</code> command. By default, DPM fetches packages from the official Djazair registry or directly from GitHub repositories.</p>
+
+<pre class="shell"><code># Install a package from the official registry
+dpm install http-router
+
+# Install a specific version
+dpm install http-router@1.2.0
+
+# Install directly from a GitHub repository
+dpm install github:username/repo-name</code></pre>
+
+<p>Installed packages are placed in the <code>dpm_modules</code> directory in your project root. DPM automatically adds the installed package to your <code>dpm.json</code> file.</p>
+
+<h3 id="using-installed-packages">Using Installed Packages</h3>
+<p>Once a package is installed, you can <code>use</code> it directly in your code without providing a relative path.</p>
+
+<pre class="djazair"><code>use router from "http-router"
+use http
+
+let app = router.new()
+
+app.get("/", fn(req, res)
+    res.send("Hello from DPM package!")
+end)
+
+http.listen(8080, app)</code></pre>
+
+<h3 id="updating-and-removing">Updating and Removing</h3>
+<p>To update all installed packages to their latest compatible versions:</p>
+<pre class="shell"><code>dpm update</code></pre>
+
+<p>To remove a package and delete it from <code>dpm.json</code>:</p>
+<pre class="shell"><code>dpm remove http-router</code></pre>
+
+<h2 id="creating-and-publishing-packages">Creating and Publishing Packages</h2>
+<p>DPM makes it easy to share your code with others.</p>
+
+<h3 id="structure-of-a-package">Structure of a Package</h3>
+<p>A valid DPM package must contain:</p>
+<ol>
+    <li>A <code>dpm.json</code> file with at least <code>name</code> and <code>version</code> fields.</li>
+    <li>A <code>main.dz</code> file, which acts as the entry point when your package is imported.</li>
+</ol>
+
+<h3 id="publishing">Publishing</h3>
+<p>Once your package is ready and pushed to a public GitHub repository, others can install it using the <code>github:user/repo</code> syntax.</p>
+<p>To publish to the official registry, you can run:</p>
+<pre class="shell"><code>dpm publish</code></pre>
+
+<h2 id="global-installation">Global Installation</h2>
+<p>Some packages provide command-line tools. You can install them globally so they are available from anywhere on your system.</p>
+<pre class="shell"><code>dpm install -g dz-linter</code></pre>
+<p>Global packages are installed in your user's home directory. Make sure to add this path to your system's <code>PATH</code> environment variable.</p>
+
+<div class="alert alert-tip">
+    <i class="fa-solid fa-lightbulb"></i>
+    <p>Keep your <code>dpm.json</code> committed to your version control system, but add <code>dpm_modules/</code> to your <code>.gitignore</code>.</p>
+</div>
 
                 </article>
 
                 <div class="page-navigation">
                     
-            <a href="../../docs/language-guide/loops" class="nav-card">
+            <a href="../../docs/language-guide/async-await" class="nav-card">
                 <span class="nav-label">Previous</span>
-                <span class="nav-title">Loops</span>
+                <span class="nav-title">Async / Await</span>
             </a>
             
-            <a href="../../docs/language-guide/strings" class="nav-card next">
+            <a href="../../docs/standard-library/" class="nav-card next">
                 <span class="nav-label">Next</span>
-                <span class="nav-title">Strings</span>
+                <span class="nav-title">Overview</span>
             </a>
             
                 </div>
@@ -312,10 +328,15 @@ arr<span class="op">.</span><span class="fn">sort</span>(<span class="kw">fn</sp
         <aside class="toc-wrapper">
             <div class="toc-title">On this page</div>
             <ul class="toc-links">
-                <li class=""><a href="#instantiation">Instantiation</a></li>
-<li class=""><a href="#full-methods-catalog">Full Methods Catalog</a></li>
-<li class=""><a href="#method-chaining-example">Method Chaining Example</a></li>
-<li class=""><a href="#sort-variants">Sort Variants</a></li>
+                <li class=""><a href="#basic-commands">Basic Commands</a></li>
+<li class="indent-2"><a href="#initialising-a-project">Initialising a Project</a></li>
+<li class="indent-2"><a href="#installing-packages">Installing Packages</a></li>
+<li class="indent-2"><a href="#using-installed-packages">Using Installed Packages</a></li>
+<li class="indent-2"><a href="#updating-and-removing">Updating and Removing</a></li>
+<li class=""><a href="#creating-and-publishing-packages">Creating and Publishing Packages</a></li>
+<li class="indent-2"><a href="#structure-of-a-package">Structure of a Package</a></li>
+<li class="indent-2"><a href="#publishing">Publishing</a></li>
+<li class=""><a href="#global-installation">Global Installation</a></li>
             </ul>
         </aside>
     </div>
