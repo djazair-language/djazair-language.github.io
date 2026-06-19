@@ -103,7 +103,7 @@
  
 <span class="kw">async</span> <span class="kw">fn</span> <span class="fn">fetchUser</span>(id)
     <span class="nd">print</span>(<span class="str">"Fetching user: ${id}"</span>)
-    <span class="kw">let</span> res <span class="op">=</span> <span class="kw">await</span> http<span class="op">.</span>get("https://api.github.com/users/${id}")
+    <span class="kw">let</span> res <span class="op">=</span> <span class="kw">await</span> http<span class="op">.</span>get("http://api.github.com/users/${id}")
     <span class="kw">return</span> json<span class="op">.</span><span class="fn">parse</span>(res<span class="op">.</span>body)
 <span class="kw">end</span>
  
