@@ -12,6 +12,7 @@
     <meta name="description" content="Full catalog of language keywords and reserved tokens.">
     <title>Keywords | Djazair Documentation</title>
     <link rel="stylesheet" href="../../assets/style.css">
+    <script src="https://cdn.jsdelivr.net/npm/monaco-editor@0.47.0/min/vs/loader.js"></script>
     <script>
         function filterNavigation() {
             const query = document.getElementById("search-input").value.toLowerCase();
@@ -41,7 +42,103 @@
                 event.preventDefault();
             }
         }
+
+        // --- Monaco Editor for code blocks ---
+        (function() {
+            var blocks = document.querySelectorAll("pre > code");
+            if (blocks.length === 0) return;
+            require.config({
+                paths: { vs: "https://cdn.jsdelivr.net/npm/monaco-editor@0.47.0/min/vs" },
+                "vs/nls": { availableLanguages: { "*": "en" } }
+            });
+            require(["vs/editor/editor.main"], function() {
+                blocks.forEach(function(codeEl) {
+                    var pre = codeEl.parentElement;
+                    if (!pre) return;
+                    
+                    var lang = "javascript";
+                    for (var i = 0; i < pre.classList.length; i++) {
+                        var cls = pre.classList.item(i);
+                        if (cls === "bash" || cls === "sh") {
+                            lang = "shell";
+                            break;
+                        } else if (cls === "powershell") {
+                            lang = "powershell";
+                            break;
+                        } else if (cls === "c") {
+                            lang = "c";
+                            break;
+                        } else if (cls === "cpp") {
+                            lang = "cpp";
+                            break;
+                        } else if (cls === "text" || cls === "plaintext") {
+                            lang = "plaintext";
+                            break;
+                        } else if (cls === "json") {
+                            lang = "json";
+                            break;
+                        }
+                    }
+
+                    var text = codeEl.textContent;
+                    var container = document.createElement("div");
+                    container.className = "monaco-code-wrap";
+                    container.style.height = Math.max(100, text.split("\n").length * 20 + 30) + "px";
+                    
+                    // Add copy button inside container
+                    var btn = document.createElement("button");
+                    btn.className = "copy-btn";
+                    btn.textContent = "Copy";
+                    btn.setAttribute("aria-label", "Copy code to clipboard");
+                    btn.style.zIndex = "10";
+                    btn.addEventListener("click", function() {
+                        navigator.clipboard.writeText(text).then(function() {
+                            btn.textContent = "Copied!";
+                            btn.classList.add("copied");
+                            setTimeout(function() { btn.textContent = "Copy"; btn.classList.remove("copied"); }, 2000);
+                        });
+                    });
+                    container.appendChild(btn);
+
+                    pre.parentNode.replaceChild(container, pre);
+                    
+                    monaco.editor.create(container, {
+                        value: text,
+                        language: lang,
+                        readOnly: true,
+                        lineNumbers: "off",
+                        minimap: { enabled: false },
+                        scrollBeyondLastLine: false,
+                        fontSize: 13,
+                        theme: "vs-dark",
+                        padding: { top: 12, bottom: 12 },
+                        overviewRulerLanes: 0,
+                        hideCursorInOverviewRuler: true,
+                        overviewRulerBorder: false,
+                        scrollbar: { vertical: "hidden", handleMouseWheel: true },
+                        contextmenu: false,
+                        renderLineHighlight: "none",
+                        wordWrap: "off",
+                        automaticLayout: true
+                    });
+                });
+            });
+        })();
+        function toggleSection(el) {
+            var section = el.closest(".sidebar-section");
+            var list = section.querySelector(".sidebar-links");
+            var expanded = list.getAttribute("data-expanded") === "true";
+            list.setAttribute("data-expanded", !expanded);
+            var arrow = el.querySelector(".arrow");
+            if (arrow) arrow.textContent = expanded ? ">" : "v";
+        }
         document.addEventListener("DOMContentLoaded", function() {
+            document.querySelectorAll(".sidebar-links").forEach(function(sm) {
+                if (sm.getAttribute("data-expanded") === "false") {
+                    var title = sm.closest(".sidebar-section").querySelector(".sidebar-title .arrow");
+                    if (title) title.textContent = ">";
+                }
+            });
             document.querySelectorAll(".has-submenu > a").forEach(function(el) {
                 let li = el.closest("li");
                 let sm = li.querySelector(".submenu");
@@ -82,7 +179,7 @@
     <div class="app-container">
         <aside class="sidebar">
             <div class="sidebar-section">
-  <div class="sidebar-title">Getting Started</div>
+  <div class="sidebar-title" onclick="toggleSection(this)">Getting Started <span class="arrow">v</span></div>
   <ul class="sidebar-links">
     <li><a href="../getting-started/installation.html" >Installation</a></li>
     <li><a href="../getting-started/first-program.html" >First Program</a></li>
@@ -90,7 +187,7 @@
   </ul>
 </div>
 <div class="sidebar-section">
-  <div class="sidebar-title">Language Guide</div>
+  <div class="sidebar-title" onclick="toggleSection(this)">Language Guide <span class="arrow">v</span></div>
   <ul class="sidebar-links">
     <li><a href="../language-guide/comments.html" >Comments</a></li>
     <li><a href="../language-guide/variables.html" >Variables</a></li>
@@ -110,7 +207,7 @@
   </ul>
 </div>
 <div class="sidebar-section">
-  <div class="sidebar-title">Standard Library</div>
+  <div class="sidebar-title" onclick="toggleSection(this)">Standard Library <span class="arrow">v</span></div>
   <ul class="sidebar-links">
     <li><a href="../standard-library/index.html" >Overview</a></li>
     <li class="has-submenu"><a href="../standard-library/assert.html" class="submenu-toggle" onclick="toggleSubmenu(event, this)">assert Module <span class="arrow">></span></a>
@@ -220,7 +317,7 @@
   </ul>
 </div>
 <div class="sidebar-section">
-  <div class="sidebar-title">Examples</div>
+  <div class="sidebar-title" onclick="toggleSection(this)">Examples <span class="arrow">v</span></div>
   <ul class="sidebar-links">
     <li><a href="../examples/hello-world.html" >Hello World</a></li>
     <li><a href="../examples/calculator.html" >Calculator</a></li>
@@ -229,7 +326,7 @@
   </ul>
 </div>
 <div class="sidebar-section">
-  <div class="sidebar-title">Reference</div>
+  <div class="sidebar-title" onclick="toggleSection(this)">Reference <span class="arrow">v</span></div>
   <ul class="sidebar-links">
     <li><a href="../reference/keywords.html" class="active">Keywords</a></li>
     <li><a href="../reference/operators.html" >Operators</a></li>

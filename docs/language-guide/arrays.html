@@ -14,71 +14,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <link rel="stylesheet" href="../../assets/style.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/7.0.0/fuse.min.js"></script>
-    <script id="search-index-data" type="application/json">[{"title": "Home", "path": "docs/index.html", "description": "The Djazair Programming Language official documentation home page.", "text": "The Djazair Programming Language\n    A modern, embeddable scripting language — written in pure C, featuring async coroutines, pattern matching, OOP, and a rich standard library. Designed for automation, tooling, game development, and seamless C/C++ embedding.\n    \n        Get Started\n        Learn t"}, {"title": "Docs Home", "path": "docs/index.html", "description": "Djazair documentation home page.", "text": "The Djazair Programming Language\n    A modern, embeddable scripting language — written in pure C, featuring async coroutines, pattern matching, OOP, and a rich standard library. Designed for automation, tooling, game development, and seamless C/C++ embedding.\n    \n        Get Started\n        Learn t"}, {"title": "Installation", "path": "docs/getting-started/installation.html", "description": "Install and build Djazair from source code on Windows, Linux, and macOS.", "text": "Installing Djazair\nDjazair is built to compile cleanly on Linux, macOS, and Windows. It relies on standard compiler environments and has minimal external dependencies.\n\nLinux & macOS Compilation\nEnsure you have GCC or Clang and make installed. Open a terminal and run the following commands:\n# Clone "}, {"title": "First Program", "path": "docs/getting-started/first-program.html", "description": "Write and run your very first hello world program in Djazair.", "text": "Your First Djazair Program\nIn this guide, we will write, structure, and run our very first program in Djazair.\n\nWriting the Script\nCreate a file named hello.dz in your preferred editor. Paste the following line of code into it:\n# Hello world in Djazair\nprint(\"Hello from Djazair!\")\n\n\nRunning the Scri"}, {"title": "Running Programs", "path": "docs/getting-started/running-programs.html", "description": "Learn the various CLI commands to execute your scripts inline or via files.", "text": "Running Djazair Scripts\nThe Djazair interpreter offers a command-line interface (CLI) to execute code, check versions, and configure file paths.\n\nCLI Usage\nThe general syntax of the interpreter CLI is:\ndjazair [options] [script_file.dz] [arguments...]\n\nAvailable Options\n\n    \n        \n            Op"}, {"title": "Comments", "path": "docs/language-guide/comments.html", "description": "Learn how to document your Djazair code with single and multi-line comments.", "text": "Comments\nComments are text entries ignored by the compiler, used to document structures and write explanations.\n\nSingle-line Comments\nSingle-line comments start with a hash character (#). Everything following the # on that line is ignored:\n# Declare a score variable\nlet score = 100 # Inline comment "}, {"title": "Variables", "path": "docs/language-guide/variables.html", "description": "Declare variables with let and understand lexical block scoping.", "text": "Variables & Scope\nVariables store values. Djazair is dynamically typed, meaning variables can hold any type of value and change types over time.\n\nDeclaration\nDeclare variables using let:\nlet username = \"Riyadh\"\nlet age = 30\nlet balance = 200.50\n\n# Reassignment\nbalance = 450.75\n\n\nScoping Rules\nDjazai"}, {"title": "Data Types", "path": "docs/language-guide/data-types.html", "description": "Understand primitive and object types, dynamic typing, and memory model.", "text": "Data Types\nDjazair features a rich set of built-in data types. It uses dynamic typing, but every value has a concrete runtime type.\n\nSummary of Types\n\n    \n        \n            Type\n            Sample Literals\n            Description\n        \n    \n    \n        \n            Number\n            42, 3.1"}, {"title": "Input & Output", "path": "docs/language-guide/input-output.html", "description": "Console output, user input, and string formatting in Djazair.", "text": "Input & Output\nDjazair provides built-in functions for console output and user input.\n\nConsole Output\nUse print() to output values to stdout. It accepts multiple arguments separated by spaces:\nprint(\"Hello World\")\nprint(\"The answer is\", 42)\nprint(\"Value:\", True, Null, [1, 2])\n\n\nString Interpolation\n"}, {"title": "Operators", "path": "docs/language-guide/operators.html", "description": "Examine mathematical, comparison, logical, assignment, and membership operators.", "text": "Operators Reference\nDjazair provides standard arithmetic, comparison, logical, bitwise, assignment, increment/decrement, and identity operators.\n\nArithmetic Operators\nBasic mathematical calculations:\nlet sum = 10 + 5    # Addition => 15\nlet diff = 10 - 5   # Subtraction => 5\nlet prod = 10 * 5   # Mu"}, {"title": "Conditions", "path": "docs/language-guide/conditions.html", "description": "Control execution flow using if-elif-else statements and ternary expressions.", "text": "Conditions (If-Else & Match)\nControl flow structures let your script make decisions depending on boolean expressions or value patterns.\n\nIf, Elif, Else\nThe conditional syntax uses if, elif, else, and concludes with the end keyword:\nlet score = 85\n\nif score >= 90\n    print(\"Grade: A\")\nelif score >= 8"}, {"title": "Loops", "path": "docs/language-guide/loops.html", "description": "Write loops using while, do-while, and for-in iterators over collections and ranges.", "text": "Loops\nPerform repeated executions using while, do-while, and for-in constructs.\n\nWhile Loop\nRuns as long as a boolean expression evaluates to True:\nlet i = 1\nwhile i \n\nDo-While Loop\nExecutes the body block at least once, then continues while the condition matches:\nlet x = 10\ndo\n    print(\"Runs at le"}, {"title": "Arrays", "path": "docs/language-guide/arrays.html", "description": "Create dynamic lists and manipulate them using standard array methods.", "text": "Arrays\nArrays are dynamic, ordered lists. They can hold mixed data types, resize automatically, and feature an extensive collection of utility methods.\n\nInstantiation\nlet list = [10, \"apple\", True, [3, 4]]\nprint(list[0])    # => 10\nprint(list[3][1]) # => 4\n\n\nFull Methods Catalog\n\n    \n        \n     "}, {"title": "Strings", "path": "docs/language-guide/strings.html", "description": "Learn string interpolation, multi-line blocks, and comprehensive string methods.", "text": "Strings\nDjazair Strings are immutable, UTF-8 encoded, and packed with formatting, trimming, and searching APIs.\n\nString Literals\nUse double quotes for standard strings. Strings support variable interpolation using ${expression}:\nlet user = \"Riyadh\"\nlet greet = \"Hello, ${user}! The time is ${getLine("}, {"title": "Maps", "path": "docs/language-guide/maps.html", "description": "Create and manipulate key-value hash maps with built-in methods.", "text": "Maps\nMaps (dictionaries) are unordered key-value hash tables. Keys can be any type.\n\nCreating Maps\nlet empty = {}\nlet user = {\"name\": \"Riad\", \"age\": 30, \"active\": True}\nprint(user[\"name\"])  # => Riad\n\n\nMap Methods\n\n    MethodDescription\n    \n        length()Number of entries\n        keys()Array of k"}, {"title": "Functions", "path": "docs/language-guide/functions.html", "description": "Write reusable code blocks, closures, arrow functions, and default arguments.", "text": "Functions\nFunctions are declared using the fn keyword and terminated with end. They are first-class citizen objects in Djazair.\n\nStandard Declaration\nfn calculateSum(a, b)\n    return a + b\nend\n\nprint(calculateSum(10, 20)) # => 30\n\n\nDefault Arguments\nDjazair allows function parameters to have default"}, {"title": "Modules", "path": "docs/language-guide/modules.html", "description": "Import files and use native modules to organize codebases cleanly.", "text": "Modules & Imports\nOrganize and scale your application by breaking it down into discrete script files or leveraging standard libraries.\n\nLocal Files (import)\nImport local script files using the import keyword. You can assign a namespace or use wildcard imports:\n# main.dz\nimport \"utils.dz\" as utils   "}, {"title": "Classes", "path": "docs/language-guide/classes.html", "description": "Develop using Object-Oriented paradigms: classes, inheritance, super, and self.", "text": "Classes & OOP\nDjazair implements fully featured Object-Oriented programming including classes, constructors, methods, and single inheritance.\n\nClass Declaration\nDeclare classes, instantiate objects, and refer to properties inside methods via the self prefix:\nclass User\n    init(name, email)\n        "}, {"title": "Error Handling", "path": "docs/language-guide/error-handling.html", "description": "Handle runtime issues gracefully using try-catch-finally blocks and throw statements.", "text": "Error Handling\nRuntime faults are caught and mitigated gracefully via structured exception blocks.\n\nTry-Catch-Finally Blocks\nThe error handling block uses try, catch [variable], finally, and finishes with end:\ntry\n    let num = 1 / 0\ncatch error\n    print(\"Caught an error: \" + str(error))\nfinally\n  "}, {"title": "Async / Await", "path": "docs/language-guide/async-await.html", "description": "Concurrent programming with coroutines using async and await.", "text": "Async / Await\nDjazair supports coroutine-based concurrency using async fn and await.\n\nAsync Functions\nDeclare with async fn. They return a coroutine instead of executing immediately:\nasync fn fetchData()\n    # Simulate async work\n    return 42\nend\n\nlet task = fetchData()\nprint(task)  # Coroutine obj"}, {"title": "Overview", "path": "docs/standard-library/index.html", "description": "A comprehensive index of all standard library modules.", "text": ""}, {"title": "assert Module", "path": "docs/standard-library/assert.html", "description": "Debugging and unit-testing assertion functions for validating values.", "text": ""}, {"title": "bytes Module", "path": "docs/standard-library/bytes.html", "description": "Binary data manipulation and conversion utilities.", "text": ""}, {"title": "collections Module", "path": "docs/standard-library/collections.html", "description": "Specialized container data types beyond built-in Array and Map.", "text": ""}, {"title": "crypto Module", "path": "docs/standard-library/crypto.html", "description": "Cryptographic hashing algorithms (SHA-256, etc.) and HMAC operations.", "text": ""}, {"title": "datetime Module", "path": "docs/standard-library/datetime.html", "description": "Date, time, and timezone manipulation functions and the Date class.", "text": ""}, {"title": "dir Module", "path": "docs/standard-library/dir.html", "description": "Directory traversal, creation, removal, and listing operations.", "text": ""}, {"title": "env Module", "path": "docs/standard-library/env.html", "description": "Access and manipulate environment variables at runtime.", "text": ""}, {"title": "file Module", "path": "docs/standard-library/file.html", "description": "File reading, writing, manipulation, and status query operations.", "text": ""}, {"title": "http Module", "path": "docs/standard-library/http.html", "description": "HTTP client and server implementations for web communication.", "text": ""}, {"title": "json Module", "path": "docs/standard-library/json.html", "description": "JSON parsing and stringification for data interchange.", "text": ""}, {"title": "lang Module", "path": "docs/standard-library/lang.html", "description": "Runtime introspection, control, and library path management.", "text": ""}, {"title": "math Module", "path": "docs/standard-library/math.html", "description": "Mathematical constants, trigonometry, exponentiation, and statistics.", "text": ""}, {"title": "net Module", "path": "docs/standard-library/net.html", "description": "TCP networking: server and client classes for socket communication.", "text": ""}, {"title": "os Module", "path": "docs/standard-library/os.html", "description": "Platform detection, system information, and user/temp file paths.", "text": ""}, {"title": "path Module", "path": "docs/standard-library/path.html", "description": "Cross-platform path joining, resolution, decomposition, and security checks.", "text": ""}, {"title": "process Module", "path": "docs/standard-library/process.html", "description": "Process identification, control, working directory, CLI args, and command execution.", "text": ""}, {"title": "random Module", "path": "docs/standard-library/random.html", "description": "Random number generation and sampling utilities.", "text": ""}, {"title": "regex Module", "path": "docs/standard-library/regex.html", "description": "Regular expression pattern matching, search, and replace operations.", "text": ""}, {"title": "thread Module", "path": "docs/standard-library/thread.html", "description": "Parallel execution via threads, workers, and synchronization.", "text": ""}, {"title": "uuid Module", "path": "docs/standard-library/uuid.html", "description": "Generate universally unique identifiers (UUID v4).", "text": ""}, {"title": "Hello World", "path": "docs/examples/hello-world.html", "description": "Standard hello world code snippet and explanation.", "text": "Example: Hello World\nA simple printing execution showing standard Djazair outputs:\n# The hello world program\nprint(\"Hello World from Djazair!\")\n\nHow it Works\nThe code uses the global built-in print() function to write text streams directly to the terminal stdout. Lines starting with # represent sing"}, {"title": "Calculator", "path": "docs/examples/calculator.html", "description": "Implement a fully featured command-line calculator in Djazair.", "text": "Example: Calculator\nAn interactive command line calculator script:\nprint(\"--- Djazair CLI Calculator ---\")\nprint(\"Enter calculation mode or type 'exit' to quit.\")\n\nwhile True\n    let inputStr = input(\"calc> \")\n    if inputStr == \"exit\"\n        break\n    end\n    \n    # Simple evaluation split\n    let"}, {"title": "Todo App", "path": "docs/examples/todo-app.html", "description": "A console Todo tracker demonstrating list manipulation and file persistence.", "text": "Example: Todo Application\nA terminal Todo list manager featuring file persistence:\nuse file\nuse json\n\nlet todoFile = \"todos.json\"\nlet todos = []\n\nif file.exists(todoFile)\n    todos = json.parse(file.read(todoFile))\nend\n\nfn saveTodos()\n    file.write(todoFile, json.stringify(todos))\nend\n\nwhile True\n "}, {"title": "File Processing", "path": "docs/examples/file-processing.html", "description": "Read files line-by-line, parse data structures, and output logs.", "text": "Example: File Processing\nA script that parses a log file and extracts formatted records:\nuse file\nuse regex\n\nlet logFile = \"app.log\"\nif not file.exists(logFile)\n    # Seed dummy log\n    file.write(logFile, \"[INFO] Started\\n[ERROR] DB Connection failed\\n[INFO] Retrying\\n\")\nend\n\nlet pattern = regex.co"}, {"title": "Keywords", "path": "docs/reference/keywords.html", "description": "Complete list of reserved keywords in the Djazair language.", "text": ""}, {"title": "Operators", "path": "docs/reference/operators.html", "description": "Arithmetic, comparison, logical, bitwise, and other operators.", "text": ""}, {"title": "Built-in Functions", "path": "docs/reference/builtins.html", "description": "Globally available functions for type conversion, I/O, and utilities.", "text": ""}, {"title": "Methods", "path": "docs/reference/methods.html", "description": "Built-in methods on Strings, Arrays, and Maps.", "text": ""}, {"title": "Syntax Reference", "path": "docs/reference/syntax-reference.html", "description": "Formal grammar and syntax rules of the Djazair language.", "text": ""}, {"title": "Embedding API", "path": "docs/reference/embedding.html", "description": "C/C++ API for embedding Djazair in applications.", "text": "Embedding Djazair in C/C++\nDjazair is designed to be easily embedded into C/C++ applications via a single header djazair.h.\n\nMinimal Example\n#include \"djazair.h\"\n#include &lt;stdio.h&gt;\n\nint main() {\n    // Create a new VM instance\n    djazair_vm* vm = djazair_new_vm();\n    \n    // Execute a script"}, {"title": "FAQ", "path": "docs/faq.html", "description": "Frequently Asked Questions about Djazair syntax, internals, and performance.", "text": "Frequently Asked Questions\n\n1. Is Djazair compiled or interpreted?\nDjazair features a hybrid design inspired by modern byte-oriented engines. The compiler parses your code, resolves scopes, compiles variables and functions into streamlined bytecode instruction chunks, and executes them on a fast vir"}]</script>
-    <style>
-        .feature-icon {
-            width: 48px; height: 48px;
-            display: flex; align-items: center; justify-content: center;
-            border-radius: 12px;
-            background: rgba(16, 185, 129, 0.1);
-            color: var(--color-primary);
-            font-size: 1.25rem;
-            margin-bottom: 1rem;
-            transition: all 0.3s ease;
-        }
-        .feature-card:hover .feature-icon {
-            background: var(--color-primary);
-            color: #fff;
-            transform: scale(1.05) translateY(-1px);
-            box-shadow: 0 4px 14px rgba(16, 185, 129, 0.3);
-        }
-        .feature-card {
-            opacity: 0;
-            transform: translateY(24px);
-            transition: opacity 0.5s ease, transform 0.5s ease;
-        }
-        .feature-card.reveal {
-            opacity: 1;
-            transform: translateY(0);
-        }
-        .hero-section {
-            animation: fadeInDown 0.6s ease;
-        }
-        @keyframes fadeInDown {
-            from { opacity: 0; transform: translateY(-20px); }
-            to   { opacity: 1; transform: translateY(0); }
-        }
-        .search-container { position: relative; }
-        #search-results {
-            position: absolute; top: calc(100% + 8px); right: 0; width: 380px;
-            max-height: 400px; overflow-y: auto;
-            background: var(--bg-card); border: 1px solid var(--border-color);
-            border-radius: 12px; box-shadow: 0 8px 32px rgba(0,0,0,0.4);
-            display: none; z-index: 200;
-        }
-        #search-results.show { display: block; }
-        #search-results .result-item {
-            display: block; padding: 0.75rem 1rem; border-bottom: 1px solid var(--border-color);
-            color: var(--text-primary); text-decoration: none; transition: background 0.15s;
-        }
-        #search-results .result-item:last-child { border-bottom: none; }
-        #search-results .result-item:hover { background: rgba(16,185,129,0.08); }
-        #search-results .result-item .result-title { font-weight: 600; font-size: 0.9rem; }
-        #search-results .result-item .result-desc { color: var(--text-muted); font-size: 0.8rem; margin-top: 2px; }
-        #search-results .result-empty { padding: 1.5rem; text-align: center; color: var(--text-muted); font-size: 0.9rem; }
-        .pre-wrapper { position: relative; }
-        .copy-btn {
-            position: absolute; top: 8px; right: 8px;
-            background: rgba(255,255,255,0.06); border: 1px solid var(--border-color);
-            color: var(--text-secondary); border-radius: 6px; padding: 4px 10px;
-            font-size: 0.75rem; cursor: pointer; opacity: 0;
-            transition: opacity 0.2s, background 0.2s;
-        }
-        .pre-wrapper:hover .copy-btn { opacity: 1; }
-        .copy-btn:hover { background: var(--color-primary); color: #fff; border-color: var(--color-primary); }
-        .copy-btn.copied { background: var(--color-primary); color: #fff; border-color: var(--color-primary); }
-        .toc-links li.active a { color: var(--color-primary); font-weight: 600; }
-    </style>
+    <script id="search-index-data" type="application/json">[{"title": "Installation", "path": "docs/getting-started/installation", "description": "Install and build Djazair from source code on Windows, Linux, and macOS.", "text": "Installing Djazair\nDjazair is built to compile cleanly on Linux, macOS, and Windows. It relies on standard compiler environments and has minimal external dependencies.\n\nLinux & macOS Compilation\nEnsure you have GCC or Clang and make installed. Open a terminal and run the following commands:\n# Clone "}, {"title": "First Program", "path": "docs/getting-started/first-program", "description": "Write and run your very first hello world program in Djazair.", "text": "Your First Djazair Program\nIn this guide, we will write, structure, and run our very first program in Djazair.\n\nWriting the Script\nCreate a file named hello.dz in your preferred editor. Paste the following line of code into it:\n# Hello world in Djazair\nprint(\"Hello from Djazair!\")\n\n\nRunning the Scri"}, {"title": "Running Programs", "path": "docs/getting-started/running-programs", "description": "Learn the various CLI commands to execute your scripts inline or via files.", "text": "Running Djazair Scripts\nThe Djazair interpreter offers a command-line interface (CLI) to execute code, check versions, and configure file paths.\n\nCLI Usage\nThe general syntax of the interpreter CLI is:\ndjazair [options] [script_file.dz] [arguments...]\n\nAvailable Options\n\n    \n        \n            Op"}, {"title": "Comments", "path": "docs/language-guide/comments", "description": "Learn how to document your Djazair code with single and multi-line comments.", "text": "Comments\nComments are text entries ignored by the compiler, used to document structures and write explanations.\n\nSingle-line Comments\nSingle-line comments start with a hash character (#). Everything following the # on that line is ignored:\n# Declare a score variable\nlet score = 100 # Inline comment "}, {"title": "Variables", "path": "docs/language-guide/variables", "description": "Declare variables with let and understand lexical block scoping.", "text": "Variables & Scope\nVariables store values. Djazair is dynamically typed, meaning variables can hold any type of value and change types over time.\n\nDeclaration\nDeclare variables using let:\nlet username = \"Riyadh\"\nlet age = 30\nlet balance = 200.50\n\n# Reassignment\nbalance = 450.75\n\n\nScoping Rules\nDjazai"}, {"title": "Data Types", "path": "docs/language-guide/data-types", "description": "Understand primitive and object types, dynamic typing, and memory model.", "text": "Data Types\nDjazair features a rich set of built-in data types. It uses dynamic typing, but every value has a concrete runtime type.\n\nSummary of Types\n\n    \n        \n            Type\n            Sample Literals\n            Description\n        \n    \n    \n        \n            Number\n            42, 3.1"}, {"title": "Input & Output", "path": "docs/language-guide/input-output", "description": "Console output, user input, and string formatting in Djazair.", "text": "Input & Output\nDjazair provides built-in functions for console output and user input.\n\nConsole Output\nUse print() to output values to stdout. It accepts multiple arguments separated by spaces:\nprint(\"Hello World\")\nprint(\"The answer is\", 42)\nprint(\"Value:\", True, Null, [1, 2])\n\n\nString Interpolation\n"}, {"title": "Operators", "path": "docs/language-guide/operators", "description": "Examine mathematical, comparison, logical, assignment, and membership operators.", "text": "Operators Reference\nDjazair provides standard arithmetic, comparison, logical, bitwise, assignment, increment/decrement, and identity operators.\n\nArithmetic Operators\nBasic mathematical calculations:\nlet sum = 10 + 5    # Addition => 15\nlet diff = 10 - 5   # Subtraction => 5\nlet prod = 10 * 5   # Mu"}, {"title": "Conditions", "path": "docs/language-guide/conditions", "description": "Control execution flow using if-elif-else statements and ternary expressions.", "text": "Conditions (If-Else & Match)\nControl flow structures let your script make decisions depending on boolean expressions or value patterns.\n\nIf, Elif, Else\nThe conditional syntax uses if, elif, else, and concludes with the end keyword:\nlet score = 85\n\nif score >= 90\n    print(\"Grade: A\")\nelif score >= 8"}, {"title": "Loops", "path": "docs/language-guide/loops", "description": "Write loops using while, do-while, and for-in iterators over collections and ranges.", "text": "Loops\nPerform repeated executions using while, do-while, and for-in constructs.\n\nWhile Loop\nRuns as long as a boolean expression evaluates to True:\nlet i = 1\nwhile i \n\nDo-While Loop\nExecutes the body block at least once, then continues while the condition matches:\nlet x = 10\ndo\n    print(\"Runs at le"}, {"title": "Arrays", "path": "docs/language-guide/arrays", "description": "Create dynamic lists and manipulate them using standard array methods.", "text": "Arrays\nArrays are dynamic, ordered lists. They can hold mixed data types, resize automatically, and feature an extensive collection of utility methods.\n\nInstantiation\nlet list = [10, \"apple\", True, [3, 4]]\nprint(list[0])    # => 10\nprint(list[3][1]) # => 4\n\n\nFull Methods Catalog\n\n    \n        \n     "}, {"title": "Strings", "path": "docs/language-guide/strings", "description": "Learn string interpolation, multi-line blocks, and comprehensive string methods.", "text": "Strings\nDjazair Strings are immutable, UTF-8 encoded, and packed with formatting, trimming, and searching APIs.\n\nString Literals\nUse double quotes for standard strings. Strings support variable interpolation using ${expression}:\nlet user = \"Riyadh\"\nlet greet = \"Hello, ${user}! The time is ${getLine("}, {"title": "Maps", "path": "docs/language-guide/maps", "description": "Create and manipulate key-value hash maps with built-in methods.", "text": "Maps\nMaps (dictionaries) are unordered key-value hash tables. Keys can be any type.\n\nCreating Maps\nlet empty = {}\nlet user = {\"name\": \"Riad\", \"age\": 30, \"active\": True}\nprint(user[\"name\"])  # => Riad\n\n\nMap Methods\n\n    MethodDescription\n    \n        length()Number of entries\n        keys()Array of k"}, {"title": "Functions", "path": "docs/language-guide/functions", "description": "Write reusable code blocks, closures, arrow functions, and default arguments.", "text": "Functions\nFunctions are declared using the fn keyword and terminated with end. They are first-class citizen objects in Djazair.\n\nStandard Declaration\nfn calculateSum(a, b)\n    return a + b\nend\n\nprint(calculateSum(10, 20)) # => 30\n\n\nDefault Arguments\nDjazair allows function parameters to have default"}, {"title": "Modules", "path": "docs/language-guide/modules", "description": "Import files and use native modules to organize codebases cleanly.", "text": "Modules & Imports\nOrganize and scale your application by breaking it down into discrete script files or leveraging standard libraries.\n\nLocal Files (import)\nImport local script files using the import keyword. You can assign a namespace or use wildcard imports:\n# main.dz\nimport \"utils.dz\" as utils   "}, {"title": "Classes", "path": "docs/language-guide/classes", "description": "Develop using Object-Oriented paradigms: classes, inheritance, super, and self.", "text": "Classes & OOP\nDjazair implements fully featured Object-Oriented programming including classes, constructors, methods, and single inheritance.\n\nClass Declaration\nDeclare classes, instantiate objects, and refer to properties inside methods via the self prefix:\nclass User\n    init(name, email)\n        "}, {"title": "Error Handling", "path": "docs/language-guide/error-handling", "description": "Handle runtime issues gracefully using try-catch-finally blocks and throw statements.", "text": "Error Handling\nRuntime faults are caught and mitigated gracefully via structured exception blocks.\n\nTry-Catch-Finally Blocks\nThe error handling block uses try, catch [variable], finally, and finishes with end:\ntry\n    let num = 1 / 0\ncatch error\n    print(\"Caught an error: \" + str(error))\nfinally\n  "}, {"title": "Async / Await", "path": "docs/language-guide/async-await", "description": "Concurrent programming with coroutines using async and await.", "text": "Async / Await\nDjazair supports coroutine-based concurrency using async fn and await.\n\nAsync Functions\nDeclare with async fn. They return a coroutine instead of executing immediately:\nasync fn fetchData()\n    # Simulate async work\n    return 42\nend\n\nlet task = fetchData()\nprint(task)  # Coroutine obj"}, {"title": "Overview", "path": "docs/standard-library/", "description": "A comprehensive index of all standard library modules.", "text": ""}, {"title": "assert Module", "path": "docs/standard-library/assert", "description": "Debugging and unit-testing assertion functions for validating values.", "text": ""}, {"title": "bytes Module", "path": "docs/standard-library/bytes", "description": "Binary data manipulation and conversion utilities.", "text": ""}, {"title": "collections Module", "path": "docs/standard-library/collections", "description": "Specialized container data types beyond built-in Array and Map.", "text": ""}, {"title": "crypto Module", "path": "docs/standard-library/crypto", "description": "Cryptographic hashing algorithms (SHA-256, etc.) and HMAC operations.", "text": ""}, {"title": "datetime Module", "path": "docs/standard-library/datetime", "description": "Date, time, and timezone manipulation functions and the Date class.", "text": ""}, {"title": "dir Module", "path": "docs/standard-library/dir", "description": "Directory traversal, creation, removal, and listing operations.", "text": ""}, {"title": "env Module", "path": "docs/standard-library/env", "description": "Access and manipulate environment variables at runtime.", "text": ""}, {"title": "file Module", "path": "docs/standard-library/file", "description": "File reading, writing, manipulation, and status query operations.", "text": ""}, {"title": "http Module", "path": "docs/standard-library/http", "description": "HTTP client and server implementations for web communication.", "text": ""}, {"title": "json Module", "path": "docs/standard-library/json", "description": "JSON parsing and stringification for data interchange.", "text": ""}, {"title": "lang Module", "path": "docs/standard-library/lang", "description": "Runtime introspection, control, and library path management.", "text": ""}, {"title": "math Module", "path": "docs/standard-library/math", "description": "Mathematical constants, trigonometry, exponentiation, and statistics.", "text": ""}, {"title": "net Module", "path": "docs/standard-library/net", "description": "TCP networking: server and client classes for socket communication.", "text": ""}, {"title": "os Module", "path": "docs/standard-library/os", "description": "Platform detection, system information, and user/temp file paths.", "text": ""}, {"title": "path Module", "path": "docs/standard-library/path", "description": "Cross-platform path joining, resolution, decomposition, and security checks.", "text": ""}, {"title": "process Module", "path": "docs/standard-library/process", "description": "Process identification, control, working directory, CLI args, and command execution.", "text": ""}, {"title": "random Module", "path": "docs/standard-library/random", "description": "Random number generation and sampling utilities.", "text": ""}, {"title": "regex Module", "path": "docs/standard-library/regex", "description": "Regular expression pattern matching, search, and replace operations.", "text": ""}, {"title": "thread Module", "path": "docs/standard-library/thread", "description": "Parallel execution via threads, workers, and synchronization.", "text": ""}, {"title": "uuid Module", "path": "docs/standard-library/uuid", "description": "Generate universally unique identifiers (UUID v4).", "text": ""}, {"title": "Hello World", "path": "docs/examples/hello-world", "description": "Standard hello world code snippet and explanation.", "text": "Example: Hello World\nA simple printing execution showing standard Djazair outputs:\n# The hello world program\nprint(\"Hello World from Djazair!\")\n\nHow it Works\nThe code uses the global built-in print() function to write text streams directly to the terminal stdout. Lines starting with # represent sing"}, {"title": "Calculator", "path": "docs/examples/calculator", "description": "Implement a fully featured command-line calculator in Djazair.", "text": "Example: Calculator\nAn interactive command line calculator script:\nprint(\"--- Djazair CLI Calculator ---\")\nprint(\"Enter calculation mode or type 'exit' to quit.\")\n\nwhile True\n    let inputStr = input(\"calc> \")\n    if inputStr == \"exit\"\n        break\n    end\n    \n    # Simple evaluation split\n    let"}, {"title": "Todo App", "path": "docs/examples/todo-app", "description": "A console Todo tracker demonstrating list manipulation and file persistence.", "text": "Example: Todo Application\nA terminal Todo list manager featuring file persistence:\nuse file\nuse json\n\nlet todoFile = \"todos.json\"\nlet todos = []\n\nif file.exists(todoFile)\n    todos = json.parse(file.read(todoFile))\nend\n\nfn saveTodos()\n    file.write(todoFile, json.stringify(todos))\nend\n\nwhile True\n "}, {"title": "File Processing", "path": "docs/examples/file-processing", "description": "Read files line-by-line, parse data structures, and output logs.", "text": "Example: File Processing\nA script that parses a log file and extracts formatted records:\nuse file\nuse regex\n\nlet logFile = \"app.log\"\nif not file.exists(logFile)\n    # Seed dummy log\n    file.write(logFile, \"[INFO] Started\\n[ERROR] DB Connection failed\\n[INFO] Retrying\\n\")\nend\n\nlet pattern = regex.co"}, {"title": "Keywords", "path": "docs/reference/keywords", "description": "Complete list of reserved keywords in the Djazair language.", "text": ""}, {"title": "Operators", "path": "docs/reference/operators", "description": "Arithmetic, comparison, logical, bitwise, and other operators.", "text": ""}, {"title": "Built-in Functions", "path": "docs/reference/builtins", "description": "Globally available functions for type conversion, I/O, and utilities.", "text": ""}, {"title": "Methods", "path": "docs/reference/methods", "description": "Built-in methods on Strings, Arrays, and Maps.", "text": ""}, {"title": "Syntax Reference", "path": "docs/reference/syntax-reference", "description": "Formal grammar and syntax rules of the Djazair language.", "text": ""}, {"title": "Embedding API", "path": "docs/reference/embedding", "description": "C/C++ API for embedding Djazair in applications.", "text": "Embedding Djazair in C/C++\nDjazair is designed to be easily embedded into C/C++ applications via a single header djazair.h.\n\nMinimal Example\n#include \"djazair.h\"\n#include &lt;stdio.h&gt;\n\nint main() {\n    // Create a new VM instance\n    djazair_vm* vm = djazair_new_vm();\n    \n    // Execute a script"}, {"title": "FAQ", "path": "docs/faq", "description": "Frequently Asked Questions about Djazair syntax, internals, and performance.", "text": "Frequently Asked Questions\n\n1. Is Djazair compiled or interpreted?\nDjazair features a hybrid design inspired by modern byte-oriented engines. The compiler parses your code, resolves scopes, compiles variables and functions into streamlined bytecode instruction chunks, and executes them on a fast vir"}]</script>
 </head>
 <body>
     <header>
@@ -93,13 +29,13 @@
             <div class="logo-version">v1.0.5</div>
         </div>
         <nav class="top-nav">
-            <a href="../../index.html" >Home</a>
-            <a href="../../docs/getting-started/installation.html" >Getting Started</a>
-            <a href="../../docs/language-guide/comments.html" class="active">Language Guide</a>
-            <a href="../../docs/standard-library/index.html" >Std Library</a>
-            <a href="../../docs/examples/hello-world.html" >Examples</a>
-            <a href="../../docs/reference/keywords.html" >Reference</a>
-            <a href="../../docs/faq.html" >FAQ</a>
+            <a href="../../" >Home</a>
+            <a href="../../docs/getting-started/installation" >Getting Started</a>
+            <a href="../../docs/language-guide/comments" class="active">Language Guide</a>
+            <a href="../../docs/standard-library/" >Std Library</a>
+            <a href="../../docs/examples/hello-world" >Examples</a>
+            <a href="../../docs/reference/keywords" >Reference</a>
+            <a href="../../docs/faq" >FAQ</a>
         </nav>
         <div class="search-container">
             <span class="search-icon">🔍</span>
@@ -111,162 +47,161 @@
     <div class="app-container">
         <aside class="sidebar">
             <div class="sidebar-section">
-  <div class="sidebar-title">Getting Started</div>
-  <ul class="sidebar-links">
-    <li><a href="../../docs/index.html" >Docs Home</a></li>
-    <li><a href="../../docs/getting-started/installation.html" >Installation</a></li>
-    <li><a href="../../docs/getting-started/first-program.html" >First Program</a></li>
-    <li><a href="../../docs/getting-started/running-programs.html" >Running Programs</a></li>
+  <div class="sidebar-title" onclick="toggleSection(this)">Getting Started <span class="arrow">v</span></div>
+  <ul class="sidebar-links" data-expanded="true">
+    <li><a href="../../docs/getting-started/installation" >Installation</a></li>
+    <li><a href="../../docs/getting-started/first-program" >First Program</a></li>
+    <li><a href="../../docs/getting-started/running-programs" >Running Programs</a></li>
   </ul>
 </div>
 <div class="sidebar-section">
-  <div class="sidebar-title">Language Guide</div>
-  <ul class="sidebar-links">
-    <li><a href="../../docs/language-guide/comments.html" >Comments</a></li>
-    <li><a href="../../docs/language-guide/variables.html" >Variables</a></li>
-    <li><a href="../../docs/language-guide/data-types.html" >Data Types</a></li>
-    <li><a href="../../docs/language-guide/input-output.html" >Input & Output</a></li>
-    <li><a href="../../docs/language-guide/operators.html" >Operators</a></li>
-    <li><a href="../../docs/language-guide/conditions.html" >Conditions</a></li>
-    <li><a href="../../docs/language-guide/loops.html" >Loops</a></li>
-    <li><a href="../../docs/language-guide/arrays.html" class="active">Arrays</a></li>
-    <li><a href="../../docs/language-guide/strings.html" >Strings</a></li>
-    <li><a href="../../docs/language-guide/maps.html" >Maps</a></li>
-    <li><a href="../../docs/language-guide/functions.html" >Functions</a></li>
-    <li><a href="../../docs/language-guide/modules.html" >Modules</a></li>
-    <li><a href="../../docs/language-guide/classes.html" >Classes</a></li>
-    <li><a href="../../docs/language-guide/error-handling.html" >Error Handling</a></li>
-    <li><a href="../../docs/language-guide/async-await.html" >Async / Await</a></li>
+  <div class="sidebar-title" onclick="toggleSection(this)">Language Guide <span class="arrow">v</span></div>
+  <ul class="sidebar-links" data-expanded="true">
+    <li><a href="../../docs/language-guide/comments" >Comments</a></li>
+    <li><a href="../../docs/language-guide/variables" >Variables</a></li>
+    <li><a href="../../docs/language-guide/data-types" >Data Types</a></li>
+    <li><a href="../../docs/language-guide/input-output" >Input & Output</a></li>
+    <li><a href="../../docs/language-guide/operators" >Operators</a></li>
+    <li><a href="../../docs/language-guide/conditions" >Conditions</a></li>
+    <li><a href="../../docs/language-guide/loops" >Loops</a></li>
+    <li><a href="../../docs/language-guide/arrays" class="active">Arrays</a></li>
+    <li><a href="../../docs/language-guide/strings" >Strings</a></li>
+    <li><a href="../../docs/language-guide/maps" >Maps</a></li>
+    <li><a href="../../docs/language-guide/functions" >Functions</a></li>
+    <li><a href="../../docs/language-guide/modules" >Modules</a></li>
+    <li><a href="../../docs/language-guide/classes" >Classes</a></li>
+    <li><a href="../../docs/language-guide/error-handling" >Error Handling</a></li>
+    <li><a href="../../docs/language-guide/async-await" >Async / Await</a></li>
   </ul>
 </div>
 <div class="sidebar-section">
-  <div class="sidebar-title">Standard Library</div>
-  <ul class="sidebar-links">
-    <li><a href="../../docs/standard-library/index.html" >Overview</a></li>
-    <li class="has-submenu"><a href="../../docs/standard-library/assert.html" class="submenu-toggle" onclick="toggleSubmenu(event, this)">assert Module <span class="arrow">></span></a>
+  <div class="sidebar-title" onclick="toggleSection(this)">Standard Library <span class="arrow">v</span></div>
+  <ul class="sidebar-links" data-expanded="true">
+    <li><a href="../../docs/standard-library/" >Overview</a></li>
+    <li class="has-submenu"><a href="../../docs/standard-library/assert" class="submenu-toggle" onclick="toggleSubmenu(event, this)">assert Module <span class="arrow">></span></a>
       <ul class="submenu" data-expanded="false">
-        <li><a href="../../docs/standard-library/assert.html#truthiness-assertions" class="sub-link">Truthiness Assertions</a></li>
-        <li><a href="../../docs/standard-library/assert.html#value-assertions" class="sub-link">Value Assertions</a></li>
-        <li><a href="../../docs/standard-library/assert.html#type-assertions" class="sub-link">Type Assertions</a></li>
+        <li><a href="../../docs/standard-library/assert#truthiness-assertions" class="sub-link">Truthiness Assertions</a></li>
+        <li><a href="../../docs/standard-library/assert#value-assertions" class="sub-link">Value Assertions</a></li>
+        <li><a href="../../docs/standard-library/assert#type-assertions" class="sub-link">Type Assertions</a></li>
       </ul>
     </li>
-    <li class="has-submenu"><a href="../../docs/standard-library/bytes.html" class="submenu-toggle" onclick="toggleSubmenu(event, this)">bytes Module <span class="arrow">></span></a>
+    <li class="has-submenu"><a href="../../docs/standard-library/bytes" class="submenu-toggle" onclick="toggleSubmenu(event, this)">bytes Module <span class="arrow">></span></a>
       <ul class="submenu" data-expanded="false">
-        <li><a href="../../docs/standard-library/bytes.html#creation--conversion" class="sub-link">Creation & Conversion</a></li>
-        <li><a href="../../docs/standard-library/bytes.html#manipulation" class="sub-link">Manipulation</a></li>
+        <li><a href="../../docs/standard-library/bytes#creation--conversion" class="sub-link">Creation & Conversion</a></li>
+        <li><a href="../../docs/standard-library/bytes#manipulation" class="sub-link">Manipulation</a></li>
       </ul>
     </li>
-    <li><a href="../../docs/standard-library/collections.html" >collections Module</a></li>
-    <li><a href="../../docs/standard-library/crypto.html" >crypto Module</a></li>
-    <li class="has-submenu"><a href="../../docs/standard-library/datetime.html" class="submenu-toggle" onclick="toggleSubmenu(event, this)">datetime Module <span class="arrow">></span></a>
+    <li><a href="../../docs/standard-library/collections" >collections Module</a></li>
+    <li><a href="../../docs/standard-library/crypto" >crypto Module</a></li>
+    <li class="has-submenu"><a href="../../docs/standard-library/datetime" class="submenu-toggle" onclick="toggleSubmenu(event, this)">datetime Module <span class="arrow">></span></a>
       <ul class="submenu" data-expanded="false">
-        <li><a href="../../docs/standard-library/datetime.html#time-functions" class="sub-link">Time Functions</a></li>
-        <li><a href="../../docs/standard-library/datetime.html#date-class" class="sub-link">Date Class</a></li>
+        <li><a href="../../docs/standard-library/datetime#time-functions" class="sub-link">Time Functions</a></li>
+        <li><a href="../../docs/standard-library/datetime#date-class" class="sub-link">Date Class</a></li>
       </ul>
     </li>
-    <li><a href="../../docs/standard-library/dir.html" >dir Module</a></li>
-    <li><a href="../../docs/standard-library/env.html" >env Module</a></li>
-    <li class="has-submenu"><a href="../../docs/standard-library/file.html" class="submenu-toggle" onclick="toggleSubmenu(event, this)">file Module <span class="arrow">></span></a>
+    <li><a href="../../docs/standard-library/dir" >dir Module</a></li>
+    <li><a href="../../docs/standard-library/env" >env Module</a></li>
+    <li class="has-submenu"><a href="../../docs/standard-library/file" class="submenu-toggle" onclick="toggleSubmenu(event, this)">file Module <span class="arrow">></span></a>
       <ul class="submenu" data-expanded="false">
-        <li><a href="../../docs/standard-library/file.html#read--write-operations" class="sub-link">Read & Write</a></li>
-        <li><a href="../../docs/standard-library/file.html#file-manipulation" class="sub-link">File Manipulation</a></li>
-        <li><a href="../../docs/standard-library/file.html#status-query" class="sub-link">Status Query</a></li>
+        <li><a href="../../docs/standard-library/file#read--write-operations" class="sub-link">Read & Write</a></li>
+        <li><a href="../../docs/standard-library/file#file-manipulation" class="sub-link">File Manipulation</a></li>
+        <li><a href="../../docs/standard-library/file#status-query" class="sub-link">Status Query</a></li>
       </ul>
     </li>
-    <li class="has-submenu"><a href="../../docs/standard-library/http.html" class="submenu-toggle" onclick="toggleSubmenu(event, this)">http Module <span class="arrow">></span></a>
+    <li class="has-submenu"><a href="../../docs/standard-library/http" class="submenu-toggle" onclick="toggleSubmenu(event, this)">http Module <span class="arrow">></span></a>
       <ul class="submenu" data-expanded="false">
-        <li><a href="../../docs/standard-library/http.html#http-client" class="sub-link">HTTP Client</a></li>
-        <li><a href="../../docs/standard-library/http.html#http-server" class="sub-link">HTTP Server</a></li>
-        <li><a href="../../docs/standard-library/http.html#classes--helpers" class="sub-link">Classes & Helpers</a></li>
+        <li><a href="../../docs/standard-library/http#http-client" class="sub-link">HTTP Client</a></li>
+        <li><a href="../../docs/standard-library/http#http-server" class="sub-link">HTTP Server</a></li>
+        <li><a href="../../docs/standard-library/http#classes--helpers" class="sub-link">Classes & Helpers</a></li>
       </ul>
     </li>
-    <li><a href="../../docs/standard-library/json.html" >json Module</a></li>
-    <li class="has-submenu"><a href="../../docs/standard-library/lang.html" class="submenu-toggle" onclick="toggleSubmenu(event, this)">lang Module <span class="arrow">></span></a>
+    <li><a href="../../docs/standard-library/json" >json Module</a></li>
+    <li class="has-submenu"><a href="../../docs/standard-library/lang" class="submenu-toggle" onclick="toggleSubmenu(event, this)">lang Module <span class="arrow">></span></a>
       <ul class="submenu" data-expanded="false">
-        <li><a href="../../docs/standard-library/lang.html#runtime-info" class="sub-link">Runtime Info</a></li>
-        <li><a href="../../docs/standard-library/lang.html#control" class="sub-link">Control</a></li>
-        <li><a href="../../docs/standard-library/lang.html#introspection" class="sub-link">Introspection</a></li>
-        <li><a href="../../docs/standard-library/lang.html#library-paths--queries" class="sub-link">Library Paths</a></li>
+        <li><a href="../../docs/standard-library/lang#runtime-info" class="sub-link">Runtime Info</a></li>
+        <li><a href="../../docs/standard-library/lang#control" class="sub-link">Control</a></li>
+        <li><a href="../../docs/standard-library/lang#introspection" class="sub-link">Introspection</a></li>
+        <li><a href="../../docs/standard-library/lang#library-paths--queries" class="sub-link">Library Paths</a></li>
       </ul>
     </li>
-    <li class="has-submenu"><a href="../../docs/standard-library/math.html" class="submenu-toggle" onclick="toggleSubmenu(event, this)">math Module <span class="arrow">></span></a>
+    <li class="has-submenu"><a href="../../docs/standard-library/math" class="submenu-toggle" onclick="toggleSubmenu(event, this)">math Module <span class="arrow">></span></a>
       <ul class="submenu" data-expanded="false">
-        <li><a href="../../docs/standard-library/math.html#constants" class="sub-link">Constants</a></li>
-        <li><a href="../../docs/standard-library/math.html#trigonometry" class="sub-link">Trigonometry</a></li>
-        <li><a href="../../docs/standard-library/math.html#exponentiation--logs" class="sub-link">Exponentiation & Logs</a></li>
-        <li><a href="../../docs/standard-library/math.html#rounding--absolute" class="sub-link">Rounding</a></li>
-        <li><a href="../../docs/standard-library/math.html#comparison--statistics" class="sub-link">Statistics</a></li>
+        <li><a href="../../docs/standard-library/math#constants" class="sub-link">Constants</a></li>
+        <li><a href="../../docs/standard-library/math#trigonometry" class="sub-link">Trigonometry</a></li>
+        <li><a href="../../docs/standard-library/math#exponentiation--logs" class="sub-link">Exponentiation & Logs</a></li>
+        <li><a href="../../docs/standard-library/math#rounding--absolute" class="sub-link">Rounding</a></li>
+        <li><a href="../../docs/standard-library/math#comparison--statistics" class="sub-link">Statistics</a></li>
       </ul>
     </li>
-    <li class="has-submenu"><a href="../../docs/standard-library/net.html" class="submenu-toggle" onclick="toggleSubmenu(event, this)">net Module <span class="arrow">></span></a>
+    <li class="has-submenu"><a href="../../docs/standard-library/net" class="submenu-toggle" onclick="toggleSubmenu(event, this)">net Module <span class="arrow">></span></a>
       <ul class="submenu" data-expanded="false">
-        <li><a href="../../docs/standard-library/net.html#classes--exports" class="sub-link">Classes & Exports</a></li>
-        <li><a href="../../docs/standard-library/net.html#tcp-server-example" class="sub-link">TCP Server</a></li>
-        <li><a href="../../docs/standard-library/net.html#tcp-client-example" class="sub-link">TCP Client</a></li>
+        <li><a href="../../docs/standard-library/net#classes--exports" class="sub-link">Classes & Exports</a></li>
+        <li><a href="../../docs/standard-library/net#tcp-server-example" class="sub-link">TCP Server</a></li>
+        <li><a href="../../docs/standard-library/net#tcp-client-example" class="sub-link">TCP Client</a></li>
       </ul>
     </li>
-    <li class="has-submenu"><a href="../../docs/standard-library/os.html" class="submenu-toggle" onclick="toggleSubmenu(event, this)">os Module <span class="arrow">></span></a>
+    <li class="has-submenu"><a href="../../docs/standard-library/os" class="submenu-toggle" onclick="toggleSubmenu(event, this)">os Module <span class="arrow">></span></a>
       <ul class="submenu" data-expanded="false">
-        <li><a href="../../docs/standard-library/os.html#platform-detection" class="sub-link">Platform Detection</a></li>
-        <li><a href="../../docs/standard-library/os.html#system-information" class="sub-link">System Information</a></li>
-        <li><a href="../../docs/standard-library/os.html#user--temporary-files" class="sub-link">User & Temp Files</a></li>
+        <li><a href="../../docs/standard-library/os#platform-detection" class="sub-link">Platform Detection</a></li>
+        <li><a href="../../docs/standard-library/os#system-information" class="sub-link">System Information</a></li>
+        <li><a href="../../docs/standard-library/os#user--temporary-files" class="sub-link">User & Temp Files</a></li>
       </ul>
     </li>
-    <li class="has-submenu"><a href="../../docs/standard-library/path.html" class="submenu-toggle" onclick="toggleSubmenu(event, this)">path Module <span class="arrow">></span></a>
+    <li class="has-submenu"><a href="../../docs/standard-library/path" class="submenu-toggle" onclick="toggleSubmenu(event, this)">path Module <span class="arrow">></span></a>
       <ul class="submenu" data-expanded="false">
-        <li><a href="../../docs/standard-library/path.html#constants" class="sub-link">Constants</a></li>
-        <li><a href="../../docs/standard-library/path.html#join--resolve" class="sub-link">Join & Resolve</a></li>
-        <li><a href="../../docs/standard-library/path.html#decomposition" class="sub-link">Decomposition</a></li>
-        <li><a href="../../docs/standard-library/path.html#query--security" class="sub-link">Query & Security</a></li>
+        <li><a href="../../docs/standard-library/path#constants" class="sub-link">Constants</a></li>
+        <li><a href="../../docs/standard-library/path#join--resolve" class="sub-link">Join & Resolve</a></li>
+        <li><a href="../../docs/standard-library/path#decomposition" class="sub-link">Decomposition</a></li>
+        <li><a href="../../docs/standard-library/path#query--security" class="sub-link">Query & Security</a></li>
       </ul>
     </li>
-    <li class="has-submenu"><a href="../../docs/standard-library/process.html" class="submenu-toggle" onclick="toggleSubmenu(event, this)">process Module <span class="arrow">></span></a>
+    <li class="has-submenu"><a href="../../docs/standard-library/process" class="submenu-toggle" onclick="toggleSubmenu(event, this)">process Module <span class="arrow">></span></a>
       <ul class="submenu" data-expanded="false">
-        <li><a href="../../docs/standard-library/process.html#process-identification" class="sub-link">Identification</a></li>
-        <li><a href="../../docs/standard-library/process.html#process-control" class="sub-link">Process Control</a></li>
-        <li><a href="../../docs/standard-library/process.html#working-directory" class="sub-link">Working Directory</a></li>
-        <li><a href="../../docs/standard-library/process.html#command-execution" class="sub-link">Command Execution</a></li>
-        <li><a href="../../docs/standard-library/process.html#cli-arguments--script-location" class="sub-link">CLI & Script</a></li>
-        <li><a href="../../docs/standard-library/process.html#asynchronous-spawning" class="sub-link">Async Spawning</a></li>
+        <li><a href="../../docs/standard-library/process#process-identification" class="sub-link">Identification</a></li>
+        <li><a href="../../docs/standard-library/process#process-control" class="sub-link">Process Control</a></li>
+        <li><a href="../../docs/standard-library/process#working-directory" class="sub-link">Working Directory</a></li>
+        <li><a href="../../docs/standard-library/process#command-execution" class="sub-link">Command Execution</a></li>
+        <li><a href="../../docs/standard-library/process#cli-arguments--script-location" class="sub-link">CLI & Script</a></li>
+        <li><a href="../../docs/standard-library/process#asynchronous-spawning" class="sub-link">Async Spawning</a></li>
       </ul>
     </li>
-    <li><a href="../../docs/standard-library/random.html" >random Module</a></li>
-    <li class="has-submenu"><a href="../../docs/standard-library/regex.html" class="submenu-toggle" onclick="toggleSubmenu(event, this)">regex Module <span class="arrow">></span></a>
+    <li><a href="../../docs/standard-library/random" >random Module</a></li>
+    <li class="has-submenu"><a href="../../docs/standard-library/regex" class="submenu-toggle" onclick="toggleSubmenu(event, this)">regex Module <span class="arrow">></span></a>
       <ul class="submenu" data-expanded="false">
-        <li><a href="../../docs/standard-library/regex.html#flags" class="sub-link">Flags</a></li>
-        <li><a href="../../docs/standard-library/regex.html#pattern-class" class="sub-link">Pattern Class</a></li>
-        <li><a href="../../docs/standard-library/regex.html#match-class" class="sub-link">Match Class</a></li>
-        <li><a href="../../docs/standard-library/regex.html#convenience-functions" class="sub-link">Convenience Functions</a></li>
+        <li><a href="../../docs/standard-library/regex#flags" class="sub-link">Flags</a></li>
+        <li><a href="../../docs/standard-library/regex#pattern-class" class="sub-link">Pattern Class</a></li>
+        <li><a href="../../docs/standard-library/regex#match-class" class="sub-link">Match Class</a></li>
+        <li><a href="../../docs/standard-library/regex#convenience-functions" class="sub-link">Convenience Functions</a></li>
       </ul>
     </li>
-    <li class="has-submenu"><a href="../../docs/standard-library/thread.html" class="submenu-toggle" onclick="toggleSubmenu(event, this)">thread Module <span class="arrow">></span></a>
+    <li class="has-submenu"><a href="../../docs/standard-library/thread" class="submenu-toggle" onclick="toggleSubmenu(event, this)">thread Module <span class="arrow">></span></a>
       <ul class="submenu" data-expanded="false">
-        <li><a href="../../docs/standard-library/thread.html#thread-class" class="sub-link">Thread Class</a></li>
-        <li><a href="../../docs/standard-library/thread.html#worker-side-functions" class="sub-link">Worker Functions</a></li>
-        <li><a href="../../docs/standard-library/thread.html#convenience-functions" class="sub-link">Convenience</a></li>
+        <li><a href="../../docs/standard-library/thread#thread-class" class="sub-link">Thread Class</a></li>
+        <li><a href="../../docs/standard-library/thread#worker-side-functions" class="sub-link">Worker Functions</a></li>
+        <li><a href="../../docs/standard-library/thread#convenience-functions" class="sub-link">Convenience</a></li>
       </ul>
     </li>
-    <li><a href="../../docs/standard-library/uuid.html" >uuid Module</a></li>
+    <li><a href="../../docs/standard-library/uuid" >uuid Module</a></li>
   </ul>
 </div>
 <div class="sidebar-section">
-  <div class="sidebar-title">Examples</div>
-  <ul class="sidebar-links">
-    <li><a href="../../docs/examples/hello-world.html" >Hello World</a></li>
-    <li><a href="../../docs/examples/calculator.html" >Calculator</a></li>
-    <li><a href="../../docs/examples/todo-app.html" >Todo App</a></li>
-    <li><a href="../../docs/examples/file-processing.html" >File Processing</a></li>
+  <div class="sidebar-title" onclick="toggleSection(this)">Examples <span class="arrow">v</span></div>
+  <ul class="sidebar-links" data-expanded="true">
+    <li><a href="../../docs/examples/hello-world" >Hello World</a></li>
+    <li><a href="../../docs/examples/calculator" >Calculator</a></li>
+    <li><a href="../../docs/examples/todo-app" >Todo App</a></li>
+    <li><a href="../../docs/examples/file-processing" >File Processing</a></li>
   </ul>
 </div>
 <div class="sidebar-section">
-  <div class="sidebar-title">Reference</div>
-  <ul class="sidebar-links">
-    <li><a href="../../docs/reference/keywords.html" >Keywords</a></li>
-    <li><a href="../../docs/reference/operators.html" >Operators</a></li>
-    <li><a href="../../docs/reference/builtins.html" >Built-in Functions</a></li>
-    <li><a href="../../docs/reference/methods.html" >Methods</a></li>
-    <li><a href="../../docs/reference/syntax-reference.html" >Syntax Reference</a></li>
-    <li><a href="../../docs/reference/embedding.html" >Embedding API</a></li>
+  <div class="sidebar-title" onclick="toggleSection(this)">Reference <span class="arrow">v</span></div>
+  <ul class="sidebar-links" data-expanded="true">
+    <li><a href="../../docs/reference/keywords" >Keywords</a></li>
+    <li><a href="../../docs/reference/operators" >Operators</a></li>
+    <li><a href="../../docs/reference/builtins" >Built-in Functions</a></li>
+    <li><a href="../../docs/reference/methods" >Methods</a></li>
+    <li><a href="../../docs/reference/syntax-reference" >Syntax Reference</a></li>
+    <li><a href="../../docs/reference/embedding" >Embedding API</a></li>
   </ul>
 </div>
         </aside>
@@ -274,7 +209,7 @@
         <main class="content-wrapper">
             <div class="content-body">
                 <div class="breadcrumbs">
-                    <a href="../../index.html">Home</a>
+                    <a href="../../">Home</a>
 <span class="separator">/</span>
 <span>Getting Started</span>
 <span class="separator">/</span>
@@ -353,12 +288,12 @@ arr<span class="op">.</span><span class="fn">sort</span>(<span class="kw">fn</sp
 
                 <div class="page-navigation">
                     
-            <a href="../../docs/language-guide/loops.html" class="nav-card">
+            <a href="../../docs/language-guide/loops" class="nav-card">
                 <span class="nav-label">Previous</span>
                 <span class="nav-title">Loops</span>
             </a>
             
-            <a href="../../docs/language-guide/strings.html" class="nav-card next">
+            <a href="../../docs/language-guide/strings" class="nav-card next">
                 <span class="nav-label">Next</span>
                 <span class="nav-title">Strings</span>
             </a>
@@ -384,6 +319,23 @@ arr<span class="op">.</span><span class="fn">sort</span>(<span class="kw">fn</sp
     </div>
 
     <script>
+        function toggleSubmenu(event, el) {
+            var li = el.closest("li.has-submenu");
+            var submenu = li.querySelector(".submenu");
+            var expanded = submenu.getAttribute("data-expanded") === "true";
+            submenu.setAttribute("data-expanded", !expanded);
+            var arrow = el.querySelector(".arrow");
+            if (arrow) arrow.textContent = expanded ? ">" : "v";
+            if (!expanded) event.preventDefault();
+        }
+        function toggleSection(el) {
+            var section = el.closest(".sidebar-section");
+            var list = section.querySelector(".sidebar-links");
+            var expanded = list.getAttribute("data-expanded") === "true";
+            list.setAttribute("data-expanded", !expanded);
+            var arrow = el.querySelector(".arrow");
+            if (arrow) arrow.textContent = expanded ? ">" : "v";
+        }
         document.addEventListener("DOMContentLoaded", function() {
             // --- Scroll-reveal for feature cards ---
             (function() {
@@ -399,6 +351,16 @@ arr<span class="op">.</span><span class="fn">sort</span>(<span class="kw">fn</sp
                 for (var i = 0; i < cards.length; i++) observer.observe(cards[i]);
             })();
 
+            // --- Sidebar section toggle ---
+            (function() {
+                document.querySelectorAll(".sidebar-links").forEach(function(sm) {
+                    if (sm.getAttribute("data-expanded") === "false") {
+                        var title = sm.closest(".sidebar-section").querySelector(".sidebar-title .arrow");
+                        if (title) title.textContent = ">";
+                    }
+                });
+            })();
+
             // --- Submenu arrow state ---
             (function() {
                 document.querySelectorAll(".has-submenu > a").forEach(function(el) {
@@ -411,26 +373,7 @@ arr<span class="op">.</span><span class="fn">sort</span>(<span class="kw">fn</sp
             })();
 
             // --- Code copy buttons ---
-            (function() {
-                document.querySelectorAll("pre > code").forEach(function(code) {
-                    var pre = code.parentElement;
-                    if (pre.classList.contains("pre-wrapper")) return;
-                    pre.classList.add("pre-wrapper");
-                    var btn = document.createElement("button");
-                    btn.className = "copy-btn";
-                    btn.textContent = "Copy";
-                    btn.setAttribute("aria-label", "Copy code to clipboard");
-                    btn.addEventListener("click", function() {
-                        var text = code.textContent;
-                        navigator.clipboard.writeText(text).then(function() {
-                            btn.textContent = "Copied!";
-                            btn.classList.add("copied");
-                            setTimeout(function() { btn.textContent = "Copy"; btn.classList.remove("copied"); }, 2000);
-                        });
-                    });
-                    pre.appendChild(btn);
-                });
-            })();
+            // (Handled by Monaco Editor)
 
             // --- Full-text search via Fuse.js (inline index, no fetch) ---
             (function() {
@@ -458,7 +401,7 @@ arr<span class="op">.</span><span class="fn">sort</span>(<span class="kw">fn</sp
                     } else {
                         for (var i = 0; i < Math.min(results.length, 10); i++) {
                             var r = results[i].item;
-                            html += '<a href="' + r.path + '" class="result-item">' +
+                            html += '<a href="../../' + r.path + '" class="result-item">' +
                                 '<div class="result-title">' + r.title + '</div>' +
                                 '<div class="result-desc">' + r.description + '</div>' +
                                 '</a>';
@@ -536,6 +479,148 @@ arr<span class="op">.</span><span class="fn">sort</span>(<span class="kw">fn</sp
             });
             btn.addEventListener("click", function() {
                 window.scrollTo({ top: 0, behavior: "smooth" });
+            });
+        })();
+
+        // --- Dynamic Syntax Highlighter & Copy Buttons ---
+        (function() {
+            var blocks = document.querySelectorAll("pre > code");
+            if (blocks.length === 0) return;
+            
+            function highlightDjazairCode(code, lang) {
+                var spec = [];
+                if (lang === 'c' || lang === 'cpp') {
+                    spec = [
+                        { type: 'comment', regex: /^\/\/[^\n]*/ },
+                        { type: 'comment', regex: /^\/\*[\s\S]*?\*\// },
+                        { type: 'str', regex: /^"(?:\\.|[^"\\])*"/ },
+                        { type: 'str', regex: /^'(?:\\.|[^'\\])*'/ },
+                        { type: 'nd', regex: /^#(?:include|define|undef|ifdef|ifndef|if|else|elif|endif|line|error|pragma)\b/ },
+                        { type: 'kw', regex: /^\b(?:const|double|float|int|long|short|signed|unsigned|void|char|struct|union|enum|typedef|auto|register|static|extern|volatile|inline|restrict|goto|break|return|continue|if|else|switch|case|default|for|do|while|sizeof|typeof|alignof|alignas|thread_local)\b/ },
+                        { type: 'fn', regex: /^[a-zA-Z_][a-zA-Z0-9_]*(?=\s*\()/ },
+                        { type: 'num', regex: /^\b\d+(?:\.\d+)?\b/ },
+                        { type: 'op', regex: /^[+\-*\/%&|^~<>!=?:@]+/ }
+                    ];
+                } else if (lang === 'shell' || lang === 'bash' || lang === 'sh') {
+                    spec = [
+                        { type: 'comment', regex: /^#[^\n]*/ },
+                        { type: 'str', regex: /^"(?:\\.|[^"\\])*"/ },
+                        { type: 'str', regex: /^'(?:\\.|[^'\\])*'/ },
+                        { type: 'kw', regex: /^\b(?:if|then|else|elif|fi|case|esac|for|while|until|do|done|in|function|local|return|exit)\b/ },
+                        { type: 'nd', regex: /^\b(?:echo|printf|cd|pwd|ls|cat|grep|sed|awk|git|make|sudo|chmod|cp|mv|rm|mkdir|rmdir)\b/ },
+                        { type: 'num', regex: /^\b\d+\b/ },
+                        { type: 'op', regex: /^[=<>!|&;]+/ }
+                    ];
+                } else if (lang === 'powershell') {
+                    spec = [
+                        { type: 'comment', regex: /^#[^\n]*/ },
+                        { type: 'str', regex: /^"(?:\\.|[^"\\])*"/ },
+                        { type: 'str', regex: /^'(?:\\.|[^'\\])*'/ },
+                        { type: 'kw', regex: /^\b(?:function|filter|workflow|param|begin|process|end|if|else|elseif|switch|foreach|for|while|do|until|break|continue|return|try|catch|finally|throw|trap)\b/i },
+                        { type: 'nd', regex: /^\b(?:Write-Host|Write-Output|Get-Item|Copy-Item|Remove-Item|Set-Location|Split-Path|Out-Null|Measure-Object)\b/i },
+                        { type: 'num', regex: /^\b\d+\b/ }
+                    ];
+                } else if (lang === 'json') {
+                    spec = [
+                        { type: 'kw', regex: /^"(?:\\.|[^"\\])*"(?=\s*:)/ },
+                        { type: 'str', regex: /^"(?:\\.|[^"\\])*"/ },
+                        { type: 'num', regex: /^\b\d+(?:\.\d+)?\b/ },
+                        { type: 'kw', regex: /^\b(?:true|false|null)\b/i }
+                    ];
+                } else { // Default to Djazair
+                    spec = [
+                        { type: 'comment', regex: /^#![\s\S]*?!#/ },
+                        { type: 'comment', regex: /^#[^\n]*/ },
+                        { type: 'str', regex: /^"(?:\\.|[^"\\])*"/ },
+                        { type: 'str', regex: /^`(?:\\.|[^`\\])*`/ },
+                        { type: 'kw', regex: /^\b(?:let|fn|return|class|init|super|self|is|instanceof|try|catch|finally|throw|if|elif|else|match|case|default|while|do|for|in|to|break|continue|and|or|not|Null|True|False|use|import|as|end|async|await|new)\b/ },
+                        { type: 'nd', regex: /^\b(?:print|input|type|str|num|bool|int|float|chr|ord|range|enumerate|zip|abs|round|exit|isNull|isString|isNumber|isBool|isArray|isMap|isFunction|isClass|isInstance|__native|hasNative|getFile|getDir|getLine)\b/ },
+                        { type: 'fn', regex: /^[a-zA-Z_][a-zA-Z0-9_]*(?=\s*\()/ },
+                        { type: 'num', regex: /^\b\d+(?:_\d+)*(?:\.\d+)?\b/ },
+                        { type: 'op', regex: /^[+\-*\/%&|^~<>!=.?:@#]+/ }
+                    ];
+                }
+
+                var html = '';
+                var idx = 0;
+                while (idx < code.length) {
+                    var match = null;
+                    for (var j = 0; j < spec.length; j++) {
+                        var res = spec[j].regex.exec(code.substring(idx));
+                        if (res) {
+                            match = { type: spec[j].type, val: res[0] };
+                            break;
+                        }
+                    }
+                    if (match) {
+                        var escaped = match.val.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+                        html += '<span class="' + match.type + '">' + escaped + '</span>';
+                        idx += match.val.length;
+                    } else {
+                        var c = code[idx];
+                        if (c === '&') html += '&amp;';
+                        else if (c === '<') html += '&lt;';
+                        else if (c === '>') html += '&gt;';
+                        else html += c;
+                        idx++;
+                    }
+                }
+                return html;
+            }
+
+            blocks.forEach(function(codeEl) {
+                var pre = codeEl.parentElement;
+                if (!pre || pre.closest(".lp-terminal")) return;
+                
+                var lang = "djazair";
+                for (var i = 0; i < pre.classList.length; i++) {
+                    var cls = pre.classList.item(i);
+                    if (cls === "bash" || cls === "sh") {
+                        lang = "shell";
+                        break;
+                    } else if (cls === "powershell") {
+                        lang = "powershell";
+                        break;
+                    } else if (cls === "c") {
+                        lang = "c";
+                        break;
+                    } else if (cls === "cpp") {
+                        lang = "cpp";
+                        break;
+                    } else if (cls === "text" || cls === "plaintext") {
+                        lang = "plaintext";
+                        break;
+                    } else if (cls === "json") {
+                        lang = "json";
+                        break;
+                    }
+                }
+                
+                var rawText = codeEl.textContent.trim();
+                var highlighted = highlightDjazairCode(rawText, lang);
+                codeEl.innerHTML = highlighted;
+                
+                var wrapper = document.createElement("div");
+                wrapper.className = "pre-wrapper";
+                
+                var btn = document.createElement("button");
+                btn.className = "copy-btn";
+                btn.textContent = "Copy";
+                btn.setAttribute("aria-label", "Copy code to clipboard");
+                btn.addEventListener("click", function() {
+                    navigator.clipboard.writeText(rawText).then(function() {
+                        btn.textContent = "Copied!";
+                        btn.classList.add("copied");
+                        setTimeout(function() {
+                            btn.textContent = "Copy";
+                            btn.classList.remove("copied");
+                        }, 2000);
+                    });
+                });
+                
+                pre.parentNode.insertBefore(wrapper, pre);
+                wrapper.appendChild(btn);
+                wrapper.appendChild(pre);
             });
         })();
     </script>

@@ -9,6 +9,22 @@ def get_root_prefix(file_path):
         return '../' * (len(parts) - 1)
     return ''
 
+# Helper to clean URLs to use extension-less paths (clean URLs)
+def clean_url(path):
+    if not path:
+        return path
+    parts = path.split('#')
+    url = parts[0]
+    hash_fragment = '#' + parts[1] if len(parts) > 1 else ''
+    
+    if url == 'index.html':
+        return '' + hash_fragment
+    if url.endswith('/index.html'):
+        return url[:-10] + hash_fragment
+    if url.endswith('.html'):
+        return url[:-5] + hash_fragment
+    return path
+
 # Custom syntax highlighter for code snippets
 def highlight_djazair(code):
     token_spec = [
@@ -82,70 +98,6 @@ LAYOUT = """<!DOCTYPE html>
     <link rel="stylesheet" href="{root_prefix}assets/style.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/7.0.0/fuse.min.js"></script>
     <script id="search-index-data" type="application/json">{search_index_json}</script>
-    <style>
-        .feature-icon {{
-            width: 48px; height: 48px;
-            display: flex; align-items: center; justify-content: center;
-            border-radius: 12px;
-            background: rgba(16, 185, 129, 0.1);
-            color: var(--color-primary);
-            font-size: 1.25rem;
-            margin-bottom: 1rem;
-            transition: all 0.3s ease;
-        }}
-        .feature-card:hover .feature-icon {{
-            background: var(--color-primary);
-            color: #fff;
-            transform: scale(1.05) translateY(-1px);
-            box-shadow: 0 4px 14px rgba(16, 185, 129, 0.3);
-        }}
-        .feature-card {{
-            opacity: 0;
-            transform: translateY(24px);
-            transition: opacity 0.5s ease, transform 0.5s ease;
-        }}
-        .feature-card.reveal {{
-            opacity: 1;
-            transform: translateY(0);
-        }}
-        .hero-section {{
-            animation: fadeInDown 0.6s ease;
-        }}
-        @keyframes fadeInDown {{
-            from {{ opacity: 0; transform: translateY(-20px); }}
-            to   {{ opacity: 1; transform: translateY(0); }}
-        }}
-        .search-container {{ position: relative; }}
-        #search-results {{
-            position: absolute; top: calc(100% + 8px); right: 0; width: 380px;
-            max-height: 400px; overflow-y: auto;
-            background: var(--bg-card); border: 1px solid var(--border-color);
-            border-radius: 12px; box-shadow: 0 8px 32px rgba(0,0,0,0.4);
-            display: none; z-index: 200;
-        }}
-        #search-results.show {{ display: block; }}
-        #search-results .result-item {{
-            display: block; padding: 0.75rem 1rem; border-bottom: 1px solid var(--border-color);
-            color: var(--text-primary); text-decoration: none; transition: background 0.15s;
-        }}
-        #search-results .result-item:last-child {{ border-bottom: none; }}
-        #search-results .result-item:hover {{ background: rgba(16,185,129,0.08); }}
-        #search-results .result-item .result-title {{ font-weight: 600; font-size: 0.9rem; }}
-        #search-results .result-item .result-desc {{ color: var(--text-muted); font-size: 0.8rem; margin-top: 2px; }}
-        #search-results .result-empty {{ padding: 1.5rem; text-align: center; color: var(--text-muted); font-size: 0.9rem; }}
-        .pre-wrapper {{ position: relative; }}
-        .copy-btn {{
-            position: absolute; top: 8px; right: 8px;
-            background: rgba(255,255,255,0.06); border: 1px solid var(--border-color);
-            color: var(--text-secondary); border-radius: 6px; padding: 4px 10px;
-            font-size: 0.75rem; cursor: pointer; opacity: 0;
-            transition: opacity 0.2s, background 0.2s;
-        }}
-        .pre-wrapper:hover .copy-btn {{ opacity: 1; }}
-        .copy-btn:hover {{ background: var(--color-primary); color: #fff; border-color: var(--color-primary); }}
-        .copy-btn.copied {{ background: var(--color-primary); color: #fff; border-color: var(--color-primary); }}
-        .toc-links li.active a {{ color: var(--color-primary); font-weight: 600; }}
-    </style>
 </head>
 <body>
     <header>
@@ -160,13 +112,13 @@ LAYOUT = """<!DOCTYPE html>
             <div class="logo-version">v1.0.5</div>
         </div>
         <nav class="top-nav">
-            <a href="{root_prefix}index.html" {active_home}>Home</a>
-            <a href="{root_prefix}docs/getting-started/installation.html" {active_getting}>Getting Started</a>
-            <a href="{root_prefix}docs/language-guide/comments.html" {active_guide}>Language Guide</a>
-            <a href="{root_prefix}docs/standard-library/index.html" {active_std}>Std Library</a>
-            <a href="{root_prefix}docs/examples/hello-world.html" {active_examples}>Examples</a>
-            <a href="{root_prefix}docs/reference/keywords.html" {active_ref}>Reference</a>
-            <a href="{root_prefix}docs/faq.html" {active_faq}>FAQ</a>
+            <a href="{root_prefix}" {active_home}>Home</a>
+            <a href="{root_prefix}docs/getting-started/installation" {active_getting}>Getting Started</a>
+            <a href="{root_prefix}docs/language-guide/comments" {active_guide}>Language Guide</a>
+            <a href="{root_prefix}docs/standard-library/" {active_std}>Std Library</a>
+            <a href="{root_prefix}docs/examples/hello-world" {active_examples}>Examples</a>
+            <a href="{root_prefix}docs/reference/keywords" {active_ref}>Reference</a>
+            <a href="{root_prefix}docs/faq" {active_faq}>FAQ</a>
         </nav>
         <div class="search-container">
             <span class="search-icon">🔍</span>
@@ -210,6 +162,23 @@ LAYOUT = """<!DOCTYPE html>
     </div>
 
     <script>
+        function toggleSubmenu(event, el) {{
+            var li = el.closest("li.has-submenu");
+            var submenu = li.querySelector(".submenu");
+            var expanded = submenu.getAttribute("data-expanded") === "true";
+            submenu.setAttribute("data-expanded", !expanded);
+            var arrow = el.querySelector(".arrow");
+            if (arrow) arrow.textContent = expanded ? ">" : "v";
+            if (!expanded) event.preventDefault();
+        }}
+        function toggleSection(el) {{
+            var section = el.closest(".sidebar-section");
+            var list = section.querySelector(".sidebar-links");
+            var expanded = list.getAttribute("data-expanded") === "true";
+            list.setAttribute("data-expanded", !expanded);
+            var arrow = el.querySelector(".arrow");
+            if (arrow) arrow.textContent = expanded ? ">" : "v";
+        }}
         document.addEventListener("DOMContentLoaded", function() {{
             // --- Scroll-reveal for feature cards ---
             (function() {{
@@ -225,6 +194,16 @@ LAYOUT = """<!DOCTYPE html>
                 for (var i = 0; i < cards.length; i++) observer.observe(cards[i]);
             }})();
 
+            // --- Sidebar section toggle ---
+            (function() {{
+                document.querySelectorAll(".sidebar-links").forEach(function(sm) {{
+                    if (sm.getAttribute("data-expanded") === "false") {{
+                        var title = sm.closest(".sidebar-section").querySelector(".sidebar-title .arrow");
+                        if (title) title.textContent = ">";
+                    }}
+                }});
+            }})();
+
             // --- Submenu arrow state ---
             (function() {{
                 document.querySelectorAll(".has-submenu > a").forEach(function(el) {{
@@ -237,26 +216,7 @@ LAYOUT = """<!DOCTYPE html>
             }})();
 
             // --- Code copy buttons ---
-            (function() {{
-                document.querySelectorAll("pre > code").forEach(function(code) {{
-                    var pre = code.parentElement;
-                    if (pre.classList.contains("pre-wrapper")) return;
-                    pre.classList.add("pre-wrapper");
-                    var btn = document.createElement("button");
-                    btn.className = "copy-btn";
-                    btn.textContent = "Copy";
-                    btn.setAttribute("aria-label", "Copy code to clipboard");
-                    btn.addEventListener("click", function() {{
-                        var text = code.textContent;
-                        navigator.clipboard.writeText(text).then(function() {{
-                            btn.textContent = "Copied!";
-                            btn.classList.add("copied");
-                            setTimeout(function() {{ btn.textContent = "Copy"; btn.classList.remove("copied"); }}, 2000);
-                        }});
-                    }});
-                    pre.appendChild(btn);
-                }});
-            }})();
+            // (Handled by Monaco Editor)
 
             // --- Full-text search via Fuse.js (inline index, no fetch) ---
             (function() {{
@@ -284,7 +244,7 @@ LAYOUT = """<!DOCTYPE html>
                     }} else {{
                         for (var i = 0; i < Math.min(results.length, 10); i++) {{
                             var r = results[i].item;
-                            html += '<a href="' + r.path + '" class="result-item">' +
+                            html += '<a href="{root_prefix}' + r.path + '" class="result-item">' +
                                 '<div class="result-title">' + r.title + '</div>' +
                                 '<div class="result-desc">' + r.description + '</div>' +
                                 '</a>';
@@ -364,6 +324,148 @@ LAYOUT = """<!DOCTYPE html>
                 window.scrollTo({{ top: 0, behavior: "smooth" }});
             }});
         }})();
+
+        // --- Dynamic Syntax Highlighter & Copy Buttons ---
+        (function() {{
+            var blocks = document.querySelectorAll("pre > code");
+            if (blocks.length === 0) return;
+            
+            function highlightDjazairCode(code, lang) {{
+                var spec = [];
+                if (lang === 'c' || lang === 'cpp') {{
+                    spec = [
+                        {{ type: 'comment', regex: /^\\/\\/[^\\n]*/ }},
+                        {{ type: 'comment', regex: /^\\/\\*[\\s\\S]*?\\*\\// }},
+                        {{ type: 'str', regex: /^"(?:\\\\.|[^"\\\\])*"/ }},
+                        {{ type: 'str', regex: /^'(?:\\\\.|[^'\\\\])*'/ }},
+                        {{ type: 'nd', regex: /^#(?:include|define|undef|ifdef|ifndef|if|else|elif|endif|line|error|pragma)\\b/ }},
+                        {{ type: 'kw', regex: /^\\b(?:const|double|float|int|long|short|signed|unsigned|void|char|struct|union|enum|typedef|auto|register|static|extern|volatile|inline|restrict|goto|break|return|continue|if|else|switch|case|default|for|do|while|sizeof|typeof|alignof|alignas|thread_local)\\b/ }},
+                        {{ type: 'fn', regex: /^[a-zA-Z_][a-zA-Z0-9_]*(?=\\s*\\()/ }},
+                        {{ type: 'num', regex: /^\\b\\d+(?:\\.\\d+)?\\b/ }},
+                        {{ type: 'op', regex: /^[+\\-*\\/%&|^~<>!=?:@]+/ }}
+                    ];
+                }} else if (lang === 'shell' || lang === 'bash' || lang === 'sh') {{
+                    spec = [
+                        {{ type: 'comment', regex: /^#[^\\n]*/ }},
+                        {{ type: 'str', regex: /^"(?:\\\\.|[^"\\\\])*"/ }},
+                        {{ type: 'str', regex: /^'(?:\\\\.|[^'\\\\])*'/ }},
+                        {{ type: 'kw', regex: /^\\b(?:if|then|else|elif|fi|case|esac|for|while|until|do|done|in|function|local|return|exit)\\b/ }},
+                        {{ type: 'nd', regex: /^\\b(?:echo|printf|cd|pwd|ls|cat|grep|sed|awk|git|make|sudo|chmod|cp|mv|rm|mkdir|rmdir)\\b/ }},
+                        {{ type: 'num', regex: /^\\b\\d+\\b/ }},
+                        {{ type: 'op', regex: /^[=<>!|&;]+/ }}
+                    ];
+                }} else if (lang === 'powershell') {{
+                    spec = [
+                        {{ type: 'comment', regex: /^#[^\\n]*/ }},
+                        {{ type: 'str', regex: /^"(?:\\\\.|[^"\\\\])*"/ }},
+                        {{ type: 'str', regex: /^'(?:\\\\.|[^'\\\\])*'/ }},
+                        {{ type: 'kw', regex: /^\\b(?:function|filter|workflow|param|begin|process|end|if|else|elseif|switch|foreach|for|while|do|until|break|continue|return|try|catch|finally|throw|trap)\\b/i }},
+                        {{ type: 'nd', regex: /^\\b(?:Write-Host|Write-Output|Get-Item|Copy-Item|Remove-Item|Set-Location|Split-Path|Out-Null|Measure-Object)\\b/i }},
+                        {{ type: 'num', regex: /^\\b\\d+\\b/ }}
+                    ];
+                }} else if (lang === 'json') {{
+                    spec = [
+                        {{ type: 'kw', regex: /^"(?:\\\\.|[^"\\\\])*"(?=\\s*:)/ }},
+                        {{ type: 'str', regex: /^"(?:\\\\.|[^"\\\\])*"/ }},
+                        {{ type: 'num', regex: /^\\b\\d+(?:\\.\\d+)?\\b/ }},
+                        {{ type: 'kw', regex: /^\\b(?:true|false|null)\\b/i }}
+                    ];
+                }} else {{ // Default to Djazair
+                    spec = [
+                        {{ type: 'comment', regex: /^#![\\s\\S]*?!#/ }},
+                        {{ type: 'comment', regex: /^#[^\\n]*/ }},
+                        {{ type: 'str', regex: /^"(?:\\\\.|[^"\\\\])*"/ }},
+                        {{ type: 'str', regex: /^`(?:\\\\.|[^`\\\\])*`/ }},
+                        {{ type: 'kw', regex: /^\\b(?:let|fn|return|class|init|super|self|is|instanceof|try|catch|finally|throw|if|elif|else|match|case|default|while|do|for|in|to|break|continue|and|or|not|Null|True|False|use|import|as|end|async|await|new)\\b/ }},
+                        {{ type: 'nd', regex: /^\\b(?:print|input|type|str|num|bool|int|float|chr|ord|range|enumerate|zip|abs|round|exit|isNull|isString|isNumber|isBool|isArray|isMap|isFunction|isClass|isInstance|__native|hasNative|getFile|getDir|getLine)\\b/ }},
+                        {{ type: 'fn', regex: /^[a-zA-Z_][a-zA-Z0-9_]*(?=\\s*\\()/ }},
+                        {{ type: 'num', regex: /^\\b\\d+(?:_\\d+)*(?:\\.\\d+)?\\b/ }},
+                        {{ type: 'op', regex: /^[+\\-*\\/%&|^~<>!=.?:@#]+/ }}
+                    ];
+                }}
+
+                var html = '';
+                var idx = 0;
+                while (idx < code.length) {{
+                    var match = null;
+                    for (var j = 0; j < spec.length; j++) {{
+                        var res = spec[j].regex.exec(code.substring(idx));
+                        if (res) {{
+                            match = {{ type: spec[j].type, val: res[0] }};
+                            break;
+                        }}
+                    }}
+                    if (match) {{
+                        var escaped = match.val.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+                        html += '<span class="' + match.type + '">' + escaped + '</span>';
+                        idx += match.val.length;
+                    }} else {{
+                        var c = code[idx];
+                        if (c === '&') html += '&amp;';
+                        else if (c === '<') html += '&lt;';
+                        else if (c === '>') html += '&gt;';
+                        else html += c;
+                        idx++;
+                    }}
+                }}
+                return html;
+            }}
+
+            blocks.forEach(function(codeEl) {{
+                var pre = codeEl.parentElement;
+                if (!pre || pre.closest(".lp-terminal")) return;
+                
+                var lang = "djazair";
+                for (var i = 0; i < pre.classList.length; i++) {{
+                    var cls = pre.classList.item(i);
+                    if (cls === "bash" || cls === "sh") {{
+                        lang = "shell";
+                        break;
+                    }} else if (cls === "powershell") {{
+                        lang = "powershell";
+                        break;
+                    }} else if (cls === "c") {{
+                        lang = "c";
+                        break;
+                    }} else if (cls === "cpp") {{
+                        lang = "cpp";
+                        break;
+                    }} else if (cls === "text" || cls === "plaintext") {{
+                        lang = "plaintext";
+                        break;
+                    }} else if (cls === "json") {{
+                        lang = "json";
+                        break;
+                    }}
+                }}
+                
+                var rawText = codeEl.textContent.trim();
+                var highlighted = highlightDjazairCode(rawText, lang);
+                codeEl.innerHTML = highlighted;
+                
+                var wrapper = document.createElement("div");
+                wrapper.className = "pre-wrapper";
+                
+                var btn = document.createElement("button");
+                btn.className = "copy-btn";
+                btn.textContent = "Copy";
+                btn.setAttribute("aria-label", "Copy code to clipboard");
+                btn.addEventListener("click", function() {{
+                    navigator.clipboard.writeText(rawText).then(function() {{
+                        btn.textContent = "Copied!";
+                        btn.classList.add("copied");
+                        setTimeout(function() {{
+                            btn.textContent = "Copy";
+                            btn.classList.remove("copied");
+                        }}, 2000);
+                    }});
+                }});
+                
+                pre.parentNode.insertBefore(wrapper, pre);
+                wrapper.appendChild(btn);
+                wrapper.appendChild(pre);
+            }});
+        }})();
     </script>
 
     <button id="back-to-top" aria-label="Back to top"><i class="fa-solid fa-arrow-up"></i></button>
@@ -377,7 +479,6 @@ STRUCTURE = [
     {
         "category": "Getting Started",
         "pages": [
-            {"title": "Docs Home", "path": "docs/index.html", "description": "Djazair documentation home page."},
             {"title": "Installation", "path": "docs/getting-started/installation.html", "description": "Install and build Djazair from source code on Windows, Linux, and macOS."},
             {"title": "First Program", "path": "docs/getting-started/first-program.html", "description": "Write and run your very first hello world program in Djazair."},
             {"title": "Running Programs", "path": "docs/getting-started/running-programs.html", "description": "Learn the various CLI commands to execute your scripts inline or via files."},
@@ -511,7 +612,6 @@ STRUCTURE = [
 
 # Flat list for navigation
 FLAT_PAGES = []
-FLAT_PAGES.append({"title": "Home", "path": "docs/index.html", "description": "The Djazair Programming Language official documentation home page."})
 for cat in STRUCTURE:
     for page in cat["pages"]:
         FLAT_PAGES.append(page)
@@ -519,76 +619,6 @@ FLAT_PAGES.append({"title": "FAQ", "path": "docs/faq.html", "description": "Freq
 
 # Page contents dictionary
 PAGES_CONTENT = {}
-
-PAGES_CONTENT["docs/index.html"] = """
-<div class="hero-section">
-    <h1 class="hero-title">The Djazair Programming Language</h1>
-    <p class="hero-subtitle">A modern, embeddable scripting language — written in pure C, featuring async coroutines, pattern matching, OOP, and a rich standard library. Designed for automation, tooling, game development, and seamless C/C++ embedding.</p>
-    <div class="hero-buttons">
-        <a href="getting-started/installation.html" class="btn btn-primary">Get Started</a>
-        <a href="language-guide/comments.html" class="btn btn-secondary">Learn the Language</a>
-    </div>
-</div>
-
-<h2>Why Djazair?</h2>
-<p>Djazair is a lightweight, zero-dependency scripting engine written in pure C, designed from the ground up for <strong>embeddability and expressiveness</strong>. Whether you are adding scripting to a C/C++ application, writing automation scripts, building game logic, or prototyping ideas, Djazair gives you a modern, familiar syntax with first-class <strong>async/await coroutines</strong>, <strong>pattern matching</strong>, <strong>full OOP</strong>, and automatic memory management — all in a single portable library.</p>
-
-<div class="features-grid">
-    <div class="feature-card">
-        <div class="feature-icon"><i class="fa-solid fa-bolt"></i></div>
-        <div class="feature-title">Dynamic Typing & Inference</div>
-        <div class="feature-desc">Write less boilerplate with <code>let</code> declarations, native Arrays and Maps, first-class functions, and closures — productive from the first line.</div>
-    </div>
-    <div class="feature-card">
-        <div class="feature-icon"><i class="fa-solid fa-rocket"></i></div>
-        <div class="feature-title">Async/Await Coroutines</div>
-        <div class="feature-desc">First-class coroutines for non-blocking I/O, concurrent workflows, and efficient async scripting — no callback spaghetti, no external event loop.</div>
-    </div>
-    <div class="feature-card">
-        <div class="feature-icon"><i class="fa-solid fa-landmark"></i></div>
-        <div class="feature-title">Object-Oriented Programming</div>
-        <div class="feature-desc">Full OOP with <code>class</code>, single inheritance, constructors (<code>init</code>), <code>super</code>, and polymorphism — build organised, maintainable code at any scale.</div>
-    </div>
-    <div class="feature-card">
-        <div class="feature-icon"><i class="fa-solid fa-bullseye"></i></div>
-        <div class="feature-title">Pattern Matching</div>
-        <div class="feature-desc">Expressive <code>match</code>/<code>case</code>/<code>default</code> constructs for clean, declarative branching — more readable than chains of <code>elif</code>.</div>
-    </div>
-    <div class="feature-card">
-        <div class="feature-icon"><i class="fa-solid fa-plug"></i></div>
-        <div class="feature-title">Embedding-First C API</div>
-        <div class="feature-desc">Pure C with zero external dependencies. Embed into any C/C++ project via a minimal, documented API — ideal for extending applications with scripting.</div>
-    </div>
-    <div class="feature-card">
-        <div class="feature-icon"><i class="fa-solid fa-battery-full"></i></div>
-        <div class="feature-title">Batteries Included</div>
-        <div class="feature-desc">Comprehensive standard library: regex, TCP/UDP networking, JSON, crypto (SHA-256), threads, file I/O, date/time, math, UUID, and more — ready out of the box.</div>
-    </div>
-    <div class="feature-card">
-        <div class="feature-icon"><i class="fa-solid fa-shield-halved"></i></div>
-        <div class="feature-title">Robust Error Handling</div>
-        <div class="feature-desc">Structured <code>try</code>/<code>catch</code>/<code>finally</code> with <code>throw</code> for reliable error recovery — write production-ready scripts with confidence.</div>
-    </div>
-    <div class="feature-card">
-        <div class="feature-icon"><i class="fa-solid fa-puzzle-piece"></i></div>
-        <div class="feature-title">Automatic Memory Management</div>
-        <div class="feature-desc">Precise tracing garbage collector — no reference counting, no manual <code>free()</code>. Focus on your logic, not memory.</div>
-    </div>
-</div>
-
-<h2>Quick Snippet Preview</h2>
-<p>Here is a taste of Djazair showing functions, dynamic string interpolation, and standard library modules:</p>
-<pre class="dz"><code>use math
-
-fn computeArea(radius)
-    return math.PI * math.pow(radius, 2)
-end
-
-let r = 5
-print("The area of a circle with radius ${r} is ${computeArea(r)}")
-# Output => The area of a circle with radius 5 is 78.5398
-</code></pre>
-"""
 
 PAGES_CONTENT["docs/getting-started/installation.html"] = """
 <h1>Installing Djazair</h1>
@@ -1734,7 +1764,7 @@ def build_search_index():
         raw = PAGES_CONTENT.get(page["path"], "")
         index.append({
             "title": page["title"],
-            "path": page["path"],
+            "path": clean_url(page["path"]),
             "description": page["description"],
             "text": strip_html(raw)[:300]
         })
@@ -1770,11 +1800,11 @@ def generate_all_pages():
         sidebar_html = []
         for section in STRUCTURE:
             sidebar_html.append(f'<div class="sidebar-section">')
-            sidebar_html.append(f'  <div class="sidebar-title">{section["category"]}</div>')
-            sidebar_html.append(f'  <ul class="sidebar-links">')
+            sidebar_html.append(f'  <div class="sidebar-title" onclick="toggleSection(this)">{section["category"]} <span class="arrow">v</span></div>')
+            sidebar_html.append(f'  <ul class="sidebar-links" data-expanded="true">')
             for p in section["pages"]:
                 active_page = 'class="active"' if p["path"] == file_path else ''
-                link_href = f'{root_prefix}{p["path"]}'
+                link_href = f'{root_prefix}{clean_url(p["path"])}'
                 has_subs = "subs" in p and len(p["subs"]) > 0
                 if has_subs:
                     expanded = 'true' if p["path"] == file_path else 'false'
@@ -1782,7 +1812,7 @@ def generate_all_pages():
                     sidebar_html.append(f'    <li class="has-submenu"><a href="{link_href}" class="{link_class}" onclick="toggleSubmenu(event, this)">{p["title"]} <span class="arrow">{">" if p["path"] != file_path else "v"}</span></a>')
                     sidebar_html.append(f'      <ul class="submenu" data-expanded="{expanded}">')
                     for sub in p["subs"]:
-                        sub_href = f'{root_prefix}{p["path"]}#{sub["anchor"]}'
+                        sub_href = f'{root_prefix}{clean_url(p["path"])}#{sub["anchor"]}'
                         sidebar_html.append(f'        <li><a href="{sub_href}" class="sub-link">{sub["title"]}</a></li>')
                     sidebar_html.append(f'      </ul>')
                     sidebar_html.append(f'    </li>')
@@ -1794,7 +1824,7 @@ def generate_all_pages():
 
         # Breadcrumbs construction
         breadcrumbs_list = []
-        breadcrumbs_list.append(f'<a href="{root_prefix}index.html">Home</a>')
+        breadcrumbs_list.append(f'<a href="{root_prefix}">Home</a>')
         if '/' in file_path:
             cat_folder = file_path.split('/')[0]
             # Match folder to clean category name
@@ -1851,7 +1881,7 @@ def generate_all_pages():
         if page_idx > 0:
             prev_page = FLAT_PAGES[page_idx - 1]
             prev_card = f"""
-            <a href="{root_prefix}{prev_page["path"]}" class="nav-card">
+            <a href="{root_prefix}{clean_url(prev_page["path"])}" class="nav-card">
                 <span class="nav-label">Previous</span>
                 <span class="nav-title">{prev_page["title"]}</span>
             </a>
@@ -1862,7 +1892,7 @@ def generate_all_pages():
         if page_idx < len(FLAT_PAGES) - 1:
             next_page = FLAT_PAGES[page_idx + 1]
             next_card = f"""
-            <a href="{root_prefix}{next_page["path"]}" class="nav-card next">
+            <a href="{root_prefix}{clean_url(next_page["path"])}" class="nav-card next">
                 <span class="nav-label">Next</span>
                 <span class="nav-title">{next_page["title"]}</span>
             </a>

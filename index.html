@@ -13,325 +13,29 @@
     <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><rect width=%22100%22 height=%22100%22 rx=%2220%22 fill=%22%2310b981%22/><text x=%2250%22 y=%2268%22 font-size=%2250%22 font-weight=%22800%22 fill=%22white%22 text-anchor=%22middle%22 font-family=%22system-ui%22>Dz</text></svg>">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <link rel="stylesheet" href="assets/style.css">
-    <style>
-        #back-to-top {
-            position: fixed; bottom: 2rem; right: 2rem;
-            width: 44px; height: 44px; border-radius: 50%;
-            background: var(--color-primary); color: #fff; border: none;
-            cursor: pointer; display: flex; align-items: center; justify-content: center;
-            font-size: 1.2rem; opacity: 0; visibility: hidden;
-            transition: all 0.3s ease; z-index: 999;
-            box-shadow: 0 4px 16px rgba(16,185,129,0.3);
-        }
-        #back-to-top.visible { opacity: 1; visibility: visible; }
-        #back-to-top:hover { background: var(--color-primary-hover); transform: translateY(-3px); }
-
-        body {
-            background: var(--bg-main);
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-        .lp { width: 100%; max-width: 1100px; padding: 0 2rem; }
-
-        /* Hero */
-        .lp-hero {
-            text-align: center;
-            padding: 6rem 0 3rem;
-            position: relative;
-            overflow: hidden;
-        }
-        .lp-hero::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 800px;
-            height: 800px;
-            background: radial-gradient(circle, rgba(16,185,129,0.08) 0%, transparent 70%);
-            pointer-events: none;
-        }
-        .lp-logo {
-            display: inline-flex;
-            align-items: center;
-            gap: 1rem;
-            margin-bottom: 1.5rem;
-            position: relative;
-        }
-        .lp-logo-icon {
-            width: 64px;
-            height: 64px;
-            border-radius: 18px;
-            background: linear-gradient(135deg, var(--color-primary), var(--color-secondary));
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 2rem;
-            font-weight: 800;
-            color: #fff;
-            font-family: var(--font-heading);
-            box-shadow: 0 8px 32px rgba(16,185,129,0.25);
-        }
-        .lp-logo-text {
-            font-family: var(--font-heading);
-            font-size: 2.5rem;
-            font-weight: 700;
-            color: #fff;
-        }
-        .lp-hero h1 {
-            font-family: var(--font-heading);
-            font-size: 3.2rem;
-            font-weight: 700;
-            line-height: 1.2;
-            color: #fff;
-            margin-bottom: 1rem;
-            position: relative;
-        }
-        .lp-hero h1 span { color: var(--color-primary); }
-        .lp-hero p {
-            font-size: 1.15rem;
-            color: var(--text-secondary);
-            max-width: 680px;
-            margin: 0 auto 2rem;
-            line-height: 1.7;
-            position: relative;
-        }
-        .lp-badges {
-            display: flex;
-            justify-content: center;
-            gap: 1rem;
-            flex-wrap: wrap;
-            margin-bottom: 2rem;
-            position: relative;
-        }
-        .lp-badge {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.4rem;
-            padding: 0.35rem 0.9rem;
-            border-radius: 20px;
-            font-size: 0.8rem;
-            font-weight: 500;
-            background: var(--bg-card);
-            border: 1px solid var(--border-color);
-            color: var(--text-secondary);
-        }
-        .lp-badge i { color: var(--color-primary); }
-        .lp-buttons {
-            display: flex;
-            justify-content: center;
-            gap: 1rem;
-            flex-wrap: wrap;
-            position: relative;
-        }
-        .lp-btn {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.5rem;
-            padding: 0.9rem 2rem;
-            border-radius: 12px;
-            font-size: 1rem;
-            font-weight: 600;
-            font-family: var(--font-sans);
-            cursor: pointer;
-            transition: all 0.25s ease;
-            text-decoration: none;
-        }
-        .lp-btn-primary {
-            background: var(--color-primary);
-            color: #fff;
-            border: none;
-        }
-        .lp-btn-primary:hover {
-            background: var(--color-primary-hover);
-            transform: translateY(-2px);
-            box-shadow: 0 8px 24px rgba(16,185,129,0.3);
-            color: #fff;
-        }
-        .lp-btn-secondary {
-            background: var(--bg-card);
-            color: var(--text-primary);
-            border: 1px solid var(--border-color);
-        }
-        .lp-btn-secondary:hover {
-            border-color: var(--color-primary);
-            transform: translateY(-2px);
-            color: var(--text-primary);
-        }
-        .lp-btn-ghost {
-            background: transparent;
-            color: var(--text-secondary);
-            border: 1px solid var(--border-color);
-        }
-        .lp-btn-ghost:hover {
-            border-color: var(--text-secondary);
-            color: var(--text-primary);
-        }
-
-        /* Code terminal */
-        .lp-terminal {
-            margin: 3rem auto;
-            max-width: 720px;
-            background: #0d1117;
-            border: 1px solid var(--border-color);
-            border-radius: 14px;
-            overflow: hidden;
-            box-shadow: 0 16px 48px rgba(0,0,0,0.4);
-        }
-        .lp-terminal-header {
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            padding: 0.8rem 1.2rem;
-            background: #161b22;
-            border-bottom: 1px solid var(--border-color);
-        }
-        .lp-terminal-dot {
-            width: 12px;
-            height: 12px;
-            border-radius: 50%;
-        }
-        .lp-terminal-dot.red { background: #ff5f57; }
-        .lp-terminal-dot.yellow { background: #ffbd2e; }
-        .lp-terminal-dot.green { background: #28c840; }
-        .lp-terminal-title {
-            margin-left: 0.5rem;
-            font-size: 0.8rem;
-            color: var(--text-muted);
-            font-family: var(--font-mono);
-        }
-        .lp-terminal-body {
-            padding: 1.5rem;
-            overflow-x: auto;
-        }
-        .lp-terminal-body pre {
-            margin: 0;
-            font-family: var(--font-mono);
-            font-size: 0.9rem;
-            line-height: 1.7;
-            color: #e6edf3;
-        }
-        .lp-terminal-body .kw { color: #ff7b72; }
-        .lp-terminal-body .fn { color: #d2a8ff; }
-        .lp-terminal-body .str { color: #a5d6ff; }
-        .lp-terminal-body .op { color: #79c0ff; }
-        .lp-terminal-body .num { color: #79c0ff; }
-        .lp-terminal-body .nd { color: #7ee787; }
-        .lp-terminal-body .comment { color: #8b949e; font-style: italic; }
-
-        /* Sections */
-        .lp-section {
-            padding: 4rem 0;
-        }
-        .lp-section-title {
-            font-family: var(--font-heading);
-            font-size: 2rem;
-            font-weight: 700;
-            color: #fff;
-            text-align: center;
-            margin-bottom: 0.75rem;
-        }
-        .lp-section-sub {
-            text-align: center;
-            color: var(--text-muted);
-            font-size: 1rem;
-            max-width: 600px;
-            margin: 0 auto 3rem;
-        }
-
-        /* Feature cards (reuse doc styles with landing overrides) */
-        .features-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-            gap: 1.25rem;
-            margin: 0;
-        }
-        .feature-card {
-            background: var(--bg-card);
-            border: 1px solid var(--border-color);
-            border-radius: 14px;
-            padding: 1.75rem;
-            transition: all 0.3s ease;
-        }
-        .feature-card:hover {
-            border-color: rgba(16,185,129,0.3);
-            transform: translateY(-3px);
-            box-shadow: 0 8px 24px rgba(0,0,0,0.2);
-        }
-        .feature-icon {
-            width: 44px; height: 44px;
-            display: flex; align-items: center; justify-content: center;
-            border-radius: 10px;
-            background: rgba(16,185,129,0.1);
-            color: var(--color-primary);
-            font-size: 1.1rem;
-            margin-bottom: 1rem;
-            transition: all 0.3s ease;
-        }
-        .feature-card:hover .feature-icon {
-            background: var(--color-primary);
-            color: #fff;
-        }
-        .feature-title {
-            font-family: var(--font-heading);
-            font-size: 1.05rem;
-            font-weight: 600;
-            color: #fff;
-            margin-bottom: 0.4rem;
-        }
-        .feature-desc {
-            font-size: 0.9rem;
-            color: var(--text-secondary);
-            line-height: 1.6;
-        }
-        .feature-desc code {
-            font-size: 0.85rem;
-            background: rgba(255,255,255,0.06);
-            padding: 0.1em 0.35em;
-            border-radius: 4px;
-        }
-
-        /* CTA */
-        .lp-cta {
-            text-align: center;
-            padding: 5rem 0;
-            border-top: 1px solid var(--border-color);
-        }
-        .lp-cta h2 {
-            font-family: var(--font-heading);
-            font-size: 2rem;
-            font-weight: 700;
-            color: #fff;
-            margin-bottom: 0.75rem;
-        }
-        .lp-cta p {
-            color: var(--text-secondary);
-            margin-bottom: 2rem;
-        }
-
-        /* Footer */
-        .lp-footer {
-            text-align: center;
-            padding: 2rem 0;
-            border-top: 1px solid var(--border-color);
-            color: var(--text-muted);
-            font-size: 0.85rem;
-        }
-        .lp-footer a { color: var(--text-secondary); }
-        .lp-footer a:hover { color: var(--color-primary); }
-
-        @media (max-width: 640px) {
-            .lp-hero h1 { font-size: 2rem; }
-            .lp-logo-text { font-size: 1.8rem; }
-            .lp-logo-icon { width: 48px; height: 48px; font-size: 1.5rem; }
-            .lp { padding: 0 1rem; }
-            .features-grid { grid-template-columns: 1fr; }
-        }
-    </style>
+    <link rel="stylesheet" href="assets/landing.css">
 </head>
 <body>
+    <!-- Sticky Glassmorphic Header -->
+    <header class="lp-header">
+        <div class="lp-header-container">
+            <a href="./" class="lp-header-logo">
+                <span class="lp-header-logo-icon">Dz</span>
+                <span class="lp-header-logo-text">Djazair</span>
+            </a>
+            <nav class="lp-header-nav">
+                <a href="docs/">Documentation</a>
+                <a href="docs/standard-library/">Std Library</a>
+                <a href="https://github.com/djazair-language/djazair" class="lp-header-github" target="_blank"><i class="fa-brands fa-github"></i> GitHub</a>
+            </nav>
+        </div>
+    </header>
+
     <div class="lp">
+        <!-- Glow Blobs -->
+        <div class="glow-blob blob-1"></div>
+        <div class="glow-blob blob-2"></div>
+
         <section class="lp-hero">
             <div class="lp-logo">
                 <div class="lp-logo-icon">Dz</div>
@@ -343,24 +47,32 @@
                 <span class="lp-badge"><i class="fa-regular fa-circle-check"></i> v1.0.5</span>
                 <span class="lp-badge"><i class="fa-regular fa-file-code"></i> Pure C, zero deps</span>
                 <span class="lp-badge"><i class="fa-regular fa-gem"></i> MIT License</span>
-                <a href="https://github.com/djazair-language/djazair-language" class="lp-badge" style="text-decoration:none;"><i class="fa-brands fa-github"></i> GitHub</a>
+                <a href="https://github.com/djazair-language/djazair" class="lp-badge" style="text-decoration:none;" target="_blank"><i class="fa-brands fa-github"></i> GitHub</a>
             </div>
             <div class="lp-buttons">
                 <a href="docs/" class="lp-btn lp-btn-primary"><i class="fa-solid fa-book-open"></i> Read the Docs</a>
-                <a href="docs/getting-started/installation.html" class="lp-btn lp-btn-secondary"><i class="fa-solid fa-download"></i> Get Started</a>
-                <a href="https://github.com/djazair-language/djazair-language" class="lp-btn lp-btn-ghost"><i class="fa-brands fa-github"></i> Source Code</a>
+                <a href="docs/getting-started/installation" class="lp-btn lp-btn-secondary"><i class="fa-solid fa-download"></i> Get Started</a>
+                <a href="https://github.com/djazair-language/djazair" class="lp-btn lp-btn-ghost" target="_blank"><i class="fa-brands fa-github"></i> Source Code</a>
             </div>
         </section>
 
+        <!-- Interactive Terminal -->
         <div class="lp-terminal">
             <div class="lp-terminal-header">
                 <span class="lp-terminal-dot red"></span>
                 <span class="lp-terminal-dot yellow"></span>
                 <span class="lp-terminal-dot green"></span>
-                <span class="lp-terminal-title">hello.dz</span>
+            </div>
+            <div class="lp-terminal-tabs">
+                <button class="lp-terminal-tab active" onclick="switchTab(this, 'tab-hello')"><i class="fa-regular fa-file-code"></i> hello.dz</button>
+                <button class="lp-terminal-tab" onclick="switchTab(this, 'tab-fib')"><i class="fa-solid fa-arrow-trend-up"></i> fibonacci.dz</button>
+                <button class="lp-terminal-tab" onclick="switchTab(this, 'tab-range')"><i class="fa-solid fa-rotate"></i> range_loop.dz</button>
+                <button class="lp-terminal-tab" onclick="switchTab(this, 'tab-async')"><i class="fa-solid fa-cloud-arrow-down"></i> async_web.dz</button>
+                <button class="lp-terminal-tab" onclick="switchTab(this, 'tab-error')"><i class="fa-solid fa-triangle-exclamation"></i> error_handling.dz</button>
             </div>
             <div class="lp-terminal-body">
-<pre><span class="kw">use</span> math
+                <!-- hello.dz -->
+                <pre id="tab-hello" class="lp-terminal-code active"><code><span class="kw">use</span> math
 
 <span class="kw">fn</span> <span class="fn">greet</span>(name)
     <span class="kw">return</span> <span class="str">"Hello, ${name}!"</span>
@@ -370,53 +82,300 @@
 <span class="nd">print</span>(<span class="fn">greet</span>(<span class="str">"Djazair"</span>))
 <span class="nd">print</span>(<span class="str">"Area: ${math.PI * math.pow(radius, 2)}"</span>)
 <span class="comment"># => Hello, Djazair!</span>
-<span class="comment"># => Area: 78.5398</span></pre>
+<span class="comment"># => Area: 78.5398</span></code></pre>
+
+                <!-- fibonacci.dz -->
+                <pre id="tab-fib" class="lp-terminal-code"><code><span class="kw">fn</span> <span class="fn">fib</span>(n)
+    <span class="kw">if</span> n <span class="op">&lt;=</span> <span class="num">1</span>
+        <span class="kw">return</span> n
+    <span class="kw">end</span>
+    <span class="kw">return</span> <span class="fn">fib</span>(n <span class="op">-</span> <span class="num">1</span>) <span class="op">+</span> <span class="fn">fib</span>(n <span class="op">-</span> <span class="num">2</span>)
+<span class="kw">end</span>
+
+<span class="comment"># Calculate first 10 Fibonacci numbers</span>
+<span class="kw">for</span> i <span class="kw">in</span> <span class="num">0</span><span class="op">..</span><span class="num">10</span>
+    <span class="nd">print</span>(<span class="str">"fib(${i}) = "</span> <span class="op">+</span> <span class="nd">str</span>(<span class="fn">fib</span>(i)))
+<span class="kw">end</span></code></pre>
+
+                <!-- async_web.dz -->
+                <pre id="tab-async" class="lp-terminal-code"><code><span class="kw">use</span> http
+<span class="kw">use</span> json
+ 
+<span class="kw">async</span> <span class="kw">fn</span> <span class="fn">fetchUser</span>(id)
+    <span class="nd">print</span>(<span class="str">"Fetching user: ${id}"</span>)
+    <span class="kw">let</span> res <span class="op">=</span> <span class="kw">await</span> http<span class="op">.</span>get("https://api.github.com/users/${id}")
+    <span class="kw">return</span> json<span class="op">.</span><span class="fn">parse</span>(res<span class="op">.</span>body)
+<span class="kw">end</span>
+ 
+<span class="kw">async</span> <span class="kw">fn</span> <span class="fn">main</span>()
+    <span class="kw">let</span> task <span class="op">=</span> <span class="fn">fetchUser</span>("djazair-language")
+    <span class="kw">let</span> data <span class="op">=</span> <span class="kw">await</span> task
+    <span class="nd">print</span>(<span class="str">"User: "</span> <span class="op">+</span> data["name"])
+<span class="kw">end</span>
+ 
+<span class="kw">await</span> <span class="fn">main</span>()</code></pre>
+
+                <!-- range_loop.dz -->
+                <pre id="tab-range" class="lp-terminal-code"><code><span class="comment"># 1. Iterate over a range (0 to 5 inclusive)</span>
+<span class="kw">for</span> i <span class="kw">in</span> <span class="num">0</span><span class="op">..</span><span class="num">5</span>
+    <span class="nd">print</span>(<span class="str">"Number: ${i}"</span>)
+<span class="kw">end</span>
+
+<span class="comment"># 2. Iterate directly over array elements</span>
+<span class="kw">let</span> fruits <span class="op">=</span> [<span class="str">"apple"</span>, <span class="str">"banana"</span>, <span class="str">"cherry"</span>]
+<span class="kw">for</span> fruit <span class="kw">in</span> fruits
+    <span class="nd">print</span>(<span class="str">"Fruit: "</span> <span class="op">+</span> fruit)
+<span class="kw">end</span>
+
+<span class="comment"># 3. Iterate over hash keys and values</span>
+<span class="kw">let</span> person <span class="op">=</span> {<span class="str">"name"</span>: <span class="str">"Riad"</span>, <span class="str">"age"</span>: <span class="num">30</span>}
+<span class="kw">for</span> key, value <span class="kw">in</span> person
+    <span class="nd">print</span>(<span class="str">"${key}: ${value}"</span>)
+<span class="kw">end</span></code></pre>
+
+                <!-- error_handling.dz -->
+                <pre id="tab-error" class="lp-terminal-code"><code><span class="kw">fn</span> <span class="fn">divide</span>(a, b)
+    <span class="kw">if</span> b <span class="op">==</span> <span class="num">0</span>
+        <span class="kw">throw</span> <span class="str">"Division by zero error!"</span>
+    <span class="kw">end</span>
+    <span class="kw">return</span> a <span class="op">/</span> b
+<span class="kw">end</span>
+
+<span class="kw">try</span>
+    <span class="kw">let</span> result <span class="op">=</span> <span class="fn">divide</span>(<span class="num">10</span>, <span class="num">0</span>)
+    <span class="nd">print</span>(<span class="str">"Result: ${result}"</span>)
+<span class="kw">catch</span> err
+    <span class="nd">print</span>(<span class="str">"Caught error: "</span> <span class="op">+</span> <span class="nd">str</span>(err))
+<span class="kw">finally</span>
+    <span class="nd">print</span>(<span class="str">"Cleanup: execution complete."</span>)
+<span class="kw">end</span></code></pre>
             </div>
         </div>
 
         <section class="lp-section">
             <h2 class="lp-section-title">Why Djazair?</h2>
-            <p class="lp-section-sub">A lightweight engine that punches above its weight — productive, embeddable, and ready for real-world use.</p>
+            <p class="lp-section-sub">A lightweight, future-ready scripting language with high-performance C integration and a rich feature set.</p>
             <div class="features-grid">
-                <div class="feature-card">
-                    <div class="feature-icon"><i class="fa-solid fa-bolt"></i></div>
-                    <div class="feature-title">Dynamic Typing & Inference</div>
-                    <div class="feature-desc">Write less boilerplate with <code>let</code> declarations, native Arrays and Maps, first-class functions, and closures — productive from the first line.</div>
+                <div class="feature-card feat-networking">
+                    <div class="feature-icon"><i class="fa-solid fa-globe"></i></div>
+                    <div class="feature-title">Networking & Web Dev</div>
+                    <div class="feature-desc">Build non-blocking servers and network utilities with built-in asynchronous HTTP client/server, TCP/UDP sockets, and coroutines.</div>
                 </div>
-                <div class="feature-card">
-                    <div class="feature-icon"><i class="fa-solid fa-rocket"></i></div>
-                    <div class="feature-title">Async/Await Coroutines</div>
-                    <div class="feature-desc">First-class coroutines for non-blocking I/O, concurrent workflows, and efficient async scripting — no callback spaghetti.</div>
+                <div class="feature-card feat-games">
+                    <div class="feature-icon"><i class="fa-solid fa-gamepad"></i></div>
+                    <div class="feature-title">2D Game Development</div>
+                    <div class="feature-desc">Design interactive games and multimedia applications using a clean, Object-Oriented wrapper around the high-performance <b>Raylib</b> engine.</div>
                 </div>
-                <div class="feature-card">
-                    <div class="feature-icon"><i class="fa-solid fa-landmark"></i></div>
-                    <div class="feature-title">Object-Oriented Programming</div>
-                    <div class="feature-desc">Full OOP with <code>class</code>, single inheritance, constructors (<code>init</code>), <code>super</code>, and polymorphism — build organised code at any scale.</div>
+                <div class="feature-card feat-desktop">
+                    <div class="feature-icon"><i class="fa-solid fa-window-maximize"></i></div>
+                    <div class="feature-title">Desktop Applications</div>
+                    <div class="feature-desc">Build modern desktop GUI apps using Edge/Chromium WebView2. Combine HTML/CSS/JS frontend with Djazair backend via a secure IPC bridge.</div>
                 </div>
-                <div class="feature-card">
-                    <div class="feature-icon"><i class="fa-solid fa-bullseye"></i></div>
-                    <div class="feature-title">Pattern Matching</div>
-                    <div class="feature-desc">Expressive <code>match</code>/<code>case</code>/<code>default</code> constructs for clean, declarative branching — more readable than chains of <code>elif</code>.</div>
+                <div class="feature-card feat-database">
+                    <div class="feature-icon"><i class="fa-solid fa-database"></i></div>
+                    <div class="feature-title">Databases & Storage</div>
+                    <div class="feature-desc">Out-of-the-box support for SQLite and MySQL. Run safe parameterized queries (<code>safeExecute</code> / <code>safeQuery</code>) to prevent SQL injections.</div>
                 </div>
-                <div class="feature-card">
+                <div class="feature-card feat-api">
                     <div class="feature-icon"><i class="fa-solid fa-plug"></i></div>
                     <div class="feature-title">Embedding-First C API</div>
-                    <div class="feature-desc">Pure C with zero external dependencies. Embed into any C/C++ project via a minimal, documented API — ideal for extending applications.</div>
+                    <div class="feature-desc">Lightweight, isolated VM with a core size of only ~180KB. Embed into any C/C++ project with a single header and custom callbacks.</div>
                 </div>
-                <div class="feature-card">
-                    <div class="feature-icon"><i class="fa-solid fa-battery-full"></i></div>
-                    <div class="feature-title">Batteries Included</div>
-                    <div class="feature-desc">Comprehensive standard library: regex, TCP/UDP networking, JSON, crypto (SHA-256), threads, file I/O, date/time, math, UUID, and more.</div>
+                <div class="feature-card feat-dpm">
+                    <div class="feature-icon"><i class="fa-solid fa-box-archive"></i></div>
+                    <div class="feature-title">Built-in Package Manager</div>
+                    <div class="feature-desc">Manage your ecosystem with <b>DPM</b> (written in Djazair). Easily download, resolve, and compile native extensions directly from Git or Zip.</div>
                 </div>
-                <div class="feature-card">
-                    <div class="feature-icon"><i class="fa-solid fa-shield-halved"></i></div>
-                    <div class="feature-title">Robust Error Handling</div>
-                    <div class="feature-desc">Structured <code>try</code>/<code>catch</code>/<code>finally</code> with <code>throw</code> for reliable error recovery — write production-ready scripts.</div>
+            </div>
+        </section>
+
+        <!-- Showcase Section -->
+        <section class="lp-section">
+            <h2 class="lp-section-title">One Language, Infinite Possibilities</h2>
+            <p class="lp-section-sub">See how Djazair handles real-world scenarios across games, desktop apps, web dev, and database integration.</p>
+            <div class="showcase-container">
+                <div class="showcase-tabs">
+                    <button class="showcase-tab active" onclick="switchShowcaseTab(this, 'showcase-games')">
+                        <i class="fa-solid fa-gamepad"></i> 2D Games (Raylib)
+                    </button>
+                    <button class="showcase-tab" onclick="switchShowcaseTab(this, 'showcase-desktop')">
+                        <i class="fa-solid fa-window-maximize"></i> Desktop Apps (WebView)
+                    </button>
+                    <button class="showcase-tab" onclick="switchShowcaseTab(this, 'showcase-database')">
+                        <i class="fa-solid fa-database"></i> Databases (SQLite/MySQL)
+                    </button>
+                    <button class="showcase-tab" onclick="switchShowcaseTab(this, 'showcase-networking')">
+                        <i class="fa-solid fa-globe"></i> Networking (HTTP Server)
+                    </button>
                 </div>
-                <div class="feature-card">
-                    <div class="feature-icon"><i class="fa-solid fa-puzzle-piece"></i></div>
-                    <div class="feature-title">Automatic Memory Management</div>
-                    <div class="feature-desc">Precise tracing garbage collector — no reference counting, no manual <code>free()</code>. Focus on your logic, not memory.</div>
+                
+                <div class="showcase-content">
+                    <div class="showcase-info-panel">
+                        <h3 id="showcase-title">Interactive 2D Games with Raylib</h3>
+                        <p id="showcase-desc">Djazair features an official Object-Oriented wrapper for the popular Raylib engine. Build 2D graphics, handle window drawing loops, configure FPS targets, poll keyboard/mouse inputs, and manage audio devices directly in Djazair.</p>
+                    </div>
+                    
+                    <div class="lp-terminal" style="margin: 0; max-width: 100%;">
+                        <div class="lp-terminal-header">
+                            <span class="lp-terminal-dot red"></span>
+                            <span class="lp-terminal-dot yellow"></span>
+                            <span class="lp-terminal-dot green"></span>
+                            <span style="margin-left: auto; font-family: var(--font-mono); font-size: 0.8rem; color: var(--text-muted);" id="showcase-filename">game.dz</span>
+                        </div>
+                        <div class="lp-terminal-body" style="min-height: 260px;">
+                            <!-- showcase-games -->
+                            <pre id="showcase-games" class="lp-terminal-code active"><code><span class="kw">use</span> raylib <span class="kw">as</span> rl
+
+<span class="kw">let</span> win <span class="op">=</span> rl<span class="op">.</span><span class="fn">Window</span>(<span class="num">800</span>, <span class="num">600</span>, <span class="str">"Djazair Raylib Sandbox"</span>)
+win<span class="op">.</span><span class="fn">setFPS</span>(<span class="num">60</span>)
+
+<span class="kw">while</span> win<span class="op">.</span><span class="fn">isOpen</span>()
+    win<span class="op">.</span><span class="fn">begin</span>()
+    win<span class="op">.</span><span class="fn">clear</span>(rl<span class="op">.</span>BLACK)
+    
+    rl<span class="op">.</span><span class="fn">drawCircle</span>(<span class="num">400</span>, <span class="num">300</span>, <span class="num">30</span>, rl<span class="op">.</span>PURPLE)
+    rl<span class="op">.</span><span class="fn">drawText</span>(<span class="str">"Press ESC to exit"</span>, <span class="num">10</span>, <span class="num">10</span>, <span class="num">20</span>, rl<span class="op">.</span>WHITE)
+    
+    win<span class="op">.</span><span class="fn">finish</span>()
+<span class="kw">end</span>
+
+win<span class="op">.</span><span class="fn">close</span>()</code></pre>
+
+                            <!-- showcase-desktop -->
+                            <pre id="showcase-desktop" class="lp-terminal-code"><code><span class="kw">use</span> webview
+
+<span class="kw">let</span> app <span class="op">=</span> webview<span class="op">.</span><span class="fn">createWindow</span>({
+    <span class="str">"title"</span>: <span class="str">"Djazair Desktop App"</span>,
+    <span class="str">"width"</span>: <span class="num">800</span>,
+    <span class="str">"height"</span>: <span class="num">600</span>
+})
+
+app<span class="op">.</span><span class="fn">onReady</span>(<span class="kw">fn</span>()
+    app<span class="op">.</span>window<span class="op">.</span><span class="fn">setHtml</span>(<span class="str">"&lt;h1&gt;Hello from Edge WebView2!&lt;/h1&gt;"</span>)
+<span class="kw">end</span>)
+
+app<span class="op">.</span><span class="fn">run</span>()</code></pre>
+
+                            <!-- showcase-database -->
+                            <pre id="showcase-database" class="lp-terminal-code"><code><span class="kw">use</span> sqlite
+
+<span class="kw">let</span> db <span class="op">=</span> sqlite<span class="op">.</span><span class="fn">connect</span>(<span class="str">"app.db"</span>)
+
+<span class="kw">if</span> db<span class="op">.</span><span class="fn">isConnected</span>()
+    db<span class="op">.</span><span class="fn">execute</span>(<span class="str">"CREATE TABLE IF NOT EXISTS users (id INT, name TEXT)"</span>)
+    
+    <span class="comment"># Safe query execution (prevents SQL injection)</span>
+    db<span class="op">.</span><span class="fn">safeExecute</span>(<span class="str">"INSERT INTO users VALUES (?, ?)"</span>, [<span class="num">1</span>, <span class="str">"Riad"</span>])
+    
+    <span class="kw">let</span> res <span class="op">=</span> db<span class="op">.</span><span class="fn">safeQuery</span>(<span class="str">"SELECT * FROM users WHERE id = ?"</span>, [<span class="num">1</span>])
+    <span class="nd">print</span>(res<span class="op">.</span><span class="fn">fetchAllAssoc</span>())
+    
+    res<span class="op">.</span><span class="fn">close</span>()
+    db<span class="op">.</span><span class="fn">close</span>()
+<span class="kw">end</span></code></pre>
+
+                            <!-- showcase-networking -->
+                            <pre id="showcase-networking" class="lp-terminal-code"><code><span class="kw">use</span> http
+
+<span class="kw">let</span> server <span class="op">=</span> http<span class="op">.</span><span class="fn">createServer</span>(<span class="kw">fn</span>(req, res)
+    res<span class="op">.</span><span class="fn">send</span>(<span class="str">"Hello from Djazair Asynchronous HTTP Server!"</span>)
+<span class="kw">end</span>)
+
+<span class="nd">print</span>(<span class="str">"Server started at http://127.0.0.1:8080"</span>)
+server<span class="op">.</span><span class="fn">listen</span>(<span class="num">8080</span>)</code></pre>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Benchmark Section -->
+        <section class="lp-section">
+            <h2 class="lp-section-title">Lightweight & Fast</h2>
+            <p class="lp-section-sub">Djazair is engineered to be as featherlight as Lua, while providing modern developer comforts.</p>
+            <div class="benchmarks-wrapper">
+                <div class="bench-grid">
+                    <!-- Startup Latency -->
+                    <div class="bench-col">
+                        <h3><i class="fa-solid fa-gauge-high"></i> Startup Latency (lower is better)</h3>
+                        <div class="bench-item">
+                            <div class="bench-info">
+                                <span class="bench-label">Djazair v1.0.5</span>
+                                <span class="bench-value best">~0.15 ms</span>
+                            </div>
+                            <div class="bench-bar-bg">
+                                <div class="bench-bar-fill fill-djazair" data-width="1.5%"></div>
+                            </div>
+                        </div>
+                        <div class="bench-item">
+                            <div class="bench-info">
+                                <span class="bench-label">Lua 5.4</span>
+                                <span class="bench-value">~0.12 ms</span>
+                            </div>
+                            <div class="bench-bar-bg">
+                                <div class="bench-bar-fill fill-lua" data-width="1.2%"></div>
+                            </div>
+                        </div>
+                        <div class="bench-item">
+                            <div class="bench-info">
+                                <span class="bench-label">Python 3.11</span>
+                                <span class="bench-value">~9.20 ms</span>
+                            </div>
+                            <div class="bench-bar-bg">
+                                <div class="bench-bar-fill fill-python" data-width="45%"></div>
+                            </div>
+                        </div>
+                        <div class="bench-item">
+                            <div class="bench-info">
+                                <span class="bench-label">Node.js v20</span>
+                                <span class="bench-value">~22.40 ms</span>
+                            </div>
+                            <div class="bench-bar-bg">
+                                <div class="bench-bar-fill fill-node" data-width="100%"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Binary footprint -->
+                    <div class="bench-col">
+                        <h3><i class="fa-solid fa-box-open"></i> Binary Footprint (lower is better)</h3>
+                        <div class="bench-item">
+                            <div class="bench-info">
+                                <span class="bench-label">Djazair (Interpreter VM)</span>
+                                <span class="bench-value">~180 KB</span>
+                            </div>
+                            <div class="bench-bar-bg">
+                                <div class="bench-bar-fill fill-djazair" data-width="5.5%"></div>
+                            </div>
+                        </div>
+                        <div class="bench-item">
+                            <div class="bench-info">
+                                <span class="bench-label">Lua (Interpreter VM)</span>
+                                <span class="bench-value best">~280 KB</span>
+                            </div>
+                            <div class="bench-bar-bg">
+                                <div class="bench-bar-fill fill-lua" data-width="8.5%"></div>
+                            </div>
+                        </div>
+                        <div class="bench-item">
+                            <div class="bench-info">
+                                <span class="bench-label">Python 3.11 (Minimal stdlib)</span>
+                                <span class="bench-value">~15.4 MB</span>
+                            </div>
+                            <div class="bench-bar-bg">
+                                <div class="bench-bar-fill fill-python" data-width="50%"></div>
+                            </div>
+                        </div>
+                        <div class="bench-item">
+                            <div class="bench-info">
+                                <span class="bench-label">Node.js v20 (Statically linked)</span>
+                                <span class="bench-value">~31.2 MB</span>
+                            </div>
+                            <div class="bench-bar-bg">
+                                <div class="bench-bar-fill fill-node" data-width="100%"></div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </section>
@@ -426,19 +385,20 @@
             <p>Dive into the documentation, explore the standard library, or browse the source on GitHub.</p>
             <div class="lp-buttons" style="justify-content:center;">
                 <a href="docs/" class="lp-btn lp-btn-primary"><i class="fa-solid fa-book-open"></i> Documentation</a>
-                <a href="docs/getting-started/installation.html" class="lp-btn lp-btn-secondary"><i class="fa-solid fa-download"></i> Installation</a>
-                <a href="docs/language-guide/comments.html" class="lp-btn lp-btn-ghost"><i class="fa-solid fa-code"></i> Language Guide</a>
+                <a href="docs/getting-started/installation" class="lp-btn lp-btn-secondary"><i class="fa-solid fa-download"></i> Installation</a>
+                <a href="docs/language-guide/comments" class="lp-btn lp-btn-ghost"><i class="fa-solid fa-code"></i> Language Guide</a>
             </div>
         </section>
 
         <footer class="lp-footer">
-            <p>&copy; 2026 Harizi Riyadh. Released under the <a href="https://github.com/djazair-language/djazair-language/blob/main/LICENSE">MIT License</a>. &middot; <a href="docs/">Documentation</a> &middot; <a href="https://github.com/djazair-language/djazair-language">GitHub</a></p>
+            <p>&copy; 2026 Harizi Riyadh. Released under the <a href="https://github.com/djazair-language/djazair/blob/main/LICENSE" target="_blank">MIT License</a>. &middot; <a href="docs/">Documentation</a> &middot; <a href="https://github.com/djazair-language/djazair" target="_blank">GitHub</a></p>
         </footer>
     </div>
 
     <button id="back-to-top" aria-label="Back to top"><i class="fa-solid fa-arrow-up"></i></button>
 
     <script>
+        // Back to top button logic
         (function() {
             var btn = document.getElementById("back-to-top");
             if (!btn) return;
@@ -447,6 +407,132 @@
             });
             btn.addEventListener("click", function() {
                 window.scrollTo({ top: 0, behavior: "smooth" });
+            });
+        })();
+
+        // Tab switching logic inside code terminal
+        function switchTab(btn, tabId) {
+            // Deactivate old tab buttons and code blocks
+            var container = btn.closest(".lp-terminal");
+            container.querySelectorAll(".lp-terminal-tab").forEach(function(t) {
+                t.classList.remove("active");
+            });
+            container.querySelectorAll(".lp-terminal-code").forEach(function(c) {
+                c.classList.remove("active");
+            });
+
+            // Activate current tab button and code block
+            btn.classList.add("active");
+            var targetCode = document.getElementById(tabId);
+            if (targetCode) {
+                targetCode.classList.add("active");
+            }
+        }
+
+        // Showcase Tab descriptions mapping
+        var showcaseData = {
+            'showcase-games': {
+                title: 'Interactive 2D Games with Raylib',
+                desc: 'Djazair features an official Object-Oriented wrapper for the popular Raylib engine. Build 2D graphics, handle window drawing loops, configure FPS targets, poll keyboard/mouse inputs, and manage audio devices directly in Djazair.',
+                filename: 'game.dz'
+            },
+            'showcase-desktop': {
+                title: 'Desktop Apps with WebView',
+                desc: 'Djazair integrates directly with the Edge/Chromium WebView2 runtime. Design interfaces in HTML/CSS/JS and power them with Djazair business logic in the backend. Includes IPC communication, menus, system tray icon support, and toast notifications.',
+                filename: 'app.dz'
+            },
+            'showcase-database': {
+                title: 'Secure Database Connectivity',
+                desc: 'Access serverless SQLite databases locally or connect to remote MySQL/MariaDB database servers. Protect your data automatically with secure, pre-parsed parameterized queries to prevent SQL injections.',
+                filename: 'database.dz'
+            },
+            'showcase-networking': {
+                title: 'High-Performance Networking',
+                desc: 'Build asynchronous HTTP servers, REST APIs, or TCP/UDP socket servers. Utilise coroutine-based non-blocking execution to handle thousands of requests concurrently with simple callback functions.',
+                filename: 'server.dz'
+            }
+        };
+
+        function switchShowcaseTab(tabEl, tabId) {
+            // Remove active classes
+            var container = tabEl.closest('.showcase-container');
+            container.querySelectorAll('.showcase-tab').forEach(function(t) {
+                t.classList.remove('active');
+            });
+            container.querySelectorAll('.lp-terminal-code').forEach(function(c) {
+                c.classList.remove('active');
+            });
+            
+            // Set active class
+            tabEl.classList.add('active');
+            
+            // Show code block with fade effect
+            var targetCode = container.querySelector('#' + tabId);
+            if (targetCode) {
+                targetCode.classList.add('active');
+            }
+            
+            // Update details
+            var data = showcaseData[tabId];
+            if (data) {
+                container.querySelector('#showcase-title').innerText = data.title;
+                container.querySelector('#showcase-desc').innerText = data.desc;
+                container.querySelector('#showcase-filename').innerText = data.filename;
+            }
+        }
+
+        // Benchmark progress bar animation on scroll reveal
+        (function() {
+            var benchmarkSection = document.querySelector(".benchmarks-wrapper");
+            if (!benchmarkSection) return;
+
+            var animated = false;
+            var observer = new IntersectionObserver(function(entries) {
+                entries.forEach(function(entry) {
+                    if (entry.isIntersecting && !animated) {
+                        animated = true;
+                        // Animate each benchmark bar fill to its data-width
+                        benchmarkSection.querySelectorAll(".bench-bar-fill").forEach(function(bar) {
+                            var width = bar.getAttribute("data-width");
+                            bar.style.width = width;
+                        });
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.15 });
+
+            observer.observe(benchmarkSection);
+        })();
+
+        // Card mouse move effect (shimmer border)
+        document.querySelectorAll(".feature-card").forEach(function(card) {
+            card.addEventListener("mousemove", function(e) {
+                var rect = card.getBoundingClientRect();
+                var x = e.clientX - rect.left;
+                var y = e.clientY - rect.top;
+                card.style.setProperty("--x", x + "px");
+                card.style.setProperty("--y", y + "px");
+            });
+        });
+
+        // Scroll-reveal for feature cards
+        (function() {
+            if (typeof IntersectionObserver === "undefined") {
+                document.querySelectorAll(".feature-card").forEach(function(card) {
+                    card.classList.add("reveal");
+                });
+                return;
+            }
+            var observer = new IntersectionObserver(function(entries) {
+                entries.forEach(function(entry) {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add("reveal");
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.1 });
+            document.querySelectorAll(".feature-card").forEach(function(card) {
+                observer.observe(card);
             });
         })();
     </script>
