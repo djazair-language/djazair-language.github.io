@@ -48,29 +48,29 @@
             <div class="dpm-how-it-works" style="max-width: 900px; width: 100%; margin-bottom: 4rem; text-align: left;">
                 <div class="showcase-info-panel" style="margin-bottom: 2rem;">
                     <h3>How DPM Works</h3>
-                    <p>The Djazair Package Manager (DPM) uses a simple, decentralized architecture. Packages are fetched directly from the official extensions repository or any public GitHub repository. When you install a package, DPM downloads it into a local <code>dpm_modules</code> folder and tracks it in your <code>dpm.json</code> file.</p>
+                    <p>The Djazair Package Manager (DPM) uses a modern, decentralized architecture. Packages are fetched directly from the official extensions repository or any public GitHub repository. When you install a package, DPM downloads it securely into your global Djazair libraries directory, making it instantly available to all your scripts.</p>
                 </div>
                 
                 <div class="bench-grid" style="gap: 1.5rem;">
                     <div class="feature-card">
-                        <div class="feature-title" style="color: var(--color-primary);"><i class="fa-solid fa-folder-plus"></i> Initialize Project</div>
-                        <div class="feature-desc" style="margin-bottom: 1rem;">Create a new project and generate a <code>dpm.json</code> tracking file.</div>
-                        <code style="background: rgba(0,0,0,0.2); padding: 0.5rem 1rem; border-radius: 6px; color: #fff; font-family: var(--font-mono); display: block; border: 1px solid rgba(255,255,255,0.05);">dpm init</code>
+                        <div class="feature-title" style="color: var(--color-primary);"><i class="fa-solid fa-download"></i> Install Packages</div>
+                        <div class="feature-desc" style="margin-bottom: 1rem;">Install globally from name, GitHub, or ZIP files.</div>
+                        <code style="background: rgba(0,0,0,0.2); padding: 0.5rem 1rem; border-radius: 6px; color: #fff; font-family: var(--font-mono); display: block; border: 1px solid rgba(255,255,255,0.05);">dpm install &lt;pkg&gt;</code>
                     </div>
                     <div class="feature-card">
-                        <div class="feature-title" style="color: var(--color-primary);"><i class="fa-solid fa-download"></i> Install Package</div>
-                        <div class="feature-desc" style="margin-bottom: 1rem;">Fetch a package and save it into <code>dpm_modules</code>.</div>
-                        <code style="background: rgba(0,0,0,0.2); padding: 0.5rem 1rem; border-radius: 6px; color: #fff; font-family: var(--font-mono); display: block; border: 1px solid rgba(255,255,255,0.05);">dpm install &lt;package&gt;</code>
+                        <div class="feature-title" style="color: var(--color-primary);"><i class="fa-solid fa-hammer"></i> Build Native Code</div>
+                        <div class="feature-desc" style="margin-bottom: 1rem;">Compile a package's native C/C++ extensions dynamically.</div>
+                        <code style="background: rgba(0,0,0,0.2); padding: 0.5rem 1rem; border-radius: 6px; color: #fff; font-family: var(--font-mono); display: block; border: 1px solid rgba(255,255,255,0.05);">dpm build &lt;pkg&gt;</code>
                     </div>
                     <div class="feature-card">
                         <div class="feature-title" style="color: var(--color-primary);"><i class="fa-solid fa-arrows-rotate"></i> Update Dependencies</div>
-                        <div class="feature-desc" style="margin-bottom: 1rem;">Update all installed packages to their latest versions.</div>
-                        <code style="background: rgba(0,0,0,0.2); padding: 0.5rem 1rem; border-radius: 6px; color: #fff; font-family: var(--font-mono); display: block; border: 1px solid rgba(255,255,255,0.05);">dpm update</code>
+                        <div class="feature-desc" style="margin-bottom: 1rem;">Update installed packages from their original sources.</div>
+                        <code style="background: rgba(0,0,0,0.2); padding: 0.5rem 1rem; border-radius: 6px; color: #fff; font-family: var(--font-mono); display: block; border: 1px solid rgba(255,255,255,0.05);">dpm update &lt;pkg&gt;</code>
                     </div>
                     <div class="feature-card">
-                        <div class="feature-title" style="color: var(--color-primary);"><i class="fa-solid fa-cloud-arrow-up"></i> Publish Your Own</div>
-                        <div class="feature-desc" style="margin-bottom: 1rem;">Publish your library for the Djazair community to use.</div>
-                        <code style="background: rgba(0,0,0,0.2); padding: 0.5rem 1rem; border-radius: 6px; color: #fff; font-family: var(--font-mono); display: block; border: 1px solid rgba(255,255,255,0.05);">dpm publish</code>
+                        <div class="feature-title" style="color: var(--color-primary);"><i class="fa-solid fa-folder-plus"></i> Package Scaffold</div>
+                        <div class="feature-desc" style="margin-bottom: 1rem;">Initialize a new package and generate its <code>dpm.json</code>.</div>
+                        <code style="background: rgba(0,0,0,0.2); padding: 0.5rem 1rem; border-radius: 6px; color: #fff; font-family: var(--font-mono); display: block; border: 1px solid rgba(255,255,255,0.05);">dpm init</code>
                     </div>
                 </div>
             </div>

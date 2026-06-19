@@ -1590,86 +1590,60 @@ end
 # Standard Library Pages
 PAGES_CONTENT["docs/language-guide/dpm.html"] = """
 <h1>Package Manager (DPM)</h1>
-<p>DPM (Djazair Package Manager) is the official package manager for the Djazair language. It allows you to easily install third-party libraries, manage project dependencies, and publish your own packages to the community.</p>
+<p>DPM (Djazair Package Manager) is the official package manager for the Djazair language. It allows you to easily install third-party libraries, compile native C/C++ extensions, and manage project dependencies.</p>
 
-<div class="alert alert-note">
-    <i class="fa-solid fa-circle-info"></i>
+<div class="note-box">
     <p>DPM is written entirely in Djazair and comes bundled with the standard distribution.</p>
 </div>
 
 <h2>Basic Commands</h2>
 <p>DPM provides a simple command-line interface to interact with packages.</p>
 
-<h3>Initialising a Project</h3>
-<p>To start a new project, use <code>init</code>. This creates a <code>dpm.json</code> file in your current directory.</p>
+<h3>Initialization</h3>
+<p>To start a new project or package, use <code>init</code>. This creates a <code>dpm.json</code> file in your current directory.</p>
 <pre class="shell"><code>dpm init</code></pre>
 
 <p>The generated <code>dpm.json</code> will look something like this:</p>
-<pre class="json"><code>{
-  "name": "my-awesome-project",
+<pre><code>{
+  "name": "my-project",
   "version": "1.0.0",
+  "description": "",
   "dependencies": {}
 }</code></pre>
 
 <h3>Installing Packages</h3>
-<p>To install a package, use the <code>install</code> command. By default, DPM fetches packages from the official Djazair registry or directly from GitHub repositories.</p>
+<p>To install a package, use the <code>install</code> command. DPM fetches packages from the official Djazair registry, GitHub repositories, or local ZIP files, and installs them globally into your Djazair libraries directory.</p>
+<pre class="shell"><code># Install from official extensions repository
+dpm install sqlite
 
-<pre class="shell"><code># Install a package from the official registry
-dpm install http-router
-
-# Install a specific version
-dpm install http-router@1.2.0
-
-# Install directly from a GitHub repository
+# Install from a specific GitHub repository
 dpm install github:username/repo-name</code></pre>
 
-<p>Installed packages are placed in the <code>dpm_modules</code> directory in your project root. DPM automatically adds the installed package to your <code>dpm.json</code> file.</p>
+<p>Once installed, you can use the module in any of your scripts anywhere on your system:</p>
+<pre><code>use sqlite
 
-<h3>Using Installed Packages</h3>
-<p>Once a package is installed, you can <code>use</code> it directly in your code without providing a relative path.</p>
+let db = sqlite.open("test.db")
+# ...
+</code></pre>
 
-<pre class="djazair"><code>use router from "http-router"
-use http
+<h3>Building Native Extensions</h3>
+<p>Some extensions (like <code>raylib</code>, <code>sqlite</code>, or <code>mysql</code>) contain C/C++ source code that must be compiled into native dynamic libraries (.dll, .so, or .dylib) before they can be used.</p>
+<pre class="shell"><code>dpm build sqlite</code></pre>
+<p>DPM automatically detects your platform and uses the available C compiler (GCC, Clang, or MSVC) to build the extension.</p>
 
-let app = router.new()
+<h3>Updating & Removing Packages</h3>
+<p>To update a package to its latest version from its original source:</p>
+<pre class="shell"><code>dpm update sqlite</code></pre>
 
-app.get("/", fn(req, res)
-    res.send("Hello from DPM package!")
-end)
+<p>To completely remove an installed package and its files:</p>
+<pre class="shell"><code>dpm remove sqlite</code></pre>
 
-http.listen(8080, app)</code></pre>
+<h3>Listing Installed Packages</h3>
+<p>To view all packages currently installed on your system:</p>
+<pre class="shell"><code>dpm list</code></pre>
 
-<h3>Updating and Removing</h3>
-<p>To update all installed packages to their latest compatible versions:</p>
-<pre class="shell"><code>dpm update</code></pre>
-
-<p>To remove a package and delete it from <code>dpm.json</code>:</p>
-<pre class="shell"><code>dpm remove http-router</code></pre>
-
-<h2>Creating and Publishing Packages</h2>
-<p>DPM makes it easy to share your code with others.</p>
-
-<h3>Structure of a Package</h3>
-<p>A valid DPM package must contain:</p>
-<ol>
-    <li>A <code>dpm.json</code> file with at least <code>name</code> and <code>version</code> fields.</li>
-    <li>A <code>main.dz</code> file, which acts as the entry point when your package is imported.</li>
-</ol>
-
-<h3>Publishing</h3>
-<p>Once your package is ready and pushed to a public GitHub repository, others can install it using the <code>github:user/repo</code> syntax.</p>
-<p>To publish to the official registry, you can run:</p>
-<pre class="shell"><code>dpm publish</code></pre>
-
-<h2>Global Installation</h2>
-<p>Some packages provide command-line tools. You can install them globally so they are available from anywhere on your system.</p>
-<pre class="shell"><code>dpm install -g dz-linter</code></pre>
-<p>Global packages are installed in your user's home directory. Make sure to add this path to your system's <code>PATH</code> environment variable.</p>
-
-<div class="alert alert-tip">
-    <i class="fa-solid fa-lightbulb"></i>
-    <p>Keep your <code>dpm.json</code> committed to your version control system, but add <code>dpm_modules/</code> to your <code>.gitignore</code>.</p>
-</div>
+<h2>DPM Configuration</h2>
+<p>Keep your <code>dpm.json</code> committed to your version control system to track your dependencies.</p>
 """
 
 # Examples pages
