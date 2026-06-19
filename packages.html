@@ -52,25 +52,52 @@
                 </div>
                 
                 <div class="features-grid" style="grid-template-columns: repeat(2, 1fr);">
-                    <div class="feature-card reveal" style="padding: 2rem;">
-                        <div class="feature-title" style="color: var(--color-primary); font-size: 1.2rem; font-weight: bold; margin-bottom: 0.5rem;"><i class="fa-solid fa-download"></i> Install Packages</div>
-                        <div class="feature-desc" style="margin-bottom: 1rem; color: var(--text-secondary);">Install globally from name, GitHub, or ZIP files.</div>
-                        <code style="background: rgba(0,0,0,0.3); padding: 0.6rem 1rem; border-radius: 6px; color: #fff; font-family: var(--font-mono); display: block; border: 1px solid rgba(255,255,255,0.05); font-size: 0.9rem;">dpm install &lt;pkg&gt;</code>
+                    <div class="extension-card reveal" style="padding: 1.5rem; justify-content: space-between;">
+                        <div class="ext-header" style="margin-bottom: 0.5rem;">
+                            <div class="ext-icon" style="color: #fff; background: var(--color-primary);"><i class="fa-solid fa-download"></i></div>
+                            <div class="ext-name">Install Packages</div>
+                        </div>
+                        <div class="ext-desc" style="font-size: 0.95rem; color: var(--text-secondary); line-height: 1.5; flex-grow: 1;">Install globally from name, GitHub, or ZIP files.</div>
+                        <div class="ext-install" onclick="navigator.clipboard.writeText('dpm install <pkg>'); this.querySelector('i').className = 'fa-solid fa-check'; setTimeout(() => this.querySelector('i').className = 'fa-regular fa-copy', 2000);">
+                            <span>dpm install &lt;pkg&gt;</span>
+                            <i class="fa-regular fa-copy" title="Copy command"></i>
+                        </div>
                     </div>
-                    <div class="feature-card reveal" style="padding: 2rem;">
-                        <div class="feature-title" style="color: var(--color-primary); font-size: 1.2rem; font-weight: bold; margin-bottom: 0.5rem;"><i class="fa-solid fa-hammer"></i> Build Native Code</div>
-                        <div class="feature-desc" style="margin-bottom: 1rem; color: var(--text-secondary);">Compile a package's native C/C++ extensions.</div>
-                        <code style="background: rgba(0,0,0,0.3); padding: 0.6rem 1rem; border-radius: 6px; color: #fff; font-family: var(--font-mono); display: block; border: 1px solid rgba(255,255,255,0.05); font-size: 0.9rem;">dpm build &lt;pkg&gt;</code>
+                    
+                    <div class="extension-card reveal" style="padding: 1.5rem; justify-content: space-between;">
+                        <div class="ext-header" style="margin-bottom: 0.5rem;">
+                            <div class="ext-icon" style="color: #fff; background: var(--color-primary);"><i class="fa-solid fa-hammer"></i></div>
+                            <div class="ext-name">Build Native Code</div>
+                        </div>
+                        <div class="ext-desc" style="font-size: 0.95rem; color: var(--text-secondary); line-height: 1.5; flex-grow: 1;">Compile a package's native C/C++ extensions dynamically.</div>
+                        <div class="ext-install" onclick="navigator.clipboard.writeText('dpm build <pkg>'); this.querySelector('i').className = 'fa-solid fa-check'; setTimeout(() => this.querySelector('i').className = 'fa-regular fa-copy', 2000);">
+                            <span>dpm build &lt;pkg&gt;</span>
+                            <i class="fa-regular fa-copy" title="Copy command"></i>
+                        </div>
                     </div>
-                    <div class="feature-card reveal" style="padding: 2rem;">
-                        <div class="feature-title" style="color: var(--color-primary); font-size: 1.2rem; font-weight: bold; margin-bottom: 0.5rem;"><i class="fa-solid fa-arrows-rotate"></i> Update Dependencies</div>
-                        <div class="feature-desc" style="margin-bottom: 1rem; color: var(--text-secondary);">Update installed packages from original sources.</div>
-                        <code style="background: rgba(0,0,0,0.3); padding: 0.6rem 1rem; border-radius: 6px; color: #fff; font-family: var(--font-mono); display: block; border: 1px solid rgba(255,255,255,0.05); font-size: 0.9rem;">dpm update &lt;pkg&gt;</code>
+                    
+                    <div class="extension-card reveal" style="padding: 1.5rem; justify-content: space-between;">
+                        <div class="ext-header" style="margin-bottom: 0.5rem;">
+                            <div class="ext-icon" style="color: #fff; background: var(--color-primary);"><i class="fa-solid fa-arrows-rotate"></i></div>
+                            <div class="ext-name">Update Dependencies</div>
+                        </div>
+                        <div class="ext-desc" style="font-size: 0.95rem; color: var(--text-secondary); line-height: 1.5; flex-grow: 1;">Update installed packages from their original sources.</div>
+                        <div class="ext-install" onclick="navigator.clipboard.writeText('dpm update <pkg>'); this.querySelector('i').className = 'fa-solid fa-check'; setTimeout(() => this.querySelector('i').className = 'fa-regular fa-copy', 2000);">
+                            <span>dpm update &lt;pkg&gt;</span>
+                            <i class="fa-regular fa-copy" title="Copy command"></i>
+                        </div>
                     </div>
-                    <div class="feature-card reveal" style="padding: 2rem;">
-                        <div class="feature-title" style="color: var(--color-primary); font-size: 1.2rem; font-weight: bold; margin-bottom: 0.5rem;"><i class="fa-solid fa-folder-plus"></i> Package Scaffold</div>
-                        <div class="feature-desc" style="margin-bottom: 1rem; color: var(--text-secondary);">Initialize a new package and generate <code>dpm.json</code>.</div>
-                        <code style="background: rgba(0,0,0,0.3); padding: 0.6rem 1rem; border-radius: 6px; color: #fff; font-family: var(--font-mono); display: block; border: 1px solid rgba(255,255,255,0.05); font-size: 0.9rem;">dpm init</code>
+                    
+                    <div class="extension-card reveal" style="padding: 1.5rem; justify-content: space-between;">
+                        <div class="ext-header" style="margin-bottom: 0.5rem;">
+                            <div class="ext-icon" style="color: #fff; background: var(--color-primary);"><i class="fa-solid fa-folder-plus"></i></div>
+                            <div class="ext-name">Package Scaffold</div>
+                        </div>
+                        <div class="ext-desc" style="font-size: 0.95rem; color: var(--text-secondary); line-height: 1.5; flex-grow: 1;">Initialize a new package and generate <code>dpm.json</code>.</div>
+                        <div class="ext-install" onclick="navigator.clipboard.writeText('dpm init'); this.querySelector('i').className = 'fa-solid fa-check'; setTimeout(() => this.querySelector('i').className = 'fa-regular fa-copy', 2000);">
+                            <span>dpm init</span>
+                            <i class="fa-regular fa-copy" title="Copy command"></i>
+                        </div>
                     </div>
                 </div>
             </div>
