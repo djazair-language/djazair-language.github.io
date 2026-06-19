@@ -45,32 +45,32 @@
             </div>
             
             <!-- How DPM Works Section -->
-            <div class="dpm-how-it-works" style="max-width: 900px; width: 100%; margin-bottom: 4rem; text-align: left;">
-                <div class="showcase-info-panel" style="margin-bottom: 2rem;">
-                    <h3>How DPM Works</h3>
-                    <p>The Djazair Package Manager (DPM) uses a modern, decentralized architecture. Packages are fetched directly from the official extensions repository or any public GitHub repository. When you install a package, DPM downloads it securely into your global Djazair libraries directory, making it instantly available to all your scripts.</p>
+            <div class="dpm-how-it-works" style="max-width: 1000px; width: 100%; margin: 0 auto 5rem; text-align: left;">
+                <div class="showcase-info-panel" style="margin-bottom: 2.5rem; border: 1px solid rgba(16, 185, 129, 0.2); background: rgba(16, 31, 48, 0.6);">
+                    <h3 style="margin-top: 0;"><i class="fa-solid fa-circle-info" style="color: var(--color-primary); margin-right: 10px;"></i>How DPM Works</h3>
+                    <p style="margin-bottom: 0;">The Djazair Package Manager (DPM) uses a modern, decentralized architecture. Packages are fetched directly from the official extensions repository or any public GitHub repository. When you install a package, DPM downloads it securely into your global Djazair libraries directory, making it instantly available to all your scripts.</p>
                 </div>
                 
-                <div class="bench-grid" style="gap: 1.5rem;">
-                    <div class="feature-card">
-                        <div class="feature-title" style="color: var(--color-primary);"><i class="fa-solid fa-download"></i> Install Packages</div>
-                        <div class="feature-desc" style="margin-bottom: 1rem;">Install globally from name, GitHub, or ZIP files.</div>
-                        <code style="background: rgba(0,0,0,0.2); padding: 0.5rem 1rem; border-radius: 6px; color: #fff; font-family: var(--font-mono); display: block; border: 1px solid rgba(255,255,255,0.05);">dpm install &lt;pkg&gt;</code>
+                <div class="features-grid" style="grid-template-columns: repeat(2, 1fr);">
+                    <div class="feature-card" style="padding: 2rem;">
+                        <div class="feature-title" style="color: var(--color-primary); font-size: 1.2rem; font-weight: bold; margin-bottom: 0.5rem;"><i class="fa-solid fa-download"></i> Install Packages</div>
+                        <div class="feature-desc" style="margin-bottom: 1rem; color: var(--text-secondary);">Install globally from name, GitHub, or ZIP files.</div>
+                        <code style="background: rgba(0,0,0,0.3); padding: 0.6rem 1rem; border-radius: 6px; color: #fff; font-family: var(--font-mono); display: block; border: 1px solid rgba(255,255,255,0.05); font-size: 0.9rem;">dpm install &lt;pkg&gt;</code>
                     </div>
-                    <div class="feature-card">
-                        <div class="feature-title" style="color: var(--color-primary);"><i class="fa-solid fa-hammer"></i> Build Native Code</div>
-                        <div class="feature-desc" style="margin-bottom: 1rem;">Compile a package's native C/C++ extensions dynamically.</div>
-                        <code style="background: rgba(0,0,0,0.2); padding: 0.5rem 1rem; border-radius: 6px; color: #fff; font-family: var(--font-mono); display: block; border: 1px solid rgba(255,255,255,0.05);">dpm build &lt;pkg&gt;</code>
+                    <div class="feature-card" style="padding: 2rem;">
+                        <div class="feature-title" style="color: var(--color-primary); font-size: 1.2rem; font-weight: bold; margin-bottom: 0.5rem;"><i class="fa-solid fa-hammer"></i> Build Native Code</div>
+                        <div class="feature-desc" style="margin-bottom: 1rem; color: var(--text-secondary);">Compile a package's native C/C++ extensions.</div>
+                        <code style="background: rgba(0,0,0,0.3); padding: 0.6rem 1rem; border-radius: 6px; color: #fff; font-family: var(--font-mono); display: block; border: 1px solid rgba(255,255,255,0.05); font-size: 0.9rem;">dpm build &lt;pkg&gt;</code>
                     </div>
-                    <div class="feature-card">
-                        <div class="feature-title" style="color: var(--color-primary);"><i class="fa-solid fa-arrows-rotate"></i> Update Dependencies</div>
-                        <div class="feature-desc" style="margin-bottom: 1rem;">Update installed packages from their original sources.</div>
-                        <code style="background: rgba(0,0,0,0.2); padding: 0.5rem 1rem; border-radius: 6px; color: #fff; font-family: var(--font-mono); display: block; border: 1px solid rgba(255,255,255,0.05);">dpm update &lt;pkg&gt;</code>
+                    <div class="feature-card" style="padding: 2rem;">
+                        <div class="feature-title" style="color: var(--color-primary); font-size: 1.2rem; font-weight: bold; margin-bottom: 0.5rem;"><i class="fa-solid fa-arrows-rotate"></i> Update Dependencies</div>
+                        <div class="feature-desc" style="margin-bottom: 1rem; color: var(--text-secondary);">Update installed packages from original sources.</div>
+                        <code style="background: rgba(0,0,0,0.3); padding: 0.6rem 1rem; border-radius: 6px; color: #fff; font-family: var(--font-mono); display: block; border: 1px solid rgba(255,255,255,0.05); font-size: 0.9rem;">dpm update &lt;pkg&gt;</code>
                     </div>
-                    <div class="feature-card">
-                        <div class="feature-title" style="color: var(--color-primary);"><i class="fa-solid fa-folder-plus"></i> Package Scaffold</div>
-                        <div class="feature-desc" style="margin-bottom: 1rem;">Initialize a new package and generate its <code>dpm.json</code>.</div>
-                        <code style="background: rgba(0,0,0,0.2); padding: 0.5rem 1rem; border-radius: 6px; color: #fff; font-family: var(--font-mono); display: block; border: 1px solid rgba(255,255,255,0.05);">dpm init</code>
+                    <div class="feature-card" style="padding: 2rem;">
+                        <div class="feature-title" style="color: var(--color-primary); font-size: 1.2rem; font-weight: bold; margin-bottom: 0.5rem;"><i class="fa-solid fa-folder-plus"></i> Package Scaffold</div>
+                        <div class="feature-desc" style="margin-bottom: 1rem; color: var(--text-secondary);">Initialize a new package and generate <code>dpm.json</code>.</div>
+                        <code style="background: rgba(0,0,0,0.3); padding: 0.6rem 1rem; border-radius: 6px; color: #fff; font-family: var(--font-mono); display: block; border: 1px solid rgba(255,255,255,0.05); font-size: 0.9rem;">dpm init</code>
                     </div>
                 </div>
             </div>
