@@ -592,6 +592,177 @@ body {
     line-height: 1.6;
 }
 
+
+/* Editor Support Section */
+.lp-editors {
+    width: 100%;
+    margin: 6rem 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.editor-cards {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2rem;
+    width: 100%;
+    margin-bottom: 3rem;
+}
+
+.editor-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: 16px;
+    padding: 2rem;
+    display: flex;
+    gap: 1.5rem;
+    align-items: flex-start;
+    text-decoration: none;
+    color: var(--text-primary);
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.editor-card:hover {
+    transform: translateY(-4px);
+    border-color: var(--color-primary);
+    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.2);
+}
+
+.editor-card-icon {
+    width: 64px;
+    height: 64px;
+    border-radius: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2rem;
+    color: #fff;
+    flex-shrink: 0;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.editor-card-body {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.editor-card-name {
+    font-family: var(--font-heading);
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+.editor-badge {
+    font-family: var(--font-sans);
+    font-size: 0.7rem;
+    background: rgba(16, 185, 129, 0.15);
+    color: var(--color-primary);
+    padding: 0.15rem 0.5rem;
+    border-radius: 12px;
+    font-weight: 600;
+    border: 1px solid rgba(16, 185, 129, 0.3);
+}
+
+.editor-card-desc {
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+    line-height: 1.5;
+}
+
+.editor-card-desc code {
+    background: rgba(255,255,255,0.05);
+    padding: 0.1rem 0.3rem;
+    border-radius: 4px;
+    font-size: 0.85em;
+}
+
+.editor-card-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-top: 0.5rem;
+}
+
+.editor-card-tags span {
+    font-size: 0.75rem;
+    color: var(--text-muted);
+    background: rgba(255,255,255,0.03);
+    padding: 0.2rem 0.6rem;
+    border-radius: 4px;
+    border: 1px solid rgba(255,255,255,0.05);
+}
+
+.editor-card-arrow {
+    position: absolute;
+    top: 1.5rem;
+    right: 1.5rem;
+    color: var(--text-muted);
+    font-size: 1.1rem;
+    opacity: 0;
+    transform: translate(-10px, 10px);
+    transition: all 0.3s ease;
+}
+
+.editor-card:hover .editor-card-arrow {
+    opacity: 1;
+    color: var(--color-primary);
+    transform: translate(0, 0);
+}
+
+/* Install Steps */
+.editor-install {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    background: rgba(255,255,255,0.02);
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    padding: 1.5rem 2rem;
+    gap: 1rem;
+}
+
+.editor-install-step {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+}
+
+.editor-install-step strong {
+    color: var(--text-primary);
+    font-weight: 600;
+}
+
+.editor-install-num {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    background: rgba(16, 185, 129, 0.1);
+    color: var(--color-primary);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 0.85rem;
+    border: 1px solid rgba(16, 185, 129, 0.2);
+}
+
+.editor-install-divider {
+    height: 1px;
+    width: 30px;
+    background: var(--border-color);
+}
+
 @media (max-width: 900px) {
     .showcase-content {
         grid-template-columns: 1fr;
@@ -613,5 +784,8 @@ body {
     .lp { padding: 0 1.25rem; }
     .features-grid { grid-template-columns: 1fr; }
     .bench-grid { grid-template-columns: 1fr; gap: 2rem; }
+    .editor-cards { grid-template-columns: 1fr; }
+    .editor-install { flex-direction: column; align-items: flex-start; gap: 1.5rem; }
+    .editor-install-divider { width: 1px; height: 20px; margin-left: 14px; }
     .lp-header-nav a:not(.lp-header-github) { display: none; }
 }
