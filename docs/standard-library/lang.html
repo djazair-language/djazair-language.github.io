@@ -253,6 +253,7 @@
         <li><a href="../standard-library/lang.html#runtime-info" class="sub-link">Runtime Info</a></li>
         <li><a href="../standard-library/lang.html#control" class="sub-link">Control</a></li>
         <li><a href="../standard-library/lang.html#introspection" class="sub-link">Introspection</a></li>
+        <li><a href="../standard-library/lang.html#module-members" class="sub-link">moduleMembers</a></li>
         <li><a href="../standard-library/lang.html#library-paths--queries" class="sub-link">Library Paths</a></li>
       </ul>
     </li>
@@ -385,12 +386,20 @@ lang<span class="op">.</span><span class="fn">gc</span>()
 <ul>
     <li><code>lang.disassembler(fn)</code> - Disassemble closure bytecode into human-readable instructions. Returns string.</li>
     <li><code>lang.arity(fn)</code> - Returns number of formal parameters of a function.</li>
+    <li><code>lang.moduleMembers(mod)</code> - Returns a Map of all exported symbols from a Module or Library. Keys are symbol names, values are the symbols themselves.</li>
     <li><code>lang.sysLog(level, message)</code> - Write timestamped log entry to stdout.</li>
 </ul>
 <pre><code><span class="kw">use</span> lang
 <span class="kw">let</span> add <span class="op">=</span> <span class="kw">fn</span>(a, b) a <span class="op">+</span> b <span class="kw">end</span>
 <span class="nd">print</span>(<span class="nd">str</span>(lang<span class="op">.</span><span class="fn">arity</span>(add)))  <span class="comment"># 2</span>
-lang<span class="op">.</span><span class="fn">sysLog</span>(<span class="str">"INFO"</span>, <span class="str">"System ready"</span>)</code></pre>
+lang<span class="op">.</span><span class="fn">sysLog</span>(<span class="str">"INFO"</span>, <span class="str">"System ready"</span>)
+
+<span class="comment"># Inspect a module&#39;s exports</span>
+<span class="kw">use</span> file
+<span class="kw">let</span> syms <span class="op">=</span> lang<span class="op">.</span><span class="fn">moduleMembers</span>(file)
+<span class="kw">for</span> s <span class="kw">in</span> syms<span class="op">.</span><span class="fn">items</span>()
+    <span class="nd">print</span>(s[<span class="num">0</span>] <span class="op">+</span> <span class="str">" -> "</span> <span class="op">+</span> <span class="nd">type</span>(s[<span class="num">1</span>]))
+<span class="kw">end</span></code></pre>
 
 <h2 id="library-paths--amp--queries">Library Paths &amp; Queries</h2>
 <ul>
