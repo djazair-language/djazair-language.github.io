@@ -1894,6 +1894,35 @@ def generate_all_pages():
         # Only regenerate pages that have content in PAGES_CONTENT
         # (preserves manually crafted HTML for reference/ and standard-library/)
         if file_path not in PAGES_CONTENT:
+            target_file_path = os.path.join(BASE_DIR, file_path)
+            if os.path.exists(target_file_path):
+                with open(target_file_path, "r", encoding="utf-8") as f:
+                    content = f.read()
+                
+                # Render components
+                root_prefix = get_root_prefix(file_path)
+                active_home = ' class="active"' if file_path == 'docs/index.html' else ''
+                active_docs = ' class="active"' if file_path.startswith('docs/') and not file_path.startswith('docs/standard-library/') and file_path != 'docs/faq.html' else ''
+                active_std = ' class="active"' if file_path.startswith('docs/standard-library/') else ''
+                active_faq = ' class="active"' if file_path == 'docs/faq.html' else ''
+                
+                navbar_rendered = NAVBAR_TEMPLATE.format(
+                    root_prefix=root_prefix,
+                    active_home=active_home,
+                    active_pkg='',
+                    active_docs=active_docs,
+                    active_std=active_std,
+                    active_faq=active_faq
+                )
+                
+                # Replace the entire <nav class="top-nav">...</nav> block
+                content = re.sub(r'<nav class="top-nav">.*?</nav>', f'<nav class="top-nav">\n            {navbar_rendered}\n        </nav>', content, flags=re.DOTALL)
+                
+                # Replace the entire <footer>...</footer> block
+                content = re.sub(r'<footer>.*?</footer>', f'<footer>\n                    {FOOTER_TEMPLATE}\n                </footer>', content, flags=re.DOTALL)
+                
+                with open(target_file_path, "w", encoding="utf-8") as f:
+                    f.write(content)
             continue
         
         # Calculate relative prefix
