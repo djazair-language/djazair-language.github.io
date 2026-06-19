@@ -113,14 +113,11 @@ LAYOUT = """<!DOCTYPE html>
             <div class="logo-version">v1.0.5</div>
         </div>
         <nav class="top-nav">
-            <a href="{root_prefix}packages.html">Package Manager</a>
             <a href="{root_prefix}" {active_home}>Home</a>
-            <a href="{root_prefix}docs/getting-started/installation" {active_getting}>Getting Started</a>
-            <a href="{root_prefix}docs/language-guide/comments" {active_guide}>Language Guide</a>
-            <a href="{root_prefix}docs/standard-library/" {active_std}>Standard Library</a>
-            <a href="{root_prefix}docs/examples/hello-world" {active_examples}>Examples</a>
-            <a href="{root_prefix}docs/reference/keywords" {active_ref}>Reference</a>
-            <a href="{root_prefix}docs/faq" {active_faq}>FAQ</a>
+            <a href="{root_prefix}packages.html">Package Manager</a>
+            <a href="{root_prefix}docs/getting-started/installation.html" {active_docs}>Documentation</a>
+            <a href="{root_prefix}docs/standard-library/index.html" {active_std}>Standard Library</a>
+            <a href="{root_prefix}docs/faq.html" {active_faq}>faq</a>
         </nav>
         <div class="search-container">
             <span class="search-icon">🔍</span>
@@ -1902,11 +1899,8 @@ def generate_all_pages():
         
         # Determine top navigation active classes
         active_home = 'class="active"' if file_path == 'docs/index.html' else ''
-        active_getting = 'class="active"' if file_path.startswith('docs/getting-started/') else ''
-        active_guide = 'class="active"' if file_path.startswith('docs/language-guide/') else ''
+        active_docs = 'class="active"' if file_path.startswith('docs/') and not file_path.startswith('docs/standard-library/') and not file_path == 'docs/faq.html' else ''
         active_std = 'class="active"' if file_path.startswith('docs/standard-library/') else ''
-        active_examples = 'class="active"' if file_path.startswith('docs/examples/') else ''
-        active_ref = 'class="active"' if file_path.startswith('docs/reference/') else ''
         active_faq = 'class="active"' if file_path == 'docs/faq.html' else ''
 
         # Sidebar navigation compilation
@@ -2021,11 +2015,8 @@ def generate_all_pages():
             title=title,
             root_prefix=root_prefix,
             active_home=active_home,
-            active_getting=active_getting,
-            active_guide=active_guide,
+            active_docs=active_docs,
             active_std=active_std,
-            active_examples=active_examples,
-            active_ref=active_ref,
             active_faq=active_faq,
             sidebar=sidebar_nav,
             breadcrumbs=breadcrumbs,
