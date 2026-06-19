@@ -11,11 +11,266 @@
     <link rel="stylesheet" href="assets/style.css">
     <link rel="stylesheet" href="assets/landing.css">
     <style>
-        .lp-extensions { margin-top: 10rem; }
+        /* ── Page layout ── */
+        .pkg-page { padding-top: 7rem; }
+
+        /* ── Hero ── */
+        .pkg-hero {
+            text-align: center;
+            padding: 5rem 0 4rem;
+        }
+        .pkg-hero-tag {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: rgba(16, 185, 129, 0.1);
+            border: 1px solid rgba(16, 185, 129, 0.25);
+            color: var(--color-primary);
+            padding: 0.35rem 1rem;
+            border-radius: 999px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+        }
+        .pkg-hero h1 {
+            font-family: var(--font-heading);
+            font-size: clamp(2.2rem, 5vw, 3.4rem);
+            font-weight: 800;
+            color: #fff;
+            margin: 0 0 1rem;
+            line-height: 1.15;
+        }
+        .pkg-hero h1 span {
+            background: linear-gradient(135deg, var(--color-primary), #06b6d4);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .pkg-hero p {
+            color: var(--text-secondary);
+            font-size: 1.1rem;
+            max-width: 580px;
+            margin: 0 auto;
+            line-height: 1.7;
+        }
+
+        /* ── Section chrome ── */
+        .pkg-section {
+            padding: 4rem 0;
+        }
+        .pkg-section + .pkg-section {
+            border-top: 1px solid var(--border-color);
+        }
+        .pkg-section-label {
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+            font-family: var(--font-heading);
+            font-size: 0.78rem;
+            font-weight: 700;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: var(--color-primary);
+            margin-bottom: 0.6rem;
+        }
+        .pkg-section-label i { font-size: 0.9rem; }
+        .pkg-section-title {
+            font-family: var(--font-heading);
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: #fff;
+            margin: 0 0 0.5rem;
+        }
+        .pkg-section-sub {
+            color: var(--text-secondary);
+            font-size: 0.97rem;
+            margin: 0 0 2.5rem;
+            line-height: 1.6;
+            max-width: 640px;
+        }
+
+        /* ── Inner container ── */
+        .pkg-inner { max-width: 1100px; margin: 0 auto; }
+
+        /* ── How DPM info box ── */
+        .dpm-info-box {
+            background: rgba(16, 31, 48, 0.7);
+            border: 1px solid rgba(16, 185, 129, 0.2);
+            border-radius: 12px;
+            padding: 1.5rem 2rem;
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+            margin-bottom: 2.5rem;
+        }
+        .dpm-info-box i {
+            color: var(--color-primary);
+            font-size: 1.1rem;
+            margin-top: 2px;
+            flex-shrink: 0;
+        }
+        .dpm-info-box p {
+            color: var(--text-secondary);
+            margin: 0;
+            line-height: 1.65;
+            font-size: 0.97rem;
+        }
+
+        /* ── Commands grid ── */
+        .dpm-cmds-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+            gap: 1.2rem;
+        }
+        .dpm-cmd-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 1.4rem 1.5rem;
+            display: flex;
+            flex-direction: column;
+            gap: 0.6rem;
+            transition: border-color 0.25s, transform 0.25s, box-shadow 0.25s;
+        }
+        .dpm-cmd-card:hover {
+            border-color: rgba(16, 185, 129, 0.35);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 24px rgba(0,0,0,0.25);
+        }
+        .dpm-cmd-header {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+        .dpm-cmd-icon {
+            width: 36px;
+            height: 36px;
+            border-radius: 8px;
+            background: rgba(16, 185, 129, 0.12);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--color-primary);
+            font-size: 1rem;
+            flex-shrink: 0;
+        }
+        .dpm-cmd-name {
+            font-family: var(--font-heading);
+            font-size: 0.95rem;
+            font-weight: 600;
+            color: #fff;
+        }
+        .dpm-cmd-desc {
+            color: var(--text-secondary);
+            font-size: 0.88rem;
+            line-height: 1.5;
+        }
+        .dpm-cmd-code {
+            background: rgba(0,0,0,0.25);
+            border: 1px solid rgba(255,255,255,0.06);
+            border-radius: 6px;
+            padding: 0.45rem 0.75rem;
+            font-family: var(--font-mono);
+            font-size: 0.82rem;
+            color: var(--color-primary);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+            transition: background 0.2s;
+            margin-top: auto;
+        }
+        .dpm-cmd-code:hover { background: rgba(16,185,129,0.08); }
+        .dpm-cmd-code i { color: var(--text-muted); font-size: 0.75rem; }
+        .dpm-cmd-code i:hover { color: var(--color-primary); }
+
+        /* ── Extensions grid ── */
+        .ext-grid-wrapper { max-width: 1100px; margin: 0 auto; }
+
+        /* ── Divider ── */
+        .pkg-divider {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin: 0;
+            color: var(--text-muted);
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+        }
+        .pkg-divider::before,
+        .pkg-divider::after {
+            content: '';
+            flex: 1;
+            height: 1px;
+            background: var(--border-color);
+        }
+
+        /* ── Contribute box ── */
+        .pkg-contribute {
+            background: linear-gradient(135deg, rgba(16,31,48,0.8) 0%, rgba(6,182,212,0.05) 100%);
+            border: 1px dashed rgba(16, 185, 129, 0.4);
+            border-radius: 14px;
+            padding: 2.5rem;
+        }
+        .pkg-contribute h3 {
+            font-family: var(--font-heading);
+            font-size: 1.5rem;
+            color: #fff;
+            margin: 0 0 0.75rem;
+        }
+        .pkg-contribute p {
+            color: var(--text-secondary);
+            line-height: 1.65;
+            margin: 0 0 2rem;
+            max-width: 560px;
+        }
+        .pkg-steps {
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+            margin-bottom: 2rem;
+        }
+        .pkg-step {
+            display: flex;
+            align-items: flex-start;
+            gap: 0.85rem;
+        }
+        .pkg-step-num {
+            width: 26px;
+            height: 26px;
+            border-radius: 50%;
+            background: rgba(16,185,129,0.15);
+            border: 1px solid rgba(16,185,129,0.3);
+            color: var(--color-primary);
+            font-size: 0.75rem;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            margin-top: 1px;
+        }
+        .pkg-step-text { color: #e6edf3; font-size: 0.95rem; line-height: 1.5; }
+        .pkg-step-text strong { color: #fff; }
+        .pkg-gh-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: var(--color-primary);
+            color: #000;
+            font-weight: 700;
+            font-family: var(--font-heading);
+            padding: 0.7rem 1.5rem;
+            border-radius: 8px;
+            text-decoration: none;
+            font-size: 0.95rem;
+            transition: opacity 0.2s, transform 0.2s;
+        }
+        .pkg-gh-btn:hover { opacity: 0.85; transform: translateY(-1px); }
     </style>
 </head>
 <body>
-    <!-- Sticky Glassmorphic Header -->
+    <!-- Sticky Header -->
     <header class="lp-header">
         <div class="lp-header-container">
             <a href="./" class="lp-header-logo">
@@ -32,112 +287,155 @@
     </header>
 
     <div class="lp">
-        <!-- Glow Blobs -->
         <div class="glow-blob blob-1"></div>
         <div class="glow-blob blob-2"></div>
 
-        <!-- Extensions & Ecosystem Section -->
-        <section class="lp-extensions" id="extensions">
-            <div class="lp-section-header">
-                <span class="lp-section-tag"><i class="fa-solid fa-box-open"></i> Ecosystem & Extensions</span>
-                <h2>Expand Djazair with DPM</h2>
-                <p>Use the Djazair Package Manager (DPM) to seamlessly install community extensions. Browse available packages fetched directly from the official repository.</p>
-            </div>
-            
-            <!-- How DPM Works Section -->
-            <div class="dpm-how-it-works" style="max-width: 1000px; width: 100%; margin: 0 auto 5rem; text-align: left;">
-                <div class="showcase-info-panel" style="margin-bottom: 2.5rem; border: 1px solid rgba(16, 185, 129, 0.2); background: rgba(16, 31, 48, 0.6);">
-                    <h3 style="margin-top: 0;"><i class="fa-solid fa-circle-info" style="color: var(--color-primary); margin-right: 10px;"></i>How DPM Works</h3>
-                    <p style="margin-bottom: 0;">The Djazair Package Manager (DPM) uses a modern, decentralized architecture. Packages are fetched directly from the official extensions repository or any public GitHub repository. When you install a package, DPM downloads it securely into your global Djazair libraries directory, making it instantly available to all your scripts.</p>
-                </div>
-                
-                <div class="features-grid" style="grid-template-columns: repeat(2, 1fr);">
-                    <div class="extension-card reveal" style="padding: 1.5rem; justify-content: space-between;">
-                        <div class="ext-header" style="margin-bottom: 0.5rem;">
-                            <div class="ext-icon" style="color: #fff; background: var(--color-primary);"><i class="fa-solid fa-download"></i></div>
-                            <div class="ext-name">Install Packages</div>
-                        </div>
-                        <div class="ext-desc" style="font-size: 0.95rem; color: var(--text-secondary); line-height: 1.5; flex-grow: 1;">Install globally from name, GitHub, or ZIP files.</div>
-                        <div class="ext-install" onclick="navigator.clipboard.writeText('dpm install <pkg>'); this.querySelector('i').className = 'fa-solid fa-check'; setTimeout(() => this.querySelector('i').className = 'fa-regular fa-copy', 2000);">
-                            <span>dpm install &lt;pkg&gt;</span>
-                            <i class="fa-regular fa-copy" title="Copy command"></i>
-                        </div>
-                    </div>
-                    
-                    <div class="extension-card reveal" style="padding: 1.5rem; justify-content: space-between;">
-                        <div class="ext-header" style="margin-bottom: 0.5rem;">
-                            <div class="ext-icon" style="color: #fff; background: var(--color-primary);"><i class="fa-solid fa-hammer"></i></div>
-                            <div class="ext-name">Build Native Code</div>
-                        </div>
-                        <div class="ext-desc" style="font-size: 0.95rem; color: var(--text-secondary); line-height: 1.5; flex-grow: 1;">Compile a package's native C/C++ extensions dynamically.</div>
-                        <div class="ext-install" onclick="navigator.clipboard.writeText('dpm build <pkg>'); this.querySelector('i').className = 'fa-solid fa-check'; setTimeout(() => this.querySelector('i').className = 'fa-regular fa-copy', 2000);">
-                            <span>dpm build &lt;pkg&gt;</span>
-                            <i class="fa-regular fa-copy" title="Copy command"></i>
-                        </div>
-                    </div>
-                    
-                    <div class="extension-card reveal" style="padding: 1.5rem; justify-content: space-between;">
-                        <div class="ext-header" style="margin-bottom: 0.5rem;">
-                            <div class="ext-icon" style="color: #fff; background: var(--color-primary);"><i class="fa-solid fa-arrows-rotate"></i></div>
-                            <div class="ext-name">Update Dependencies</div>
-                        </div>
-                        <div class="ext-desc" style="font-size: 0.95rem; color: var(--text-secondary); line-height: 1.5; flex-grow: 1;">Update installed packages from their original sources.</div>
-                        <div class="ext-install" onclick="navigator.clipboard.writeText('dpm update <pkg>'); this.querySelector('i').className = 'fa-solid fa-check'; setTimeout(() => this.querySelector('i').className = 'fa-regular fa-copy', 2000);">
-                            <span>dpm update &lt;pkg&gt;</span>
-                            <i class="fa-regular fa-copy" title="Copy command"></i>
-                        </div>
-                    </div>
-                    
-                    <div class="extension-card reveal" style="padding: 1.5rem; justify-content: space-between;">
-                        <div class="ext-header" style="margin-bottom: 0.5rem;">
-                            <div class="ext-icon" style="color: #fff; background: var(--color-primary);"><i class="fa-solid fa-folder-plus"></i></div>
-                            <div class="ext-name">Package Scaffold</div>
-                        </div>
-                        <div class="ext-desc" style="font-size: 0.95rem; color: var(--text-secondary); line-height: 1.5; flex-grow: 1;">Initialize a new package and generate <code>dpm.json</code>.</div>
-                        <div class="ext-install" onclick="navigator.clipboard.writeText('dpm init'); this.querySelector('i').className = 'fa-solid fa-check'; setTimeout(() => this.querySelector('i').className = 'fa-regular fa-copy', 2000);">
-                            <span>dpm init</span>
-                            <i class="fa-regular fa-copy" title="Copy command"></i>
-                        </div>
-                    </div>
-                </div>
-            </div>
+        <div class="pkg-page">
+            <div class="pkg-inner">
 
-            <div id="extensions-grid" class="extensions-grid">
-                <!-- Extensions will be dynamically loaded here via JS -->
-                <div class="extensions-loading">
-                    <i class="fa-solid fa-spinner fa-spin"></i> Loading extensions from GitHub...
+                <!-- ════════════════════════════════════
+                     HERO
+                     ════════════════════════════════════ -->
+                <div class="pkg-hero">
+                    <div class="pkg-hero-tag"><i class="fa-solid fa-box-open"></i> Package Manager</div>
+                    <h1>Expand Djazair with <span>DPM</span></h1>
+                    <p>The Djazair Package Manager installs native extensions, resolves dependencies, and compiles C/C++ bindings — all from a single tool bundled with the language.</p>
                 </div>
-            </div>
 
-            <!-- Contribute Section -->
-            <div class="contribute-ecosystem" style="max-width: 1000px; width: 100%; margin: 5rem auto 0; text-align: left; background: var(--bg-card); border: 1px dashed rgba(16, 185, 129, 0.4); border-radius: 14px; padding: 2.5rem; position: relative;">
-                <div style="display: flex; gap: 2rem; align-items: center; flex-wrap: wrap;">
-                    <div style="flex: 1; min-width: 300px;">
-                        <h3 style="font-family: var(--font-heading); font-size: 1.6rem; color: #fff; margin-top: 0; margin-bottom: 1rem;"><i class="fa-brands fa-github" style="margin-right: 10px; color: var(--color-primary);"></i>Contribute an Extension</h3>
-                        <p style="color: var(--text-secondary); line-height: 1.6; margin-bottom: 1.5rem;">The Djazair ecosystem thrives on community contributions. If you have built an awesome module, wrapper, or C/C++ extension, you can easily share it with everyone by submitting it to the official repository.</p>
-                        
-                        <div style="display: flex; flex-direction: column; gap: 0.8rem; margin-bottom: 2rem;">
-                            <div style="display: flex; align-items: flex-start; gap: 10px;">
-                                <i class="fa-solid fa-1" style="color: var(--color-primary); background: rgba(16,185,129,0.1); padding: 5px; border-radius: 4px; font-size: 0.8rem; margin-top: 3px;"></i>
-                                <span style="color: #e6edf3;"><strong>Create a dpm.json:</strong> Define your package name, version, and details using <code>dpm init</code>.</span>
+                <!-- ════════════════════════════════════
+                     SECTION 1 – How DPM Works
+                     ════════════════════════════════════ -->
+                <div class="pkg-section">
+                    <div class="pkg-section-label"><i class="fa-solid fa-terminal"></i> Getting Started</div>
+                    <h2 class="pkg-section-title">How DPM Works</h2>
+                    <p class="pkg-section-sub">DPM fetches packages from the official extensions repository or any public GitHub repository and installs them globally into your Djazair libraries directory.</p>
+
+                    <div class="dpm-info-box">
+                        <i class="fa-solid fa-circle-info"></i>
+                        <p>DPM is written entirely in Djazair and ships with the standard distribution. Once a package is installed, it is available system-wide — no local project folders required.</p>
+                    </div>
+
+                    <div class="dpm-cmds-grid">
+                        <div class="dpm-cmd-card">
+                            <div class="dpm-cmd-header">
+                                <div class="dpm-cmd-icon"><i class="fa-solid fa-folder-plus"></i></div>
+                                <div class="dpm-cmd-name">Initialize</div>
                             </div>
-                            <div style="display: flex; align-items: flex-start; gap: 10px;">
-                                <i class="fa-solid fa-2" style="color: var(--color-primary); background: rgba(16,185,129,0.1); padding: 5px; border-radius: 4px; font-size: 0.8rem; margin-top: 3px;"></i>
-                                <span style="color: #e6edf3;"><strong>Fork & Commit:</strong> Fork the <code>djazair-extensions</code> repository and add your package folder.</span>
-                            </div>
-                            <div style="display: flex; align-items: flex-start; gap: 10px;">
-                                <i class="fa-solid fa-3" style="color: var(--color-primary); background: rgba(16,185,129,0.1); padding: 5px; border-radius: 4px; font-size: 0.8rem; margin-top: 3px;"></i>
-                                <span style="color: #e6edf3;"><strong>Open a PR:</strong> Submit a Pull Request. Once approved, it will be instantly available to all developers!</span>
+                            <div class="dpm-cmd-desc">Create a new <code>dpm.json</code> scaffold for your package.</div>
+                            <div class="dpm-cmd-code" onclick="copyCmd(this, 'dpm init')">
+                                <span>dpm init</span>
+                                <i class="fa-regular fa-copy"></i>
                             </div>
                         </div>
 
-                        <a href="https://github.com/djazair-language/djazair-extensions" target="_blank" class="lp-button primary" style="padding: 0.75rem 1.5rem; border-radius: 8px; font-weight: bold; font-family: var(--font-heading); background: var(--color-primary); color: #000; text-decoration: none; display: inline-flex; align-items: center; gap: 8px; transition: opacity 0.2s;">
-                            View on GitHub <i class="fa-solid fa-arrow-right"></i>
+                        <div class="dpm-cmd-card">
+                            <div class="dpm-cmd-header">
+                                <div class="dpm-cmd-icon"><i class="fa-solid fa-download"></i></div>
+                                <div class="dpm-cmd-name">Install</div>
+                            </div>
+                            <div class="dpm-cmd-desc">Install globally from name, GitHub repo, or local ZIP file.</div>
+                            <div class="dpm-cmd-code" onclick="copyCmd(this, 'dpm install <pkg>')">
+                                <span>dpm install &lt;pkg&gt;</span>
+                                <i class="fa-regular fa-copy"></i>
+                            </div>
+                        </div>
+
+                        <div class="dpm-cmd-card">
+                            <div class="dpm-cmd-header">
+                                <div class="dpm-cmd-icon"><i class="fa-solid fa-hammer"></i></div>
+                                <div class="dpm-cmd-name">Build</div>
+                            </div>
+                            <div class="dpm-cmd-desc">Compile a package's native C/C++ extensions into .dll / .so.</div>
+                            <div class="dpm-cmd-code" onclick="copyCmd(this, 'dpm build <pkg>')">
+                                <span>dpm build &lt;pkg&gt;</span>
+                                <i class="fa-regular fa-copy"></i>
+                            </div>
+                        </div>
+
+                        <div class="dpm-cmd-card">
+                            <div class="dpm-cmd-header">
+                                <div class="dpm-cmd-icon"><i class="fa-solid fa-arrows-rotate"></i></div>
+                                <div class="dpm-cmd-name">Update</div>
+                            </div>
+                            <div class="dpm-cmd-desc">Re-fetch a package from its original source to update it.</div>
+                            <div class="dpm-cmd-code" onclick="copyCmd(this, 'dpm update <pkg>')">
+                                <span>dpm update &lt;pkg&gt;</span>
+                                <i class="fa-regular fa-copy"></i>
+                            </div>
+                        </div>
+
+                        <div class="dpm-cmd-card">
+                            <div class="dpm-cmd-header">
+                                <div class="dpm-cmd-icon"><i class="fa-solid fa-trash"></i></div>
+                                <div class="dpm-cmd-name">Remove</div>
+                            </div>
+                            <div class="dpm-cmd-desc">Uninstall a package and remove all its files from the system.</div>
+                            <div class="dpm-cmd-code" onclick="copyCmd(this, 'dpm remove <pkg>')">
+                                <span>dpm remove &lt;pkg&gt;</span>
+                                <i class="fa-regular fa-copy"></i>
+                            </div>
+                        </div>
+
+                        <div class="dpm-cmd-card">
+                            <div class="dpm-cmd-header">
+                                <div class="dpm-cmd-icon"><i class="fa-solid fa-list"></i></div>
+                                <div class="dpm-cmd-name">List</div>
+                            </div>
+                            <div class="dpm-cmd-desc">Show all currently installed packages on your system.</div>
+                            <div class="dpm-cmd-code" onclick="copyCmd(this, 'dpm list')">
+                                <span>dpm list</span>
+                                <i class="fa-regular fa-copy"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ════════════════════════════════════
+                     SECTION 2 – Available Extensions
+                     ════════════════════════════════════ -->
+                <div class="pkg-section">
+                    <div class="pkg-section-label"><i class="fa-solid fa-cubes"></i> Official Packages</div>
+                    <h2 class="pkg-section-title">Available Extensions</h2>
+                    <p class="pkg-section-sub">All packages are fetched live from the <a href="https://github.com/djazair-language/djazair-extensions" target="_blank" style="color: var(--color-primary); text-decoration: none;">djazair-extensions</a> repository. Click any package to view its source code.</p>
+
+                    <div id="extensions-grid" class="extensions-grid">
+                        <div class="extensions-loading">
+                            <i class="fa-solid fa-spinner fa-spin"></i> Loading extensions from GitHub...
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ════════════════════════════════════
+                     SECTION 3 – Contribute
+                     ════════════════════════════════════ -->
+                <div class="pkg-section">
+                    <div class="pkg-section-label"><i class="fa-brands fa-github"></i> Open Source</div>
+                    <h2 class="pkg-section-title">Contribute an Extension</h2>
+                    <p class="pkg-section-sub">Built something useful? Submit it to the official repository and share it with the entire Djazair community.</p>
+
+                    <div class="pkg-contribute">
+                        <div class="pkg-steps">
+                            <div class="pkg-step">
+                                <div class="pkg-step-num">1</div>
+                                <div class="pkg-step-text"><strong>Create your package:</strong> Run <code>dpm init</code> to generate a <code>dpm.json</code> with name, version, and description fields.</div>
+                            </div>
+                            <div class="pkg-step">
+                                <div class="pkg-step-num">2</div>
+                                <div class="pkg-step-text"><strong>Fork & add your folder:</strong> Fork <code>djazair-extensions</code> on GitHub and add your package as a new subdirectory.</div>
+                            </div>
+                            <div class="pkg-step">
+                                <div class="pkg-step-num">3</div>
+                                <div class="pkg-step-text"><strong>Open a Pull Request:</strong> Once merged, your extension will appear on this page and be installable with <code>dpm install</code>.</div>
+                            </div>
+                        </div>
+                        <a href="https://github.com/djazair-language/djazair-extensions" target="_blank" class="pkg-gh-btn">
+                            <i class="fa-brands fa-github"></i> View Repository
                         </a>
                     </div>
                 </div>
-            </div>
-        </section>
+
+            </div><!-- /pkg-inner -->
+        </div><!-- /pkg-page -->
 
         <footer class="lp-footer">
             <p>&copy; 2026 Harizi Riyadh. Released under the <a href="https://github.com/djazair-language/djazair/blob/main/LICENSE" target="_blank">MIT License</a>. &middot; <a href="docs/">Documentation</a> &middot; <a href="https://github.com/djazair-language/djazair" target="_blank">GitHub</a></p>
@@ -145,7 +443,18 @@
     </div>
 
     <script>
-        // Fetch Extensions from GitHub
+        // ── Copy command helper ──────────────────────────
+        function copyCmd(el, text) {
+            navigator.clipboard.writeText(text);
+            var icon = el.querySelector('i');
+            icon.className = 'fa-solid fa-check';
+            el.style.color = 'var(--color-primary)';
+            setTimeout(function() {
+                icon.className = 'fa-regular fa-copy';
+            }, 2000);
+        }
+
+        // ── Fetch extensions from GitHub ─────────────────
         (function() {
             var grid = document.getElementById("extensions-grid");
             if (!grid) return;
@@ -165,7 +474,6 @@
                         throw new Error("Empty");
                     }
 
-                    // Fetch dpm.json for each extension to get the description
                     var promises = extensions.map(function(ext) {
                         return fetch("https://raw.githubusercontent.com/djazair-language/djazair-extensions/main/" + ext.name + "/dpm.json")
                             .then(res => res.ok ? res.json() : {})
@@ -173,7 +481,7 @@
                                 ext.description = dpm.description || "An official Djazair extension.";
                                 return ext;
                             })
-                            .catch(err => {
+                            .catch(() => {
                                 ext.description = "An official Djazair extension.";
                                 return ext;
                             });
@@ -181,24 +489,22 @@
 
                     return Promise.all(promises);
                 })
-                .then(function(extensionsWithData) {
+                .then(function(exts) {
                     var html = "";
-                    extensionsWithData.forEach(function(ext) {
+                    exts.forEach(function(ext) {
                         html += `
                         <a href="${ext.html_url}" target="_blank" rel="noopener" class="extension-card">
                             <div class="ext-header">
                                 <div class="ext-icon"><i class="fa-solid fa-cube"></i></div>
                                 <div class="ext-name">${ext.name}</div>
                             </div>
-                            <div class="ext-desc" style="font-size: 0.95rem; color: var(--text-secondary); line-height: 1.5; flex-grow: 1;">${ext.description}</div>
-                            <div class="ext-install" onclick="event.preventDefault(); navigator.clipboard.writeText('dpm install github:djazair-language/djazair-extensions/${ext.name}'); this.querySelector('i').className = 'fa-solid fa-check'; setTimeout(() => this.querySelector('i').className = 'fa-regular fa-copy', 2000);">
+                            <div class="ext-desc" style="font-size:0.95rem;color:var(--text-secondary);line-height:1.5;flex-grow:1;">${ext.description}</div>
+                            <div class="ext-install" onclick="event.preventDefault(); copyCmd(this, 'dpm install ${ext.name}')">
                                 <span>dpm install ${ext.name}</span>
                                 <i class="fa-regular fa-copy" title="Copy install command"></i>
                             </div>
-                        </a>
-                        `;
+                        </a>`;
                     });
-
                     grid.innerHTML = html;
                 })
                 .catch(function(err) {
