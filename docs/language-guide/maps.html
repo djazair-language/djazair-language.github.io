@@ -45,7 +45,7 @@
     </header>
 
     <div class="app-container">
-        <aside class="sidebar">
+        <aside class="sidebar" id="sidebar">
             <div class="sidebar-section">
   <div class="sidebar-title" onclick="toggleSection(this)">Getting Started <span class="arrow">v</span></div>
   <ul class="sidebar-links" data-expanded="true">
@@ -205,6 +205,7 @@
   </ul>
 </div>
         </aside>
+        <div class="sidebar-backdrop" id="sidebar-backdrop"></div>
 
         <main class="content-wrapper">
             <div class="content-body">
@@ -429,22 +430,73 @@ m<span class="op">.</span><span class="fn">update</span>({<span class="str">"d"<
             })();
         });
 
-        // --- Hamburger menu toggle ---
+        // --- Hamburger / Sidebar Drawer toggle ---
         (function() {
             var toggle = document.querySelector(".menu-toggle");
             var nav = document.querySelector(".top-nav");
-            if (toggle && nav) {
-                toggle.addEventListener("click", function() {
-                    nav.classList.toggle("open");
-                    toggle.classList.toggle("active");
-                });
-                document.addEventListener("click", function(e) {
-                    if (!toggle.contains(e.target) && !nav.contains(e.target)) {
-                        nav.classList.remove("open");
-                        toggle.classList.remove("active");
+            var sidebar = document.getElementById("sidebar");
+            var backdrop = document.getElementById("sidebar-backdrop");
+
+            function openSidebar() {
+                if (sidebar) sidebar.classList.add("open");
+                if (backdrop) backdrop.classList.add("show");
+                if (toggle) toggle.classList.add("active");
+                document.body.style.overflow = "hidden";
+            }
+            function closeSidebar() {
+                if (sidebar) sidebar.classList.remove("open");
+                if (backdrop) backdrop.classList.remove("show");
+                if (toggle) toggle.classList.remove("active");
+                document.body.style.overflow = "";
+            }
+
+            if (toggle) {
+                toggle.addEventListener("click", function(e) {
+                    e.stopPropagation();
+                    // Also toggle top-nav on mobile
+                    if (nav) nav.classList.toggle("open");
+                    // Toggle sidebar drawer
+                    if (sidebar && sidebar.classList.contains("open")) {
+                        closeSidebar();
+                    } else {
+                        openSidebar();
                     }
                 });
             }
+
+            // Close on backdrop click
+            if (backdrop) {
+                backdrop.addEventListener("click", closeSidebar);
+            }
+
+            // Close on nav link click inside sidebar
+            if (sidebar) {
+                sidebar.querySelectorAll("a").forEach(function(a) {
+                    a.addEventListener("click", function() {
+                        closeSidebar();
+                    });
+                });
+            }
+
+            // Close sidebar on scroll (only on mobile)
+            var lastScrollY = window.scrollY;
+            window.addEventListener("scroll", function() {
+                var currentScrollY = window.scrollY;
+                var isMobile = window.innerWidth <= 768;
+                if (isMobile && Math.abs(currentScrollY - lastScrollY) > 40) {
+                    closeSidebar();
+                }
+                lastScrollY = currentScrollY;
+            }, { passive: true });
+
+            // Close on outside click (desktop nav)
+            document.addEventListener("click", function(e) {
+                if (nav && nav.classList.contains("open")) {
+                    if (!toggle.contains(e.target) && !nav.contains(e.target)) {
+                        nav.classList.remove("open");
+                    }
+                }
+            });
         })();
 
         // --- Back to top button ---
