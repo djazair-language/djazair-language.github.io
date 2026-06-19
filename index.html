@@ -101,16 +101,17 @@
                 <pre id="tab-async" class="lp-terminal-code"><code><span class="kw">use</span> http
 <span class="kw">use</span> json
  
-<span class="kw">async</span> <span class="kw">fn</span> <span class="fn">fetchUser</span>(id)
-    <span class="nd">print</span>(<span class="str">"Fetching user: ${id}"</span>)
-    <span class="kw">let</span> res <span class="op">=</span> <span class="kw">await</span> http<span class="op">.</span>get("http://api.github.com/users/${id}")
+<span class="kw">async</span> <span class="kw">fn</span> <span class="fn">fetchIP</span>()
+    <span class="nd">print</span>(<span class="str">"Fetching IP data..."</span>)
+    <span class="kw">let</span> res <span class="op">=</span> <span class="kw">await</span> http<span class="op">.</span>get("http://ip-api.com/json")
     <span class="kw">return</span> json<span class="op">.</span><span class="fn">parse</span>(res<span class="op">.</span>body)
 <span class="kw">end</span>
  
 <span class="kw">async</span> <span class="kw">fn</span> <span class="fn">main</span>()
-    <span class="kw">let</span> task <span class="op">=</span> <span class="fn">fetchUser</span>("djazair-language")
+    <span class="kw">let</span> task <span class="op">=</span> <span class="fn">fetchIP</span>()
     <span class="kw">let</span> data <span class="op">=</span> <span class="kw">await</span> task
-    <span class="nd">print</span>(<span class="str">"User: "</span> <span class="op">+</span> data["name"])
+    <span class="nd">print</span>(<span class="str">"Query IP: "</span> <span class="op">+</span> data["query"])
+    <span class="nd">print</span>(<span class="str">"Country: "</span> <span class="op">+</span> data["country"])
 <span class="kw">end</span>
  
 <span class="kw">await</span> <span class="fn">main</span>()</code></pre>
