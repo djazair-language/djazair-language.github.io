@@ -294,6 +294,7 @@
         <li><a href="../standard-library/process.html#command-execution" class="sub-link">Command Execution</a></li>
         <li><a href="../standard-library/process.html#cli-arguments--script-location" class="sub-link">CLI & Script</a></li>
         <li><a href="../standard-library/process.html#asynchronous-spawning" class="sub-link">Async Spawning</a></li>
+        <li><a href="../standard-library/process.html#writing-to-process-stdin" class="sub-link">Write to Stdin</a></li>
       </ul>
     </li>
     <li><a href="../standard-library/random.html" >random Module</a></li>
@@ -412,7 +413,22 @@ process<span class="op">.</span><span class="fn">chdir</span>(cwd)</code></pre>
 <span class="kw">let</span> code <span class="op">=</span> process<span class="op">.</span><span class="fn">close</span>(handle)
 <span class="nd">print</span>(<span class="str">"Exit: "</span> <span class="op">+</span> <span class="nd">str</span>(code))</code></pre>
 
-                </article>
+<h2 id="writing-to-process-stdin">Writing to Process Stdin</h2>
+<ul>
+    <li><code>process.spawnWrite(command)</code> - Spawn background command with writable stdin. Returns ProcessHandle.</li>
+    <li><code>process.write(handle, text)</code> - Write text to process's stdin pipe. Returns <code>True</code> on success.</li>
+    <li><code>process.close(handle)</code> - Close handle, sending EOF to stdin. Returns exit code.</li>
+</ul>
+<pre><code><span class="kw">use</span> process
+<span class="kw">let</span> proc <span class="op">=</span> process<span class="op">.</span><span class="fn">spawnWrite</span>(<span class="str">"sort"</span>)
+process<span class="op">.</span><span class="fn">write</span>(proc, <span class="str">"banana\n"</span>)
+process<span class="op">.</span><span class="fn">write</span>(proc, <span class="str">"apple\n"</span>)
+process<span class="op">.</span><span class="fn">write</span>(proc, <span class="str">"cherry\n"</span>)
+<span class="kw">let</span> code <span class="op">=</span> process<span class="op">.</span><span class="fn">close</span>(proc)  <span class="comment"># EOF + wait</span>
+<span class="nd">print</span>(<span class="str">"Exit: "</span> <span class="op">+</span> <span class="nd">str</span>(code))</code></pre>
+<p>Note: Use <code>spawnWrite()</code> for processes you want to send data to (write-only stdin pipe). Use <code>spawn()</code> for reading output (read-only stdout pipe). For bidirectional communication, a combined solution will be available in a future release.</p>
+
+                 </article>
 
                 <div class="page-navigation">
                     
@@ -446,7 +462,8 @@ process<span class="op">.</span><span class="fn">chdir</span>(cwd)</code></pre>
 <li class=""><a href="#working-directory">Working Directory</a></li>
 <li class=""><a href="#command-execution">Command Execution</a></li>
 <li class=""><a href="#cli-arguments--amp--script-location">CLI Arguments &amp; Script Location</a></li>
-<li class=""><a href="#asynchronous-spawning">Asynchronous Spawning</a></li>
+                <li class=""><a href="#asynchronous-spawning">Asynchronous Spawning</a></li>
+                <li class=""><a href="#writing-to-process-stdin">Writing to Process Stdin</a></li>
             </ul>
         </aside>
     </div>
