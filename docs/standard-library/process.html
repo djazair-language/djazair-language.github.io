@@ -420,7 +420,9 @@ process<span class="op">.</span><span class="fn">close</span>(child[<span class=
 <span class="kw">let</span> output <span class="op">=</span> <span class="str">""</span>
 <span class="kw">while</span> <span class="kw">True</span>
     <span class="kw">let</span> chunk <span class="op">=</span> process<span class="op">.</span><span class="fn">read</span>(child[<span class="str">"read"</span>])
-    <span class="kw">if</span> <span class="nd">isNull</span>(chunk); <span class="kw">break</span>; <span class="kw">end</span>
+    <span class="kw">if</span> <span class="nd">isNull</span>(chunk)
+        <span class="kw">break</span>
+    <span class="kw">end</span>
     output <span class="op">=</span> output <span class="op">+</span> chunk
 <span class="kw">end</span>
 
