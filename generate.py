@@ -82,7 +82,7 @@ def highlight_djazair(code):
 def process_code_blocks(content):
     def replacer(match):
         code = match.group(1).strip('\n')
-        return f'<pre><code>{highlight_djazair(code)}</code></pre>'
+        return f'<pre class="dz"><code>{highlight_djazair(code)}</code></pre>'
     
     pattern = r'<pre class="dz"><code>(.*?)</code></pre>'
     return re.sub(pattern, replacer, content, flags=re.DOTALL)
@@ -106,6 +106,7 @@ LAYOUT = """<!DOCTYPE html>
     <link rel="stylesheet" href="{root_prefix}assets/style.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/7.0.0/fuse.min.js"></script>
     <script id="search-index-data" type="application/json">{search_index_json}</script>
+    <script src="https://cdn.jsdelivr.net/npm/monaco-editor@0.47.0/min/vs/loader.js"></script>
 </head>
 <body>
     <header>
@@ -378,10 +379,54 @@ LAYOUT = """<!DOCTYPE html>
             }});
         }})();
 
+        // --- Monaco Editor for code blocks ---
+        (function() {{
+            var blocks = document.querySelectorAll("pre.dz > code");
+            if (blocks.length === 0) return;
+            require.config({{
+                paths: {{ vs: "https://cdn.jsdelivr.net/npm/monaco-editor@0.47.0/min/vs" }},
+                "vs/nls": {{ availableLanguages: {{ "*": "en" }} }}
+            }});
+            require(["vs/editor/editor.main"], function() {{
+                blocks.forEach(function(codeEl) {{
+                    var pre = codeEl.parentElement;
+                    if (!pre) return;
+                    var text = codeEl.textContent;
+                    var container = document.createElement("div");
+                    container.className = "monaco-code-wrap";
+                    container.style.height = Math.max(100, text.split("\\n").length * 20 + 30) + "px";
+                    pre.parentNode.replaceChild(container, pre);
+                    monaco.editor.create(container, {{
+                        value: text,
+                        language: "javascript",
+                        readOnly: true,
+                        lineNumbers: "off",
+                        minimap: {{ enabled: false }},
+                        scrollBeyondLastLine: false,
+                        fontSize: 13,
+                        theme: "vs-dark",
+                        padding: {{ top: 12, bottom: 12 }},
+                        overviewRulerLanes: 0,
+                        hideCursorInOverviewRuler: true,
+                        overviewRulerBorder: false,
+                        scrollbar: {{ vertical: "hidden", handleMouseWheel: true }},
+                        contextmenu: false,
+                        renderLineHighlight: "none",
+                        wordWrap: "off",
+                        automaticLayout: true
+                    }});
+                }});
+            }});
+        }})();
+
         // --- Dynamic Syntax Highlighter & Copy Buttons ---
         (function() {{
             var blocks = document.querySelectorAll("pre > code");
             if (blocks.length === 0) return;
+            // Skip .dz blocks (handled by Monaco Editor)
+            blocks = Array.prototype.filter.call(blocks, function(c) {{
+                return !c.parentElement.classList.contains("dz");
+            }});
             
             function highlightDjazairCode(code, lang) {{
                 var spec = [];
@@ -989,6 +1034,26 @@ print(5 not in [1, 2, 3])   # => True
 print("name" in {"name": "A"}) # => True (key exists)
 print("orld" in "Hello World") # => True (substring)
 </code></pre>
+
+<h2>Bitwise Operators</h2>
+<p>Perform operations at the bit level for integers:</p>
+<pre class="dz"><code>print(5 & 3)    # Bitwise AND => 1
+print(5 | 3)    # Bitwise OR => 7
+print(5 ^ 3)    # Bitwise XOR => 6
+print(~5)       # Bitwise NOT => -6
+print(8 << 2)   # Left Shift => 32
+print(8 >> 2)   # Right Shift => 2
+</code></pre>
+
+<h2>Bitwise Assignment Operators</h2>
+<p>Djazair also supports assigning bitwise values directly:</p>
+<pre class="dz"><code>let y = 5
+y &= 3          # y becomes 1
+y |= 3          # y becomes 3
+y ^= 3          # y becomes 0
+y <<= 2         # y becomes 0
+y >>= 2         # y becomes 0
+</code></pre>
 """
 
 PAGES_CONTENT["docs/language-guide/conditions.html"] = """
@@ -1262,7 +1327,7 @@ print(list[3][1]) # => 4
         <tr><td><code>remove(value)</code></td><td>Remove first occurrence of value</td></tr>
         <tr><td><code>reverse()</code></td><td>Reverse array <b>in-place</b></td></tr>
         <tr><td><code>reversed()</code></td><td>Return new array in reverse order (original unchanged)</td></tr>
-        <tr><td><code>index(value)</code></td><td>Index of value (-1 if not found)</td></tr>
+        <tr><td><code>index(value|cb)</code></td><td>Index of value or first element matching callback (-1 if not found)</td></tr>
         <tr><td><code>extend(array)</code></td><td>Append all elements from another array</td></tr>
         <tr><td><code>sort(descOrCmp?)</code></td><td>Sort array; accepts bool (descending) or comparator function</td></tr>
         <tr><td><code>sorted(desc?)</code></td><td>Return sorted copy (original unchanged)</td></tr>
@@ -1345,6 +1410,7 @@ print(query)
         <tr><td><code>lStrip()</code></td><td>Trim whitespace from left</td></tr>
         <tr><td><code>rStrip()</code></td><td>Trim whitespace from right</td></tr>
         <tr><td><code>contains(substr)</code></td><td>Check if substring exists</td></tr>
+        <tr><td><code>find(substr)</code></td><td>Return index of substring (alias for index)</td></tr>
         <tr><td><code>count(substr)</code></td><td>Count occurrences of substring</td></tr>
         <tr><td><code>index(needle)</code></td><td>First index of needle (returns -1 if not found)</td></tr>
         <tr><td><code>split(sep?)</code></td><td>Split into array (default: whitespace)</td></tr>
@@ -1352,7 +1418,8 @@ print(query)
         <tr><td><code>slice(start, end?)</code></td><td>Extract substring</td></tr>
         <tr><td><code>subStr(start, length?)</code></td><td>Extract by start and length</td></tr>
         <tr><td><code>replace(old, new)</code></td><td>Replace all occurrences</td></tr>
-        <tr><td><code>reverse()</code></td><td>Return reversed string</td></tr>
+        <tr><td><code>reverse()</code></td><td>Reverse string <b>in-place</b></td></tr>
+        <tr><td><code>reversed()</code></td><td>Return reversed string copy</td></tr>
         <tr><td><code>repeat(n)</code></td><td>Return string repeated n times</td></tr>
         <tr><td><code>zFill(width)</code></td><td>Zero-pad to given width</td></tr>
         <tr><td><code>center(width)</code></td><td>Center string in field of given width</td></tr>
@@ -1540,6 +1607,13 @@ end
 finally
     print("cleaned")
 end
+</code></pre>
+
+<h2>Try-Catch (Ignoring Error)</h2>
+<p>If you don't need the error variable, you can omit it and use <code>catch end</code>:</p>
+<pre class="dz"><code>try
+    file.delete("temp.txt")
+catch end
 </code></pre>
 
 <h2>Finally with Return</h2>

@@ -360,19 +360,21 @@
         <tr><td><code>upper()</code></td><td>Uppercase conversion</td></tr>
         <tr><td><code>lower()</code></td><td>Lowercase conversion</td></tr>
         <tr><td><code>strip()</code></td><td>Trim whitespace both ends</td></tr>
-        <tr><td><code>lStrip()</code></td><td>Trim left whitespace</td></tr>
-        <tr><td><code>rStrip()</code></td><td>Trim right whitespace</td></tr>
-        <tr><td><code>contains(sub)</code></td><td>Check substring existence</td></tr>
-        <tr><td><code>count(sub)</code></td><td>Count occurrences of substring</td></tr>
+        <tr><td><code>lStrip()</code></td><td>Trim whitespace from left</td></tr>
+        <tr><td><code>rStrip()</code></td><td>Trim whitespace from right</td></tr>
+        <tr><td><code>contains(substr)</code></td><td>Check if substring exists</td></tr>
+        <tr><td><code>find(substr)</code></td><td>Return index of substring (alias for index)</td></tr>
+        <tr><td><code>count(substr)</code></td><td>Count occurrences</td></tr>
         <tr><td><code>index(needle)</code></td><td>First index (-1 if not found)</td></tr>
         <tr><td><code>split(sep?)</code></td><td>Split into array (default: whitespace)</td></tr>
         <tr><td><code>join(list)</code></td><td>Join array using string as separator</td></tr>
         <tr><td><code>slice(start, end?)</code></td><td>Extract substring</td></tr>
-        <tr><td><code>subStr(start, length?)</code></td><td>Extract by start and length</td></tr>
-        <tr><td><code>replace(old, new)</code></td><td>Replace all occurrences</td></tr>
-        <tr><td><code>reverse()</code></td><td>Return reversed string</td></tr>
-        <tr><td><code>repeat(n)</code></td><td>Return string repeated n times</td></tr>
-        <tr><td><code>zFill(width)</code></td><td>Zero-pad to width</td></tr>
+        <tr><td><code>subStr(start, len?)</code></td><td>Extract by start and length</td></tr>
+        <tr><td><code>replace(old, new)</code></td><td>Replace all</td></tr>
+        <tr><td><code>reverse()</code></td><td>Reverse string <strong>in-place</strong></td></tr>
+        <tr><td><code>reversed()</code></td><td>Return reversed string copy</td></tr>
+        <tr><td><code>repeat(n)</code></td><td>Repeat n times</td></tr>
+        <tr><td><code>zFill(width)</code></td><td>Zero-pad to given width</td></tr>
         <tr><td><code>center(width)</code></td><td>Center string in field of given width</td></tr>
         <tr><td><code>lJust(width)</code></td><td>Left-justify in field of given width</td></tr>
         <tr><td><code>rJust(width)</code></td><td>Right-justify in field of given width</td></tr>
@@ -403,7 +405,7 @@
         <tr><td><code>remove(v)</code></td><td>Remove first occurrence of value</td></tr>
         <tr><td><code>reverse()</code></td><td>Reverse array <strong>in-place</strong></td></tr>
         <tr><td><code>reversed()</code></td><td>Return reversed copy (original unchanged)</td></tr>
-        <tr><td><code>index(val)</code></td><td>Index of value (-1 if not found)</td></tr>
+        <tr><td><code>index(val|cb)</code></td><td>Index of value or first element matching callback (-1 if not found)</td></tr>
         <tr><td><code>extend(arr)</code></td><td>Append all elements from another array</td></tr>
         <tr><td><code>sort(desc?)</code></td><td>Sort in-place</td></tr>
         <tr><td><code>sorted(desc?)</code></td><td>Return sorted copy (original unchanged)</td></tr>
