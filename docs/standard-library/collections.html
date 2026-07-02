@@ -355,7 +355,7 @@
 <h2 id="stack">Stack</h2>
 <p>Last-in, First-out (LIFO). Methods: push, pop, peek, contains, clear, isEmpty, size, toArray, toString.</p>
 <pre><code><span class="kw">use</span> collections
-<span class="kw">let</span> s <span class="op">=</span> collections<span class="op">.</span><span class="fn">Stack</span>()
+<span class="kw">let</span> s <span class="op">=</span> <span class="kw">new</span> collections<span class="op">.</span><span class="fn">Stack</span>()
 s<span class="op">.</span><span class="fn">push</span>(<span class="num">10</span>)
 s<span class="op">.</span><span class="fn">push</span>(<span class="num">20</span>)
 s<span class="op">.</span><span class="fn">push</span>(<span class="num">30</span>)
@@ -371,7 +371,7 @@ s<span class="op">.</span><span class="fn">clear</span>()
 <h2 id="queue">Queue</h2>
 <p>First-in, First-out (FIFO). Methods: enqueue, dequeue, front, rear, contains, clear, isEmpty, size, toArray, toString.</p>
 <pre><code><span class="kw">use</span> collections
-<span class="kw">let</span> q <span class="op">=</span> collections<span class="op">.</span><span class="fn">Queue</span>()
+<span class="kw">let</span> q <span class="op">=</span> <span class="kw">new</span> collections<span class="op">.</span><span class="fn">Queue</span>()
 q<span class="op">.</span><span class="fn">enqueue</span>(<span class="str">"a"</span>)
 q<span class="op">.</span><span class="fn">enqueue</span>(<span class="str">"b"</span>)
 q<span class="op">.</span><span class="fn">enqueue</span>(<span class="str">"c"</span>)
@@ -383,7 +383,7 @@ q<span class="op">.</span><span class="fn">enqueue</span>(<span class="str">"c"<
 <h2 id="deque">Deque</h2>
 <p>Double-ended queue. Methods: pushFront, pushBack, popFront, popBack, front, back, contains, clear, isEmpty, size, toArray, toString.</p>
 <pre><code><span class="kw">use</span> collections
-<span class="kw">let</span> d <span class="op">=</span> collections<span class="op">.</span><span class="fn">Deque</span>()
+<span class="kw">let</span> d <span class="op">=</span> <span class="kw">new</span> collections<span class="op">.</span><span class="fn">Deque</span>()
 d<span class="op">.</span><span class="fn">pushBack</span>(<span class="num">1</span>)
 d<span class="op">.</span><span class="fn">pushBack</span>(<span class="num">2</span>)
 d<span class="op">.</span><span class="fn">pushFront</span>(<span class="num">0</span>)
@@ -395,7 +395,7 @@ d<span class="op">.</span><span class="fn">pushFront</span>(<span class="num">0<
 <h2 id="map">Map</h2>
 <p>Ordered key-value store. Methods: set, get, getOrDefault, has, delete, clear, size, isEmpty, keys, values, entries, mapValues, filterEntries, forEach, merge, toArray, toString.</p>
 <pre><code><span class="kw">use</span> collections
-<span class="kw">let</span> m <span class="op">=</span> collections<span class="op">.</span><span class="fn">Map</span>()
+<span class="kw">let</span> m <span class="op">=</span> <span class="kw">new</span> collections<span class="op">.</span><span class="fn">Map</span>()
 m<span class="op">.</span><span class="fn">set</span>(<span class="str">"name"</span>, <span class="str">"Djazair"</span>)
 m<span class="op">.</span><span class="fn">set</span>(<span class="str">"version"</span>, <span class="num">1.0</span>)
 <span class="nd">print</span>(m<span class="op">.</span><span class="fn">get</span>(<span class="str">"name"</span>))              <span class="comment"># Djazair</span>
@@ -409,11 +409,11 @@ m<span class="op">.</span><span class="fn">delete</span>(<span class="str">"vers
 <h2 id="set">Set</h2>
 <p>Unique values. Methods: add, has, delete, clear, size, isEmpty, toArray, values, union, intersection, difference, isSubset, equals, toString.</p>
 <pre><code><span class="kw">use</span> collections
-<span class="kw">let</span> setA <span class="op">=</span> collections<span class="op">.</span><span class="fn">Set</span>()
+<span class="kw">let</span> setA <span class="op">=</span> <span class="kw">new</span> collections<span class="op">.</span><span class="fn">Set</span>()
 setA<span class="op">.</span><span class="fn">add</span>(<span class="num">1</span>)
 setA<span class="op">.</span><span class="fn">add</span>(<span class="num">2</span>)
 setA<span class="op">.</span><span class="fn">add</span>(<span class="num">3</span>)
-<span class="kw">let</span> setB <span class="op">=</span> collections<span class="op">.</span><span class="fn">Set</span>()
+<span class="kw">let</span> setB <span class="op">=</span> <span class="kw">new</span> collections<span class="op">.</span><span class="fn">Set</span>()
 setB<span class="op">.</span><span class="fn">add</span>(<span class="num">2</span>)
 setB<span class="op">.</span><span class="fn">add</span>(<span class="num">3</span>)
 setB<span class="op">.</span><span class="fn">add</span>(<span class="num">4</span>)
@@ -425,7 +425,7 @@ setB<span class="op">.</span><span class="fn">add</span>(<span class="num">4</sp
 <h2 id="linkedlist">LinkedList</h2>
 <p>Doubly linked list. Methods: append, prepend, popBack, popFront, front, back, contains, toArray, isEmpty, size, clear, toString.</p>
 <pre><code><span class="kw">use</span> collections
-<span class="kw">let</span> ll <span class="op">=</span> collections<span class="op">.</span><span class="fn">LinkedList</span>()
+<span class="kw">let</span> ll <span class="op">=</span> <span class="kw">new</span> collections<span class="op">.</span><span class="fn">LinkedList</span>()
 ll<span class="op">.</span><span class="fn">append</span>(<span class="str">"first"</span>)
 ll<span class="op">.</span><span class="fn">append</span>(<span class="str">"second"</span>)
 ll<span class="op">.</span><span class="fn">prepend</span>(<span class="str">"zeroth"</span>)
@@ -436,7 +436,7 @@ ll<span class="op">.</span><span class="fn">prepend</span>(<span class="str">"ze
 <h2 id="priorityqueue">PriorityQueue</h2>
 <p>Min-heap by priority number. Methods: enqueue(value, priority), dequeue, peek, isEmpty, size, clear, toArray, toString.</p>
 <pre><code><span class="kw">use</span> collections
-<span class="kw">let</span> pq <span class="op">=</span> collections<span class="op">.</span><span class="fn">PriorityQueue</span>()
+<span class="kw">let</span> pq <span class="op">=</span> <span class="kw">new</span> collections<span class="op">.</span><span class="fn">PriorityQueue</span>()
 pq<span class="op">.</span><span class="fn">enqueue</span>(<span class="str">"low"</span>, <span class="num">3</span>)
 pq<span class="op">.</span><span class="fn">enqueue</span>(<span class="str">"high"</span>, <span class="num">1</span>)
 pq<span class="op">.</span><span class="fn">enqueue</span>(<span class="str">"mid"</span>, <span class="num">2</span>)
