@@ -409,8 +409,8 @@ srv<span class="op">.</span><span class="fn">listen</span>(<span class="num">808
 
 <h2 id="classes--amp--helpers">Classes &amp; Helpers</h2>
 <ul>
-    <li><code>http.HttpParser</code> - HTTP protocol parser. Methods: <code>split(raw)</code>, <code>parseHeaders(lines)</code>, <code>parseRequest(raw)</code>, <code>parseResponse(raw)</code>.</li>
-    <li><code>http.ResponseBuilder</code> - Builder for constructing raw HTTP responses. Methods: <code>status(code, text)</code>, <code>setHeader(name, value)</code>, <code>build(body)</code>, <code>buildStatus(code)</code>, <code>buildJson(obj)</code>, <code>buildRedirect(path)</code>.</li>
+    <li><code>http.httpParser</code> - HTTP protocol parser. Methods: <code>split(raw)</code>, <code>parseHeaders(lines)</code>, <code>parseRequest(raw)</code>, <code>parseResponse(raw)</code>.</li>
+    <li><code>http.httpResponseBuilder</code> - Builder for constructing raw HTTP responses. Methods: <code>status(code, text)</code>, <code>setHeader(name, value)</code>, <code>build(body)</code>, <code>buildStatus(code)</code>, <code>buildJson(obj)</code>, <code>buildRedirect(path)</code>.</li>
     <li><code>http.STATUS_TEXTS</code> - Map of HTTP status codes to reason phrases.</li>
     <li><code>http.statusText(code)</code> - Get status text for a status code.</li>
 </ul>
