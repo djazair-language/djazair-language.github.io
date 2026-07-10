@@ -354,11 +354,11 @@
 
 <h2 id="classes--amp--exports">Classes &amp; Exports</h2>
 <ul>
-    <li><code>net.TcpServer</code> - TCP Server class. Call <code>new()</code> to create instance, then <code>listen(port)</code>, <code>accept()</code>, <code>close()</code>.</li>
-    <li><code>net.TcpClient</code> - TCP Client class. Call <code>new()</code>, then <code>connect(host, port)</code>, <code>read()</code>, <code>write(data)</code>, <code>close()</code>.</li>
-    <li><code>net.UdpServer</code> - UDP Server class for receiving datagrams.</li>
-    <li><code>net.UdpClient</code> - UDP Client class. Methods: <code>send(data, host, port)</code>, <code>receive()</code>, <code>close()</code>.</li>
-    <li><code>net.Socket</code> - Raw Socket wrapper.</li>
+    <li><code>net.tcpServer</code> - TCP Server class. Call <code>new()</code> to create instance, then <code>listen(port)</code>, <code>accept()</code>, <code>close()</code>.</li>
+    <li><code>net.tcpClient</code> - TCP Client class. Call <code>new()</code>, then <code>connect(host, port)</code>, <code>read()</code>, <code>write(data)</code>, <code>close()</code>.</li>
+    <li><code>net.udpServer</code> - UDP Server class for receiving datagrams.</li>
+    <li><code>net.udpClient</code> - UDP Client class. Methods: <code>send(data, host, port)</code>, <code>receive()</code>, <code>close()</code>.</li>
+    <li><code>net.socket</code> - Raw Socket wrapper.</li>
     <li><code>net.resolveDNS(hostname)</code> - DNS resolution, returns IP address string.</li>
     <li><code>net.URL</code> - URL class for parsing and constructing URLs.</li>
     <li><code>net.parseURL(urlString)</code> - Parse URL string into a URL object.</li>
@@ -366,7 +366,7 @@
 
 <h2 id="tcp-server-example">TCP Server Example</h2>
 <pre><code><span class="kw">use</span> net
-<span class="kw">let</span> server <span class="op">=</span> net<span class="op">.</span>TcpServer<span class="op">.</span><span class="fn">new</span>()
+<span class="kw">let</span> server <span class="op">=</span> net<span class="op">.</span>tcpServer<span class="op">.</span><span class="fn">new</span>()
 server<span class="op">.</span><span class="fn">listen</span>(<span class="num">9000</span>)
 <span class="nd">print</span>(<span class="str">"Listening on port 9000..."</span>)
 <span class="kw">let</span> client <span class="op">=</span> server<span class="op">.</span><span class="fn">accept</span>()
@@ -376,7 +376,7 @@ server<span class="op">.</span><span class="fn">close</span>()</code></pre>
 
 <h2 id="tcp-client-example">TCP Client Example</h2>
 <pre><code><span class="kw">use</span> net
-<span class="kw">let</span> socket <span class="op">=</span> net<span class="op">.</span>TcpClient<span class="op">.</span><span class="fn">new</span>()
+<span class="kw">let</span> socket <span class="op">=</span> net<span class="op">.</span>tcpClient<span class="op">.</span><span class="fn">new</span>()
 socket<span class="op">.</span><span class="fn">connect</span>(<span class="str">"127.0.0.1"</span>, <span class="num">9000</span>)
 <span class="kw">let</span> response <span class="op">=</span> socket<span class="op">.</span><span class="fn">read</span>()
 <span class="nd">print</span>(<span class="str">"Received: "</span> <span class="op">+</span> response)
@@ -385,10 +385,10 @@ socket<span class="op">.</span><span class="fn">close</span>()</code></pre>
 <h2 id="udp-communication">UDP Communication</h2>
 <pre><code><span class="kw">use</span> net
 <span class="comment"># UDP Server</span>
-<span class="kw">let</span> server <span class="op">=</span> net<span class="op">.</span>UdpServer<span class="op">.</span><span class="fn">new</span>()
+<span class="kw">let</span> server <span class="op">=</span> net<span class="op">.</span>udpServer<span class="op">.</span><span class="fn">new</span>()
 server<span class="op">.</span><span class="fn">bind</span>(<span class="num">9001</span>)
 <span class="comment"># UDP Client</span>
-<span class="kw">let</span> client <span class="op">=</span> net<span class="op">.</span>UdpClient<span class="op">.</span><span class="fn">new</span>()
+<span class="kw">let</span> client <span class="op">=</span> net<span class="op">.</span>udpClient<span class="op">.</span><span class="fn">new</span>()
 client<span class="op">.</span><span class="fn">send</span>(<span class="str">"Hello UDP"</span>, <span class="str">"127.0.0.1"</span>, <span class="num">9001</span>)
 <span class="kw">let</span> data <span class="op">=</span> server<span class="op">.</span><span class="fn">receive</span>()
 <span class="nd">print</span>(<span class="str">"Got: "</span> <span class="op">+</span> data[<span class="str">"data"</span>])
