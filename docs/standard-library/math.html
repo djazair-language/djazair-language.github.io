@@ -1,505 +1,364 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta property="og:title" content="math Module | Djazair Documentation">
-    <meta property="og:description" content="Standard math module for trigonometric, statistics, and rounding operations.">
-    <meta property="og:type" content="website">
-    <meta property="og:url" content="https://djazair-language.github.io/">
-    <meta name="twitter:card" content="summary_large_image">
-
-    <meta name="description" content="Standard math module for trigonometric, statistics, and rounding operations.">
-    <title>math Module | Djazair Documentation</title>
-    <link rel="stylesheet" href="../../assets/style.css">
-    <script src="https://cdn.jsdelivr.net/npm/monaco-editor@0.47.0/min/vs/loader.js"></script>
-    <script>
-        function filterNavigation() {
-            const query = document.getElementById("search-input").value.toLowerCase();
-            const links = document.querySelectorAll(".sidebar-links a");
-            links.forEach(link => {
-                const text = link.textContent.toLowerCase();
-                const parent = link.parentElement;
-                if (text.includes(query)) {
-                    parent.style.display = "";
-                    let hasSub = parent.closest("li.has-submenu");
-                    if (hasSub) { hasSub.style.display = ""; }
-                    let sub = parent.closest(".submenu");
-                    if (sub) { sub.setAttribute("data-expanded", "true"); }
-                } else {
-                    parent.style.display = "none";
-                }
-            });
-        }
-        function toggleSubmenu(event, el) {
-            const li = el.closest("li.has-submenu");
-            const submenu = li.querySelector(".submenu");
-            const expanded = submenu.getAttribute("data-expanded") === "true";
-            submenu.setAttribute("data-expanded", !expanded);
-            const arrow = el.querySelector(".arrow");
-            if (arrow) arrow.textContent = expanded ? ">" : "v";
-            if (!expanded) {
-                event.preventDefault();
-            }
-        }
-
-        // --- Monaco Editor for code blocks ---
-        (function() {
-            var blocks = document.querySelectorAll("pre > code");
-            if (blocks.length === 0) return;
-            require.config({
-                paths: { vs: "https://cdn.jsdelivr.net/npm/monaco-editor@0.47.0/min/vs" },
-                "vs/nls": { availableLanguages: { "*": "en" } }
-            });
-            require(["vs/editor/editor.main"], function() {
-                blocks.forEach(function(codeEl) {
-                    var pre = codeEl.parentElement;
-                    if (!pre) return;
-                    
-                    var lang = "javascript";
-                    for (var i = 0; i < pre.classList.length; i++) {
-                        var cls = pre.classList.item(i);
-                        if (cls === "bash" || cls === "sh") {
-                            lang = "shell";
-                            break;
-                        } else if (cls === "powershell") {
-                            lang = "powershell";
-                            break;
-                        } else if (cls === "c") {
-                            lang = "c";
-                            break;
-                        } else if (cls === "cpp") {
-                            lang = "cpp";
-                            break;
-                        } else if (cls === "text" || cls === "plaintext") {
-                            lang = "plaintext";
-                            break;
-                        } else if (cls === "json") {
-                            lang = "json";
-                            break;
-                        }
-                    }
-
-                    var text = codeEl.textContent;
-                    var container = document.createElement("div");
-                    container.className = "monaco-code-wrap";
-                    container.style.height = Math.max(100, text.split("\n").length * 20 + 30) + "px";
-                    
-                    // Add copy button inside container
-                    var btn = document.createElement("button");
-                    btn.className = "copy-btn";
-                    btn.textContent = "Copy";
-                    btn.setAttribute("aria-label", "Copy code to clipboard");
-                    btn.style.zIndex = "10";
-                    btn.addEventListener("click", function() {
-                        navigator.clipboard.writeText(text).then(function() {
-                            btn.textContent = "Copied!";
-                            btn.classList.add("copied");
-                            setTimeout(function() { btn.textContent = "Copy"; btn.classList.remove("copied"); }, 2000);
-                        });
-                    });
-                    container.appendChild(btn);
-
-                    pre.parentNode.replaceChild(container, pre);
-                    
-                    monaco.editor.create(container, {
-                        value: text,
-                        language: lang,
-                        readOnly: true,
-                        lineNumbers: "off",
-                        minimap: { enabled: false },
-                        scrollBeyondLastLine: false,
-                        fontSize: 13,
-                        theme: "vs-dark",
-                        padding: { top: 12, bottom: 12 },
-                        overviewRulerLanes: 0,
-                        hideCursorInOverviewRuler: true,
-                        overviewRulerBorder: false,
-                        scrollbar: { vertical: "hidden", handleMouseWheel: true },
-                        contextmenu: false,
-                        renderLineHighlight: "none",
-                        wordWrap: "off",
-                        automaticLayout: true
-                    });
-                });
-            });
-        })();
-        function toggleSection(el) {
-            var section = el.closest(".sidebar-section");
-            var list = section.querySelector(".sidebar-links");
-            var expanded = list.getAttribute("data-expanded") === "true";
-            list.setAttribute("data-expanded", !expanded);
-            var arrow = el.querySelector(".arrow");
-            if (arrow) arrow.textContent = expanded ? ">" : "v";
-        }
-        document.addEventListener("DOMContentLoaded", function() {
-            document.querySelectorAll(".sidebar-links").forEach(function(sm) {
-                if (sm.getAttribute("data-expanded") === "false") {
-                    var title = sm.closest(".sidebar-section").querySelector(".sidebar-title .arrow");
-                    if (title) title.textContent = ">";
-                }
-            });
-            document.querySelectorAll(".has-submenu > a").forEach(function(el) {
-                let li = el.closest("li");
-                let sm = li.querySelector(".submenu");
-                if (sm.getAttribute("data-expanded") === "true") {
-                    el.querySelector(".arrow").textContent = "v";
-                }
-            });
-        });
-    </script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>math | Djazair Documentation</title>
+  <meta name="description" content="Mathematical constants, trigonometry, logs, power, rounding, gcd, lcm, factorial.">
+  <link rel="icon" href="../../assets/images/logo.svg" type="image/svg+xml">
+  
+  <!-- FontAwesome 6 -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  
+  <!-- Google Fonts (Inter & JetBrains Mono) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+  
+  <!-- Modern Docs Stylesheets -->
+  <link rel="stylesheet" href="../../assets/css/main.css">
+  <link rel="stylesheet" href="../../assets/css/syntax.css">
+  
+  <!-- Early theme application to avoid flash -->
+  <script src="../../assets/js/theme.js"></script>
 </head>
 <body>
-    <header>
-        <button class="menu-toggle" aria-label="Toggle navigation menu">
-            <span></span>
-            <span></span>
-            <span></span>
-        </button>
-        <div class="logo-container">
-            <div class="logo-icon">Dz</div>
-            <div class="logo-text">Djazair</div>
-            <div class="logo-version">v1.0.5</div>
-        </div>
-        <nav class="top-nav">
-            <a href="../../index.html">Home</a>
-<a href="../../packages.html">Package Manager</a>
-<a href="../../docs/getting-started/installation.html">Documentation</a>
-<a href="../../docs/standard-library/index.html" class="active">Standard Library</a>
-<a href="../../docs/faq.html">faq</a>
+  <header class="site-header">
+  <div class="header-left">
+    <button class="mobile-toggle-btn" id="mobile-toggle" aria-label="Toggle navigation drawer">
+      <i class="fa-solid fa-bars"></i>
+    </button>
+    <a href="../../index.html" class="brand-link">
+      <img src="../../assets/images/logo.svg" alt="Djazair Logo" class="brand-logo">
+      <span>Djazair</span>
+      <span class="version-tag">v1.1.0</span>
+    </a>
+  </div>
 
-        </nav>
-        <div class="search-container">
-            <span class="search-icon">🔍</span>
-            <input type="text" id="search-input" class="search-input" placeholder="Search docs..." onkeyup="filterNavigation()">
-        </div>
-    </header>
+  <nav class="header-nav">
+    <a href="../../docs/getting-started/index.html" class="nav-link ">Documentation</a>
+    <a href="../../docs/standard-library/index.html" class="nav-link active">Standard Library</a>
+    <a href="../../docs/dpm/index.html" class="nav-link ">DPM</a>
+    <a href="../../docs/cookbook/rest-api.html" class="nav-link ">Cookbook</a>
+    <a href="../../docs/reference/cheat-sheet.html" class="nav-link ">Cheat Sheet</a>
+  </nav>
 
-    <div class="app-container">
-        <aside class="sidebar">
-            <div class="sidebar-section">
-  <div class="sidebar-title" onclick="toggleSection(this)">Getting Started <span class="arrow">v</span></div>
-  <ul class="sidebar-links">
-    <li><a href="../getting-started/installation.html" >Installation</a></li>
-    <li><a href="../getting-started/first-program.html" >First Program</a></li>
-    <li><a href="../getting-started/running-programs.html" >Running Programs</a></li>
+  <div class="header-right">
+    <button class="search-btn" aria-label="Search documentation">
+      <i class="fa-solid fa-magnifying-glass"></i>
+      <span>Search...</span>
+      <span class="search-shortcut">Ctrl K</span>
+    </button>
+    <button class="theme-btn" id="theme-toggle" aria-label="Toggle dark mode">
+      <i class="fa-solid fa-moon"></i>
+    </button>
+    <a href="https://github.com/djazair-language/djazair" target="_blank" rel="noopener noreferrer" class="icon-btn" aria-label="GitHub repository">
+      <i class="fa-brands fa-github"></i>
+    </a>
+  </div>
+</header>
+
+  <div class="docs-layout">
+    <div class="sidebar-backdrop" id="sidebar-backdrop"></div>
+    <aside class="docs-sidebar" id="docs-sidebar">
+<div class="sidebar-category">
+  <div class="category-title">
+    <span><i class="fa-solid fa-rocket fa-fw" style="margin-right:6px; opacity:0.7;"></i> Getting Started</span>
+  </div>
+  <ul class="sidebar-items">
+    <li class="sidebar-item">
+      <a href="../../docs/getting-started/index.html" class="sidebar-link ">Introduction</a>
+    </li>
+    <li class="sidebar-item">
+      <a href="../../docs/getting-started/installation.html" class="sidebar-link ">Installation</a>
+    </li>
+    <li class="sidebar-item">
+      <a href="../../docs/getting-started/first-program.html" class="sidebar-link ">First Program</a>
+    </li>
+    <li class="sidebar-item">
+      <a href="../../docs/getting-started/cli.html" class="sidebar-link ">Command-Line (CLI)</a>
+    </li>
   </ul>
 </div>
-<div class="sidebar-section">
-  <div class="sidebar-title" onclick="toggleSection(this)">Language Guide <span class="arrow">v</span></div>
-  <ul class="sidebar-links">
-    <li><a href="../language-guide/comments.html" >Comments</a></li>
-    <li><a href="../language-guide/variables.html" >Variables</a></li>
-    <li><a href="../language-guide/data-types.html" >Data Types</a></li>
-    <li><a href="../language-guide/input-output.html" >Input & Output</a></li>
-    <li><a href="../language-guide/operators.html" >Operators</a></li>
-    <li><a href="../language-guide/conditions.html" >Conditions</a></li>
-    <li><a href="../language-guide/loops.html" >Loops</a></li>
-    <li><a href="../language-guide/arrays.html" >Arrays</a></li>
-    <li><a href="../language-guide/strings.html" >Strings</a></li>
-    <li><a href="../language-guide/maps.html" >Maps</a></li>
-    <li><a href="../language-guide/functions.html" >Functions</a></li>
-    <li><a href="../language-guide/modules.html" >Modules</a></li>
-    <li><a href="../language-guide/classes.html" >Classes</a></li>
-    <li><a href="../language-guide/error-handling.html" >Error Handling</a></li>
-    <li><a href="../language-guide/async-await.html" >Async / Await</a></li>
+<div class="sidebar-category">
+  <div class="category-title">
+    <span><i class="fa-solid fa-book-open fa-fw" style="margin-right:6px; opacity:0.7;"></i> Language Guide</span>
+  </div>
+  <ul class="sidebar-items">
+    <li class="sidebar-item">
+      <a href="../../docs/language-guide/variables.html" class="sidebar-link ">Variables &amp; Scope</a>
+    </li>
+    <li class="sidebar-item">
+      <a href="../../docs/language-guide/data-types.html" class="sidebar-link ">Data Types &amp; Casting</a>
+    </li>
+    <li class="sidebar-item">
+      <a href="../../docs/language-guide/operators.html" class="sidebar-link ">Operators</a>
+    </li>
+    <li class="sidebar-item">
+      <a href="../../docs/language-guide/strings.html" class="sidebar-link ">Strings &amp; Methods</a>
+    </li>
+    <li class="sidebar-item">
+      <a href="../../docs/language-guide/unicode.html" class="sidebar-link ">Unicode &amp; UTF-8</a>
+    </li>
+    <li class="sidebar-item">
+      <a href="../../docs/language-guide/arrays.html" class="sidebar-link ">Arrays &amp; Methods</a>
+    </li>
+    <li class="sidebar-item">
+      <a href="../../docs/language-guide/maps.html" class="sidebar-link ">Maps &amp; Hashes</a>
+    </li>
+    <li class="sidebar-item">
+      <a href="../../docs/language-guide/control-flow.html" class="sidebar-link ">Control Flow</a>
+    </li>
+    <li class="sidebar-item">
+      <a href="../../docs/language-guide/loops.html" class="sidebar-link ">Loops &amp; Iteration</a>
+    </li>
+    <li class="sidebar-item">
+      <a href="../../docs/language-guide/functions.html" class="sidebar-link ">Functions &amp; Closures</a>
+    </li>
+    <li class="sidebar-item">
+      <a href="../../docs/language-guide/oop.html" class="sidebar-link ">Classes &amp; OOP</a>
+    </li>
+    <li class="sidebar-item">
+      <a href="../../docs/language-guide/error-handling.html" class="sidebar-link ">Error Handling</a>
+    </li>
+    <li class="sidebar-item">
+      <a href="../../docs/language-guide/modules.html" class="sidebar-link ">Modules &amp; Imports</a>
+    </li>
   </ul>
 </div>
-<div class="sidebar-section">
-  <div class="sidebar-title" onclick="toggleSection(this)">Standard Library <span class="arrow">v</span></div>
-  <ul class="sidebar-links">
-    <li><a href="../standard-library/index.html" >Overview</a></li>
-    <li class="has-submenu"><a href="../standard-library/assert.html" class="submenu-toggle" onclick="toggleSubmenu(event, this)">assert Module <span class="arrow">></span></a>
-      <ul class="submenu" data-expanded="false">
-        <li><a href="../standard-library/assert.html#truthiness-assertions" class="sub-link">Truthiness Assertions</a></li>
-        <li><a href="../standard-library/assert.html#value-assertions" class="sub-link">Value Assertions</a></li>
-        <li><a href="../standard-library/assert.html#type-assertions" class="sub-link">Type Assertions</a></li>
-      </ul>
+<div class="sidebar-category">
+  <div class="category-title">
+    <span><i class="fa-solid fa-box-open fa-fw" style="margin-right:6px; opacity:0.7;"></i> Package Manager (DPM)</span>
+  </div>
+  <ul class="sidebar-items">
+    <li class="sidebar-item">
+      <a href="../../docs/dpm/index.html" class="sidebar-link ">DPM Guide &amp; Reference</a>
     </li>
-    <li class="has-submenu"><a href="../standard-library/bytes.html" class="submenu-toggle" onclick="toggleSubmenu(event, this)">bytes Module <span class="arrow">></span></a>
-      <ul class="submenu" data-expanded="false">
-        <li><a href="../standard-library/bytes.html#creation--conversion" class="sub-link">Creation & Conversion</a></li>
-        <li><a href="../standard-library/bytes.html#manipulation" class="sub-link">Manipulation</a></li>
-      </ul>
-    </li>
-    <li><a href="../standard-library/collections.html" >collections Module</a></li>
-    <li><a href="../standard-library/crypto.html" >crypto Module</a></li>
-    <li class="has-submenu"><a href="../standard-library/datetime.html" class="submenu-toggle" onclick="toggleSubmenu(event, this)">datetime Module <span class="arrow">></span></a>
-      <ul class="submenu" data-expanded="false">
-        <li><a href="../standard-library/datetime.html#time-functions" class="sub-link">Time Functions</a></li>
-        <li><a href="../standard-library/datetime.html#date-class" class="sub-link">Date Class</a></li>
-      </ul>
-    </li>
-    <li><a href="../standard-library/dir.html" >dir Module</a></li>
-    <li><a href="../standard-library/env.html" >env Module</a></li>
-    <li class="has-submenu"><a href="../standard-library/file.html" class="submenu-toggle" onclick="toggleSubmenu(event, this)">file Module <span class="arrow">></span></a>
-      <ul class="submenu" data-expanded="false">
-        <li><a href="../standard-library/file.html#read--write-operations" class="sub-link">Read & Write</a></li>
-        <li><a href="../standard-library/file.html#file-manipulation" class="sub-link">File Manipulation</a></li>
-        <li><a href="../standard-library/file.html#status-query" class="sub-link">Status Query</a></li>
-      </ul>
-    </li>
-    <li class="has-submenu"><a href="../standard-library/http.html" class="submenu-toggle" onclick="toggleSubmenu(event, this)">http Module <span class="arrow">></span></a>
-      <ul class="submenu" data-expanded="false">
-        <li><a href="../standard-library/http.html#http-client" class="sub-link">HTTP Client</a></li>
-        <li><a href="../standard-library/http.html#http-server" class="sub-link">HTTP Server</a></li>
-        <li><a href="../standard-library/http.html#classes--helpers" class="sub-link">Classes & Helpers</a></li>
-      </ul>
-    </li>
-    <li><a href="../standard-library/json.html" >json Module</a></li>
-    <li class="has-submenu"><a href="../standard-library/lang.html" class="submenu-toggle" onclick="toggleSubmenu(event, this)">lang Module <span class="arrow">></span></a>
-      <ul class="submenu" data-expanded="false">
-        <li><a href="../standard-library/lang.html#runtime-info" class="sub-link">Runtime Info</a></li>
-        <li><a href="../standard-library/lang.html#control" class="sub-link">Control</a></li>
-        <li><a href="../standard-library/lang.html#introspection" class="sub-link">Introspection</a></li>
-        <li><a href="../standard-library/lang.html#library-paths--queries" class="sub-link">Library Paths</a></li>
-      </ul>
-    </li>
-    <li class="has-submenu"><a href="../standard-library/math.html" class="submenu-toggle active" onclick="toggleSubmenu(event, this)">math Module <span class="arrow">v</span></a>
-      <ul class="submenu" data-expanded="true">
-        <li><a href="../standard-library/math.html#constants" class="sub-link">Constants</a></li>
-        <li><a href="../standard-library/math.html#trigonometry" class="sub-link">Trigonometry</a></li>
-        <li><a href="../standard-library/math.html#exponentiation--logs" class="sub-link">Exponentiation & Logs</a></li>
-        <li><a href="../standard-library/math.html#rounding--absolute" class="sub-link">Rounding</a></li>
-        <li><a href="../standard-library/math.html#comparison--statistics" class="sub-link">Statistics</a></li>
-      </ul>
-    </li>
-    <li class="has-submenu"><a href="../standard-library/net.html" class="submenu-toggle" onclick="toggleSubmenu(event, this)">net Module <span class="arrow">></span></a>
-      <ul class="submenu" data-expanded="false">
-        <li><a href="../standard-library/net.html#classes--exports" class="sub-link">Classes & Exports</a></li>
-        <li><a href="../standard-library/net.html#tcp-server-example" class="sub-link">TCP Server</a></li>
-        <li><a href="../standard-library/net.html#tcp-client-example" class="sub-link">TCP Client</a></li>
-      </ul>
-    </li>
-    <li class="has-submenu"><a href="../standard-library/os.html" class="submenu-toggle" onclick="toggleSubmenu(event, this)">os Module <span class="arrow">></span></a>
-      <ul class="submenu" data-expanded="false">
-        <li><a href="../standard-library/os.html#platform-detection" class="sub-link">Platform Detection</a></li>
-        <li><a href="../standard-library/os.html#system-information" class="sub-link">System Information</a></li>
-        <li><a href="../standard-library/os.html#user--temporary-files" class="sub-link">User & Temp Files</a></li>
-      </ul>
-    </li>
-    <li class="has-submenu"><a href="../standard-library/path.html" class="submenu-toggle" onclick="toggleSubmenu(event, this)">path Module <span class="arrow">></span></a>
-      <ul class="submenu" data-expanded="false">
-        <li><a href="../standard-library/path.html#constants" class="sub-link">Constants</a></li>
-        <li><a href="../standard-library/path.html#join--resolve" class="sub-link">Join & Resolve</a></li>
-        <li><a href="../standard-library/path.html#decomposition" class="sub-link">Decomposition</a></li>
-        <li><a href="../standard-library/path.html#query--security" class="sub-link">Query & Security</a></li>
-      </ul>
-    </li>
-    <li class="has-submenu"><a href="../standard-library/process.html" class="submenu-toggle" onclick="toggleSubmenu(event, this)">process Module <span class="arrow">></span></a>
-      <ul class="submenu" data-expanded="false">
-        <li><a href="../standard-library/process.html#process-identification" class="sub-link">Identification</a></li>
-        <li><a href="../standard-library/process.html#process-control" class="sub-link">Process Control</a></li>
-        <li><a href="../standard-library/process.html#working-directory" class="sub-link">Working Directory</a></li>
-        <li><a href="../standard-library/process.html#command-execution" class="sub-link">Command Execution</a></li>
-        <li><a href="../standard-library/process.html#cli-arguments--script-location" class="sub-link">CLI & Script</a></li>
-        <li><a href="../standard-library/process.html#asynchronous-spawning" class="sub-link">Async Spawning</a></li>
-      </ul>
-    </li>
-    <li><a href="../standard-library/random.html" >random Module</a></li>
-    <li class="has-submenu"><a href="../standard-library/regex.html" class="submenu-toggle" onclick="toggleSubmenu(event, this)">regex Module <span class="arrow">></span></a>
-      <ul class="submenu" data-expanded="false">
-        <li><a href="../standard-library/regex.html#flags" class="sub-link">Flags</a></li>
-        <li><a href="../standard-library/regex.html#pattern-class" class="sub-link">Pattern Class</a></li>
-        <li><a href="../standard-library/regex.html#match-class" class="sub-link">Match Class</a></li>
-        <li><a href="../standard-library/regex.html#convenience-functions" class="sub-link">Convenience Functions</a></li>
-      </ul>
-    </li>
-    <li class="has-submenu"><a href="../standard-library/thread.html" class="submenu-toggle" onclick="toggleSubmenu(event, this)">thread Module <span class="arrow">></span></a>
-      <ul class="submenu" data-expanded="false">
-        <li><a href="../standard-library/thread.html#thread-class" class="sub-link">Thread Class</a></li>
-        <li><a href="../standard-library/thread.html#worker-side-functions" class="sub-link">Worker Functions</a></li>
-        <li><a href="../standard-library/thread.html#convenience-functions" class="sub-link">Convenience</a></li>
-      </ul>
-    </li>
-    <li><a href="../standard-library/uuid.html" >uuid Module</a></li>
   </ul>
 </div>
-<div class="sidebar-section">
-  <div class="sidebar-title" onclick="toggleSection(this)">Examples <span class="arrow">v</span></div>
-  <ul class="sidebar-links">
-    <li><a href="../examples/hello-world.html" >Hello World</a></li>
-    <li><a href="../examples/calculator.html" >Calculator</a></li>
-    <li><a href="../examples/todo-app.html" >Todo App</a></li>
-    <li><a href="../examples/file-processing.html" >File Processing</a></li>
+<div class="sidebar-category">
+  <div class="category-title">
+    <span><i class="fa-solid fa-cubes fa-fw" style="margin-right:6px; opacity:0.7;"></i> Standard Library</span>
+  </div>
+  <ul class="sidebar-items">
+    <li class="sidebar-item">
+      <a href="../../docs/standard-library/index.html" class="sidebar-link ">Overview</a>
+    </li>
+    <li class="sidebar-item">
+      <a href="../../docs/standard-library/assert.html" class="sidebar-link ">assert</a>
+    </li>
+    <li class="sidebar-item">
+      <a href="../../docs/standard-library/bytes.html" class="sidebar-link ">bytes</a>
+    </li>
+    <li class="sidebar-item">
+      <a href="../../docs/standard-library/collections.html" class="sidebar-link ">collections</a>
+    </li>
+    <li class="sidebar-item">
+      <a href="../../docs/standard-library/crypto.html" class="sidebar-link ">crypto</a>
+    </li>
+    <li class="sidebar-item">
+      <a href="../../docs/standard-library/datetime.html" class="sidebar-link ">datetime</a>
+    </li>
+    <li class="sidebar-item">
+      <a href="../../docs/standard-library/dir.html" class="sidebar-link ">dir</a>
+    </li>
+    <li class="sidebar-item">
+      <a href="../../docs/standard-library/env.html" class="sidebar-link ">env</a>
+    </li>
+    <li class="sidebar-item">
+      <a href="../../docs/standard-library/file.html" class="sidebar-link ">file</a>
+    </li>
+    <li class="sidebar-item">
+      <a href="../../docs/standard-library/http.html" class="sidebar-link ">http</a>
+    </li>
+    <li class="sidebar-item">
+      <a href="../../docs/standard-library/json.html" class="sidebar-link ">json</a>
+    </li>
+    <li class="sidebar-item">
+      <a href="../../docs/standard-library/lang.html" class="sidebar-link ">lang</a>
+    </li>
+    <li class="sidebar-item">
+      <a href="../../docs/standard-library/math.html" class="sidebar-link active">math</a>
+    </li>
+    <li class="sidebar-item">
+      <a href="../../docs/standard-library/net.html" class="sidebar-link ">net</a>
+    </li>
+    <li class="sidebar-item">
+      <a href="../../docs/standard-library/os.html" class="sidebar-link ">os</a>
+    </li>
+    <li class="sidebar-item">
+      <a href="../../docs/standard-library/path.html" class="sidebar-link ">path</a>
+    </li>
+    <li class="sidebar-item">
+      <a href="../../docs/standard-library/process.html" class="sidebar-link ">process</a>
+    </li>
+    <li class="sidebar-item">
+      <a href="../../docs/standard-library/random.html" class="sidebar-link ">random</a>
+    </li>
+    <li class="sidebar-item">
+      <a href="../../docs/standard-library/regex.html" class="sidebar-link ">regex</a>
+    </li>
+    <li class="sidebar-item">
+      <a href="../../docs/standard-library/thread.html" class="sidebar-link ">thread</a>
+    </li>
+    <li class="sidebar-item">
+      <a href="../../docs/standard-library/uuid.html" class="sidebar-link ">uuid</a>
+    </li>
   </ul>
 </div>
-<div class="sidebar-section">
-  <div class="sidebar-title" onclick="toggleSection(this)">Reference <span class="arrow">v</span></div>
-  <ul class="sidebar-links">
-    <li><a href="../reference/keywords.html" >Keywords</a></li>
-    <li><a href="../reference/operators.html" >Operators</a></li>
-    <li><a href="../reference/builtins.html" >Built-in Functions</a></li>
-    <li><a href="../reference/methods.html" >Methods</a></li>
-    <li><a href="../reference/syntax-reference.html" >Syntax Reference</a></li>
-    <li><a href="../reference/embedding.html" >Embedding API</a></li>
+<div class="sidebar-category">
+  <div class="category-title">
+    <span><i class="fa-solid fa-microchip fa-fw" style="margin-right:6px; opacity:0.7;"></i> C / C++ Embedding</span>
+  </div>
+  <ul class="sidebar-items">
+    <li class="sidebar-item">
+      <a href="../../docs/embedding/index.html" class="sidebar-link ">Embedding Overview</a>
+    </li>
+    <li class="sidebar-item">
+      <a href="../../docs/embedding/vm-lifecycle.html" class="sidebar-link ">VM Lifecycle &amp; Config</a>
+    </li>
+    <li class="sidebar-item">
+      <a href="../../docs/embedding/c-extensions.html" class="sidebar-link ">Writing C Extensions</a>
+    </li>
   </ul>
 </div>
-        </aside>
+<div class="sidebar-category">
+  <div class="category-title">
+    <span><i class="fa-solid fa-utensils fa-fw" style="margin-right:6px; opacity:0.7;"></i> Cookbook &amp; Practical</span>
+  </div>
+  <ul class="sidebar-items">
+    <li class="sidebar-item">
+      <a href="../../docs/cookbook/rest-api.html" class="sidebar-link ">Building a REST API</a>
+    </li>
+    <li class="sidebar-item">
+      <a href="../../docs/cookbook/cli-tool.html" class="sidebar-link ">CLI Automation Tool</a>
+    </li>
+    <li class="sidebar-item">
+      <a href="../../docs/cookbook/parallel-workers.html" class="sidebar-link ">Parallel Worker Pool</a>
+    </li>
+  </ul>
+</div>
+<div class="sidebar-category">
+  <div class="category-title">
+    <span><i class="fa-solid fa-bookmark fa-fw" style="margin-right:6px; opacity:0.7;"></i> Reference</span>
+  </div>
+  <ul class="sidebar-items">
+    <li class="sidebar-item">
+      <a href="../../docs/reference/builtins.html" class="sidebar-link ">Built-in Functions</a>
+    </li>
+    <li class="sidebar-item">
+      <a href="../../docs/reference/keywords.html" class="sidebar-link ">Keywords &amp; Grammar</a>
+    </li>
+    <li class="sidebar-item">
+      <a href="../../docs/reference/cheat-sheet.html" class="sidebar-link ">Cheat Sheet</a>
+    </li>
+  </ul>
+</div>
+</aside>
 
-        <main class="content-wrapper">
-            <div class="content-body">
-                <div class="breadcrumbs">
-                    <a href="../../index.html">Home</a>
-<span class="separator">/</span>
-<span>Standard Library</span>
-<span class="separator">/</span>
-<span class="active">math Module</span>
-                </div>
-                
-                <article>
-                    
-<h1>Math Module</h1>
-<p>Import using: <code>use math</code></p>
+    <main class="docs-content-wrapper">
+      <article class="docs-article">
+        <nav class="breadcrumbs" aria-label="Breadcrumb">
+  <a href="../../index.html">Home</a>
+  <span class="breadcrumb-separator"><i class="fa-solid fa-chevron-right fa-xs"></i></span>
+  <span>Standard Library</span>
+  <span class="breadcrumb-separator"><i class="fa-solid fa-chevron-right fa-xs"></i></span>
+  <span style="color:var(--text-primary); font-weight:600;">math</span>
+</nav>
+        
+        
+<h1 id="math-module">math Module</h1>
+<p class="lead" style="font-size:1.15rem; color:var(--text-secondary); margin-bottom:1.75rem;">
+  The <code>math</code> module provides mathematical constants, trigonometric operations, logarithms, power functions, statistical aggregations, and number theory utilities.
+</p>
 
-<h2 id="constants">Constants</h2>
-<ul>
-    <li><code>math.PI</code> - Ratio of a circle's circumference to its diameter (~3.14159).</li>
-    <li><code>math.E</code> - Euler's constant (~2.71828).</li>
-    <li><code>math.TAU</code> - Equal to 2 * PI (~6.28318).</li>
-</ul>
-<pre><code><span class="kw">use</span> math
-<span class="nd">print</span>(<span class="nd">str</span>(math<span class="op">.</span>PI))     <span class="comment"># 3.141592653589793</span>
-<span class="nd">print</span>(<span class="nd">str</span>(math<span class="op">.</span>E))      <span class="comment"># 2.718281828459045</span>
-<span class="nd">print</span>(<span class="nd">str</span>(math<span class="op">.</span>TAU))    <span class="comment"># 6.283185307179586</span></code></pre>
-
-<h2 id="trigonometry">Trigonometry</h2>
-<p>Angle parameters are in radians:</p>
-<ul>
-    <li><code>math.sin(x)</code>, <code>math.cos(x)</code>, <code>math.tan(x)</code> - Sine, cosine, tangent</li>
-    <li><code>math.asin(x)</code>, <code>math.acos(x)</code>, <code>math.atan(x)</code>, <code>math.atan2(y, x)</code> - Inverse trig</li>
-    <li><code>math.sinh(x)</code>, <code>math.cosh(x)</code>, <code>math.tanh(x)</code> - Hyperbolic trig</li>
-    <li><code>math.deg(rad)</code> - Radians to degrees</li>
-    <li><code>math.rad(deg)</code> - Degrees to radians</li>
-</ul>
-<pre><code><span class="kw">use</span> math
-<span class="nd">print</span>(<span class="nd">str</span>(math<span class="op">.</span><span class="fn">sin</span>(math<span class="op">.</span>PI <span class="op">/</span> <span class="num">2</span>)))  <span class="comment"># 1.0</span>
-<span class="nd">print</span>(<span class="nd">str</span>(math<span class="op">.</span><span class="fn">cos</span>(math<span class="op">.</span>PI)))      <span class="comment"># -1.0</span>
-<span class="nd">print</span>(<span class="nd">str</span>(math<span class="op">.</span><span class="fn">tan</span>(<span class="num">0</span>)))            <span class="comment"># 0.0</span>
-<span class="nd">print</span>(<span class="nd">str</span>(math<span class="op">.</span><span class="fn">deg</span>(math<span class="op">.</span>PI)))      <span class="comment"># 180.0</span>
-<span class="nd">print</span>(<span class="nd">str</span>(math<span class="op">.</span><span class="fn">rad</span>(<span class="num">180</span>)))          <span class="comment"># 3.141592653589793</span></code></pre>
-
-<h2 id="exponentiation--amp--logs">Exponentiation &amp; Logs</h2>
-<ul>
-    <li><code>math.sqrt(x)</code> - Square root</li>
-    <li><code>math.cbrt(x)</code> - Cube root</li>
-    <li><code>math.pow(x, y)</code> - x raised to power y</li>
-    <li><code>math.exp(x)</code> - e^x</li>
-    <li><code>math.log(x)</code> - Natural logarithm</li>
-    <li><code>math.log10(x)</code> - Base-10 logarithm</li>
-    <li><code>math.log2(x)</code> - Base-2 logarithm</li>
-</ul>
-<pre><code><span class="kw">use</span> math
-<span class="nd">print</span>(<span class="nd">str</span>(math<span class="op">.</span><span class="fn">sqrt</span>(<span class="num">25</span>)))       <span class="comment"># 5.0</span>
-<span class="nd">print</span>(<span class="nd">str</span>(math<span class="op">.</span><span class="fn">cbrt</span>(<span class="num">27</span>)))       <span class="comment"># 3.0</span>
-<span class="nd">print</span>(<span class="nd">str</span>(math<span class="op">.</span><span class="fn">pow</span>(<span class="num">2</span>, <span class="num">10</span>)))     <span class="comment"># 1024.0</span>
-<span class="nd">print</span>(<span class="nd">str</span>(math<span class="op">.</span><span class="fn">exp</span>(<span class="num">1</span>)))         <span class="comment"># 2.718281828459045</span>
-<span class="nd">print</span>(<span class="nd">str</span>(math<span class="op">.</span><span class="fn">log</span>(math<span class="op">.</span>E)))    <span class="comment"># 1.0</span>
-<span class="nd">print</span>(<span class="nd">str</span>(math<span class="op">.</span><span class="fn">log10</span>(<span class="num">100</span>)))     <span class="comment"># 2.0</span>
-<span class="nd">print</span>(<span class="nd">str</span>(math<span class="op">.</span><span class="fn">log2</span>(<span class="num">8</span>)))        <span class="comment"># 3.0</span></code></pre>
-
-<h2 id="rounding--amp--absolute">Rounding &amp; Absolute</h2>
-<ul>
-    <li><code>math.ceil(x)</code> - Round up to nearest integer</li>
-    <li><code>math.floor(x)</code> - Round down to nearest integer</li>
-    <li><code>math.round(x)</code> - Round half-up to nearest integer</li>
-    <li><code>math.trunc(x)</code> - Truncate fractional part</li>
-    <li><code>math.abs(x)</code> - Absolute value</li>
-</ul>
-<pre><code><span class="kw">use</span> math
-<span class="nd">print</span>(<span class="nd">str</span>(math<span class="op">.</span><span class="fn">ceil</span>(<span class="num">3.2</span>)))    <span class="comment"># 4.0</span>
-<span class="nd">print</span>(<span class="nd">str</span>(math<span class="op">.</span><span class="fn">floor</span>(<span class="num">3.8</span>)))   <span class="comment"># 3.0</span>
-<span class="nd">print</span>(<span class="nd">str</span>(math<span class="op">.</span><span class="nd">round</span>(<span class="num">3.5</span>)))   <span class="comment"># 4.0</span>
-<span class="nd">print</span>(<span class="nd">str</span>(math<span class="op">.</span><span class="fn">trunc</span>(<span class="num">3.9</span>)))   <span class="comment"># 3.0</span>
-<span class="nd">print</span>(<span class="nd">str</span>(math<span class="op">.</span><span class="nd">abs</span>(<span class="op">-</span><span class="num">5</span>)))      <span class="comment"># 5.0</span></code></pre>
-
-<h2 id="comparison--amp--statistics">Comparison &amp; Statistics</h2>
-<ul>
-    <li><code>math.min(a, b)</code> - Smaller of two numbers</li>
-    <li><code>math.max(a, b)</code> - Larger of two numbers</li>
-    <li><code>math.clamp(val, min, max)</code> - Clamp to inclusive range</li>
-    <li><code>math.sum(arr)</code> - Arithmetic sum of array</li>
-    <li><code>math.mean(arr)</code> - Arithmetic mean (Null if empty)</li>
-    <li><code>math.gcd(a, b)</code> - Greatest Common Divisor</li>
-    <li><code>math.lcm(a, b)</code> - Least Common Multiple</li>
-    <li><code>math.factorial(n)</code> - Factorial of non-negative integer</li>
-</ul>
-<pre><code><span class="kw">use</span> math
-<span class="nd">print</span>(<span class="nd">str</span>(math<span class="op">.</span><span class="fn">min</span>(<span class="num">3</span>, <span class="num">7</span>)))        <span class="comment"># 3.0</span>
-<span class="nd">print</span>(<span class="nd">str</span>(math<span class="op">.</span><span class="fn">max</span>(<span class="num">3</span>, <span class="num">7</span>)))        <span class="comment"># 7.0</span>
-<span class="nd">print</span>(<span class="nd">str</span>(math<span class="op">.</span><span class="fn">clamp</span>(<span class="num">15</span>, <span class="num">0</span>, <span class="num">10</span>))) <span class="comment"># 10.0</span>
-<span class="nd">print</span>(<span class="nd">str</span>(math<span class="op">.</span><span class="fn">sum</span>([<span class="num">1</span>, <span class="num">2</span>, <span class="num">3</span>])))   <span class="comment"># 6.0</span>
-<span class="nd">print</span>(<span class="nd">str</span>(math<span class="op">.</span><span class="fn">mean</span>([<span class="num">1</span>, <span class="num">2</span>, <span class="num">3</span>])))  <span class="comment"># 2.0</span>
-<span class="nd">print</span>(<span class="nd">str</span>(math<span class="op">.</span><span class="fn">gcd</span>(<span class="num">12</span>, <span class="num">8</span>)))       <span class="comment"># 4</span>
-<span class="nd">print</span>(<span class="nd">str</span>(math<span class="op">.</span><span class="fn">lcm</span>(<span class="num">4</span>, <span class="num">6</span>)))        <span class="comment"># 12</span>
-<span class="nd">print</span>(<span class="nd">str</span>(math<span class="op">.</span><span class="fn">factorial</span>(<span class="num">5</span>)))     <span class="comment"># 120</span></code></pre>
-
-                </article>
-
-                <div class="page-navigation">
-                    
-            <a href="../standard-library/lang.html" class="nav-card">
-                <span class="nav-label">Previous</span>
-                <span class="nav-title">lang Module</span>
-            </a>
-            
-            <a href="../standard-library/net.html" class="nav-card next">
-                <span class="nav-label">Next</span>
-                <span class="nav-title">net Module</span>
-            </a>
-            
-                </div>
-
-                <footer>
-                    <div style="text-align: center; font-size: 0.9rem; line-height: 1.5;">
-    &copy; 2026 Harizi Riyadh. Released under the <a href="https://github.com/djazair-language/djazair/blob/main/LICENSE" target="_blank" style="color: inherit; text-decoration: underline;">MIT License</a>.<br>
-    Official Website for Djazair.
+<h2 id="importing">Importing</h2>
+<div class="code-wrapper">
+  <div class="code-header">
+    <span class="code-lang">djazair</span>
+    <button class="copy-btn" aria-label="Copy code"><i class="fa-regular fa-copy"></i> Copy</button>
+  </div>
+  <pre><code><span class="hl-kw">use</span> math</code></pre>
 </div>
 
-                </footer>
-            </div>
-        </main>
+<h2 id="constants">Mathematical Constants</h2>
+<ul>
+  <li><code>math.PI</code>: Ratio of circle circumference to diameter (~3.141592653589793).</li>
+  <li><code>math.E</code>: Base of natural logarithms (~2.718281828459045).</li>
+  <li><code>math.TAU</code>: 2 * PI (~6.283185307179586).</li>
+</ul>
 
-        <aside class="toc-wrapper">
-            <div class="toc-title">On this page</div>
-            <ul class="toc-links">
-                <li class=""><a href="#constants">Constants</a></li>
-<li class=""><a href="#trigonometry">Trigonometry</a></li>
-<li class=""><a href="#exponentiation--amp--logs">Exponentiation &amp; Logs</a></li>
-<li class=""><a href="#rounding--amp--absolute">Rounding &amp; Absolute</a></li>
-<li class=""><a href="#comparison--amp--statistics">Comparison &amp; Statistics</a></li>
-            </ul>
-        </aside>
+<h2 id="functions-catalog">Functions Catalog</h2>
+<div class="table-wrapper">
+  <table>
+    <thead>
+      <tr><th>Function</th><th>Description</th><th>Example</th></tr>
+    </thead>
+    <tbody>
+      <tr><td><code>math.sqrt(x)</code></td><td>Square root</td><td><code>math.sqrt(16) # => 4.0</code></td></tr>
+      <tr><td><code>math.cbrt(x)</code></td><td>Cube root</td><td><code>math.cbrt(27) # => 3.0</code></td></tr>
+      <tr><td><code>math.pow(x, y)</code></td><td>x raised to power y</td><td><code>math.pow(2, 10) # => 1024.0</code></td></tr>
+      <tr><td><code>math.sin(x)</code> / <code>cos(x)</code> / <code>tan(x)</code></td><td>Trigonometric functions (radians)</td><td><code>math.sin(math.PI / 2) # => 1.0</code></td></tr>
+      <tr><td><code>math.log(x)</code> / <code>log10(x)</code> / <code>log2(x)</code></td><td>Logarithms (natural, base-10, base-2)</td><td><code>math.log10(1000) # => 3.0</code></td></tr>
+      <tr><td><code>math.ceil(x)</code> / <code>floor(x)</code> / <code>round(x)</code></td><td>Rounding functions</td><td><code>math.ceil(2.1) # => 3</code></td></tr>
+      <tr><td><code>math.gcd(a, b)</code></td><td>Greatest Common Divisor</td><td><code>math.gcd(12, 8) # => 4</code></td></tr>
+      <tr><td><code>math.lcm(a, b)</code></td><td>Least Common Multiple</td><td><code>math.lcm(4, 6) # => 12</code></td></tr>
+      <tr><td><code>math.factorial(n)</code></td><td>Factorial n!</td><td><code>math.factorial(5) # => 120</code></td></tr>
+      <tr><td><code>math.clamp(x, min, max)</code></td><td>Restricts x between min and max</td><td><code>math.clamp(15, 0, 10) # => 10</code></td></tr>
+      <tr><td><code>math.deg(rad)</code> / <code>rad(deg)</code></td><td>Angle conversions</td><td><code>math.deg(math.PI) # => 180.0</code></td></tr>
+    </tbody>
+  </table>
+</div>
+
+
+        <div class="docs-nav-footer">
+  <a href="../../docs/standard-library/lang.html" class="nav-card prev">
+    <div class="nav-card-label"><i class="fa-solid fa-arrow-left"></i> Previous</div>
+    <div class="nav-card-title">lang</div>
+  </a>
+  <a href="../../docs/standard-library/net.html" class="nav-card next">
+    <div class="nav-card-label">Next <i class="fa-solid fa-arrow-right"></i></div>
+    <div class="nav-card-title">net</div>
+  </a>
+</div>
+      </article>
+    </main>
+
+    <aside class="docs-toc">
+  <div class="toc-title">On this page</div>
+  <ul class="toc-links">
+    <li>
+      <a href="#importing" class="toc-link" >Importing</a>
+    </li>
+    <li>
+      <a href="#constants" class="toc-link" >Mathematical Constants</a>
+    </li>
+    <li>
+      <a href="#functions-catalog" class="toc-link" >Functions Catalog</a>
+    </li>
+  </ul>
+</aside>
+  </div>
+
+  <div class="search-modal-backdrop" id="search-modal">
+  <div class="search-modal">
+    <div class="search-input-wrap">
+      <i class="fa-solid fa-magnifying-glass"></i>
+      <input type="text" id="search-input" class="search-input" placeholder="Search documentation, methods, keywords..." autocomplete="off">
     </div>
-    <script>
-        (function() {
-            var btn = document.getElementById("back-to-top");
-            if (!btn) return;
-            window.addEventListener("scroll", function() {
-                btn.classList.toggle("visible", window.scrollY > 400);
-            });
-            btn.addEventListener("click", function() {
-                window.scrollTo({ top: 0, behavior: "smooth" });
-            });
-        })();
+    <div class="search-results-list" id="search-results"></div>
+    <div class="search-footer">
+      <span>Navigate with <kbd>↑</kbd> <kbd>↓</kbd></span>
+      <span>Open with <kbd>Enter</kbd></span>
+      <span>Close with <kbd>Esc</kbd></span>
+    </div>
+  </div>
+</div>
 
-        (function() {
-            var toggle = document.querySelector(".menu-toggle");
-            var nav = document.querySelector(".top-nav");
-            if (toggle && nav) {
-                toggle.addEventListener("click", function() {
-                    nav.classList.toggle("open");
-                    toggle.classList.toggle("active");
-                });
-                document.addEventListener("click", function(e) {
-                    if (!toggle.contains(e.target) && !nav.contains(e.target)) {
-                        nav.classList.remove("open");
-                        toggle.classList.remove("active");
-                    }
-                });
-            }
-        })();
-    </script>
-    <button id="back-to-top" aria-label="Back to top"><i class="fa-solid fa-arrow-up"></i></button>
+  <!-- Scripts -->
+  <script src="../../assets/js/search-index.js"></script>
+  <script src="../../assets/js/search.js"></script>
+  <script src="../../assets/js/code-tools.js"></script>
+  <script src="../../assets/js/navigation.js"></script>
 </body>
 </html>

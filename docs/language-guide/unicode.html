@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Unicode &amp; UTF-8 | Djazair Documentation</title>
+  <meta name="description" content="First-class UTF-8, Arabic identifiers, emojis, and code-point accurate operations.">
+  <link rel="icon" href="../../assets/images/logo.svg" type="image/svg+xml">
+  
+  <!-- FontAwesome 6 -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  
+  <!-- Google Fonts (Inter & JetBrains Mono) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+  
+  <!-- Modern Docs Stylesheets -->
+  <link rel="stylesheet" href="../../assets/css/main.css">
+  <link rel="stylesheet" href="../../assets/css/syntax.css">
+  
+  <!-- Early theme application to avoid flash -->
+  <script src="../../assets/js/theme.js"></script>
+</head>
+<body>
+  <header class="site-header">
+  <div class="header-left">
+    <button class="mobile-toggle-btn" id="mobile-toggle" aria-label="Toggle navigation drawer">
+      <i class="fa-solid fa-bars"></i>
+    </button>
+    <a href="../../index.html" class="brand-link">
+      <img src="../../assets/images/logo.svg" alt="Djazair Logo" class="brand-logo">
+      <span>Djazair</span>
+      <span class="version-tag">v1.1.0</span>
+    </a>
+  </div>
+
+  <nav class="header-nav">
+    <a href="../../docs/getting-started/index.html" class="nav-link active">Documentation</a>
+    <a href="../../docs/standard-library/index.html" class="nav-link ">Standard Library</a>
+    <a href="../../docs/dpm/index.html" class="nav-link ">DPM</a>
+    <a href="../../docs/cookbook/rest-api.html" class="nav-link ">Cookbook</a>
+    <a href="../../docs/reference/cheat-sheet.html" class="nav-link ">Cheat Sheet</a>
+  </nav>
+
+  <div class="header-right">
+    <button class="search-btn" aria-label="Search documentation">
+      <i class="fa-solid fa-magnifying-glass"></i>
+      <span>Search...</span>
+      <span class="search-shortcut">Ctrl K</span>
+    </button>
+    <button class="theme-btn" id="theme-toggle" aria-label="Toggle dark mode">
+      <i class="fa-solid fa-moon"></i>
+    </button>
+    <a href="https://github.com/djazair-language/djazair" target="_blank" rel="noopener noreferrer" class="icon-btn" aria-label="GitHub repository">
+      <i class="fa-brands fa-github"></i>
+    </a>
+  </div>
+</header>
+
+  <div class="docs-layout">
+    <div class="sidebar-backdrop" id="sidebar-backdrop"></div>
+    <aside class="docs-sidebar" id="docs-sidebar">
+<div class="sidebar-category">
+  <div class="category-title">
+    <span><i class="fa-solid fa-rocket fa-fw" style="margin-right:6px; opacity:0.7;"></i> Getting Started</span>
+  </div>
+  <ul class="sidebar-items">
+    <li class="sidebar-item">
+      <a href="../../docs/getting-started/index.html" class="sidebar-link ">Introduction</a>
+    </li>
+    <li class="sidebar-item">
+      <a href="../../docs/getting-started/installation.html" class="sidebar-link ">Installation</a>
+    </li>
+    <li class="sidebar-item">
+      <a href="../../docs/getting-started/first-program.html" class="sidebar-link ">First Program</a>
+    </li>
+    <li class="sidebar-item">
+      <a href="../../docs/getting-started/cli.html" class="sidebar-link ">Command-Line (CLI)</a>
+    </li>
+  </ul>
+</div>
+<div class="sidebar-category">
+  <div class="category-title">
+    <span><i class="fa-solid fa-book-open fa-fw" style="margin-right:6px; opacity:0.7;"></i> Language Guide</span>
+  </div>
+  <ul class="sidebar-items">
+    <li class="sidebar-item">
+      <a href="../../docs/language-guide/variables.html" class="sidebar-link ">Variables &amp; Scope</a>
+    </li>
+    <li class="sidebar-item">
+      <a href="../../docs/language-guide/data-types.html" class="sidebar-link ">Data Types &amp; Casting</a>
+    </li>
+    <li class="sidebar-item">
+      <a href="../../docs/language-guide/operators.html" class="sidebar-link ">Operators</a>
+    </li>
+    <li class="sidebar-item">
+      <a href="../../docs/language-guide/strings.html" class="sidebar-link ">Strings &amp; Methods</a>
+    </li>
+    <li class="sidebar-item">
+      <a href="../../docs/language-guide/unicode.html" class="sidebar-link active">Unicode &amp; UTF-8</a>
+    </li>
+    <li class="sidebar-item">
+      <a href="../../docs/language-guide/arrays.html" class="sidebar-link ">Arrays &amp; Methods</a>
+    </li>
+    <li class="sidebar-item">
+      <a href="../../docs/language-guide/maps.html" class="sidebar-link ">Maps &amp; Hashes</a>
+    </li>
+    <li class="sidebar-item">
+      <a href="../../docs/language-guide/control-flow.html" class="sidebar-link ">Control Flow</a>
+    </li>
+    <li class="sidebar-item">
+      <a href="../../docs/language-guide/loops.html" class="sidebar-link ">Loops &amp; Iteration</a>
+    </li>
+    <li class="sidebar-item">
+      <a href="../../docs/language-guide/functions.html" class="sidebar-link ">Functions &amp; Closures</a>
+    </li>
+    <li class="sidebar-item">
+      <a href="../../docs/language-guide/oop.html" class="sidebar-link ">Classes &amp; OOP</a>
+    </li>
+    <li class="sidebar-item">
+      <a href="../../docs/language-guide/error-handling.html" class="sidebar-link ">Error Handling</a>
+    </li>
+    <li class="sidebar-item">
+      <a href="../../docs/language-guide/modules.html" class="sidebar-link ">Modules &amp; Imports</a>
+    </li>
+  </ul>
+</div>
+<div class="sidebar-category">
+  <div class="category-title">
+    <span><i class="fa-solid fa-box-open fa-fw" style="margin-right:6px; opacity:0.7;"></i> Package Manager (DPM)</span>
+  </div>
+  <ul class="sidebar-items">
+    <li class="sidebar-item">
+      <a href="../../docs/dpm/index.html" class="sidebar-link ">DPM Guide &amp; Reference</a>
+    </li>
+  </ul>
+</div>
+<div class="sidebar-category">
+  <div class="category-title">
+    <span><i class="fa-solid fa-cubes fa-fw" style="margin-right:6px; opacity:0.7;"></i> Standard Library</span>
+  </div>
+  <ul class="sidebar-items">
+    <li class="sidebar-item">
+      <a href="../../docs/standard-library/index.html" class="sidebar-link ">Overview</a>
+    </li>
+    <li class="sidebar-item">
+      <a href="../../docs/standard-library/assert.html" class="sidebar-link ">assert</a>
+    </li>
+    <li class="sidebar-item">
+      <a href="../../docs/standard-library/bytes.html" class="sidebar-link ">bytes</a>
+    </li>
+    <li class="sidebar-item">
+      <a href="../../docs/standard-library/collections.html" class="sidebar-link ">collections</a>
+    </li>
+    <li class="sidebar-item">
+      <a href="../../docs/standard-library/crypto.html" class="sidebar-link ">crypto</a>
+    </li>
+    <li class="sidebar-item">
+      <a href="../../docs/standard-library/datetime.html" class="sidebar-link ">datetime</a>
+    </li>
+    <li class="sidebar-item">
+      <a href="../../docs/standard-library/dir.html" class="sidebar-link ">dir</a>
+    </li>
+    <li class="sidebar-item">
+      <a href="../../docs/standard-library/env.html" class="sidebar-link ">env</a>
+    </li>
+    <li class="sidebar-item">
+      <a href="../../docs/standard-library/file.html" class="sidebar-link ">file</a>
+    </li>
+    <li class="sidebar-item">
+      <a href="../../docs/standard-library/http.html" class="sidebar-link ">http</a>
+    </li>
+    <li class="sidebar-item">
+      <a href="../../docs/standard-library/json.html" class="sidebar-link ">json</a>
+    </li>
+    <li class="sidebar-item">
+      <a href="../../docs/standard-library/lang.html" class="sidebar-link ">lang</a>
+    </li>
+    <li class="sidebar-item">
+      <a href="../../docs/standard-library/math.html" class="sidebar-link ">math</a>
+    </li>
+    <li class="sidebar-item">
+      <a href="../../docs/standard-library/net.html" class="sidebar-link ">net</a>
+    </li>
+    <li class="sidebar-item">
+      <a href="../../docs/standard-library/os.html" class="sidebar-link ">os</a>
+    </li>
+    <li class="sidebar-item">
+      <a href="../../docs/standard-library/path.html" class="sidebar-link ">path</a>
+    </li>
+    <li class="sidebar-item">
+      <a href="../../docs/standard-library/process.html" class="sidebar-link ">process</a>
+    </li>
+    <li class="sidebar-item">
+      <a href="../../docs/standard-library/random.html" class="sidebar-link ">random</a>
+    </li>
+    <li class="sidebar-item">
+      <a href="../../docs/standard-library/regex.html" class="sidebar-link ">regex</a>
+    </li>
+    <li class="sidebar-item">
+      <a href="../../docs/standard-library/thread.html" class="sidebar-link ">thread</a>
+    </li>
+    <li class="sidebar-item">
+      <a href="../../docs/standard-library/uuid.html" class="sidebar-link ">uuid</a>
+    </li>
+  </ul>
+</div>
+<div class="sidebar-category">
+  <div class="category-title">
+    <span><i class="fa-solid fa-microchip fa-fw" style="margin-right:6px; opacity:0.7;"></i> C / C++ Embedding</span>
+  </div>
+  <ul class="sidebar-items">
+    <li class="sidebar-item">
+      <a href="../../docs/embedding/index.html" class="sidebar-link ">Embedding Overview</a>
+    </li>
+    <li class="sidebar-item">
+      <a href="../../docs/embedding/vm-lifecycle.html" class="sidebar-link ">VM Lifecycle &amp; Config</a>
+    </li>
+    <li class="sidebar-item">
+      <a href="../../docs/embedding/c-extensions.html" class="sidebar-link ">Writing C Extensions</a>
+    </li>
+  </ul>
+</div>
+<div class="sidebar-category">
+  <div class="category-title">
+    <span><i class="fa-solid fa-utensils fa-fw" style="margin-right:6px; opacity:0.7;"></i> Cookbook &amp; Practical</span>
+  </div>
+  <ul class="sidebar-items">
+    <li class="sidebar-item">
+      <a href="../../docs/cookbook/rest-api.html" class="sidebar-link ">Building a REST API</a>
+    </li>
+    <li class="sidebar-item">
+      <a href="../../docs/cookbook/cli-tool.html" class="sidebar-link ">CLI Automation Tool</a>
+    </li>
+    <li class="sidebar-item">
+      <a href="../../docs/cookbook/parallel-workers.html" class="sidebar-link ">Parallel Worker Pool</a>
+    </li>
+  </ul>
+</div>
+<div class="sidebar-category">
+  <div class="category-title">
+    <span><i class="fa-solid fa-bookmark fa-fw" style="margin-right:6px; opacity:0.7;"></i> Reference</span>
+  </div>
+  <ul class="sidebar-items">
+    <li class="sidebar-item">
+      <a href="../../docs/reference/builtins.html" class="sidebar-link ">Built-in Functions</a>
+    </li>
+    <li class="sidebar-item">
+      <a href="../../docs/reference/keywords.html" class="sidebar-link ">Keywords &amp; Grammar</a>
+    </li>
+    <li class="sidebar-item">
+      <a href="../../docs/reference/cheat-sheet.html" class="sidebar-link ">Cheat Sheet</a>
+    </li>
+  </ul>
+</div>
+</aside>
+
+    <main class="docs-content-wrapper">
+      <article class="docs-article">
+        <nav class="breadcrumbs" aria-label="Breadcrumb">
+  <a href="../../index.html">Home</a>
+  <span class="breadcrumb-separator"><i class="fa-solid fa-chevron-right fa-xs"></i></span>
+  <span>Language Guide</span>
+  <span class="breadcrumb-separator"><i class="fa-solid fa-chevron-right fa-xs"></i></span>
+  <span style="color:var(--text-primary); font-weight:600;">Unicode &amp; UTF-8</span>
+</nav>
+        
+        
+<h1 id="unicode-utf8">Unicode & UTF-8</h1>
+<p class="lead" style="font-size:1.15rem; color:var(--text-secondary); margin-bottom:1.75rem;">
+  Djazair was engineered with first-class internationalization at its very core. Rather than treating strings as raw ASCII byte buffers, Djazair operates on true Unicode code points.
+</p>
+
+<div class="callout callout-tip">
+  <div class="callout-title"><i class="fa-solid fa-earth-africa"></i> Native Arabic & Emoji Support</div>
+  <p>In Djazair, Arabic identifiers, multi-byte emojis, Japanese Kanji, and accented letters are valid anywhere: in variable names, function declarations, class properties, and string operations.</p>
+</div>
+
+<h2 id="arabic-identifiers">Arabic Identifiers & Code Example</h2>
+<p>You can write complete scripts using Arabic variable and function names:</p>
+
+<div class="code-wrapper">
+  <div class="code-header">
+    <span class="code-lang">djazair</span>
+    <button class="copy-btn" aria-label="Copy code"><i class="fa-regular fa-copy"></i> Copy</button>
+  </div>
+  <pre><code><span class="hl-comment"># Variables and functions with Arabic and emojis</span>
+<span class="hl-kw">let</span> 🚀_السرعة <span class="hl-op">=</span> <span class="hl-num">100</span>
+
+<span class="hl-kw">fn</span> 🧑‍💻_حساب_المجموع(أ, ب)
+    <span class="hl-kw">return</span> أ <span class="hl-op">+</span> ب
+<span class="hl-kw">end</span>
+
+<span class="hl-builtin">print</span>(<span class="hl-str">&quot;النتيجة: <span class="hl-interp">${</span>🧑‍💻_حساب_المجموع(<span class="hl-num">25</span>, <span class="hl-num">75</span>)<span class="hl-interp">}</span>&quot;</span>)
+<span class="hl-output"># =&gt; النتيجة: 100</span></code></pre>
+</div>
+
+<h2 id="code-point-accuracy">Code-Point Accurate Length & Indexing</h2>
+<p>Consider a mixed string with 1-byte, 2-byte, 3-byte, and 4-byte characters:</p>
+
+<div class="code-wrapper">
+  <div class="code-header">
+    <span class="code-lang">djazair</span>
+    <button class="copy-btn" aria-label="Copy code"><i class="fa-regular fa-copy"></i> Copy</button>
+  </div>
+  <pre><code><span class="hl-comment"># A (1 byte), م (2 bytes), 漢 (3 bytes), 🚀 (4 bytes)</span>
+<span class="hl-kw">let</span> complexStr <span class="hl-op">=</span> <span class="hl-str">&quot;Aم漢🚀&quot;</span>
+
+<span class="hl-comment"># In many other languages, length returns 10 bytes.</span>
+<span class="hl-comment"># In Djazair, length() returns the true logical character count:</span>
+<span class="hl-builtin">print</span>(complexStr.<span class="hl-fn">length</span>())          <span class="hl-output"># =&gt; 4</span>
+
+<span class="hl-comment"># Accurate character iteration:</span>
+<span class="hl-kw">for</span> char <span class="hl-kw">in</span> complexStr
+    <span class="hl-builtin">print</span>(<span class="hl-str">&quot;<span class="hl-interp">${</span>char<span class="hl-interp">}</span> =&gt; code point: <span class="hl-interp">${</span>char.<span class="hl-fn">charCodeAt</span>(<span class="hl-num">0</span>)<span class="hl-interp">}</span>&quot;</span>)
+<span class="hl-kw">end</span>
+<span class="hl-comment"># A =&gt; code point: 65</span>
+<span class="hl-comment"># م =&gt; code point: 1605</span>
+<span class="hl-comment"># 漢 =&gt; code point: 28450</span>
+<span class="hl-comment"># 🚀 =&gt; code point: 128640</span>
+
+<span class="hl-comment"># Surgical slicing without breaking multi-byte boundaries:</span>
+<span class="hl-builtin">print</span>(complexStr.<span class="hl-fn">slice</span>(<span class="hl-num">1</span>, <span class="hl-num">3</span>))       <span class="hl-output"># =&gt; م漢</span></code></pre>
+</div>
+
+<h2 id="arabic-diacritics">Arabic Diacritics (التشكيل)</h2>
+<p>Arabic vowels and diacritical marks (حركات التشكيل) are treated as distinct logical Unicode code points, allowing precise linguistic processing:</p>
+
+<div class="code-wrapper">
+  <div class="code-header">
+    <span class="code-lang">djazair</span>
+    <button class="copy-btn" aria-label="Copy code"><i class="fa-regular fa-copy"></i> Copy</button>
+  </div>
+  <pre><code><span class="hl-kw">let</span> phrase <span class="hl-op">=</span> <span class="hl-str">&quot;بِسْمِ اللَّهِ&quot;</span>
+<span class="hl-builtin">print</span>(<span class="hl-str">&quot;Text: <span class="hl-interp">${</span>phrase<span class="hl-interp">}</span>&quot;</span>)
+<span class="hl-builtin">print</span>(<span class="hl-str">&quot;Character count with diacritics: <span class="hl-interp">${</span>phrase.<span class="hl-fn">length</span>()<span class="hl-interp">}</span>&quot;</span>)</code></pre>
+</div>
+
+
+        <div class="docs-nav-footer">
+  <a href="../../docs/language-guide/strings.html" class="nav-card prev">
+    <div class="nav-card-label"><i class="fa-solid fa-arrow-left"></i> Previous</div>
+    <div class="nav-card-title">Strings &amp; Methods</div>
+  </a>
+  <a href="../../docs/language-guide/arrays.html" class="nav-card next">
+    <div class="nav-card-label">Next <i class="fa-solid fa-arrow-right"></i></div>
+    <div class="nav-card-title">Arrays &amp; Methods</div>
+  </a>
+</div>
+      </article>
+    </main>
+
+    <aside class="docs-toc">
+  <div class="toc-title">On this page</div>
+  <ul class="toc-links">
+    <li>
+      <a href="#arabic-identifiers" class="toc-link" >Arabic Identifiers &amp; Code Example</a>
+    </li>
+    <li>
+      <a href="#code-point-accuracy" class="toc-link" >Code-Point Accurate Length &amp; Indexing</a>
+    </li>
+    <li>
+      <a href="#arabic-diacritics" class="toc-link" >Arabic Diacritics (التشكيل)</a>
+    </li>
+  </ul>
+</aside>
+  </div>
+
+  <div class="search-modal-backdrop" id="search-modal">
+  <div class="search-modal">
+    <div class="search-input-wrap">
+      <i class="fa-solid fa-magnifying-glass"></i>
+      <input type="text" id="search-input" class="search-input" placeholder="Search documentation, methods, keywords..." autocomplete="off">
+    </div>
+    <div class="search-results-list" id="search-results"></div>
+    <div class="search-footer">
+      <span>Navigate with <kbd>↑</kbd> <kbd>↓</kbd></span>
+      <span>Open with <kbd>Enter</kbd></span>
+      <span>Close with <kbd>Esc</kbd></span>
+    </div>
+  </div>
+</div>
+
+  <!-- Scripts -->
+  <script src="../../assets/js/search-index.js"></script>
+  <script src="../../assets/js/search.js"></script>
+  <script src="../../assets/js/code-tools.js"></script>
+  <script src="../../assets/js/navigation.js"></script>
+</body>
+</html>

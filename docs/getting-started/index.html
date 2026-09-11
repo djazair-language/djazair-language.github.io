@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Introduction | Djazair Documentation</title>
+  <meta name="description" content="Overview of Djazair, architectural design, C engine, and modern features.">
+  <link rel="icon" href="../../assets/images/logo.svg" type="image/svg+xml">
+  
+  <!-- FontAwesome 6 -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  
+  <!-- Google Fonts (Inter & JetBrains Mono) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+  
+  <!-- Modern Docs Stylesheets -->
+  <link rel="stylesheet" href="../../assets/css/main.css">
+  <link rel="stylesheet" href="../../assets/css/syntax.css">
+  
+  <!-- Early theme application to avoid flash -->
+  <script src="../../assets/js/theme.js"></script>
+</head>
+<body>
+  <header class="site-header">
+  <div class="header-left">
+    <button class="mobile-toggle-btn" id="mobile-toggle" aria-label="Toggle navigation drawer">
+      <i class="fa-solid fa-bars"></i>
+    </button>
+    <a href="../../index.html" class="brand-link">
+      <img src="../../assets/images/logo.svg" alt="Djazair Logo" class="brand-logo">
+      <span>Djazair</span>
+      <span class="version-tag">v1.1.0</span>
+    </a>
+  </div>
+
+  <nav class="header-nav">
+    <a href="../../docs/getting-started/index.html" class="nav-link active">Documentation</a>
+    <a href="../../docs/standard-library/index.html" class="nav-link ">Standard Library</a>
+    <a href="../../docs/dpm/index.html" class="nav-link ">DPM</a>
+    <a href="../../docs/cookbook/rest-api.html" class="nav-link ">Cookbook</a>
+    <a href="../../docs/reference/cheat-sheet.html" class="nav-link ">Cheat Sheet</a>
+  </nav>
+
+  <div class="header-right">
+    <button class="search-btn" aria-label="Search documentation">
+      <i class="fa-solid fa-magnifying-glass"></i>
+      <span>Search...</span>
+      <span class="search-shortcut">Ctrl K</span>
+    </button>
+    <button class="theme-btn" id="theme-toggle" aria-label="Toggle dark mode">
+      <i class="fa-solid fa-moon"></i>
+    </button>
+    <a href="https://github.com/djazair-language/djazair" target="_blank" rel="noopener noreferrer" class="icon-btn" aria-label="GitHub repository">
+      <i class="fa-brands fa-github"></i>
+    </a>
+  </div>
+</header>
+
+  <div class="docs-layout">
+    <div class="sidebar-backdrop" id="sidebar-backdrop"></div>
+    <aside class="docs-sidebar" id="docs-sidebar">
+<div class="sidebar-category">
+  <div class="category-title">
+    <span><i class="fa-solid fa-rocket fa-fw" style="margin-right:6px; opacity:0.7;"></i> Getting Started</span>
+  </div>
+  <ul class="sidebar-items">
+    <li class="sidebar-item">
+      <a href="../../docs/getting-started/index.html" class="sidebar-link active">Introduction</a>
+    </li>
+    <li class="sidebar-item">
+      <a href="../../docs/getting-started/installation.html" class="sidebar-link ">Installation</a>
+    </li>
+    <li class="sidebar-item">
+      <a href="../../docs/getting-started/first-program.html" class="sidebar-link ">First Program</a>
+    </li>
+    <li class="sidebar-item">
+      <a href="../../docs/getting-started/cli.html" class="sidebar-link ">Command-Line (CLI)</a>
+    </li>
+  </ul>
+</div>
+<div class="sidebar-category">
+  <div class="category-title">
+    <span><i class="fa-solid fa-book-open fa-fw" style="margin-right:6px; opacity:0.7;"></i> Language Guide</span>
+  </div>
+  <ul class="sidebar-items">
+    <li class="sidebar-item">
+      <a href="../../docs/language-guide/variables.html" class="sidebar-link ">Variables &amp; Scope</a>
+    </li>
+    <li class="sidebar-item">
+      <a href="../../docs/language-guide/data-types.html" class="sidebar-link ">Data Types &amp; Casting</a>
+    </li>
+    <li class="sidebar-item">
+      <a href="../../docs/language-guide/operators.html" class="sidebar-link ">Operators</a>
+    </li>
+    <li class="sidebar-item">
+      <a href="../../docs/language-guide/strings.html" class="sidebar-link ">Strings &amp; Methods</a>
+    </li>
+    <li class="sidebar-item">
+      <a href="../../docs/language-guide/unicode.html" class="sidebar-link ">Unicode &amp; UTF-8</a>
+    </li>
+    <li class="sidebar-item">
+      <a href="../../docs/language-guide/arrays.html" class="sidebar-link ">Arrays &amp; Methods</a>
+    </li>
+    <li class="sidebar-item">
+      <a href="../../docs/language-guide/maps.html" class="sidebar-link ">Maps &amp; Hashes</a>
+    </li>
+    <li class="sidebar-item">
+      <a href="../../docs/language-guide/control-flow.html" class="sidebar-link ">Control Flow</a>
+    </li>
+    <li class="sidebar-item">
+      <a href="../../docs/language-guide/loops.html" class="sidebar-link ">Loops &amp; Iteration</a>
+    </li>
+    <li class="sidebar-item">
+      <a href="../../docs/language-guide/functions.html" class="sidebar-link ">Functions &amp; Closures</a>
+    </li>
+    <li class="sidebar-item">
+      <a href="../../docs/language-guide/oop.html" class="sidebar-link ">Classes &amp; OOP</a>
+    </li>
+    <li class="sidebar-item">
+      <a href="../../docs/language-guide/error-handling.html" class="sidebar-link ">Error Handling</a>
+    </li>
+    <li class="sidebar-item">
+      <a href="../../docs/language-guide/modules.html" class="sidebar-link ">Modules &amp; Imports</a>
+    </li>
+  </ul>
+</div>
+<div class="sidebar-category">
+  <div class="category-title">
+    <span><i class="fa-solid fa-box-open fa-fw" style="margin-right:6px; opacity:0.7;"></i> Package Manager (DPM)</span>
+  </div>
+  <ul class="sidebar-items">
+    <li class="sidebar-item">
+      <a href="../../docs/dpm/index.html" class="sidebar-link ">DPM Guide &amp; Reference</a>
+    </li>
+  </ul>
+</div>
+<div class="sidebar-category">
+  <div class="category-title">
+    <span><i class="fa-solid fa-cubes fa-fw" style="margin-right:6px; opacity:0.7;"></i> Standard Library</span>
+  </div>
+  <ul class="sidebar-items">
+    <li class="sidebar-item">
+      <a href="../../docs/standard-library/index.html" class="sidebar-link ">Overview</a>
+    </li>
+    <li class="sidebar-item">
+      <a href="../../docs/standard-library/assert.html" class="sidebar-link ">assert</a>
+    </li>
+    <li class="sidebar-item">
+      <a href="../../docs/standard-library/bytes.html" class="sidebar-link ">bytes</a>
+    </li>
+    <li class="sidebar-item">
+      <a href="../../docs/standard-library/collections.html" class="sidebar-link ">collections</a>
+    </li>
+    <li class="sidebar-item">
+      <a href="../../docs/standard-library/crypto.html" class="sidebar-link ">crypto</a>
+    </li>
+    <li class="sidebar-item">
+      <a href="../../docs/standard-library/datetime.html" class="sidebar-link ">datetime</a>
+    </li>
+    <li class="sidebar-item">
+      <a href="../../docs/standard-library/dir.html" class="sidebar-link ">dir</a>
+    </li>
+    <li class="sidebar-item">
+      <a href="../../docs/standard-library/env.html" class="sidebar-link ">env</a>
+    </li>
+    <li class="sidebar-item">
+      <a href="../../docs/standard-library/file.html" class="sidebar-link ">file</a>
+    </li>
+    <li class="sidebar-item">
+      <a href="../../docs/standard-library/http.html" class="sidebar-link ">http</a>
+    </li>
+    <li class="sidebar-item">
+      <a href="../../docs/standard-library/json.html" class="sidebar-link ">json</a>
+    </li>
+    <li class="sidebar-item">
+      <a href="../../docs/standard-library/lang.html" class="sidebar-link ">lang</a>
+    </li>
+    <li class="sidebar-item">
+      <a href="../../docs/standard-library/math.html" class="sidebar-link ">math</a>
+    </li>
+    <li class="sidebar-item">
+      <a href="../../docs/standard-library/net.html" class="sidebar-link ">net</a>
+    </li>
+    <li class="sidebar-item">
+      <a href="../../docs/standard-library/os.html" class="sidebar-link ">os</a>
+    </li>
+    <li class="sidebar-item">
+      <a href="../../docs/standard-library/path.html" class="sidebar-link ">path</a>
+    </li>
+    <li class="sidebar-item">
+      <a href="../../docs/standard-library/process.html" class="sidebar-link ">process</a>
+    </li>
+    <li class="sidebar-item">
+      <a href="../../docs/standard-library/random.html" class="sidebar-link ">random</a>
+    </li>
+    <li class="sidebar-item">
+      <a href="../../docs/standard-library/regex.html" class="sidebar-link ">regex</a>
+    </li>
+    <li class="sidebar-item">
+      <a href="../../docs/standard-library/thread.html" class="sidebar-link ">thread</a>
+    </li>
+    <li class="sidebar-item">
+      <a href="../../docs/standard-library/uuid.html" class="sidebar-link ">uuid</a>
+    </li>
+  </ul>
+</div>
+<div class="sidebar-category">
+  <div class="category-title">
+    <span><i class="fa-solid fa-microchip fa-fw" style="margin-right:6px; opacity:0.7;"></i> C / C++ Embedding</span>
+  </div>
+  <ul class="sidebar-items">
+    <li class="sidebar-item">
+      <a href="../../docs/embedding/index.html" class="sidebar-link ">Embedding Overview</a>
+    </li>
+    <li class="sidebar-item">
+      <a href="../../docs/embedding/vm-lifecycle.html" class="sidebar-link ">VM Lifecycle &amp; Config</a>
+    </li>
+    <li class="sidebar-item">
+      <a href="../../docs/embedding/c-extensions.html" class="sidebar-link ">Writing C Extensions</a>
+    </li>
+  </ul>
+</div>
+<div class="sidebar-category">
+  <div class="category-title">
+    <span><i class="fa-solid fa-utensils fa-fw" style="margin-right:6px; opacity:0.7;"></i> Cookbook &amp; Practical</span>
+  </div>
+  <ul class="sidebar-items">
+    <li class="sidebar-item">
+      <a href="../../docs/cookbook/rest-api.html" class="sidebar-link ">Building a REST API</a>
+    </li>
+    <li class="sidebar-item">
+      <a href="../../docs/cookbook/cli-tool.html" class="sidebar-link ">CLI Automation Tool</a>
+    </li>
+    <li class="sidebar-item">
+      <a href="../../docs/cookbook/parallel-workers.html" class="sidebar-link ">Parallel Worker Pool</a>
+    </li>
+  </ul>
+</div>
+<div class="sidebar-category">
+  <div class="category-title">
+    <span><i class="fa-solid fa-bookmark fa-fw" style="margin-right:6px; opacity:0.7;"></i> Reference</span>
+  </div>
+  <ul class="sidebar-items">
+    <li class="sidebar-item">
+      <a href="../../docs/reference/builtins.html" class="sidebar-link ">Built-in Functions</a>
+    </li>
+    <li class="sidebar-item">
+      <a href="../../docs/reference/keywords.html" class="sidebar-link ">Keywords &amp; Grammar</a>
+    </li>
+    <li class="sidebar-item">
+      <a href="../../docs/reference/cheat-sheet.html" class="sidebar-link ">Cheat Sheet</a>
+    </li>
+  </ul>
+</div>
+</aside>
+
+    <main class="docs-content-wrapper">
+      <article class="docs-article">
+        <nav class="breadcrumbs" aria-label="Breadcrumb">
+  <a href="../../index.html">Home</a>
+  <span class="breadcrumb-separator"><i class="fa-solid fa-chevron-right fa-xs"></i></span>
+  <span>Getting Started</span>
+  <span class="breadcrumb-separator"><i class="fa-solid fa-chevron-right fa-xs"></i></span>
+  <span style="color:var(--text-primary); font-weight:600;">Introduction</span>
+</nav>
+        
+        
+<h1 id="introduction">Introduction to Djazair</h1>
+<p class="lead" style="font-size:1.15rem; color:var(--text-secondary); margin-bottom:1.75rem;">
+  <strong>Djazair</strong> is a modern, expressive, lightweight scripting language inspired by the vibrant spirit of North Africa. Built from the ground up in ANSI C, it seamlessly combines the intuitive elegance of high-level dynamic languages with the raw performance and low memory footprint of a compact bytecode virtual machine.
+</p>
+
+<div class="callout callout-tip">
+  <div class="callout-title"><i class="fa-solid fa-lightbulb"></i> Why Djazair?</div>
+  <p>Djazair was engineered to solve a common dilemma: developers shouldn't have to choose between developer happiness and execution efficiency. It offers first-class functions, closures, class-based object-oriented programming, pattern matching, native Unicode support, and a complete 20-module standard library—all inside an engine that embeds into any C or C++ application in less than 20 lines of code.</p>
+</div>
+
+<h2 id="core-philosophy">Core Architectural Philosophy</h2>
+<ul>
+  <li><strong>Clean, Readable Syntax:</strong> No cryptic semicolons or braces cluttering your logic. Blocks use familiar, expressive keywords like <code>fn ... end</code>, <code>class ... end</code>, and <code>if ... end</code>.</li>
+  <li><strong>Bytecode Virtual Machine (VM):</strong> Single-pass compilation from source code directly into optimized bytecode instructions, executed by an efficient stack-based C virtual machine.</li>
+  <li><strong>Exact Garbage Collection:</strong> Automatic memory management with mark-and-sweep garbage collection, ensuring developers never have to worry about manual memory leaks.</li>
+  <li><strong>Uncompromising Unicode UTF-8:</strong> Variables, function identifiers, strings, and looping constructs treat multi-byte UTF-8 sequences (including Arabic characters and emojis) as first-class citizens.</li>
+  <li><strong>Actor-Model Concurrency:</strong> True parallel execution using native OS threads with actor-style message passing, isolating state and preventing race conditions without complex mutex locking.</li>
+</ul>
+
+<h2 id="quick-glance">Djazair at a Glance</h2>
+<p>Here is a snippet showcasing variable declarations, first-class functions, string interpolation, and collection operations:</p>
+
+<div class="code-wrapper">
+  <div class="code-header">
+    <span class="code-lang">djazair</span>
+    <button class="copy-btn" aria-label="Copy code"><i class="fa-regular fa-copy"></i> Copy</button>
+  </div>
+  <pre><code><span class="hl-comment"># A quick taste of Djazair</span>
+<span class="hl-kw">fn</span> <span class="hl-fn">createMultiplier</span>(factor)
+    <span class="hl-kw">return</span> <span class="hl-kw">fn</span>(number) <span class="hl-op">=&gt;</span> number <span class="hl-op">*</span> factor
+<span class="hl-kw">end</span>
+
+<span class="hl-kw">let</span> double <span class="hl-op">=</span> <span class="hl-fn">createMultiplier</span>(<span class="hl-num">2</span>)
+<span class="hl-kw">let</span> numbers <span class="hl-op">=</span> [<span class="hl-num">1</span>, <span class="hl-num">2</span>, <span class="hl-num">3</span>, <span class="hl-num">4</span>, <span class="hl-num">5</span>]
+
+<span class="hl-comment"># Functional transformation with map and filter</span>
+<span class="hl-kw">let</span> doubledOdds <span class="hl-op">=</span> numbers
+    .<span class="hl-fn">filter</span>(<span class="hl-kw">fn</span>(n) <span class="hl-op">=&gt;</span> n <span class="hl-op">%</span> <span class="hl-num">2</span> <span class="hl-op">!=</span> <span class="hl-num">0</span>)
+    .<span class="hl-fn">map</span>(double)
+
+<span class="hl-builtin">print</span>(<span class="hl-str">&quot;Doubled odd numbers: <span class="hl-interp">${</span>doubledOdds<span class="hl-interp">}</span>&quot;</span>)
+<span class="hl-output"># =&gt; Doubled odd numbers: [2, 6, 10]</span></code></pre>
+</div>
+
+<h2 id="features-summary">Feature Summary</h2>
+<div class="table-wrapper">
+  <table>
+    <thead>
+      <tr>
+        <th>Capability</th>
+        <th>Specification</th>
+        <th>Highlights</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>Typing System</strong></td>
+        <td>Dynamic with strong runtime contracts</td>
+        <td>Int, Float, String, Bool, Null, Array, Map, Function, Range, Class</td>
+      </tr>
+      <tr>
+        <td><strong>Unicode</strong></td>
+        <td>First-Class 100% UTF-8</td>
+        <td>Arabic identifiers (e.g. <code>let السرعة = 100</code>), logical code-point indexing</td>
+      </tr>
+      <tr>
+        <td><strong>Functions</strong></td>
+        <td>First-Class Citizens & Closures</td>
+        <td>Default arguments, rest parameters (<code>...args</code>), arrow expressions (<code>=&gt;</code>)</td>
+      </tr>
+      <tr>
+        <td><strong>Object-Oriented</strong></td>
+        <td>Class-based with Single Inheritance</td>
+        <td><code>class ... is ...</code>, <code>super</code>, <code>self</code>, <code>new</code>, <code>instanceof</code></td>
+      </tr>
+      <tr>
+        <td><strong>Concurrency</strong></td>
+        <td>Actor Model / Worker Threads</td>
+        <td>Worker threads with <code>send()</code>, <code>receive()</code>, and structured JSON messaging</td>
+      </tr>
+      <tr>
+        <td><strong>Standard Library</strong></td>
+        <td>20 Built-in Standard Modules</td>
+        <td>http, net, json, crypto, regex, datetime, file, dir, process, thread, etc.</td>
+      </tr>
+      <tr>
+        <td><strong>Embeddable</strong></td>
+        <td>Pure C Header (<code>djazair.h</code>)</td>
+        <td>Zero external hard runtime dependencies; embeds anywhere in seconds</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+
+        <div class="docs-nav-footer">
+  <div></div>
+  <a href="../../docs/getting-started/installation.html" class="nav-card next">
+    <div class="nav-card-label">Next <i class="fa-solid fa-arrow-right"></i></div>
+    <div class="nav-card-title">Installation</div>
+  </a>
+</div>
+      </article>
+    </main>
+
+    <aside class="docs-toc">
+  <div class="toc-title">On this page</div>
+  <ul class="toc-links">
+    <li>
+      <a href="#core-philosophy" class="toc-link" >Core Architectural Philosophy</a>
+    </li>
+    <li>
+      <a href="#quick-glance" class="toc-link" >Djazair at a Glance</a>
+    </li>
+    <li>
+      <a href="#features-summary" class="toc-link" >Feature Summary</a>
+    </li>
+  </ul>
+</aside>
+  </div>
+
+  <div class="search-modal-backdrop" id="search-modal">
+  <div class="search-modal">
+    <div class="search-input-wrap">
+      <i class="fa-solid fa-magnifying-glass"></i>
+      <input type="text" id="search-input" class="search-input" placeholder="Search documentation, methods, keywords..." autocomplete="off">
+    </div>
+    <div class="search-results-list" id="search-results"></div>
+    <div class="search-footer">
+      <span>Navigate with <kbd>↑</kbd> <kbd>↓</kbd></span>
+      <span>Open with <kbd>Enter</kbd></span>
+      <span>Close with <kbd>Esc</kbd></span>
+    </div>
+  </div>
+</div>
+
+  <!-- Scripts -->
+  <script src="../../assets/js/search-index.js"></script>
+  <script src="../../assets/js/search.js"></script>
+  <script src="../../assets/js/code-tools.js"></script>
+  <script src="../../assets/js/navigation.js"></script>
+</body>
+</html>

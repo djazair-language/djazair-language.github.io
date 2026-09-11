@@ -1,0 +1,82 @@
+/* =============================================================================
+   Djazair Syntax Highlighting Theme (syntax.css)
+   Vibrant, high-contrast, optimized for Djazair code snippets.
+   ============================================================================= */
+
+pre code {
+  color: #e2e8f0;
+}
+
+/* Keywords (let, fn, class, if, match, end, use, import...) */
+.token.keyword, .hl-kw {
+  color: #c084fc; /* Electric Purple */
+  font-weight: 600;
+}
+
+/* Built-in Functions & Types (print, range, str, int, bool...) */
+.token.builtin, .hl-builtin {
+  color: #38bdf8; /* Cyan Sky */
+  font-weight: 600;
+}
+
+/* Strings ("...", `...`) */
+.token.string, .hl-str {
+  color: #34d399; /* Emerald Green */
+}
+
+/* String Interpolation ${...} */
+.token.interpolation, .hl-interp {
+  color: #f472b6; /* Hot Pink */
+}
+
+/* Numbers (123, 3.14, 100_000, 0xFF) */
+.token.number, .hl-num {
+  color: #fb923c; /* Warm Orange */
+}
+
+/* Comments (#, #! ... !#) */
+.token.comment, .hl-comment {
+  color: #64748b; /* Muted Slate */
+  font-style: italic;
+}
+
+/* Output markers (# => Result) */
+.token.output, .hl-output {
+  color: #a3e635; /* Lime Accent */
+  font-style: italic;
+  font-weight: 500;
+}
+
+/* Functions & Method calls */
+.token.function, .hl-fn {
+  color: #60a5fa; /* Vibrant Blue */
+  font-weight: 500;
+}
+
+/* Class / Type Names */
+.token.class-name, .hl-class {
+  color: #facc15; /* Golden Yellow */
+  font-weight: 600;
+}
+
+/* Operators (+, -, *, /, **, //, ==, !=, =>, ..) */
+.token.operator, .hl-op {
+  color: #f43f5e; /* Rose Red */
+}
+
+/* Properties / Hash keys */
+.token.property, .hl-prop {
+  color: #e2e8f0;
+}
+
+/* Booleans and Null */
+.token.boolean, .token.null, .hl-bool {
+  color: #f87171; /* Coral Red */
+  font-weight: 600;
+}
+
+/* Self / Super identifiers */
+.token.variable-special, .hl-special {
+  color: #e879f9; /* Violet */
+  font-weight: 600;
+}

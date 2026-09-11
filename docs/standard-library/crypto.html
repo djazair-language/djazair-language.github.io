@@ -1,445 +1,380 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta property="og:title" content="crypto Module | Djazair Documentation">
-    <meta property="og:description" content="Cryptographic hashing (SHA-256).">
-    <meta property="og:type" content="website">
-    <meta property="og:url" content="https://djazair-language.github.io/">
-    <meta name="twitter:card" content="summary_large_image">
-
-    <meta name="description" content="Cryptographic hashing (SHA-256).">
-    <title>crypto Module | Djazair Documentation</title>
-    <link rel="stylesheet" href="../../assets/style.css">
-    <script src="https://cdn.jsdelivr.net/npm/monaco-editor@0.47.0/min/vs/loader.js"></script>
-    <script>
-        function filterNavigation() {
-            const query = document.getElementById("search-input").value.toLowerCase();
-            const links = document.querySelectorAll(".sidebar-links a");
-            links.forEach(link => {
-                const text = link.textContent.toLowerCase();
-                const parent = link.parentElement;
-                if (text.includes(query)) {
-                    parent.style.display = "";
-                    let hasSub = parent.closest("li.has-submenu");
-                    if (hasSub) { hasSub.style.display = ""; }
-                    let sub = parent.closest(".submenu");
-                    if (sub) { sub.setAttribute("data-expanded", "true"); }
-                } else {
-                    parent.style.display = "none";
-                }
-            });
-        }
-        function toggleSubmenu(event, el) {
-            const li = el.closest("li.has-submenu");
-            const submenu = li.querySelector(".submenu");
-            const expanded = submenu.getAttribute("data-expanded") === "true";
-            submenu.setAttribute("data-expanded", !expanded);
-            const arrow = el.querySelector(".arrow");
-            if (arrow) arrow.textContent = expanded ? ">" : "v";
-            if (!expanded) {
-                event.preventDefault();
-            }
-        }
-
-        // --- Monaco Editor for code blocks ---
-        (function() {
-            var blocks = document.querySelectorAll("pre > code");
-            if (blocks.length === 0) return;
-            require.config({
-                paths: { vs: "https://cdn.jsdelivr.net/npm/monaco-editor@0.47.0/min/vs" },
-                "vs/nls": { availableLanguages: { "*": "en" } }
-            });
-            require(["vs/editor/editor.main"], function() {
-                blocks.forEach(function(codeEl) {
-                    var pre = codeEl.parentElement;
-                    if (!pre) return;
-                    
-                    var lang = "javascript";
-                    for (var i = 0; i < pre.classList.length; i++) {
-                        var cls = pre.classList.item(i);
-                        if (cls === "bash" || cls === "sh") {
-                            lang = "shell";
-                            break;
-                        } else if (cls === "powershell") {
-                            lang = "powershell";
-                            break;
-                        } else if (cls === "c") {
-                            lang = "c";
-                            break;
-                        } else if (cls === "cpp") {
-                            lang = "cpp";
-                            break;
-                        } else if (cls === "text" || cls === "plaintext") {
-                            lang = "plaintext";
-                            break;
-                        } else if (cls === "json") {
-                            lang = "json";
-                            break;
-                        }
-                    }
-
-                    var text = codeEl.textContent;
-                    var container = document.createElement("div");
-                    container.className = "monaco-code-wrap";
-                    container.style.height = Math.max(100, text.split("\n").length * 20 + 30) + "px";
-                    
-                    // Add copy button inside container
-                    var btn = document.createElement("button");
-                    btn.className = "copy-btn";
-                    btn.textContent = "Copy";
-                    btn.setAttribute("aria-label", "Copy code to clipboard");
-                    btn.style.zIndex = "10";
-                    btn.addEventListener("click", function() {
-                        navigator.clipboard.writeText(text).then(function() {
-                            btn.textContent = "Copied!";
-                            btn.classList.add("copied");
-                            setTimeout(function() { btn.textContent = "Copy"; btn.classList.remove("copied"); }, 2000);
-                        });
-                    });
-                    container.appendChild(btn);
-
-                    pre.parentNode.replaceChild(container, pre);
-                    
-                    monaco.editor.create(container, {
-                        value: text,
-                        language: lang,
-                        readOnly: true,
-                        lineNumbers: "off",
-                        minimap: { enabled: false },
-                        scrollBeyondLastLine: false,
-                        fontSize: 13,
-                        theme: "vs-dark",
-                        padding: { top: 12, bottom: 12 },
-                        overviewRulerLanes: 0,
-                        hideCursorInOverviewRuler: true,
-                        overviewRulerBorder: false,
-                        scrollbar: { vertical: "hidden", handleMouseWheel: true },
-                        contextmenu: false,
-                        renderLineHighlight: "none",
-                        wordWrap: "off",
-                        automaticLayout: true
-                    });
-                });
-            });
-        })();
-        function toggleSection(el) {
-            var section = el.closest(".sidebar-section");
-            var list = section.querySelector(".sidebar-links");
-            var expanded = list.getAttribute("data-expanded") === "true";
-            list.setAttribute("data-expanded", !expanded);
-            var arrow = el.querySelector(".arrow");
-            if (arrow) arrow.textContent = expanded ? ">" : "v";
-        }
-        document.addEventListener("DOMContentLoaded", function() {
-            document.querySelectorAll(".sidebar-links").forEach(function(sm) {
-                if (sm.getAttribute("data-expanded") === "false") {
-                    var title = sm.closest(".sidebar-section").querySelector(".sidebar-title .arrow");
-                    if (title) title.textContent = ">";
-                }
-            });
-            document.querySelectorAll(".has-submenu > a").forEach(function(el) {
-                let li = el.closest("li");
-                let sm = li.querySelector(".submenu");
-                if (sm.getAttribute("data-expanded") === "true") {
-                    el.querySelector(".arrow").textContent = "v";
-                }
-            });
-        });
-    </script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>crypto | Djazair Documentation</title>
+  <meta name="description" content="SHA-256 cryptographic hashing, Base64 encode/decode, AES-CBC encryption.">
+  <link rel="icon" href="../../assets/images/logo.svg" type="image/svg+xml">
+  
+  <!-- FontAwesome 6 -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  
+  <!-- Google Fonts (Inter & JetBrains Mono) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+  
+  <!-- Modern Docs Stylesheets -->
+  <link rel="stylesheet" href="../../assets/css/main.css">
+  <link rel="stylesheet" href="../../assets/css/syntax.css">
+  
+  <!-- Early theme application to avoid flash -->
+  <script src="../../assets/js/theme.js"></script>
 </head>
 <body>
-    <header>
-        <button class="menu-toggle" aria-label="Toggle navigation menu">
-            <span></span>
-            <span></span>
-            <span></span>
-        </button>
-        <div class="logo-container">
-            <div class="logo-icon">Dz</div>
-            <div class="logo-text">Djazair</div>
-            <div class="logo-version">v1.0.5</div>
-        </div>
-        <nav class="top-nav">
-            <a href="../../index.html">Home</a>
-<a href="../../packages.html">Package Manager</a>
-<a href="../../docs/getting-started/installation.html">Documentation</a>
-<a href="../../docs/standard-library/index.html" class="active">Standard Library</a>
-<a href="../../docs/faq.html">faq</a>
+  <header class="site-header">
+  <div class="header-left">
+    <button class="mobile-toggle-btn" id="mobile-toggle" aria-label="Toggle navigation drawer">
+      <i class="fa-solid fa-bars"></i>
+    </button>
+    <a href="../../index.html" class="brand-link">
+      <img src="../../assets/images/logo.svg" alt="Djazair Logo" class="brand-logo">
+      <span>Djazair</span>
+      <span class="version-tag">v1.1.0</span>
+    </a>
+  </div>
 
-        </nav>
-        <div class="search-container">
-            <span class="search-icon">🔍</span>
-            <input type="text" id="search-input" class="search-input" placeholder="Search docs..." onkeyup="filterNavigation()">
-        </div>
-    </header>
+  <nav class="header-nav">
+    <a href="../../docs/getting-started/index.html" class="nav-link ">Documentation</a>
+    <a href="../../docs/standard-library/index.html" class="nav-link active">Standard Library</a>
+    <a href="../../docs/dpm/index.html" class="nav-link ">DPM</a>
+    <a href="../../docs/cookbook/rest-api.html" class="nav-link ">Cookbook</a>
+    <a href="../../docs/reference/cheat-sheet.html" class="nav-link ">Cheat Sheet</a>
+  </nav>
 
-    <div class="app-container">
-        <aside class="sidebar">
-            <div class="sidebar-section">
-  <div class="sidebar-title" onclick="toggleSection(this)">Getting Started <span class="arrow">v</span></div>
-  <ul class="sidebar-links">
-    <li><a href="../getting-started/installation.html" >Installation</a></li>
-    <li><a href="../getting-started/first-program.html" >First Program</a></li>
-    <li><a href="../getting-started/running-programs.html" >Running Programs</a></li>
+  <div class="header-right">
+    <button class="search-btn" aria-label="Search documentation">
+      <i class="fa-solid fa-magnifying-glass"></i>
+      <span>Search...</span>
+      <span class="search-shortcut">Ctrl K</span>
+    </button>
+    <button class="theme-btn" id="theme-toggle" aria-label="Toggle dark mode">
+      <i class="fa-solid fa-moon"></i>
+    </button>
+    <a href="https://github.com/djazair-language/djazair" target="_blank" rel="noopener noreferrer" class="icon-btn" aria-label="GitHub repository">
+      <i class="fa-brands fa-github"></i>
+    </a>
+  </div>
+</header>
+
+  <div class="docs-layout">
+    <div class="sidebar-backdrop" id="sidebar-backdrop"></div>
+    <aside class="docs-sidebar" id="docs-sidebar">
+<div class="sidebar-category">
+  <div class="category-title">
+    <span><i class="fa-solid fa-rocket fa-fw" style="margin-right:6px; opacity:0.7;"></i> Getting Started</span>
+  </div>
+  <ul class="sidebar-items">
+    <li class="sidebar-item">
+      <a href="../../docs/getting-started/index.html" class="sidebar-link ">Introduction</a>
+    </li>
+    <li class="sidebar-item">
+      <a href="../../docs/getting-started/installation.html" class="sidebar-link ">Installation</a>
+    </li>
+    <li class="sidebar-item">
+      <a href="../../docs/getting-started/first-program.html" class="sidebar-link ">First Program</a>
+    </li>
+    <li class="sidebar-item">
+      <a href="../../docs/getting-started/cli.html" class="sidebar-link ">Command-Line (CLI)</a>
+    </li>
   </ul>
 </div>
-<div class="sidebar-section">
-  <div class="sidebar-title" onclick="toggleSection(this)">Language Guide <span class="arrow">v</span></div>
-  <ul class="sidebar-links">
-    <li><a href="../language-guide/comments.html" >Comments</a></li>
-    <li><a href="../language-guide/variables.html" >Variables</a></li>
-    <li><a href="../language-guide/data-types.html" >Data Types</a></li>
-    <li><a href="../language-guide/input-output.html" >Input & Output</a></li>
-    <li><a href="../language-guide/operators.html" >Operators</a></li>
-    <li><a href="../language-guide/conditions.html" >Conditions</a></li>
-    <li><a href="../language-guide/loops.html" >Loops</a></li>
-    <li><a href="../language-guide/arrays.html" >Arrays</a></li>
-    <li><a href="../language-guide/strings.html" >Strings</a></li>
-    <li><a href="../language-guide/maps.html" >Maps</a></li>
-    <li><a href="../language-guide/functions.html" >Functions</a></li>
-    <li><a href="../language-guide/modules.html" >Modules</a></li>
-    <li><a href="../language-guide/classes.html" >Classes</a></li>
-    <li><a href="../language-guide/error-handling.html" >Error Handling</a></li>
-    <li><a href="../language-guide/async-await.html" >Async / Await</a></li>
+<div class="sidebar-category">
+  <div class="category-title">
+    <span><i class="fa-solid fa-book-open fa-fw" style="margin-right:6px; opacity:0.7;"></i> Language Guide</span>
+  </div>
+  <ul class="sidebar-items">
+    <li class="sidebar-item">
+      <a href="../../docs/language-guide/variables.html" class="sidebar-link ">Variables &amp; Scope</a>
+    </li>
+    <li class="sidebar-item">
+      <a href="../../docs/language-guide/data-types.html" class="sidebar-link ">Data Types &amp; Casting</a>
+    </li>
+    <li class="sidebar-item">
+      <a href="../../docs/language-guide/operators.html" class="sidebar-link ">Operators</a>
+    </li>
+    <li class="sidebar-item">
+      <a href="../../docs/language-guide/strings.html" class="sidebar-link ">Strings &amp; Methods</a>
+    </li>
+    <li class="sidebar-item">
+      <a href="../../docs/language-guide/unicode.html" class="sidebar-link ">Unicode &amp; UTF-8</a>
+    </li>
+    <li class="sidebar-item">
+      <a href="../../docs/language-guide/arrays.html" class="sidebar-link ">Arrays &amp; Methods</a>
+    </li>
+    <li class="sidebar-item">
+      <a href="../../docs/language-guide/maps.html" class="sidebar-link ">Maps &amp; Hashes</a>
+    </li>
+    <li class="sidebar-item">
+      <a href="../../docs/language-guide/control-flow.html" class="sidebar-link ">Control Flow</a>
+    </li>
+    <li class="sidebar-item">
+      <a href="../../docs/language-guide/loops.html" class="sidebar-link ">Loops &amp; Iteration</a>
+    </li>
+    <li class="sidebar-item">
+      <a href="../../docs/language-guide/functions.html" class="sidebar-link ">Functions &amp; Closures</a>
+    </li>
+    <li class="sidebar-item">
+      <a href="../../docs/language-guide/oop.html" class="sidebar-link ">Classes &amp; OOP</a>
+    </li>
+    <li class="sidebar-item">
+      <a href="../../docs/language-guide/error-handling.html" class="sidebar-link ">Error Handling</a>
+    </li>
+    <li class="sidebar-item">
+      <a href="../../docs/language-guide/modules.html" class="sidebar-link ">Modules &amp; Imports</a>
+    </li>
   </ul>
 </div>
-<div class="sidebar-section">
-  <div class="sidebar-title" onclick="toggleSection(this)">Standard Library <span class="arrow">v</span></div>
-  <ul class="sidebar-links">
-    <li><a href="../standard-library/index.html" >Overview</a></li>
-    <li class="has-submenu"><a href="../standard-library/assert.html" class="submenu-toggle" onclick="toggleSubmenu(event, this)">assert Module <span class="arrow">></span></a>
-      <ul class="submenu" data-expanded="false">
-        <li><a href="../standard-library/assert.html#truthiness-assertions" class="sub-link">Truthiness Assertions</a></li>
-        <li><a href="../standard-library/assert.html#value-assertions" class="sub-link">Value Assertions</a></li>
-        <li><a href="../standard-library/assert.html#type-assertions" class="sub-link">Type Assertions</a></li>
-      </ul>
+<div class="sidebar-category">
+  <div class="category-title">
+    <span><i class="fa-solid fa-box-open fa-fw" style="margin-right:6px; opacity:0.7;"></i> Package Manager (DPM)</span>
+  </div>
+  <ul class="sidebar-items">
+    <li class="sidebar-item">
+      <a href="../../docs/dpm/index.html" class="sidebar-link ">DPM Guide &amp; Reference</a>
     </li>
-    <li class="has-submenu"><a href="../standard-library/bytes.html" class="submenu-toggle" onclick="toggleSubmenu(event, this)">bytes Module <span class="arrow">></span></a>
-      <ul class="submenu" data-expanded="false">
-        <li><a href="../standard-library/bytes.html#creation--conversion" class="sub-link">Creation & Conversion</a></li>
-        <li><a href="../standard-library/bytes.html#manipulation" class="sub-link">Manipulation</a></li>
-      </ul>
-    </li>
-    <li><a href="../standard-library/collections.html" >collections Module</a></li>
-    <li><a href="../standard-library/crypto.html" class="active">crypto Module</a></li>
-    <li class="has-submenu"><a href="../standard-library/datetime.html" class="submenu-toggle" onclick="toggleSubmenu(event, this)">datetime Module <span class="arrow">></span></a>
-      <ul class="submenu" data-expanded="false">
-        <li><a href="../standard-library/datetime.html#time-functions" class="sub-link">Time Functions</a></li>
-        <li><a href="../standard-library/datetime.html#date-class" class="sub-link">Date Class</a></li>
-      </ul>
-    </li>
-    <li><a href="../standard-library/dir.html" >dir Module</a></li>
-    <li><a href="../standard-library/env.html" >env Module</a></li>
-    <li class="has-submenu"><a href="../standard-library/file.html" class="submenu-toggle" onclick="toggleSubmenu(event, this)">file Module <span class="arrow">></span></a>
-      <ul class="submenu" data-expanded="false">
-        <li><a href="../standard-library/file.html#read--write-operations" class="sub-link">Read & Write</a></li>
-        <li><a href="../standard-library/file.html#file-manipulation" class="sub-link">File Manipulation</a></li>
-        <li><a href="../standard-library/file.html#status-query" class="sub-link">Status Query</a></li>
-      </ul>
-    </li>
-    <li class="has-submenu"><a href="../standard-library/http.html" class="submenu-toggle" onclick="toggleSubmenu(event, this)">http Module <span class="arrow">></span></a>
-      <ul class="submenu" data-expanded="false">
-        <li><a href="../standard-library/http.html#http-client" class="sub-link">HTTP Client</a></li>
-        <li><a href="../standard-library/http.html#http-server" class="sub-link">HTTP Server</a></li>
-        <li><a href="../standard-library/http.html#classes--helpers" class="sub-link">Classes & Helpers</a></li>
-      </ul>
-    </li>
-    <li><a href="../standard-library/json.html" >json Module</a></li>
-    <li class="has-submenu"><a href="../standard-library/lang.html" class="submenu-toggle" onclick="toggleSubmenu(event, this)">lang Module <span class="arrow">></span></a>
-      <ul class="submenu" data-expanded="false">
-        <li><a href="../standard-library/lang.html#runtime-info" class="sub-link">Runtime Info</a></li>
-        <li><a href="../standard-library/lang.html#control" class="sub-link">Control</a></li>
-        <li><a href="../standard-library/lang.html#introspection" class="sub-link">Introspection</a></li>
-        <li><a href="../standard-library/lang.html#library-paths--queries" class="sub-link">Library Paths</a></li>
-      </ul>
-    </li>
-    <li class="has-submenu"><a href="../standard-library/math.html" class="submenu-toggle" onclick="toggleSubmenu(event, this)">math Module <span class="arrow">></span></a>
-      <ul class="submenu" data-expanded="false">
-        <li><a href="../standard-library/math.html#constants" class="sub-link">Constants</a></li>
-        <li><a href="../standard-library/math.html#trigonometry" class="sub-link">Trigonometry</a></li>
-        <li><a href="../standard-library/math.html#exponentiation--logs" class="sub-link">Exponentiation & Logs</a></li>
-        <li><a href="../standard-library/math.html#rounding--absolute" class="sub-link">Rounding</a></li>
-        <li><a href="../standard-library/math.html#comparison--statistics" class="sub-link">Statistics</a></li>
-      </ul>
-    </li>
-    <li class="has-submenu"><a href="../standard-library/net.html" class="submenu-toggle" onclick="toggleSubmenu(event, this)">net Module <span class="arrow">></span></a>
-      <ul class="submenu" data-expanded="false">
-        <li><a href="../standard-library/net.html#classes--exports" class="sub-link">Classes & Exports</a></li>
-        <li><a href="../standard-library/net.html#tcp-server-example" class="sub-link">TCP Server</a></li>
-        <li><a href="../standard-library/net.html#tcp-client-example" class="sub-link">TCP Client</a></li>
-      </ul>
-    </li>
-    <li class="has-submenu"><a href="../standard-library/os.html" class="submenu-toggle" onclick="toggleSubmenu(event, this)">os Module <span class="arrow">></span></a>
-      <ul class="submenu" data-expanded="false">
-        <li><a href="../standard-library/os.html#platform-detection" class="sub-link">Platform Detection</a></li>
-        <li><a href="../standard-library/os.html#system-information" class="sub-link">System Information</a></li>
-        <li><a href="../standard-library/os.html#user--temporary-files" class="sub-link">User & Temp Files</a></li>
-      </ul>
-    </li>
-    <li class="has-submenu"><a href="../standard-library/path.html" class="submenu-toggle" onclick="toggleSubmenu(event, this)">path Module <span class="arrow">></span></a>
-      <ul class="submenu" data-expanded="false">
-        <li><a href="../standard-library/path.html#constants" class="sub-link">Constants</a></li>
-        <li><a href="../standard-library/path.html#join--resolve" class="sub-link">Join & Resolve</a></li>
-        <li><a href="../standard-library/path.html#decomposition" class="sub-link">Decomposition</a></li>
-        <li><a href="../standard-library/path.html#query--security" class="sub-link">Query & Security</a></li>
-      </ul>
-    </li>
-    <li class="has-submenu"><a href="../standard-library/process.html" class="submenu-toggle" onclick="toggleSubmenu(event, this)">process Module <span class="arrow">></span></a>
-      <ul class="submenu" data-expanded="false">
-        <li><a href="../standard-library/process.html#process-identification" class="sub-link">Identification</a></li>
-        <li><a href="../standard-library/process.html#process-control" class="sub-link">Process Control</a></li>
-        <li><a href="../standard-library/process.html#working-directory" class="sub-link">Working Directory</a></li>
-        <li><a href="../standard-library/process.html#command-execution" class="sub-link">Command Execution</a></li>
-        <li><a href="../standard-library/process.html#cli-arguments--script-location" class="sub-link">CLI & Script</a></li>
-        <li><a href="../standard-library/process.html#asynchronous-spawning" class="sub-link">Async Spawning</a></li>
-      </ul>
-    </li>
-    <li><a href="../standard-library/random.html" >random Module</a></li>
-    <li class="has-submenu"><a href="../standard-library/regex.html" class="submenu-toggle" onclick="toggleSubmenu(event, this)">regex Module <span class="arrow">></span></a>
-      <ul class="submenu" data-expanded="false">
-        <li><a href="../standard-library/regex.html#flags" class="sub-link">Flags</a></li>
-        <li><a href="../standard-library/regex.html#pattern-class" class="sub-link">Pattern Class</a></li>
-        <li><a href="../standard-library/regex.html#match-class" class="sub-link">Match Class</a></li>
-        <li><a href="../standard-library/regex.html#convenience-functions" class="sub-link">Convenience Functions</a></li>
-      </ul>
-    </li>
-    <li class="has-submenu"><a href="../standard-library/thread.html" class="submenu-toggle" onclick="toggleSubmenu(event, this)">thread Module <span class="arrow">></span></a>
-      <ul class="submenu" data-expanded="false">
-        <li><a href="../standard-library/thread.html#thread-class" class="sub-link">Thread Class</a></li>
-        <li><a href="../standard-library/thread.html#worker-side-functions" class="sub-link">Worker Functions</a></li>
-        <li><a href="../standard-library/thread.html#convenience-functions" class="sub-link">Convenience</a></li>
-      </ul>
-    </li>
-    <li><a href="../standard-library/uuid.html" >uuid Module</a></li>
   </ul>
 </div>
-<div class="sidebar-section">
-  <div class="sidebar-title" onclick="toggleSection(this)">Examples <span class="arrow">v</span></div>
-  <ul class="sidebar-links">
-    <li><a href="../examples/hello-world.html" >Hello World</a></li>
-    <li><a href="../examples/calculator.html" >Calculator</a></li>
-    <li><a href="../examples/todo-app.html" >Todo App</a></li>
-    <li><a href="../examples/file-processing.html" >File Processing</a></li>
+<div class="sidebar-category">
+  <div class="category-title">
+    <span><i class="fa-solid fa-cubes fa-fw" style="margin-right:6px; opacity:0.7;"></i> Standard Library</span>
+  </div>
+  <ul class="sidebar-items">
+    <li class="sidebar-item">
+      <a href="../../docs/standard-library/index.html" class="sidebar-link ">Overview</a>
+    </li>
+    <li class="sidebar-item">
+      <a href="../../docs/standard-library/assert.html" class="sidebar-link ">assert</a>
+    </li>
+    <li class="sidebar-item">
+      <a href="../../docs/standard-library/bytes.html" class="sidebar-link ">bytes</a>
+    </li>
+    <li class="sidebar-item">
+      <a href="../../docs/standard-library/collections.html" class="sidebar-link ">collections</a>
+    </li>
+    <li class="sidebar-item">
+      <a href="../../docs/standard-library/crypto.html" class="sidebar-link active">crypto</a>
+    </li>
+    <li class="sidebar-item">
+      <a href="../../docs/standard-library/datetime.html" class="sidebar-link ">datetime</a>
+    </li>
+    <li class="sidebar-item">
+      <a href="../../docs/standard-library/dir.html" class="sidebar-link ">dir</a>
+    </li>
+    <li class="sidebar-item">
+      <a href="../../docs/standard-library/env.html" class="sidebar-link ">env</a>
+    </li>
+    <li class="sidebar-item">
+      <a href="../../docs/standard-library/file.html" class="sidebar-link ">file</a>
+    </li>
+    <li class="sidebar-item">
+      <a href="../../docs/standard-library/http.html" class="sidebar-link ">http</a>
+    </li>
+    <li class="sidebar-item">
+      <a href="../../docs/standard-library/json.html" class="sidebar-link ">json</a>
+    </li>
+    <li class="sidebar-item">
+      <a href="../../docs/standard-library/lang.html" class="sidebar-link ">lang</a>
+    </li>
+    <li class="sidebar-item">
+      <a href="../../docs/standard-library/math.html" class="sidebar-link ">math</a>
+    </li>
+    <li class="sidebar-item">
+      <a href="../../docs/standard-library/net.html" class="sidebar-link ">net</a>
+    </li>
+    <li class="sidebar-item">
+      <a href="../../docs/standard-library/os.html" class="sidebar-link ">os</a>
+    </li>
+    <li class="sidebar-item">
+      <a href="../../docs/standard-library/path.html" class="sidebar-link ">path</a>
+    </li>
+    <li class="sidebar-item">
+      <a href="../../docs/standard-library/process.html" class="sidebar-link ">process</a>
+    </li>
+    <li class="sidebar-item">
+      <a href="../../docs/standard-library/random.html" class="sidebar-link ">random</a>
+    </li>
+    <li class="sidebar-item">
+      <a href="../../docs/standard-library/regex.html" class="sidebar-link ">regex</a>
+    </li>
+    <li class="sidebar-item">
+      <a href="../../docs/standard-library/thread.html" class="sidebar-link ">thread</a>
+    </li>
+    <li class="sidebar-item">
+      <a href="../../docs/standard-library/uuid.html" class="sidebar-link ">uuid</a>
+    </li>
   </ul>
 </div>
-<div class="sidebar-section">
-  <div class="sidebar-title" onclick="toggleSection(this)">Reference <span class="arrow">v</span></div>
-  <ul class="sidebar-links">
-    <li><a href="../reference/keywords.html" >Keywords</a></li>
-    <li><a href="../reference/operators.html" >Operators</a></li>
-    <li><a href="../reference/builtins.html" >Built-in Functions</a></li>
-    <li><a href="../reference/methods.html" >Methods</a></li>
-    <li><a href="../reference/syntax-reference.html" >Syntax Reference</a></li>
-    <li><a href="../reference/embedding.html" >Embedding API</a></li>
+<div class="sidebar-category">
+  <div class="category-title">
+    <span><i class="fa-solid fa-microchip fa-fw" style="margin-right:6px; opacity:0.7;"></i> C / C++ Embedding</span>
+  </div>
+  <ul class="sidebar-items">
+    <li class="sidebar-item">
+      <a href="../../docs/embedding/index.html" class="sidebar-link ">Embedding Overview</a>
+    </li>
+    <li class="sidebar-item">
+      <a href="../../docs/embedding/vm-lifecycle.html" class="sidebar-link ">VM Lifecycle &amp; Config</a>
+    </li>
+    <li class="sidebar-item">
+      <a href="../../docs/embedding/c-extensions.html" class="sidebar-link ">Writing C Extensions</a>
+    </li>
   </ul>
 </div>
-        </aside>
+<div class="sidebar-category">
+  <div class="category-title">
+    <span><i class="fa-solid fa-utensils fa-fw" style="margin-right:6px; opacity:0.7;"></i> Cookbook &amp; Practical</span>
+  </div>
+  <ul class="sidebar-items">
+    <li class="sidebar-item">
+      <a href="../../docs/cookbook/rest-api.html" class="sidebar-link ">Building a REST API</a>
+    </li>
+    <li class="sidebar-item">
+      <a href="../../docs/cookbook/cli-tool.html" class="sidebar-link ">CLI Automation Tool</a>
+    </li>
+    <li class="sidebar-item">
+      <a href="../../docs/cookbook/parallel-workers.html" class="sidebar-link ">Parallel Worker Pool</a>
+    </li>
+  </ul>
+</div>
+<div class="sidebar-category">
+  <div class="category-title">
+    <span><i class="fa-solid fa-bookmark fa-fw" style="margin-right:6px; opacity:0.7;"></i> Reference</span>
+  </div>
+  <ul class="sidebar-items">
+    <li class="sidebar-item">
+      <a href="../../docs/reference/builtins.html" class="sidebar-link ">Built-in Functions</a>
+    </li>
+    <li class="sidebar-item">
+      <a href="../../docs/reference/keywords.html" class="sidebar-link ">Keywords &amp; Grammar</a>
+    </li>
+    <li class="sidebar-item">
+      <a href="../../docs/reference/cheat-sheet.html" class="sidebar-link ">Cheat Sheet</a>
+    </li>
+  </ul>
+</div>
+</aside>
 
-        <main class="content-wrapper">
-            <div class="content-body">
-                <div class="breadcrumbs">
-                    <a href="../../index.html">Home</a>
-<span class="separator">/</span>
-<span>Standard Library</span>
-<span class="separator">/</span>
-<span class="active">crypto Module</span>
-                </div>
-                
-                <article>
-                    
-<h1>Crypto Module</h1>
-<p>Import using: <code>use crypto</code></p>
+    <main class="docs-content-wrapper">
+      <article class="docs-article">
+        <nav class="breadcrumbs" aria-label="Breadcrumb">
+  <a href="../../index.html">Home</a>
+  <span class="breadcrumb-separator"><i class="fa-solid fa-chevron-right fa-xs"></i></span>
+  <span>Standard Library</span>
+  <span class="breadcrumb-separator"><i class="fa-solid fa-chevron-right fa-xs"></i></span>
+  <span style="color:var(--text-primary); font-weight:600;">crypto</span>
+</nav>
+        
+        
+<h1 id="crypto-module">crypto Module</h1>
+<p class="lead" style="font-size:1.15rem; color:var(--text-secondary); margin-bottom:1.75rem;">
+  The <code>crypto</code> module provides cryptographic primitives: SHA-256 secure hashing, Base64 encoding/decoding, and AES-CBC symmetric encryption.
+</p>
 
-<h2 id="crypto-sha256-text">crypto.sha256(text)</h2>
-<p>Returns SHA-256 hash as 64-character lowercase hex digest.</p>
-<pre><code><span class="kw">use</span> crypto
-<span class="nd">print</span>(crypto<span class="op">.</span><span class="fn">sha256</span>(<span class="str">"hello"</span>))
-<span class="comment"># 2cf24dba5fb0a30e26e83b2ac5b9e29e1b161e5c1fa7425e73043362938b9824</span></code></pre>
-
-<h2 id="crypto-base64encode-text----crypto-base64decode-encoded">crypto.base64Encode(text) / crypto.base64Decode(encoded)</h2>
-<p>Encode or decode Base64 (RFC 4648).</p>
-<pre><code><span class="kw">use</span> crypto
-<span class="kw">let</span> encoded <span class="op">=</span> crypto<span class="op">.</span><span class="fn">base64Encode</span>(<span class="str">"Hello World"</span>)
-<span class="nd">print</span>(encoded)                     <span class="comment"># SGVsbG8gV29ybGQ=</span>
-<span class="kw">let</span> decoded <span class="op">=</span> crypto<span class="op">.</span><span class="fn">base64Decode</span>(encoded)
-<span class="nd">print</span>(decoded)                     <span class="comment"># Hello World</span></code></pre>
-
-<h2 id="crypto-aesencrypt-data--key--iv----crypto-aesdecrypt-data--key--iv">crypto.aesEncrypt(data, key, iv) / crypto.aesDecrypt(data, key, iv)</h2>
-<p>AES-256 encrypt and decrypt. Key must be 32 bytes, IV must be 16 bytes.</p>
-<pre><code><span class="kw">use</span> crypto
-<span class="kw">let</span> key <span class="op">=</span> crypto<span class="op">.</span><span class="fn">sha256</span>(<span class="str">"my-password"</span>)
-<span class="kw">let</span> iv <span class="op">=</span> bytes<span class="op">.</span><span class="fn">bytesToHex</span>(bytes<span class="op">.</span><span class="fn">alloc</span>(<span class="num">16</span>))
-<span class="kw">let</span> encrypted <span class="op">=</span> crypto<span class="op">.</span><span class="fn">aesEncrypt</span>(<span class="str">"secret data"</span>, key, iv)
-<span class="nd">print</span>(encrypted)
-<span class="kw">let</span> decrypted <span class="op">=</span> crypto<span class="op">.</span><span class="fn">aesDecrypt</span>(encrypted, key, iv)
-<span class="nd">print</span>(decrypted)  <span class="comment"># secret data</span></code></pre>
-
-                </article>
-
-                <div class="page-navigation">
-                    
-            <a href="../standard-library/collections.html" class="nav-card">
-                <span class="nav-label">Previous</span>
-                <span class="nav-title">collections Module</span>
-            </a>
-            
-            <a href="../standard-library/datetime.html" class="nav-card next">
-                <span class="nav-label">Next</span>
-                <span class="nav-title">datetime Module</span>
-            </a>
-            
-                </div>
-
-                <footer>
-                    <div style="text-align: center; font-size: 0.9rem; line-height: 1.5;">
-    &copy; 2026 Harizi Riyadh. Released under the <a href="https://github.com/djazair-language/djazair/blob/main/LICENSE" target="_blank" style="color: inherit; text-decoration: underline;">MIT License</a>.<br>
-    Official Website for Djazair.
+<h2 id="importing">Importing</h2>
+<div class="code-wrapper">
+  <div class="code-header">
+    <span class="code-lang">djazair</span>
+    <button class="copy-btn" aria-label="Copy code"><i class="fa-regular fa-copy"></i> Copy</button>
+  </div>
+  <pre><code><span class="hl-kw">use</span> crypto</code></pre>
 </div>
 
-                </footer>
-            </div>
-        </main>
+<h2 id="api-reference">API Reference</h2>
+<div class="table-wrapper">
+  <table>
+    <thead>
+      <tr><th>Function</th><th>Description</th></tr>
+    </thead>
+    <tbody>
+      <tr><td><code>crypto.sha256(text)</code></td><td>Computes the SHA-256 digest of <code>text</code>, returning a 64-character lowercase hex string.</td></tr>
+      <tr><td><code>crypto.base64Encode(text)</code></td><td>Encodes text into a standard RFC-4648 Base64 string.</td></tr>
+      <tr><td><code>crypto.base64Decode(encoded)</code></td><td>Decodes a Base64 string back into original text.</td></tr>
+      <tr><td><code>crypto.aesEncrypt(plain, key, iv)</code></td><td>Encrypts plaintext using AES-256-CBC with the provided 32-byte key and 16-byte IV.</td></tr>
+      <tr><td><code>crypto.aesDecrypt(cipher, key, iv)</code></td><td>Decrypts ciphertext back to plaintext using AES-256-CBC.</td></tr>
+    </tbody>
+  </table>
+</div>
 
-        <aside class="toc-wrapper">
-            <div class="toc-title">On this page</div>
-            <ul class="toc-links">
-                <li class=""><a href="#crypto-sha256-text">crypto.sha256(text)</a></li>
-<li class=""><a href="#crypto-base64encode-text----crypto-base64decode-encoded">crypto.base64Encode(text) / crypto.base64Decode(encoded)</a></li>
-<li class=""><a href="#crypto-aesencrypt-data--key--iv----crypto-aesdecrypt-data--key--iv">crypto.aesEncrypt(data, key, iv) / crypto.aesDecrypt(data, key, iv)</a></li>
-            </ul>
-        </aside>
+<h2 id="code-example">Example Usage</h2>
+<div class="code-wrapper">
+  <div class="code-header">
+    <span class="code-lang">djazair</span>
+    <button class="copy-btn" aria-label="Copy code"><i class="fa-regular fa-copy"></i> Copy</button>
+  </div>
+  <pre><code><span class="hl-kw">use</span> crypto
+
+<span class="hl-comment"># 1. SHA-256 Hashing</span>
+<span class="hl-kw">let</span> hash <span class="hl-op">=</span> crypto.<span class="hl-fn">sha256</span>(<span class="hl-str">&quot;password123&quot;</span>)
+<span class="hl-builtin">print</span>(<span class="hl-str">&quot;SHA-256: <span class="hl-interp">${</span>hash<span class="hl-interp">}</span>&quot;</span>)
+<span class="hl-output"># =&gt; ef92b778bafe771e89245b89ecbc08a44a4e166c06659911881f383d4473e94f</span>
+
+<span class="hl-comment"># 2. Base64 Roundtrip</span>
+<span class="hl-kw">let</span> encoded <span class="hl-op">=</span> crypto.<span class="hl-fn">base64Encode</span>(<span class="hl-str">&quot;Djazair Language&quot;</span>)
+<span class="hl-builtin">print</span>(<span class="hl-str">&quot;Base64: <span class="hl-interp">${</span>encoded<span class="hl-interp">}</span>&quot;</span>) <span class="hl-output"># =&gt; &quot;RGphemFpciBMYW5ndWFnZQ==&quot;</span>
+<span class="hl-builtin">print</span>(<span class="hl-str">&quot;Decoded: <span class="hl-interp">${</span>crypto.<span class="hl-fn">base64Decode</span>(encoded)<span class="hl-interp">}</span>&quot;</span>)
+
+<span class="hl-comment"># 3. AES-256 Symmetric Encryption</span>
+<span class="hl-kw">let</span> key <span class="hl-op">=</span> <span class="hl-str">&quot;0123456789abcdef0123456789abcdef&quot;</span> <span class="hl-comment"># 32 bytes</span>
+<span class="hl-kw">let</span> iv  <span class="hl-op">=</span> <span class="hl-str">&quot;0123456789abcdef&quot;</span>                 <span class="hl-comment"># 16 bytes</span>
+
+<span class="hl-kw">let</span> secret <span class="hl-op">=</span> <span class="hl-str">&quot;Confidential payload data&quot;</span>
+<span class="hl-kw">let</span> encrypted <span class="hl-op">=</span> crypto.<span class="hl-fn">aesEncrypt</span>(secret, key, iv)
+<span class="hl-kw">let</span> decrypted <span class="hl-op">=</span> crypto.<span class="hl-fn">aesDecrypt</span>(encrypted, key, iv)
+
+<span class="hl-builtin">print</span>(<span class="hl-str">&quot;Decrypted successfully: <span class="hl-interp">${</span>decrypted <span class="hl-op">==</span> secret<span class="hl-interp">}</span>&quot;</span>) <span class="hl-output"># =&gt; True</span></code></pre>
+</div>
+
+
+        <div class="docs-nav-footer">
+  <a href="../../docs/standard-library/collections.html" class="nav-card prev">
+    <div class="nav-card-label"><i class="fa-solid fa-arrow-left"></i> Previous</div>
+    <div class="nav-card-title">collections</div>
+  </a>
+  <a href="../../docs/standard-library/datetime.html" class="nav-card next">
+    <div class="nav-card-label">Next <i class="fa-solid fa-arrow-right"></i></div>
+    <div class="nav-card-title">datetime</div>
+  </a>
+</div>
+      </article>
+    </main>
+
+    <aside class="docs-toc">
+  <div class="toc-title">On this page</div>
+  <ul class="toc-links">
+    <li>
+      <a href="#importing" class="toc-link" >Importing</a>
+    </li>
+    <li>
+      <a href="#api-reference" class="toc-link" >API Reference</a>
+    </li>
+    <li>
+      <a href="#code-example" class="toc-link" >Example Usage</a>
+    </li>
+  </ul>
+</aside>
+  </div>
+
+  <div class="search-modal-backdrop" id="search-modal">
+  <div class="search-modal">
+    <div class="search-input-wrap">
+      <i class="fa-solid fa-magnifying-glass"></i>
+      <input type="text" id="search-input" class="search-input" placeholder="Search documentation, methods, keywords..." autocomplete="off">
     </div>
-    <script>
-        (function() {
-            var btn = document.getElementById("back-to-top");
-            if (!btn) return;
-            window.addEventListener("scroll", function() {
-                btn.classList.toggle("visible", window.scrollY > 400);
-            });
-            btn.addEventListener("click", function() {
-                window.scrollTo({ top: 0, behavior: "smooth" });
-            });
-        })();
+    <div class="search-results-list" id="search-results"></div>
+    <div class="search-footer">
+      <span>Navigate with <kbd>↑</kbd> <kbd>↓</kbd></span>
+      <span>Open with <kbd>Enter</kbd></span>
+      <span>Close with <kbd>Esc</kbd></span>
+    </div>
+  </div>
+</div>
 
-        (function() {
-            var toggle = document.querySelector(".menu-toggle");
-            var nav = document.querySelector(".top-nav");
-            if (toggle && nav) {
-                toggle.addEventListener("click", function() {
-                    nav.classList.toggle("open");
-                    toggle.classList.toggle("active");
-                });
-                document.addEventListener("click", function(e) {
-                    if (!toggle.contains(e.target) && !nav.contains(e.target)) {
-                        nav.classList.remove("open");
-                        toggle.classList.remove("active");
-                    }
-                });
-            }
-        })();
-    </script>
-    <button id="back-to-top" aria-label="Back to top"><i class="fa-solid fa-arrow-up"></i></button>
+  <!-- Scripts -->
+  <script src="../../assets/js/search-index.js"></script>
+  <script src="../../assets/js/search.js"></script>
+  <script src="../../assets/js/code-tools.js"></script>
+  <script src="../../assets/js/navigation.js"></script>
 </body>
 </html>

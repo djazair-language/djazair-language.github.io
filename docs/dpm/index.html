@@ -1,0 +1,1264 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DPM Guide &amp; Reference | Djazair Documentation</title>
+  <meta name="description" content="Official package manager, CLI reference, SemVer dependency engine, manifest specification, and package authoring.">
+  <link rel="icon" href="../../assets/images/logo.svg" type="image/svg+xml">
+  
+  <!-- FontAwesome 6 -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  
+  <!-- Google Fonts (Inter & JetBrains Mono) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+  
+  <!-- Modern Docs Stylesheets -->
+  <link rel="stylesheet" href="../../assets/css/main.css">
+  <link rel="stylesheet" href="../../assets/css/syntax.css">
+  
+  <!-- Early theme application to avoid flash -->
+  <script src="../../assets/js/theme.js"></script>
+</head>
+<body>
+  <header class="site-header">
+  <div class="header-left">
+    <button class="mobile-toggle-btn" id="mobile-toggle" aria-label="Toggle navigation drawer">
+      <i class="fa-solid fa-bars"></i>
+    </button>
+    <a href="../../index.html" class="brand-link">
+      <img src="../../assets/images/logo.svg" alt="Djazair Logo" class="brand-logo">
+      <span>Djazair</span>
+      <span class="version-tag">v1.1.0</span>
+    </a>
+  </div>
+
+  <nav class="header-nav">
+    <a href="../../docs/getting-started/index.html" class="nav-link ">Documentation</a>
+    <a href="../../docs/standard-library/index.html" class="nav-link ">Standard Library</a>
+    <a href="../../docs/dpm/index.html" class="nav-link active">DPM</a>
+    <a href="../../docs/cookbook/rest-api.html" class="nav-link ">Cookbook</a>
+    <a href="../../docs/reference/cheat-sheet.html" class="nav-link ">Cheat Sheet</a>
+  </nav>
+
+  <div class="header-right">
+    <button class="search-btn" aria-label="Search documentation">
+      <i class="fa-solid fa-magnifying-glass"></i>
+      <span>Search...</span>
+      <span class="search-shortcut">Ctrl K</span>
+    </button>
+    <button class="theme-btn" id="theme-toggle" aria-label="Toggle dark mode">
+      <i class="fa-solid fa-moon"></i>
+    </button>
+    <a href="https://github.com/djazair-language/djazair" target="_blank" rel="noopener noreferrer" class="icon-btn" aria-label="GitHub repository">
+      <i class="fa-brands fa-github"></i>
+    </a>
+  </div>
+</header>
+
+  <div class="docs-layout">
+    <div class="sidebar-backdrop" id="sidebar-backdrop"></div>
+    <aside class="docs-sidebar" id="docs-sidebar">
+<div class="sidebar-category">
+  <div class="category-title">
+    <span><i class="fa-solid fa-rocket fa-fw" style="margin-right:6px; opacity:0.7;"></i> Getting Started</span>
+  </div>
+  <ul class="sidebar-items">
+    <li class="sidebar-item">
+      <a href="../../docs/getting-started/index.html" class="sidebar-link ">Introduction</a>
+    </li>
+    <li class="sidebar-item">
+      <a href="../../docs/getting-started/installation.html" class="sidebar-link ">Installation</a>
+    </li>
+    <li class="sidebar-item">
+      <a href="../../docs/getting-started/first-program.html" class="sidebar-link ">First Program</a>
+    </li>
+    <li class="sidebar-item">
+      <a href="../../docs/getting-started/cli.html" class="sidebar-link ">Command-Line (CLI)</a>
+    </li>
+  </ul>
+</div>
+<div class="sidebar-category">
+  <div class="category-title">
+    <span><i class="fa-solid fa-book-open fa-fw" style="margin-right:6px; opacity:0.7;"></i> Language Guide</span>
+  </div>
+  <ul class="sidebar-items">
+    <li class="sidebar-item">
+      <a href="../../docs/language-guide/variables.html" class="sidebar-link ">Variables &amp; Scope</a>
+    </li>
+    <li class="sidebar-item">
+      <a href="../../docs/language-guide/data-types.html" class="sidebar-link ">Data Types &amp; Casting</a>
+    </li>
+    <li class="sidebar-item">
+      <a href="../../docs/language-guide/operators.html" class="sidebar-link ">Operators</a>
+    </li>
+    <li class="sidebar-item">
+      <a href="../../docs/language-guide/strings.html" class="sidebar-link ">Strings &amp; Methods</a>
+    </li>
+    <li class="sidebar-item">
+      <a href="../../docs/language-guide/unicode.html" class="sidebar-link ">Unicode &amp; UTF-8</a>
+    </li>
+    <li class="sidebar-item">
+      <a href="../../docs/language-guide/arrays.html" class="sidebar-link ">Arrays &amp; Methods</a>
+    </li>
+    <li class="sidebar-item">
+      <a href="../../docs/language-guide/maps.html" class="sidebar-link ">Maps &amp; Hashes</a>
+    </li>
+    <li class="sidebar-item">
+      <a href="../../docs/language-guide/control-flow.html" class="sidebar-link ">Control Flow</a>
+    </li>
+    <li class="sidebar-item">
+      <a href="../../docs/language-guide/loops.html" class="sidebar-link ">Loops &amp; Iteration</a>
+    </li>
+    <li class="sidebar-item">
+      <a href="../../docs/language-guide/functions.html" class="sidebar-link ">Functions &amp; Closures</a>
+    </li>
+    <li class="sidebar-item">
+      <a href="../../docs/language-guide/oop.html" class="sidebar-link ">Classes &amp; OOP</a>
+    </li>
+    <li class="sidebar-item">
+      <a href="../../docs/language-guide/error-handling.html" class="sidebar-link ">Error Handling</a>
+    </li>
+    <li class="sidebar-item">
+      <a href="../../docs/language-guide/modules.html" class="sidebar-link ">Modules &amp; Imports</a>
+    </li>
+  </ul>
+</div>
+<div class="sidebar-category">
+  <div class="category-title">
+    <span><i class="fa-solid fa-box-open fa-fw" style="margin-right:6px; opacity:0.7;"></i> Package Manager (DPM)</span>
+  </div>
+  <ul class="sidebar-items">
+    <li class="sidebar-item">
+      <a href="../../docs/dpm/index.html" class="sidebar-link active">DPM Guide &amp; Reference</a>
+    </li>
+  </ul>
+</div>
+<div class="sidebar-category">
+  <div class="category-title">
+    <span><i class="fa-solid fa-cubes fa-fw" style="margin-right:6px; opacity:0.7;"></i> Standard Library</span>
+  </div>
+  <ul class="sidebar-items">
+    <li class="sidebar-item">
+      <a href="../../docs/standard-library/index.html" class="sidebar-link ">Overview</a>
+    </li>
+    <li class="sidebar-item">
+      <a href="../../docs/standard-library/assert.html" class="sidebar-link ">assert</a>
+    </li>
+    <li class="sidebar-item">
+      <a href="../../docs/standard-library/bytes.html" class="sidebar-link ">bytes</a>
+    </li>
+    <li class="sidebar-item">
+      <a href="../../docs/standard-library/collections.html" class="sidebar-link ">collections</a>
+    </li>
+    <li class="sidebar-item">
+      <a href="../../docs/standard-library/crypto.html" class="sidebar-link ">crypto</a>
+    </li>
+    <li class="sidebar-item">
+      <a href="../../docs/standard-library/datetime.html" class="sidebar-link ">datetime</a>
+    </li>
+    <li class="sidebar-item">
+      <a href="../../docs/standard-library/dir.html" class="sidebar-link ">dir</a>
+    </li>
+    <li class="sidebar-item">
+      <a href="../../docs/standard-library/env.html" class="sidebar-link ">env</a>
+    </li>
+    <li class="sidebar-item">
+      <a href="../../docs/standard-library/file.html" class="sidebar-link ">file</a>
+    </li>
+    <li class="sidebar-item">
+      <a href="../../docs/standard-library/http.html" class="sidebar-link ">http</a>
+    </li>
+    <li class="sidebar-item">
+      <a href="../../docs/standard-library/json.html" class="sidebar-link ">json</a>
+    </li>
+    <li class="sidebar-item">
+      <a href="../../docs/standard-library/lang.html" class="sidebar-link ">lang</a>
+    </li>
+    <li class="sidebar-item">
+      <a href="../../docs/standard-library/math.html" class="sidebar-link ">math</a>
+    </li>
+    <li class="sidebar-item">
+      <a href="../../docs/standard-library/net.html" class="sidebar-link ">net</a>
+    </li>
+    <li class="sidebar-item">
+      <a href="../../docs/standard-library/os.html" class="sidebar-link ">os</a>
+    </li>
+    <li class="sidebar-item">
+      <a href="../../docs/standard-library/path.html" class="sidebar-link ">path</a>
+    </li>
+    <li class="sidebar-item">
+      <a href="../../docs/standard-library/process.html" class="sidebar-link ">process</a>
+    </li>
+    <li class="sidebar-item">
+      <a href="../../docs/standard-library/random.html" class="sidebar-link ">random</a>
+    </li>
+    <li class="sidebar-item">
+      <a href="../../docs/standard-library/regex.html" class="sidebar-link ">regex</a>
+    </li>
+    <li class="sidebar-item">
+      <a href="../../docs/standard-library/thread.html" class="sidebar-link ">thread</a>
+    </li>
+    <li class="sidebar-item">
+      <a href="../../docs/standard-library/uuid.html" class="sidebar-link ">uuid</a>
+    </li>
+  </ul>
+</div>
+<div class="sidebar-category">
+  <div class="category-title">
+    <span><i class="fa-solid fa-microchip fa-fw" style="margin-right:6px; opacity:0.7;"></i> C / C++ Embedding</span>
+  </div>
+  <ul class="sidebar-items">
+    <li class="sidebar-item">
+      <a href="../../docs/embedding/index.html" class="sidebar-link ">Embedding Overview</a>
+    </li>
+    <li class="sidebar-item">
+      <a href="../../docs/embedding/vm-lifecycle.html" class="sidebar-link ">VM Lifecycle &amp; Config</a>
+    </li>
+    <li class="sidebar-item">
+      <a href="../../docs/embedding/c-extensions.html" class="sidebar-link ">Writing C Extensions</a>
+    </li>
+  </ul>
+</div>
+<div class="sidebar-category">
+  <div class="category-title">
+    <span><i class="fa-solid fa-utensils fa-fw" style="margin-right:6px; opacity:0.7;"></i> Cookbook &amp; Practical</span>
+  </div>
+  <ul class="sidebar-items">
+    <li class="sidebar-item">
+      <a href="../../docs/cookbook/rest-api.html" class="sidebar-link ">Building a REST API</a>
+    </li>
+    <li class="sidebar-item">
+      <a href="../../docs/cookbook/cli-tool.html" class="sidebar-link ">CLI Automation Tool</a>
+    </li>
+    <li class="sidebar-item">
+      <a href="../../docs/cookbook/parallel-workers.html" class="sidebar-link ">Parallel Worker Pool</a>
+    </li>
+  </ul>
+</div>
+<div class="sidebar-category">
+  <div class="category-title">
+    <span><i class="fa-solid fa-bookmark fa-fw" style="margin-right:6px; opacity:0.7;"></i> Reference</span>
+  </div>
+  <ul class="sidebar-items">
+    <li class="sidebar-item">
+      <a href="../../docs/reference/builtins.html" class="sidebar-link ">Built-in Functions</a>
+    </li>
+    <li class="sidebar-item">
+      <a href="../../docs/reference/keywords.html" class="sidebar-link ">Keywords &amp; Grammar</a>
+    </li>
+    <li class="sidebar-item">
+      <a href="../../docs/reference/cheat-sheet.html" class="sidebar-link ">Cheat Sheet</a>
+    </li>
+  </ul>
+</div>
+</aside>
+
+    <main class="docs-content-wrapper">
+      <article class="docs-article">
+        <nav class="breadcrumbs" aria-label="Breadcrumb">
+  <a href="../../index.html">Home</a>
+  <span class="breadcrumb-separator"><i class="fa-solid fa-chevron-right fa-xs"></i></span>
+  <span>Package Manager (DPM)</span>
+  <span class="breadcrumb-separator"><i class="fa-solid fa-chevron-right fa-xs"></i></span>
+  <span style="color:var(--text-primary); font-weight:600;">DPM Guide &amp; Reference</span>
+</nav>
+        
+        
+<h1 id="dpm">Djazair Package Manager (DPM)</h1>
+<p class="lead" style="font-size:1.15rem; color:var(--text-secondary); margin-bottom:1.75rem;">
+  <strong>DPM</strong> is the official, self-hosted package manager and build orchestrator for the Djazair Programming Language. Written natively in Djazair, DPM provides project scaffolding, Semantic Versioning (SemVer) dependency resolution, multi-source downloading (GitHub monorepos, Git repositories, HTTP ZIPs, and local archives), isolated per-project dependency trees, global tool installations, and automated native compilation for hybrid C/C++ packages.
+</p>
+
+<div class="callout callout-info" style="margin-bottom:2rem;">
+  <div style="font-weight:700; margin-bottom:0.35rem;"><i class="fa-solid fa-circle-info"></i> Native Architecture</div>
+  <p style="margin:0;">DPM is implemented as a core Djazair application (<code>dpm/init.dz</code>) and can be executed either directly via the standalone <code>dpm</code> wrapper script (<code>dpm.bat</code> on Windows, <code>dpm</code> on POSIX) or through the language driver: <code>djazair dpm &lt;command&gt;</code>.</p>
+</div>
+
+<h2 id="architecture-concepts">Architecture & Core Concepts</h2>
+<p>DPM is architected around deterministic dependency management, clean isolation, and cross-platform portability. Understanding these foundations is essential for developing production-grade applications and reusable packages in Djazair.</p>
+
+<h3 id="local-vs-global">Local Isolation vs Global Scope</h3>
+<p>DPM operates in two distinct execution modes:</p>
+<ul>
+  <li><strong>Local Project Scope (Default):</strong> Dependencies are installed strictly within the project directory inside the isolated <code>djazair_packages/</code> folder. Modifications are recorded directly in the project's root <code>dpm.json</code> manifest. This ensures completely reproducible builds and guarantees that two projects on the same machine can safely depend on different versions of the same library without conflict.</li>
+  <li><strong>Global System Scope (<code>-g</code>, <code>--global</code>):</strong> Installs packages system-wide in the language runtime directory (or <code>~/.djazair/packages</code>). This mode is ideal for developer command-line tools, language extensions, and global utilities that need to be accessible from any working directory.</li>
+</ul>
+
+<div class="table-wrapper">
+  <table>
+    <thead>
+      <tr>
+        <th>Scope</th>
+        <th>Default Installation Directory</th>
+        <th>Manifest Impact</th>
+        <th>Primary Use Case</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>Local</strong> (Default)</td>
+        <td><code>&lt;project_root&gt;/djazair_packages/</code></td>
+        <td>Pinned to root <code>dpm.json</code> (<code>require</code>)</td>
+        <td>Application libraries, database drivers, framework plugins</td>
+      </tr>
+      <tr>
+        <td><strong>Global</strong> (<code>-g</code>)</td>
+        <td><code>&lt;djazair_root&gt;/packages/</code> or <code>~/.djazair/packages/</code></td>
+        <td>None (standalone installation)</td>
+        <td>CLI utilities, linters, system-wide code generators</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<h3 id="package-types">Package Classification: Pure vs Hybrid</h3>
+<p>DPM explicitly recognizes two primary categories of packages:</p>
+<ol>
+  <li><strong>Pure Packages (<code>"type": "pure"</code>):</strong> Built entirely in Djazair source code (<code>.dz</code> files). They require no external compiler toolchain, install instantaneously across all operating systems (Windows, Linux, macOS), and have zero native binary dependencies.</li>
+  <li><strong>Hybrid Packages (<code>"type": "hybrid"</code>):</strong> Contain both Djazair wrapper code and low-level C or C++ extensions (e.g., SQLite, WebSockets, image processing). They declare platform-specific build scripts (<code>build.bat</code> on Windows, <code>build.sh</code> on POSIX) and link against the Djazair C runtime header files (<code>djazair_api.h</code>) and static library (<code>libdjazair.a</code>).</li>
+</ol>
+
+<h3 id="resolution-hierarchy">Runtime Module Resolution Hierarchy</h3>
+<p>When your Djazair script issues an <code>import</code> or <code>use</code> statement, the interpreter resolves packages in the following strictly defined order:</p>
+<ol>
+  <li><strong>Project-Local Directory Package:</strong> <code>&lt;project_root&gt;/djazair_packages/&lt;name&gt;/init.dz</code></li>
+  <li><strong>Project-Local Single-File Package:</strong> <code>&lt;project_root&gt;/djazair_packages/&lt;name&gt;.dz</code></li>
+  <li><strong>Global System Package:</strong> <code>&lt;djazair_root&gt;/packages/&lt;name&gt;/init.dz</code></li>
+  <li><strong>Built-In Standard Library:</strong> Embedded C/Djazair standard modules (e.g., <code>math</code>, <code>json</code>, <code>http</code>, <code>file</code>).</li>
+</ol>
+
+---
+
+<h2 id="semver-engine">Semantic Versioning (SemVer 2.0.0 Engine)</h2>
+<p>DPM embeds an internal, full-featured SemVer parsing and evaluation engine (<code>dpm/core/semver.dz</code>). When declaring dependencies or updating packages, DPM evaluates version constraints to ensure breaking changes are never introduced unintentionally.</p>
+
+<div class="table-wrapper">
+  <table>
+    <thead>
+      <tr>
+        <th>Constraint Pattern</th>
+        <th>Example</th>
+        <th>Matching Versions</th>
+        <th>Behavior & Rationale</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>Caret (<code>^</code>)</strong> (Default)</td>
+        <td><code>^1.2.0</code></td>
+        <td><code>1.2.0</code>, <code>1.2.3</code>, <code>1.9.9</code> (Rejects <code>2.0.0</code>)</td>
+        <td>Allows backwards-compatible minor and patch updates. For zero-major versions (<code>^0.2.0</code>), minor increments are treated as breaking (matches <code>0.2.x</code>, rejects <code>0.3.0</code>).</td>
+      </tr>
+      <tr>
+        <td><strong>Tilde (<code>~</code>)</strong></td>
+        <td><code>~1.2.0</code></td>
+        <td><code>1.2.0</code>, <code>1.2.9</code> (Rejects <code>1.3.0</code>)</td>
+        <td>Restricts updates strictly to patch releases. Useful when minor versions might alter API behavior.</td>
+      </tr>
+      <tr>
+        <td><strong>Exact</strong></td>
+        <td><code>1.2.3</code></td>
+        <td>Only <code>1.2.3</code></td>
+        <td>Locks dependency to an exact release. Essential for ultra-deterministic critical deployments.</td>
+      </tr>
+      <tr>
+        <td><strong>Wildcard / Latest</strong></td>
+        <td><code>*</code> or <code>latest</code></td>
+        <td>Any version</td>
+        <td>Matches the absolute latest release found upstream.</td>
+      </tr>
+      <tr>
+        <td><strong>Comparison Operators</strong></td>
+        <td><code>&gt;=1.0.0 &lt;2.0.0</code></td>
+        <td>Any version in range</td>
+        <td>Supports standard relational bounds (<code>&gt;=</code>, <code>&gt;</code>, <code>&lt;=</code>, <code>&lt;</code>).</td>
+      </tr>
+      <tr>
+        <td><strong>Pre-Release Identifiers</strong></td>
+        <td><code>1.0.0-rc.1</code></td>
+        <td>SemVer pre-release</td>
+        <td>Parsed cleanly via <code>semver.parse()</code>, allowing development candidate tracking.</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+---
+
+<h2 id="cli-reference">Complete CLI Reference & Workflows</h2>
+<p>DPM commands share a consistent interface, intuitive aliases, and standardized flag behavior:</p>
+
+<div class="code-wrapper">
+  <div class="code-header">
+    <span class="code-lang">bash</span>
+    <button class="copy-btn" aria-label="Copy code"><i class="fa-regular fa-copy"></i> Copy</button>
+  </div>
+  <pre><code>dpm &lt;command&gt; [options] [arguments]
+<span class="hl-comment"># or</span>
+djazair dpm &lt;command&gt; [options] [arguments]</code></pre>
+</div>
+
+<h3 id="global-options">Global Command-Line Flags</h3>
+<ul>
+  <li><code>-g</code>, <code>--global</code>: Target the global language packages directory instead of the project-local workspace.</li>
+  <li><code>-q</code>, <code>--quiet</code>: Run quietly, suppressing all non-error informational logs.</li>
+  <li><code>--verbose</code>: Enable verbose diagnostic traces, showing git command outputs and path resolution steps.</li>
+  <li><code>-v</code>, <code>--version</code>: Print DPM version, Djazair engine version, host OS platform, and author info.</li>
+  <li><code>-h</code>, <code>--help</code>: Display interactive help screen.</li>
+</ul>
+
+<h3 id="cmd-init">1. Project Scaffolding: <code>dpm init</code></h3>
+<p>Initializes a new Djazair project or library package. It launches an interactive wizard that prompts for project metadata and automatically generates a standard <code>dpm.json</code> manifest, starter entrypoint, <code>.gitignore</code>, and <code>README.md</code>.</p>
+
+<div class="code-wrapper">
+  <div class="code-header">
+    <span class="code-lang">bash</span>
+    <button class="copy-btn" aria-label="Copy code"><i class="fa-regular fa-copy"></i> Copy</button>
+  </div>
+  <pre><code><span class="hl-comment"># Interactive scaffolding wizard</span>
+dpm init
+
+<span class="hl-comment"># Non-interactive mode (accepts all sensible defaults immediately)</span>
+dpm init <span class="hl-special">--yes</span>
+<span class="hl-comment"># or</span>
+dpm init <span class="hl-special">-y</span></code></pre>
+</div>
+
+<p>When run, <code>dpm init</code> scaffolds the following standard directory structure:</p>
+<div class="code-wrapper">
+  <div class="code-header">
+    <span class="code-lang">bash</span>
+    <button class="copy-btn" aria-label="Copy code"><i class="fa-regular fa-copy"></i> Copy</button>
+  </div>
+  <pre><code>my_project/
+├── dpm.json         <span class="hl-comment"># Package manifest &amp; dependency declarations</span>
+├── init.dz          <span class="hl-comment"># Primary entrypoint with starter function</span>
+├── .gitignore       <span class="hl-comment"># Pre-configured to ignore djazair_packages/ and build binaries</span>
+└── README.md        <span class="hl-comment"># Formatted markdown documentation with install/usage examples</span></code></pre>
+</div>
+
+<div class="callout callout-tip">
+  <div style="font-weight:700; margin-bottom:0.35rem;"><i class="fa-solid fa-lightbulb"></i> Automatic Git Safety</div>
+  <p style="margin:0;">The generated <code>.gitignore</code> automatically excludes <code>djazair_packages/</code>, native build artifacts (<code>*.dll</code>, <code>*.so</code>, <code>*.dylib</code>, <code>*.o</code>, <code>*.a</code>), build flags (<code>.built</code>), and the DPM temporary cache (<code>.dpm_cache/</code>). This ensures you never accidentally commit downloaded dependencies or compiled binaries to source control.</p>
+</div>
+
+<h3 id="cmd-install">2. Package Installation: <code>dpm install</code></h3>
+<p>The <code>install</code> command (aliases: <code>i</code>, <code>add</code>) handles both batch dependency synchronization and single package retrieval.</p>
+
+<h4 id="batch-install">Batch Manifest Installation</h4>
+<p>Running <code>dpm install</code> without arguments reads the local <code>dpm.json</code>, parses the <code>require</code> block, and recursively downloads, verifies, and installs every listed dependency:</p>
+<div class="code-wrapper">
+  <div class="code-header">
+    <span class="code-lang">bash</span>
+    <button class="copy-btn" aria-label="Copy code"><i class="fa-regular fa-copy"></i> Copy</button>
+  </div>
+  <pre><code>dpm install</code></pre>
+</div>
+
+<h4 id="multi-source-formats">Supported Package Specifiers & Source Formats</h4>
+<p>DPM supports an exceptionally versatile range of source identifiers:</p>
+
+<div class="table-wrapper">
+  <table>
+    <thead>
+      <tr>
+        <th>Source Format</th>
+        <th>Syntax Example</th>
+        <th>Resolution Mechanism</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>Shorthand Name</strong></td>
+        <td><code>dpm install sqlite</code><br><code>dpm install qalam</code></td>
+        <td>Checks local offline packages (<code>&lt;djazair_root&gt;/packages/</code>) first; if not found, fetches from the official extensions monorepo (<code>github:djazair-language/djazair-extensions/&lt;name&gt;</code>).</td>
+      </tr>
+      <tr>
+        <td><strong>GitHub Monorepo Subdirectory</strong></td>
+        <td><code>dpm install github:org/repo/subfolder</code></td>
+        <td>Clones/caches the repository and extracts the specified subdirectory as a standalone package.</td>
+      </tr>
+      <tr>
+        <td><strong>GitHub Repository Shorthand</strong></td>
+        <td><code>dpm install github:user/repo</code></td>
+        <td>Clones directly from <code>https://github.com/user/repo.git</code>.</td>
+      </tr>
+      <tr>
+        <td><strong>Direct Git URL</strong></td>
+        <td><code>dpm install https://github.com/team/auth.git</code></td>
+        <td>Executes shallow clone (<code>--depth 1</code>), cleans up <code>.git</code> metadata, and places package in <code>djazair_packages/auth</code>.</td>
+      </tr>
+      <tr>
+        <td><strong>Direct HTTP/HTTPS ZIP Archive</strong></td>
+        <td><code>dpm install https://cdn.example.com/matrix.zip</code></td>
+        <td>Downloads archive to DPM cache and extracts cleanly into project packages.</td>
+      </tr>
+      <tr>
+        <td><strong>Local Directory or Archive</strong></td>
+        <td><code>dpm install ./libs/my-custom-pkg</code><br><code>dpm install ../archives/pkg.zip</code></td>
+        <td>Copies local filesystem directory or extracts local archive directly into <code>djazair_packages/</code>.</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<h4 id="install-flags">Installation Modifiers</h4>
+<div class="code-wrapper">
+  <div class="code-header">
+    <span class="code-lang">bash</span>
+    <button class="copy-btn" aria-label="Copy code"><i class="fa-regular fa-copy"></i> Copy</button>
+  </div>
+  <pre><code><span class="hl-comment"># Install globally into language packages directory</span>
+dpm install <span class="hl-special">-g</span> qalam
+
+<span class="hl-comment"># Install without updating the root dpm.json manifest</span>
+dpm install sqlite <span class="hl-special">--no-save</span>
+
+<span class="hl-comment"># Force re-download and re-install even if package directory exists</span>
+dpm install sqlite <span class="hl-special">--force</span></code></pre>
+</div>
+
+<h3 id="cmd-update">3. Package Upgrades: <code>dpm update</code></h3>
+<p>The <code>update</code> command (alias: <code>up</code>) inspects installed packages against their remote origin. For Git-backed packages, DPM queries remote tags (<code>git ls-remote --tags</code>), compares available versions using its SemVer engine, and upgrades the package when a newer compatible version is detected.</p>
+
+<div class="code-wrapper">
+  <div class="code-header">
+    <span class="code-lang">bash</span>
+    <button class="copy-btn" aria-label="Copy code"><i class="fa-regular fa-copy"></i> Copy</button>
+  </div>
+  <pre><code><span class="hl-comment"># Update a specific package locally</span>
+dpm update sqlite
+
+<span class="hl-comment"># Update all installed packages in the current project</span>
+dpm update *
+<span class="hl-comment"># or</span>
+dpm update
+
+<span class="hl-comment"># Update a globally installed package</span>
+dpm update <span class="hl-special">-g</span> qalam
+
+<span class="hl-comment"># Force re-installation of the latest version</span>
+dpm update sqlite <span class="hl-special">--force</span></code></pre>
+</div>
+
+<h3 id="cmd-remove">4. Package Uninstallation: <code>dpm remove</code></h3>
+<p>The <code>remove</code> command (aliases: <code>rm</code>, <code>uninstall</code>) safely deletes a package from <code>djazair_packages/</code> and automatically removes its dependency constraint from <code>dpm.json</code>:</p>
+
+<div class="code-wrapper">
+  <div class="code-header">
+    <span class="code-lang">bash</span>
+    <button class="copy-btn" aria-label="Copy code"><i class="fa-regular fa-copy"></i> Copy</button>
+  </div>
+  <pre><code><span class="hl-comment"># Remove package locally and update dpm.json</span>
+dpm remove sqlite
+
+<span class="hl-comment"># Remove a globally installed package</span>
+dpm remove <span class="hl-special">-g</span> qalam</code></pre>
+</div>
+
+<h3 id="cmd-list">5. Inventory Inspection: <code>dpm list</code></h3>
+<p>The <code>list</code> command (alias: <code>ls</code>) scans the packages directory and outputs a cleanly formatted table of all installed packages, their detected versions, and package types:</p>
+
+<div class="code-wrapper">
+  <div class="code-header">
+    <span class="code-lang">bash</span>
+    <button class="copy-btn" aria-label="Copy code"><i class="fa-regular fa-copy"></i> Copy</button>
+  </div>
+  <pre><code><span class="hl-comment"># List project-local packages</span>
+dpm list
+
+<span class="hl-comment"># List globally installed packages</span>
+dpm list <span class="hl-special">-g</span></code></pre>
+</div>
+
+<h3 id="cmd-info">6. Deep Metadata Inspection: <code>dpm info</code></h3>
+<p>The <code>info</code> command (alias: <code>show</code>) prints an exhaustive diagnostic report for any package, including its scope, installation location, entrypoint, author, dependency map, update availability, and file inventory:</p>
+
+<div class="code-wrapper">
+  <div class="code-header">
+    <span class="code-lang">bash</span>
+    <button class="copy-btn" aria-label="Copy code"><i class="fa-regular fa-copy"></i> Copy</button>
+  </div>
+  <pre><code>dpm info sqlite</code></pre>
+</div>
+
+<div class="code-wrapper">
+  <div class="code-header">
+    <span class="code-lang">text</span>
+    <button class="copy-btn" aria-label="Copy code"><i class="fa-regular fa-copy"></i> Copy</button>
+  </div>
+  <pre><code>Package Information: sqlite
+----------------------------------------------------
+  Name:        sqlite
+  Scope:       Local
+  Location:    D:\Projects\app\djazair_packages\sqlite
+  Version:     1.0.0
+  Type:        hybrid
+  Description: SQLite native embedded database engine for Djazair
+  Source:      github:djazair-language/djazair-extensions/sqlite
+  Entrypoint:  init.dz
+  Developer:   Harizi Riyadh &lt;hariziriyadh@gmail.com&gt;
+  Dependencies: None
+  Files (6):   dpm.json, init.dz, build.bat, build.sh, sqlite3.c, sqlite3.h</code></pre>
+</div>
+
+<h3 id="cmd-pack">7. Distributable Bundling: <code>dpm pack</code></h3>
+<p>Packages the current project or library into a clean, distributable ZIP archive named <code>&lt;name&gt;-&lt;version&gt;.zip</code>. It automatically excludes local dependencies (<code>djazair_packages/</code>), compiled binaries, and temporary files, producing a production-ready distribution artifact ready to be published or shared.</p>
+
+<div class="code-wrapper">
+  <div class="code-header">
+    <span class="code-lang">bash</span>
+    <button class="copy-btn" aria-label="Copy code"><i class="fa-regular fa-copy"></i> Copy</button>
+  </div>
+  <pre><code>dpm pack
+<span class="hl-comment"># Output: Package archive created: &#x27;D:\Projects\my_lib\my_lib-1.0.0.zip&#x27;</span></code></pre>
+</div>
+
+---
+
+<h2 id="manifest-specification">Package Manifest (<code>dpm.json</code>) Specification</h2>
+<p>The <code>dpm.json</code> file is the single source of truth for any Djazair project or distributable library. Below is the complete annotated specification:</p>
+
+<div class="code-wrapper">
+  <div class="code-header">
+    <span class="code-lang">json</span>
+    <button class="copy-btn" aria-label="Copy code"><i class="fa-regular fa-copy"></i> Copy</button>
+  </div>
+  <pre><code>{
+  &quot;name&quot;: &quot;super_cache&quot;,
+  &quot;version&quot;: &quot;1.2.0&quot;,
+  &quot;description&quot;: &quot;High-performance LRU cache and memory storage for Djazair&quot;,
+  &quot;type&quot;: &quot;pure&quot;,
+  &quot;entry&quot;: &quot;init.dz&quot;,
+  &quot;source&quot;: &quot;github:developer/super_cache&quot;,
+  &quot;developer&quot;: {
+    &quot;name&quot;: &quot;Harizi Riyadh&quot;,
+    &quot;email&quot;: &quot;hariziriyadh@gmail.com&quot;
+  },
+  &quot;require&quot;: {
+    &quot;qalam&quot;: &quot;^0.2.0&quot;,
+    &quot;sqlite&quot;: &quot;~1.0.0&quot;
+  },
+  &quot;build&quot;: {
+    &quot;windows&quot;: &quot;build.bat&quot;,
+    &quot;linux&quot;: &quot;./build.sh&quot;
+  }
+}</code></pre>
+</div>
+
+<div class="table-wrapper">
+  <table>
+    <thead>
+      <tr>
+        <th>Field</th>
+        <th>Type</th>
+        <th>Required</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><code>name</code></td>
+        <td>String</td>
+        <td><strong>Yes</strong></td>
+        <td>The unique identifier of the package. Must use lowercase alphanumeric characters, dashes, or underscores (e.g. <code>"json_validator"</code>).</td>
+      </tr>
+      <tr>
+        <td><code>version</code></td>
+        <td>String</td>
+        <td><strong>Yes</strong></td>
+        <td>Valid SemVer 2.0.0 string (<code>MAJOR.MINOR.PATCH[-PRERELEASE]</code>).</td>
+      </tr>
+      <tr>
+        <td><code>description</code></td>
+        <td>String</td>
+        <td>No</td>
+        <td>Concise overview of the package's purpose and functionality.</td>
+      </tr>
+      <tr>
+        <td><code>type</code></td>
+        <td>String</td>
+        <td><strong>Yes</strong></td>
+        <td>Either <code>"pure"</code> (Djazair code only) or <code>"hybrid"</code> (contains native C/C++ build steps).</td>
+      </tr>
+      <tr>
+        <td><code>entry</code></td>
+        <td>String</td>
+        <td>No</td>
+        <td>Main entrypoint file executed when the package is imported. Defaults to <code>"init.dz"</code>.</td>
+      </tr>
+      <tr>
+        <td><code>source</code></td>
+        <td>String</td>
+        <td>No</td>
+        <td>Upstream repository specifier (e.g. <code>"github:org/repo"</code> or Git URL) used for automated updates.</td>
+      </tr>
+      <tr>
+        <td><code>developer</code></td>
+        <td>Object</td>
+        <td>No</td>
+        <td>Metadata map containing author <code>"name"</code> and <code>"email"</code>.</td>
+      </tr>
+      <tr>
+        <td><code>require</code></td>
+        <td>Object</td>
+        <td>No</td>
+        <td>Dictionary of package dependencies mapped to SemVer constraints (e.g., <code>{"qalam": "^0.2.0"}</code>).</td>
+      </tr>
+      <tr>
+        <td><code>build</code></td>
+        <td>Object</td>
+        <td>No (Hybrid only)</td>
+        <td>Cross-platform build scripts for hybrid packages (e.g., <code>"windows": "build.bat"</code>, <code>"linux": "./build.sh"</code>).</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+---
+
+<h2 id="step-by-step-tutorial">Professional Tutorial: Creating & Publishing a Package</h2>
+<p>Follow this end-to-end walkthrough to create, structure, test, bundle, and distribute a professional Djazair package.</p>
+
+<h3 id="step-1-scaffold">Step 1: Scaffolding the Package</h3>
+<p>Create a dedicated directory for your library and initialize it with DPM:</p>
+<div class="code-wrapper">
+  <div class="code-header">
+    <span class="code-lang">bash</span>
+    <button class="copy-btn" aria-label="Copy code"><i class="fa-regular fa-copy"></i> Copy</button>
+  </div>
+  <pre><code>mkdir string_utils
+cd string_utils
+dpm init</code></pre>
+</div>
+<p>Fill in the interactive prompts:</p>
+<div class="code-wrapper">
+  <div class="code-header">
+    <span class="code-lang">text</span>
+    <button class="copy-btn" aria-label="Copy code"><i class="fa-regular fa-copy"></i> Copy</button>
+  </div>
+  <pre><code>Package name (string_utils): string_utils
+Version (0.1.0): 1.0.0
+Description: Advanced string transformation algorithms for Djazair
+Type (pure/hybrid) [pure]: pure
+Author Name: Harizi Riyadh
+Author Email: hariziriyadh@gmail.com</code></pre>
+</div>
+
+<h3 id="step-2-architecture">Step 2: Designing the Package Architecture</h3>
+<p>A professional package organizes its internal logic under a <code>src/</code> directory and exports a clean public API through <code>init.dz</code>:</p>
+
+<div class="code-wrapper">
+  <div class="code-header">
+    <span class="code-lang">bash</span>
+    <button class="copy-btn" aria-label="Copy code"><i class="fa-regular fa-copy"></i> Copy</button>
+  </div>
+  <pre><code>string_utils/
+├── dpm.json
+├── init.dz
+├── src/
+│   ├── case.dz
+│   └── slugify.dz
+├── tests/
+│   └── test_string_utils.dz
+└── README.md</code></pre>
+</div>
+
+<p>Write your internal modules inside <code>src/</code>:</p>
+<div class="code-wrapper">
+  <div class="code-header">
+    <span class="code-lang">ruby</span>
+    <button class="copy-btn" aria-label="Copy code"><i class="fa-regular fa-copy"></i> Copy</button>
+  </div>
+  <pre><code># src/slugify.dz
+fn toSlug(text)
+    let clean = text.lower().strip()
+    let result = &quot;&quot;
+    for ch in clean
+        if (ch &gt;= &quot;a&quot; and ch &lt;= &quot;z&quot;) or (ch &gt;= &quot;0&quot; and ch &lt;= &quot;9&quot;)
+            result = result + ch
+        elif ch == &quot; &quot; or ch == &quot;_&quot; or ch == &quot;-&quot;
+            if !result.endsWith(&quot;-&quot;) and result.length() &gt; 0
+                result = result + &quot;-&quot;
+            end
+        end
+    end
+    return result
+end</code></pre>
+</div>
+
+<p>Expose your public functions in the package entrypoint (<code>init.dz</code>):</p>
+<div class="code-wrapper">
+  <div class="code-header">
+    <span class="code-lang">ruby</span>
+    <button class="copy-btn" aria-label="Copy code"><i class="fa-regular fa-copy"></i> Copy</button>
+  </div>
+  <pre><code># init.dz — Public API Gateway
+import &quot;src/slugify.dz&quot; as slug
+
+# Re-export clean functions
+fn slugify(text)
+    return slug.toSlug(text)
+end
+
+fn version()
+    return &quot;1.0.0&quot;
+end</code></pre>
+</div>
+
+<h3 id="step-3-dependencies">Step 3: Managing Dependencies</h3>
+<p>If your package requires helper libraries (e.g. <code>qalam</code> for colored output or logging), install them directly:</p>
+<div class="code-wrapper">
+  <div class="code-header">
+    <span class="code-lang">bash</span>
+    <button class="copy-btn" aria-label="Copy code"><i class="fa-regular fa-copy"></i> Copy</button>
+  </div>
+  <pre><code>dpm install qalam</code></pre>
+</div>
+<p>DPM installs <code>qalam</code> into <code>djazair_packages/qalam</code> and automatically records <code>"qalam": "^0.2.0"</code> in your <code>dpm.json</code>.</p>
+
+<h3 id="step-4-testing">Step 4: Writing Unit Tests</h3>
+<p>Create a test runner under <code>tests/test_string_utils.dz</code> utilizing the standard <code>assert</code> library:</p>
+<div class="code-wrapper">
+  <div class="code-header">
+    <span class="code-lang">ruby</span>
+    <button class="copy-btn" aria-label="Copy code"><i class="fa-regular fa-copy"></i> Copy</button>
+  </div>
+  <pre><code># tests/test_string_utils.dz
+use assert
+import &quot;../init.dz&quot; as string_utils
+
+print(&quot;==&gt; Testing string_utils...&quot;)
+
+assert.equal(string_utils.slugify(&quot;Hello World! 2026&quot;), &quot;hello-world-2026&quot;, &quot;Slugification failed&quot;)
+assert.equal(string_utils.slugify(&quot;Djazair   Programming&quot;), &quot;djazair-programming&quot;, &quot;Multiple spaces failed&quot;)
+
+print(&quot;==&gt; All tests passed successfully!&quot;)</code></pre>
+</div>
+<p>Execute your tests:</p>
+<div class="code-wrapper">
+  <div class="code-header">
+    <span class="code-lang">bash</span>
+    <button class="copy-btn" aria-label="Copy code"><i class="fa-regular fa-copy"></i> Copy</button>
+  </div>
+  <pre><code>djazair tests/test_string_utils.dz</code></pre>
+</div>
+
+<h3 id="step-5-bundling">Step 5: Packaging & Publishing</h3>
+<p>When ready for release, bundle your package using <code>dpm pack</code>:</p>
+<div class="code-wrapper">
+  <div class="code-header">
+    <span class="code-lang">bash</span>
+    <button class="copy-btn" aria-label="Copy code"><i class="fa-regular fa-copy"></i> Copy</button>
+  </div>
+  <pre><code>dpm pack
+<span class="hl-comment"># Produces: string_utils-1.0.0.zip</span></code></pre>
+</div>
+
+<p>To publish via Git, push your code to GitHub with a SemVer release tag:</p>
+<div class="code-wrapper">
+  <div class="code-header">
+    <span class="code-lang">bash</span>
+    <button class="copy-btn" aria-label="Copy code"><i class="fa-regular fa-copy"></i> Copy</button>
+  </div>
+  <pre><code>git init
+git add .
+git commit <span class="hl-special">-m</span> <span class="hl-str">&quot;Release v1.0.0&quot;</span>
+git tag v1.0.0
+git remote add origin https://github.com/myusername/string_utils.git
+git push <span class="hl-special">-u</span> origin main <span class="hl-special">--tags</span></code></pre>
+</div>
+
+<h3 id="step-6-consuming">Step 6: Consuming the Published Package</h3>
+<p>Other developers can now install and consume your package directly:</p>
+<div class="code-wrapper">
+  <div class="code-header">
+    <span class="code-lang">bash</span>
+    <button class="copy-btn" aria-label="Copy code"><i class="fa-regular fa-copy"></i> Copy</button>
+  </div>
+  <pre><code><span class="hl-comment"># Install via GitHub shorthand</span>
+dpm install github:myusername/string_utils
+
+<span class="hl-comment"># Or install from direct ZIP release</span>
+dpm install https://github.com/myusername/string_utils/releases/download/v1.0.0/string_utils<span class="hl-special">-1</span>.0.0.zip</code></pre>
+</div>
+
+<p>In consumer code:</p>
+<div class="code-wrapper">
+  <div class="code-header">
+    <span class="code-lang">ruby</span>
+    <button class="copy-btn" aria-label="Copy code"><i class="fa-regular fa-copy"></i> Copy</button>
+  </div>
+  <pre><code>use string_utils
+
+let slug = string_utils.slugify(&quot;Building with Djazair and DPM&quot;)
+print(&quot;Generated Slug: &quot; + slug)
+# Output: Generated Slug: building-with-djazair-and-dpm</code></pre>
+</div>
+
+---
+
+<h2 id="hybrid-packages">Authoring Hybrid Packages (C/C++ Extensions)</h2>
+<p>Hybrid packages bridge high-performance C or C++ shared libraries into the Djazair runtime. DPM automates native builds by orchestrating cross-platform build scripts.</p>
+
+<h3 id="hybrid-structure">Hybrid Package Layout</h3>
+<div class="code-wrapper">
+  <div class="code-header">
+    <span class="code-lang">bash</span>
+    <button class="copy-btn" aria-label="Copy code"><i class="fa-regular fa-copy"></i> Copy</button>
+  </div>
+  <pre><code>fast_hash/
+├── dpm.json         <span class="hl-comment"># Declares &quot;type&quot;: &quot;hybrid&quot; and &quot;build&quot; scripts</span>
+├── init.dz          <span class="hl-comment"># Djazair bindings loading the native library</span>
+├── build.bat        <span class="hl-comment"># Windows compilation script (MinGW / MSVC)</span>
+├── build.sh         <span class="hl-comment"># Linux &amp; macOS compilation script (GCC / Clang)</span>
+└── src/
+    ├── native.c     <span class="hl-comment"># C implementation using Djazair C API</span>
+    └── native.h</code></pre>
+</div>
+
+<h3 id="hybrid-manifest">Hybrid <code>dpm.json</code></h3>
+<div class="code-wrapper">
+  <div class="code-header">
+    <span class="code-lang">json</span>
+    <button class="copy-btn" aria-label="Copy code"><i class="fa-regular fa-copy"></i> Copy</button>
+  </div>
+  <pre><code>{
+  &quot;name&quot;: &quot;fast_hash&quot;,
+  &quot;version&quot;: &quot;1.0.0&quot;,
+  &quot;description&quot;: &quot;Native high-speed hashing module for Djazair&quot;,
+  &quot;type&quot;: &quot;hybrid&quot;,
+  &quot;entry&quot;: &quot;init.dz&quot;,
+  &quot;build&quot;: {
+    &quot;windows&quot;: &quot;build.bat&quot;,
+    &quot;linux&quot;: &quot;./build.sh&quot;
+  }
+}</code></pre>
+</div>
+
+<h3 id="cross-platform-build-scripts">Standard Build Scripts</h3>
+<p>DPM sets the <code>DJAZAIR_ROOT</code> environment variable before executing your build scripts. Your scripts should reference the Djazair header files in <code>$DJAZAIR_ROOT/src/include</code> and link against <code>libdjazair</code>:</p>
+
+<div class="tabs-container">
+  <div class="tabs-header">
+    <button class="tab-btn active" onclick="switchTab(event, 'tab-win')">build.bat (Windows)</button>
+    <button class="tab-btn" onclick="switchTab(event, 'tab-posix')">build.sh (Linux/macOS)</button>
+  </div>
+
+  <div id="tab-win" class="tab-content active">
+<div class="code-wrapper">
+  <div class="code-header">
+    <span class="code-lang">bash</span>
+    <button class="copy-btn" aria-label="Copy code"><i class="fa-regular fa-copy"></i> Copy</button>
+  </div>
+  <pre><code>@echo off
+setlocal
+
+:: Set include and library directories
+if <span class="hl-str">&quot;%DJAZAIR_ROOT%&quot;</span>==<span class="hl-str">&quot;&quot;</span> set DJAZAIR_ROOT=..\..
+
+gcc <span class="hl-special">-O3</span> <span class="hl-special">-shared</span> <span class="hl-special">-fPIC</span> ^
+    <span class="hl-special">-I</span><span class="hl-str">&quot;%DJAZAIR_ROOT%\src\include&quot;</span> ^
+    <span class="hl-special">-o</span> fast_hash.dll ^
+    src\native.c ^
+    <span class="hl-special">-L</span><span class="hl-str">&quot;%DJAZAIR_ROOT%\build\lib&quot;</span> <span class="hl-special">-ldjazair</span>
+
+if %ERRORLEVEL% equ 0 (
+    echo [OK] fast_hash.dll compiled successfully.
+    exit /b 0
+) else (
+    echo [ERROR] Compilation failed.
+    exit /b 1
+)</code></pre>
+</div>
+  </div>
+
+  <div id="tab-posix" class="tab-content">
+<div class="code-wrapper">
+  <div class="code-header">
+    <span class="code-lang">bash</span>
+    <button class="copy-btn" aria-label="Copy code"><i class="fa-regular fa-copy"></i> Copy</button>
+  </div>
+  <pre><code><span class="hl-comment">#!/usr/bin/env bash</span>
+set <span class="hl-special">-e</span>
+
+: <span class="hl-str">&quot;${DJAZAIR_ROOT:=../..}&quot;</span>
+
+gcc <span class="hl-special">-O3</span> <span class="hl-special">-shared</span> <span class="hl-special">-fPIC</span> \
+    <span class="hl-special">-I</span><span class="hl-str">&quot;${DJAZAIR_ROOT}/src/include&quot;</span> \
+    <span class="hl-special">-o</span> fast_hash.so \
+    src/native.c \
+    <span class="hl-special">-L</span><span class="hl-str">&quot;${DJAZAIR_ROOT}/build/lib&quot;</span> <span class="hl-special">-ldjazair</span>
+
+echo <span class="hl-str">&quot;[OK] fast_hash.so compiled successfully.&quot;</span></code></pre>
+</div>
+  </div>
+</div>
+
+---
+
+<h2 id="programmatic-api">Programmatic Package Inspection via <code>lang</code></h2>
+<p>Djazair's standard library <code>lang</code> module provides native functions to inspect packages and query update states directly from your running scripts:</p>
+
+<div class="table-wrapper">
+  <table>
+    <thead>
+      <tr>
+        <th>Function</th>
+        <th>Return Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><code>lang.packagesDir()</code></td>
+        <td><code>String</code></td>
+        <td>Returns the absolute path to the active global packages directory.</td>
+      </tr>
+      <tr>
+        <td><code>lang.packageExist(name, [isGlobal])</code></td>
+        <td><code>Boolean</code></td>
+        <td>Checks if a package exists locally or globally. Alias: <code>lang.packageExists()</code>.</td>
+      </tr>
+      <tr>
+        <td><code>lang.checkPackageUpdate(name, [isGlobal])</code></td>
+        <td><code>Map</code></td>
+        <td>Returns a dictionary with <code>isInstalled</code>, <code>hasUpdate</code>, <code>currentVersion</code>, <code>latestVersion</code>, <code>path</code>, and <code>scope</code>.</td>
+      </tr>
+      <tr>
+        <td><code>lang.hasUpdate(name, [isGlobal])</code></td>
+        <td><code>Boolean</code></td>
+        <td>Convenience predicate checking if a newer version is available upstream.</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<h3 id="runtime-check-example">Real-World Dynamic Inspection Example</h3>
+<div class="code-wrapper">
+  <div class="code-header">
+    <span class="code-lang">ruby</span>
+    <button class="copy-btn" aria-label="Copy code"><i class="fa-regular fa-copy"></i> Copy</button>
+  </div>
+  <pre><code>use lang
+
+# Check if SQLite package is available
+if lang.packageExist(&quot;sqlite&quot;)
+    let info = lang.checkPackageUpdate(&quot;sqlite&quot;)
+    print(&quot;SQLite Version: &quot; + info[&quot;currentVersion&quot;])
+    print(&quot;Installed Path: &quot; + info[&quot;path&quot;])
+
+    if info[&quot;hasUpdate&quot;]
+        print(&quot;Notice: A newer SQLite release (v&quot; + info[&quot;latestVersion&quot;] + &quot;) is available!&quot;)
+        print(&quot;Run &#x27;dpm update sqlite&#x27; to upgrade.&quot;)
+    end
+else
+    print(&quot;SQLite is not installed. Please run: dpm install sqlite&quot;)
+end</code></pre>
+</div>
+
+---
+
+<h2 id="best-practices">Production & CI/CD Best Practices</h2>
+
+<h3 id="git-repository-hygiene">1. Git Repository Hygiene</h3>
+<ul>
+  <li><strong>Always commit <code>dpm.json</code>:</strong> The manifest defines exact version bounds and is critical for team collaboration.</li>
+  <li><strong>Never commit <code>djazair_packages/</code>:</strong> Always ignore dependencies in <code>.gitignore</code>. Team members and CI servers will reconstitute them deterministically using <code>dpm install</code>.</li>
+  <li><strong>Never commit binary artifacts:</strong> Ensure <code>*.dll</code>, <code>*.so</code>, <code>*.dylib</code>, and <code>.dpm_cache/</code> are gitignored.</li>
+</ul>
+
+<h3 id="ci-cd-pipelines">2. Continuous Integration (CI/CD) Configuration</h3>
+<p>In automated GitHub Actions or GitLab CI environments, incorporate DPM dependency synchronization into your build matrix:</p>
+
+<div class="code-wrapper">
+  <div class="code-header">
+    <span class="code-lang">yaml</span>
+    <button class="copy-btn" aria-label="Copy code"><i class="fa-regular fa-copy"></i> Copy</button>
+  </div>
+  <pre><code># .github/workflows/ci.yml
+name: Test Suite
+
+on: [push, pull_request]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Source
+        uses: actions/checkout@v4
+
+      - name: Setup Djazair &amp; DPM
+        run: |
+          sudo apt-get update &amp;&amp; sudo apt-get install -y gcc make
+          # Build or install Djazair binaries
+          make install
+
+      - name: Install Project Dependencies
+        run: dpm install
+
+      - name: Run Test Suite
+        run: djazair tests/run_all.dz</code></pre>
+</div>
+
+<h3 id="troubleshooting">3. Troubleshooting Common Issues</h3>
+<ul>
+  <li><strong>Git is not recognized:</strong> DPM relies on the system <code>git</code> command to fetch repositories. Ensure Git is installed and added to your system <code>PATH</code>.</li>
+  <li><strong>Compiler toolchain missing for hybrid packages:</strong> On Windows, ensure MinGW GCC (e.g. MSYS2 or WinLibs) is in your <code>PATH</code>. On Linux, install <code>build-essential</code> (GCC/Clang and Make).</li>
+  <li><strong>Cleaning Cache:</strong> DPM caches monorepos and downloaded archives in your OS temporary directory under <code>dpm_cache/</code>. To clear stale caches, delete the directory:
+    <div class="code-wrapper">
+  <div class="code-header">
+    <span class="code-lang">bash</span>
+    <button class="copy-btn" aria-label="Copy code"><i class="fa-regular fa-copy"></i> Copy</button>
+  </div>
+  <pre><code><span class="hl-comment"># Windows PowerShell</span>
+Remove<span class="hl-special">-Item</span> <span class="hl-special">-Recurse</span> <span class="hl-special">-Force</span> <span class="hl-str">&quot;$env:TEMP\dpm_cache&quot;</span>
+
+<span class="hl-comment"># Linux / macOS</span>
+rm <span class="hl-special">-rf</span> /tmp/dpm_cache</code></pre>
+</div>
+  </li>
+</ul>
+
+
+        <div class="docs-nav-footer">
+  <a href="../../docs/language-guide/modules.html" class="nav-card prev">
+    <div class="nav-card-label"><i class="fa-solid fa-arrow-left"></i> Previous</div>
+    <div class="nav-card-title">Modules &amp; Imports</div>
+  </a>
+  <a href="../../docs/standard-library/index.html" class="nav-card next">
+    <div class="nav-card-label">Next <i class="fa-solid fa-arrow-right"></i></div>
+    <div class="nav-card-title">Overview</div>
+  </a>
+</div>
+      </article>
+    </main>
+
+    <aside class="docs-toc">
+  <div class="toc-title">On this page</div>
+  <ul class="toc-links">
+    <li>
+      <a href="#architecture-concepts" class="toc-link" >Architecture &amp; Core Concepts</a>
+    </li>
+    <li>
+      <a href="#local-vs-global" class="toc-link" style="padding-left:1.5rem;">Local Isolation vs Global Scope</a>
+    </li>
+    <li>
+      <a href="#package-types" class="toc-link" style="padding-left:1.5rem;">Package Classification: Pure vs Hybrid</a>
+    </li>
+    <li>
+      <a href="#resolution-hierarchy" class="toc-link" style="padding-left:1.5rem;">Runtime Module Resolution Hierarchy</a>
+    </li>
+    <li>
+      <a href="#semver-engine" class="toc-link" >Semantic Versioning (SemVer 2.0.0 Engine)</a>
+    </li>
+    <li>
+      <a href="#cli-reference" class="toc-link" >Complete CLI Reference &amp; Workflows</a>
+    </li>
+    <li>
+      <a href="#global-options" class="toc-link" style="padding-left:1.5rem;">Global Command-Line Flags</a>
+    </li>
+    <li>
+      <a href="#cmd-init" class="toc-link" style="padding-left:1.5rem;">1. Project Scaffolding: dpm init</a>
+    </li>
+    <li>
+      <a href="#cmd-install" class="toc-link" style="padding-left:1.5rem;">2. Package Installation: dpm install</a>
+    </li>
+    <li>
+      <a href="#cmd-update" class="toc-link" style="padding-left:1.5rem;">3. Package Upgrades: dpm update</a>
+    </li>
+    <li>
+      <a href="#cmd-remove" class="toc-link" style="padding-left:1.5rem;">4. Package Uninstallation: dpm remove</a>
+    </li>
+    <li>
+      <a href="#cmd-list" class="toc-link" style="padding-left:1.5rem;">5. Inventory Inspection: dpm list</a>
+    </li>
+    <li>
+      <a href="#cmd-info" class="toc-link" style="padding-left:1.5rem;">6. Deep Metadata Inspection: dpm info</a>
+    </li>
+    <li>
+      <a href="#cmd-pack" class="toc-link" style="padding-left:1.5rem;">7. Distributable Bundling: dpm pack</a>
+    </li>
+    <li>
+      <a href="#manifest-specification" class="toc-link" >Package Manifest (dpm.json) Specification</a>
+    </li>
+    <li>
+      <a href="#step-by-step-tutorial" class="toc-link" >Professional Tutorial: Creating &amp; Publishing a Package</a>
+    </li>
+    <li>
+      <a href="#step-1-scaffold" class="toc-link" style="padding-left:1.5rem;">Step 1: Scaffolding the Package</a>
+    </li>
+    <li>
+      <a href="#step-2-architecture" class="toc-link" style="padding-left:1.5rem;">Step 2: Designing the Package Architecture</a>
+    </li>
+    <li>
+      <a href="#step-3-dependencies" class="toc-link" style="padding-left:1.5rem;">Step 3: Managing Dependencies</a>
+    </li>
+    <li>
+      <a href="#step-4-testing" class="toc-link" style="padding-left:1.5rem;">Step 4: Writing Unit Tests</a>
+    </li>
+    <li>
+      <a href="#step-5-bundling" class="toc-link" style="padding-left:1.5rem;">Step 5: Packaging &amp; Publishing</a>
+    </li>
+    <li>
+      <a href="#step-6-consuming" class="toc-link" style="padding-left:1.5rem;">Step 6: Consuming the Published Package</a>
+    </li>
+    <li>
+      <a href="#hybrid-packages" class="toc-link" >Authoring Hybrid Packages (C/C++ Extensions)</a>
+    </li>
+    <li>
+      <a href="#hybrid-structure" class="toc-link" style="padding-left:1.5rem;">Hybrid Package Layout</a>
+    </li>
+    <li>
+      <a href="#hybrid-manifest" class="toc-link" style="padding-left:1.5rem;">Hybrid dpm.json</a>
+    </li>
+    <li>
+      <a href="#cross-platform-build-scripts" class="toc-link" style="padding-left:1.5rem;">Standard Build Scripts</a>
+    </li>
+    <li>
+      <a href="#programmatic-api" class="toc-link" >Programmatic Package Inspection via lang</a>
+    </li>
+    <li>
+      <a href="#runtime-check-example" class="toc-link" style="padding-left:1.5rem;">Real-World Dynamic Inspection Example</a>
+    </li>
+    <li>
+      <a href="#best-practices" class="toc-link" >Production &amp; CI/CD Best Practices</a>
+    </li>
+    <li>
+      <a href="#git-repository-hygiene" class="toc-link" style="padding-left:1.5rem;">1. Git Repository Hygiene</a>
+    </li>
+    <li>
+      <a href="#ci-cd-pipelines" class="toc-link" style="padding-left:1.5rem;">2. Continuous Integration (CI/CD) Configuration</a>
+    </li>
+    <li>
+      <a href="#troubleshooting" class="toc-link" style="padding-left:1.5rem;">3. Troubleshooting Common Issues</a>
+    </li>
+  </ul>
+</aside>
+  </div>
+
+  <div class="search-modal-backdrop" id="search-modal">
+  <div class="search-modal">
+    <div class="search-input-wrap">
+      <i class="fa-solid fa-magnifying-glass"></i>
+      <input type="text" id="search-input" class="search-input" placeholder="Search documentation, methods, keywords..." autocomplete="off">
+    </div>
+    <div class="search-results-list" id="search-results"></div>
+    <div class="search-footer">
+      <span>Navigate with <kbd>↑</kbd> <kbd>↓</kbd></span>
+      <span>Open with <kbd>Enter</kbd></span>
+      <span>Close with <kbd>Esc</kbd></span>
+    </div>
+  </div>
+</div>
+
+  <!-- Scripts -->
+  <script src="../../assets/js/search-index.js"></script>
+  <script src="../../assets/js/search.js"></script>
+  <script src="../../assets/js/code-tools.js"></script>
+  <script src="../../assets/js/navigation.js"></script>
+</body>
+</html>
