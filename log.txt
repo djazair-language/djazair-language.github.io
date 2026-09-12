@@ -1,2 +1,0 @@
-Line 1: system started
-Line 2: connected to database
