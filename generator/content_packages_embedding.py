@@ -127,19 +127,17 @@ let products = [
 ]
 let nextId = 3
 
-let server = new http.Server()
-
-server.handle(fn(req, res)
+let server = http.createServer(fn(req, res)
     res.setHeader("Content-Type", "application/json")
 
     # GET /api/products
-    if req.method == "GET" and req.path == "/api/products"
-        res.send(json.encode(products))
+    if req.method == "GET" and req.pathname == "/api/products"
+        res.status(200).send(json.encode(products))
         return
     end
 
     # POST /api/products
-    if req.method == "POST" and req.path == "/api/products"
+    if req.method == "POST" and req.pathname == "/api/products"
         let payload = json.decode(req.body)
         payload["id"] = nextId
         nextId++

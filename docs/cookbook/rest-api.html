@@ -288,19 +288,17 @@
 ]
 <span class="hl-kw">let</span> nextId <span class="hl-op">=</span> <span class="hl-num">3</span>
 
-<span class="hl-kw">let</span> server <span class="hl-op">=</span> <span class="hl-kw">new</span> http.<span class="hl-fn">Server</span>()
-
-server.<span class="hl-fn">handle</span>(<span class="hl-kw">fn</span>(req, res)
+<span class="hl-kw">let</span> server <span class="hl-op">=</span> http.<span class="hl-fn">createServer</span>(<span class="hl-kw">fn</span>(req, res)
     res.<span class="hl-fn">setHeader</span>(<span class="hl-str">&quot;Content-Type&quot;</span>, <span class="hl-str">&quot;application/json&quot;</span>)
 
     <span class="hl-comment"># GET /api/products</span>
-    <span class="hl-kw">if</span> req.method <span class="hl-op">==</span> <span class="hl-str">&quot;GET&quot;</span> <span class="hl-kw">and</span> req.path <span class="hl-op">==</span> <span class="hl-str">&quot;/api/products&quot;</span>
-        res.<span class="hl-fn">send</span>(json.<span class="hl-fn">encode</span>(products))
+    <span class="hl-kw">if</span> req.method <span class="hl-op">==</span> <span class="hl-str">&quot;GET&quot;</span> <span class="hl-kw">and</span> req.pathname <span class="hl-op">==</span> <span class="hl-str">&quot;/api/products&quot;</span>
+        res.<span class="hl-fn">status</span>(<span class="hl-num">200</span>).<span class="hl-fn">send</span>(json.<span class="hl-fn">encode</span>(products))
         <span class="hl-kw">return</span>
     <span class="hl-kw">end</span>
 
     <span class="hl-comment"># POST /api/products</span>
-    <span class="hl-kw">if</span> req.method <span class="hl-op">==</span> <span class="hl-str">&quot;POST&quot;</span> <span class="hl-kw">and</span> req.path <span class="hl-op">==</span> <span class="hl-str">&quot;/api/products&quot;</span>
+    <span class="hl-kw">if</span> req.method <span class="hl-op">==</span> <span class="hl-str">&quot;POST&quot;</span> <span class="hl-kw">and</span> req.pathname <span class="hl-op">==</span> <span class="hl-str">&quot;/api/products&quot;</span>
         <span class="hl-kw">let</span> payload <span class="hl-op">=</span> json.<span class="hl-fn">decode</span>(req.body)
         payload[<span class="hl-str">&quot;id&quot;</span>] <span class="hl-op">=</span> nextId
         nextId<span class="hl-op">++</span>
