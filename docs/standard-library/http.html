@@ -303,6 +303,27 @@
 <span class="hl-builtin">print</span>(<span class="hl-str">&quot;Response status: <span class="hl-interp">${</span>postRes.statusCode<span class="hl-interp">}</span>&quot;</span>)</code></pre>
 </div>
 
+<h2 id="http-config">Client Configuration & Redirects</h2>
+<p>The HTTP client automatically follows <code>3xx</code> redirects up to 10 times. You can configure global options like connection pooling and redirect limits using <code>setClientConfig</code>:</p>
+<div class="code-wrapper">
+  <div class="code-header">
+    <span class="code-lang">djazair</span>
+    <button class="copy-btn" aria-label="Copy code"><i class="fa-regular fa-copy"></i> Copy</button>
+  </div>
+  <pre><code><span class="hl-kw">use</span> http
+
+<span class="hl-comment"># Global configuration applied to all subsequent requests</span>
+http.<span class="hl-fn">setClientConfig</span>({
+    <span class="hl-str">&quot;followRedirects&quot;</span><span class="hl-op">:</span> <span class="hl-kw">True</span>,
+    <span class="hl-str">&quot;maxRedirects&quot;</span><span class="hl-op">:</span> <span class="hl-num">10</span>,
+    <span class="hl-str">&quot;keepAlive&quot;</span><span class="hl-op">:</span> <span class="hl-kw">True</span>,
+    <span class="hl-str">&quot;maxPoolSize&quot;</span><span class="hl-op">:</span> <span class="hl-num">5</span>,
+    <span class="hl-str">&quot;connectTimeout&quot;</span><span class="hl-op">:</span> <span class="hl-num">10</span>
+})
+
+<span class="hl-kw">let</span> res <span class="hl-op">=</span> http.<span class="hl-fn">get</span>(<span class="hl-str">&quot;http://example.com/api&quot;</span>, <span class="hl-kw">Null</span>, <span class="hl-kw">True</span>) <span class="hl-comment"># third param enables Keep-Alive</span></code></pre>
+</div>
+
 <h2 id="http-server">Building an HTTP Web Server (Kasbah)</h2>
 <p>Create a high-performance, non-blocking HTTP server using <code>http.createServer()</code>:</p>
 
@@ -355,6 +376,9 @@ server.<span class="hl-fn">listen</span>(<span class="hl-num">8080</span>)</code
     </li>
     <li>
       <a href="#http-client" class="toc-link" >HTTP Client Methods</a>
+    </li>
+    <li>
+      <a href="#http-config" class="toc-link" >Client Configuration &amp; Redirects</a>
     </li>
     <li>
       <a href="#http-server" class="toc-link" >Building an HTTP Web Server (Kasbah)</a>

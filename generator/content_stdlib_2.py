@@ -380,6 +380,45 @@ let res = mathWorker.receiveJson(3.0)
 print("Computed answer: ${res["answer"]}") # => 96
 mathWorker.close()
 </code></pre>
+
+<h2 id="thread-pool">Thread Pools & Futures</h2>
+<p>For distributing workloads, the <code>thread</code> module provides built-in <strong>worker pools</strong>. Pools manage a fixed set of persistent workers and distribute tasks efficiently via a FIFO queue.</p>
+
+<pre><code class="language-dz">use thread
+use json
+
+# Create a pool of 4 workers using inline code
+let pool = thread.inlinePool(`
+    use thread
+    use json
+    while True
+        let msg = thread.receive()
+        if isNull(msg) break end # Queue closed
+        
+        let envelope = json.decode(msg)
+        if isNull(envelope) break end
+        
+        let task_id = envelope["id"]
+        let payload = envelope["data"]
+        
+        # Reply with the same task ID
+        thread.replyJson({"id": task_id, "data": payload * 2})
+    end
+`, 4)
+
+# Submit an array of tasks (returns an Array of Futures)
+let futures = pool.submit([10, 20, 30])
+
+# Wait for all tasks to complete (blocking)
+let results = thread.all(futures, 5.0) # 5 seconds timeout
+print(results) # => [20, 40, 60]
+
+# Or wait for the FIRST task to complete (returns the value directly)
+let fastest_value = thread.any(futures, 5.0)
+print("Fastest task returned: " + str(fastest_value))
+
+pool.close()
+</code></pre>
 '''
 
     # 10. uuid

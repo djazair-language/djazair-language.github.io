@@ -543,6 +543,22 @@ let postRes = http.post("https://httpbin.org/post", payload, headers)
 print("Response status: ${postRes.statusCode}")
 </code></pre>
 
+<h2 id="http-config">Client Configuration & Redirects</h2>
+<p>The HTTP client automatically follows <code>3xx</code> redirects up to 10 times. You can configure global options like connection pooling and redirect limits using <code>setClientConfig</code>:</p>
+<pre><code class="language-dz">use http
+
+# Global configuration applied to all subsequent requests
+http.setClientConfig({
+    "followRedirects": True,
+    "maxRedirects": 10,
+    "keepAlive": True,
+    "maxPoolSize": 5,
+    "connectTimeout": 10
+})
+
+let res = http.get("http://example.com/api", Null, True) # third param enables Keep-Alive
+</code></pre>
+
 <h2 id="http-server">Building an HTTP Web Server (Kasbah)</h2>
 <p>Create a high-performance, non-blocking HTTP server using <code>http.createServer()</code>:</p>
 

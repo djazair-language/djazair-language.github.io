@@ -341,6 +341,50 @@ mathWorker.<span class="hl-fn">sendJson</span>({<span class="hl-str">&quot;x&quo
 mathWorker.<span class="hl-fn">close</span>()</code></pre>
 </div>
 
+<h2 id="thread-pool">Thread Pools & Futures</h2>
+<p>For distributing workloads, the <code>thread</code> module provides built-in <strong>worker pools</strong>. Pools manage a fixed set of persistent workers and distribute tasks efficiently via a FIFO queue.</p>
+
+<div class="code-wrapper">
+  <div class="code-header">
+    <span class="code-lang">djazair</span>
+    <button class="copy-btn" aria-label="Copy code"><i class="fa-regular fa-copy"></i> Copy</button>
+  </div>
+  <pre><code><span class="hl-kw">use</span> thread
+<span class="hl-kw">use</span> json
+
+<span class="hl-comment"># Create a pool of 4 workers using inline code</span>
+<span class="hl-kw">let</span> pool <span class="hl-op">=</span> thread.<span class="hl-fn">inlinePool</span>(<span class="hl-str">`
+    use thread
+    use json
+    while True
+        let msg = thread.receive()
+        if isNull(msg) break end # Queue closed
+        
+        let envelope = json.decode(msg)
+        if isNull(envelope) break end
+        
+        let task_id = envelope[&quot;id&quot;]
+        let payload = envelope[&quot;data&quot;]
+        
+        # Reply with the same task ID
+        thread.replyJson({&quot;id&quot;: task_id, &quot;data&quot;: payload * 2})
+    end
+`</span>, <span class="hl-num">4</span>)
+
+<span class="hl-comment"># Submit an array of tasks (returns an Array of Futures)</span>
+<span class="hl-kw">let</span> futures <span class="hl-op">=</span> pool.<span class="hl-fn">submit</span>([<span class="hl-num">10</span>, <span class="hl-num">20</span>, <span class="hl-num">30</span>])
+
+<span class="hl-comment"># Wait for all tasks to complete (blocking)</span>
+<span class="hl-kw">let</span> results <span class="hl-op">=</span> thread.<span class="hl-fn">all</span>(futures, <span class="hl-num">5.0</span>) <span class="hl-comment"># 5 seconds timeout</span>
+<span class="hl-builtin">print</span>(results) <span class="hl-output"># =&gt; [20, 40, 60]</span>
+
+<span class="hl-comment"># Or wait for the FIRST task to complete (returns the value directly)</span>
+<span class="hl-kw">let</span> fastest_value <span class="hl-op">=</span> thread.<span class="hl-fn">any</span>(futures, <span class="hl-num">5.0</span>)
+<span class="hl-builtin">print</span>(<span class="hl-str">&quot;Fastest task returned: &quot;</span> <span class="hl-op">+</span> <span class="hl-builtin">str</span>(fastest_value))
+
+pool.<span class="hl-fn">close</span>()</code></pre>
+</div>
+
 
         <div class="docs-nav-footer">
   <a href="../../docs/standard-library/regex.html" class="nav-card prev">
@@ -366,6 +410,9 @@ mathWorker.<span class="hl-fn">close</span>()</code></pre>
     </li>
     <li>
       <a href="#json-messaging" class="toc-link" >Structured JSON Messaging</a>
+    </li>
+    <li>
+      <a href="#thread-pool" class="toc-link" >Thread Pools &amp; Futures</a>
     </li>
   </ul>
 </aside>
