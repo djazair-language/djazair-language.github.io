@@ -93,14 +93,14 @@ DJAZAIR_FUNC(native_fast_add) {
     djazair_check_args(2);
     double a = djazair_get_num(args, 0);
     double b = djazair_get_num(args, 1);
-    return djazair_num(a + b);
+    return djazair_float(a + b);
 }
 
 // Register module exports
-DJAZAIR_EXTENSION(fastmath, {
+DJAZAIR_EXTENSION(fastmath, ((NativeMethod[]){
     {"fastAdd", native_fast_add, 2},
     {NULL, NULL, 0}
-});
+}))
 </code></pre>
 
 <p>You can then compile this file to a shared library (<code>fastmath.dll</code> or <code>fastmath.so</code>) and load it seamlessly in Djazair!</p>
