@@ -1145,3 +1145,32 @@ pre code {
     flex-direction: column;
   }
 }
+
+/* =============================================================================
+   Custom Scrollbar Styling
+   ============================================================================= */
+
+/* WebKit (Chrome, Edge, Safari) */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: var(--border-strong);
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background-color: var(--text-muted);
+}
+
+/* Firefox */
+html, .docs-sidebar, .docs-toc, pre code {
+  scrollbar-width: thin;
+  scrollbar-color: var(--border-strong) transparent;
+}
