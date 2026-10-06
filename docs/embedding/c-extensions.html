@@ -31,7 +31,7 @@
     <a href="../../index.html" class="brand-link">
       <img src="../../assets/images/logo.svg" alt="Djazair Logo" class="brand-logo">
       <span>Djazair</span>
-      <span class="version-tag">v1.1.0</span>
+      <span class="version-tag">v1.2.0</span>
     </a>
   </div>
 
@@ -285,14 +285,14 @@
     <span class="hl-fn">djazair_check_args</span>(<span class="hl-num">2</span>);
     <span class="hl-kw">double</span> a <span class="hl-op">=</span> <span class="hl-fn">djazair_get_num</span>(args, <span class="hl-num">0</span>);
     <span class="hl-kw">double</span> b <span class="hl-op">=</span> <span class="hl-fn">djazair_get_num</span>(args, <span class="hl-num">1</span>);
-    <span class="hl-kw">return</span> <span class="hl-fn">djazair_num</span>(a <span class="hl-op">+</span> b);
+    <span class="hl-kw">return</span> <span class="hl-fn">djazair_float</span>(a <span class="hl-op">+</span> b);
 }
 
 <span class="hl-comment">// Register module exports</span>
-<span class="hl-fn">DJAZAIR_EXTENSION</span>(fastmath, {
+<span class="hl-fn">DJAZAIR_EXTENSION</span>(fastmath, ((NativeMethod[]){
     {<span class="hl-str">&quot;fastAdd&quot;</span>, native_fast_add, <span class="hl-num">2</span>},
     {<span class="hl-kw">NULL</span>, <span class="hl-kw">NULL</span>, <span class="hl-num">0</span>}
-});</code></pre>
+}))</code></pre>
 </div>
 
 <p>You can then compile this file to a shared library (<code>fastmath.dll</code> or <code>fastmath.so</code>) and load it seamlessly in Djazair!</p>

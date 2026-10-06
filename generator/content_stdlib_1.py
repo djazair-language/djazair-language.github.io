@@ -536,7 +536,7 @@ print("Status: ${res.statusCode}") # => 200
 print("Body: ${res.body}")
 
 # POST request with JSON payload
-let payload = json.encode({"name": "Djazair", "version": "1.1.0"})
+let payload = json.encode({"name": "Djazair", "version": "1.2.0"})
 let headers = {"Content-Type": "application/json"}
 
 let postRes = http.post("https://httpbin.org/post", payload, headers)

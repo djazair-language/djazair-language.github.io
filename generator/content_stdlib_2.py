@@ -24,7 +24,7 @@ def get_stdlib_part2_pages():
     <tbody>
       <tr><td><code>lang.gc()</code></td><td>Triggers an immediate garbage collection mark-and-sweep cycle.</td></tr>
       <tr><td><code>lang.memoryUsed()</code></td><td>Returns current heap memory usage in bytes.</td></tr>
-      <tr><td><code>lang.version()</code></td><td>Returns the Djazair interpreter version string (e.g. <code>"1.1.0"</code>).</td></tr>
+      <tr><td><code>lang.version()</code></td><td>Returns the Djazair interpreter version string (e.g. <code>"1.2.0"</code>).</td></tr>
       <tr><td><code>lang.platform()</code></td><td>Returns the target runtime build architecture (e.g. <code>"x86_64"</code>).</td></tr>
     </tbody>
   </table>

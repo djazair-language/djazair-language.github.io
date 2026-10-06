@@ -31,7 +31,7 @@
     <a href="../../index.html" class="brand-link">
       <img src="../../assets/images/logo.svg" alt="Djazair Logo" class="brand-logo">
       <span>Djazair</span>
-      <span class="version-tag">v1.1.0</span>
+      <span class="version-tag">v1.2.0</span>
     </a>
   </div>
 
@@ -296,7 +296,7 @@
 <span class="hl-builtin">print</span>(<span class="hl-str">&quot;Body: <span class="hl-interp">${</span>res.body<span class="hl-interp">}</span>&quot;</span>)
 
 <span class="hl-comment"># POST request with JSON payload</span>
-<span class="hl-kw">let</span> payload <span class="hl-op">=</span> json.<span class="hl-fn">encode</span>({<span class="hl-str">&quot;name&quot;</span><span class="hl-op">:</span> <span class="hl-str">&quot;Djazair&quot;</span>, <span class="hl-str">&quot;version&quot;</span><span class="hl-op">:</span> <span class="hl-str">&quot;1.1.0&quot;</span>})
+<span class="hl-kw">let</span> payload <span class="hl-op">=</span> json.<span class="hl-fn">encode</span>({<span class="hl-str">&quot;name&quot;</span><span class="hl-op">:</span> <span class="hl-str">&quot;Djazair&quot;</span>, <span class="hl-str">&quot;version&quot;</span><span class="hl-op">:</span> <span class="hl-str">&quot;1.2.0&quot;</span>})
 <span class="hl-kw">let</span> headers <span class="hl-op">=</span> {<span class="hl-str">&quot;Content-Type&quot;</span><span class="hl-op">:</span> <span class="hl-str">&quot;application/json&quot;</span>}
 
 <span class="hl-kw">let</span> postRes <span class="hl-op">=</span> http.<span class="hl-fn">post</span>(<span class="hl-str">&quot;https://httpbin.org/post&quot;</span>, payload, headers)

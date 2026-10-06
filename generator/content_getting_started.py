@@ -124,7 +124,7 @@ make
 
 # 3. Verify the executable
 ./build/bin/djazair -v
-# Output: Djazair Programming Language v1.1.0
+# Output: Djazair Programming Language v1.2.0
 </code></pre>
 
 <div class="callout callout-note">

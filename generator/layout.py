@@ -426,7 +426,7 @@ def render_navbar(root_prefix: str, active_tab: str = "docs") -> str:
     <a href="{root_prefix}index.html" class="brand-link">
       <img src="{root_prefix}assets/images/logo.svg" alt="Djazair Logo" class="brand-logo">
       <span>Djazair</span>
-      <span class="version-tag">v1.1.0</span>
+      <span class="version-tag">v1.2.0</span>
     </a>
   </div>
 
