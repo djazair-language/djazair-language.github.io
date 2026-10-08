@@ -238,6 +238,13 @@ dpm install sqlite --no-save
 dpm install sqlite --force
 </code></pre>
 
+<h3 id="cmd-run">3. Executing Projects: <code>dpm run</code></h3>
+<p>The <code>run</code> command executes the main script of your project automatically. It reads the <code>"entry"</code> field (usually <code>init.dz</code>) from your <code>dpm.json</code> file, launches the script in a child process, and <strong>streams the output in real-time</strong> back to your terminal.</p>
+
+<pre><code class="language-bash"># Start the project defined in dpm.json
+dpm run
+</code></pre>
+
 <h3 id="cmd-update">3. Package Upgrades: <code>dpm update</code></h3>
 <p>The <code>update</code> command (alias: <code>up</code>) inspects installed packages against their remote origin. For Git-backed packages, DPM queries remote tags (<code>git ls-remote --tags</code>), compares available versions using its SemVer engine, and upgrades the package when a newer compatible version is detected.</p>
 

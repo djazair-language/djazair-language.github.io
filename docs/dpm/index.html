@@ -521,6 +521,18 @@ dpm install sqlite <span class="hl-special">--no-save</span>
 dpm install sqlite <span class="hl-special">--force</span></code></pre>
 </div>
 
+<h3 id="cmd-run">3. Executing Projects: <code>dpm run</code></h3>
+<p>The <code>run</code> command executes the main script of your project automatically. It reads the <code>"entry"</code> field (usually <code>init.dz</code>) from your <code>dpm.json</code> file, launches the script in a child process, and <strong>streams the output in real-time</strong> back to your terminal.</p>
+
+<div class="code-wrapper">
+  <div class="code-header">
+    <span class="code-lang">bash</span>
+    <button class="copy-btn" aria-label="Copy code"><i class="fa-regular fa-copy"></i> Copy</button>
+  </div>
+  <pre><code><span class="hl-comment"># Start the project defined in dpm.json</span>
+dpm run</code></pre>
+</div>
+
 <h3 id="cmd-update">3. Package Upgrades: <code>dpm update</code></h3>
 <p>The <code>update</code> command (alias: <code>up</code>) inspects installed packages against their remote origin. For Git-backed packages, DPM queries remote tags (<code>git ls-remote --tags</code>), compares available versions using its SemVer engine, and upgrades the package when a newer compatible version is detected.</p>
 
@@ -1166,6 +1178,9 @@ rm <span class="hl-special">-rf</span> /tmp/dpm_cache</code></pre>
     </li>
     <li>
       <a href="#cmd-install" class="toc-link" style="padding-left:1.5rem;">2. Package Installation: dpm install</a>
+    </li>
+    <li>
+      <a href="#cmd-run" class="toc-link" style="padding-left:1.5rem;">3. Executing Projects: dpm run</a>
     </li>
     <li>
       <a href="#cmd-update" class="toc-link" style="padding-left:1.5rem;">3. Package Upgrades: dpm update</a>
