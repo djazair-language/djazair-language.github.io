@@ -155,13 +155,6 @@ window.DJAZAIR_SEARCH_INDEX = [
     "keywords": "collections stack queue deque set linkedlist priorityqueue"
   },
   {
-    "title": "crypto",
-    "category": "Standard Library",
-    "path": "docs/standard-library/crypto.html",
-    "desc": "SHA-256 cryptographic hashing, Base64 encode/decode, AES-CBC encryption.",
-    "keywords": "crypto sha256 base64 aes encryption decryption hash"
-  },
-  {
     "title": "datetime",
     "category": "Standard Library",
     "path": "docs/standard-library/datetime.html",
@@ -190,13 +183,6 @@ window.DJAZAIR_SEARCH_INDEX = [
     "keywords": "file io read write append stat chmod symlink lines"
   },
   {
-    "title": "http",
-    "category": "Standard Library",
-    "path": "docs/standard-library/http.html",
-    "desc": "Full HTTP client (get, post, put, etc.) and multithreaded HTTP Server with streaming.",
-    "keywords": "http client server request response get post headers keepalive"
-  },
-  {
     "title": "json",
     "category": "Standard Library",
     "path": "docs/standard-library/json.html",
@@ -216,13 +202,6 @@ window.DJAZAIR_SEARCH_INDEX = [
     "path": "docs/standard-library/math.html",
     "desc": "Mathematical constants, trigonometry, logs, power, rounding, gcd, lcm, factorial.",
     "keywords": "math sqrt sin cos tan log pow gcd lcm factorial clamp"
-  },
-  {
-    "title": "net",
-    "category": "Standard Library",
-    "path": "docs/standard-library/net.html",
-    "desc": "TCP & UDP sockets, URL parsing, URLSearchParams, DNS lookups, TLS client.",
-    "keywords": "net network tcp udp socket client server url dns tls"
   },
   {
     "title": "os",
@@ -253,25 +232,11 @@ window.DJAZAIR_SEARCH_INDEX = [
     "keywords": "random rand int float choice shuffle seed bytes"
   },
   {
-    "title": "regex",
-    "category": "Standard Library",
-    "path": "docs/standard-library/regex.html",
-    "desc": "Regular expressions: compile, search, fullMatch, findAll, sub, and group captures.",
-    "keywords": "regex pattern match search findall replace sub split"
-  },
-  {
     "title": "thread",
     "category": "Standard Library",
     "path": "docs/standard-library/thread.html",
     "desc": "Actor concurrency model, worker spawning, message passing, JSON messaging, pools.",
     "keywords": "thread actor concurrency spawn worker send receive pool"
-  },
-  {
-    "title": "uuid",
-    "category": "Standard Library",
-    "path": "docs/standard-library/uuid.html",
-    "desc": "Universally Unique Identifier (UUID v4) generation and RFC-4122 validation.",
-    "keywords": "uuid v4 unique identifier guid validate"
   },
   {
     "title": "Embedding Overview",

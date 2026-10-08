@@ -183,13 +183,7 @@ SITE_STRUCTURE = [
                 "desc": "Stack, Queue, Deque, Set (union, diff, intersect), LinkedList, PriorityQueue.",
                 "keywords": "collections stack queue deque set linkedlist priorityqueue"
             },
-            {
-                "id": "mod-crypto",
-                "title": "crypto",
-                "path": "docs/standard-library/crypto.html",
-                "desc": "SHA-256 cryptographic hashing, Base64 encode/decode, AES-CBC encryption.",
-                "keywords": "crypto sha256 base64 aes encryption decryption hash"
-            },
+            
             {
                 "id": "mod-datetime",
                 "title": "datetime",
@@ -218,13 +212,7 @@ SITE_STRUCTURE = [
                 "desc": "Reading, writing, appending text and binary, file stats, chmod, FileHandle, symlinks.",
                 "keywords": "file io read write append stat chmod symlink lines"
             },
-            {
-                "id": "mod-http",
-                "title": "http",
-                "path": "docs/standard-library/http.html",
-                "desc": "Full HTTP client (get, post, put, etc.) and multithreaded HTTP Server with streaming.",
-                "keywords": "http client server request response get post headers keepalive"
-            },
+            
             {
                 "id": "mod-json",
                 "title": "json",
@@ -246,13 +234,7 @@ SITE_STRUCTURE = [
                 "desc": "Mathematical constants, trigonometry, logs, power, rounding, gcd, lcm, factorial.",
                 "keywords": "math sqrt sin cos tan log pow gcd lcm factorial clamp"
             },
-            {
-                "id": "mod-net",
-                "title": "net",
-                "path": "docs/standard-library/net.html",
-                "desc": "TCP & UDP sockets, URL parsing, URLSearchParams, DNS lookups, TLS client.",
-                "keywords": "net network tcp udp socket client server url dns tls"
-            },
+            
             {
                 "id": "mod-os",
                 "title": "os",
@@ -281,26 +263,13 @@ SITE_STRUCTURE = [
                 "desc": "Pseudorandom number generator, float, int range, string, choice, shuffle, seed.",
                 "keywords": "random rand int float choice shuffle seed bytes"
             },
-            {
-                "id": "mod-regex",
-                "title": "regex",
-                "path": "docs/standard-library/regex.html",
-                "desc": "Regular expressions: compile, search, fullMatch, findAll, sub, and group captures.",
-                "keywords": "regex pattern match search findall replace sub split"
-            },
+            
             {
                 "id": "mod-thread",
                 "title": "thread",
                 "path": "docs/standard-library/thread.html",
                 "desc": "Actor concurrency model, worker spawning, message passing, JSON messaging, pools.",
                 "keywords": "thread actor concurrency spawn worker send receive pool"
-            },
-            {
-                "id": "mod-uuid",
-                "title": "uuid",
-                "path": "docs/standard-library/uuid.html",
-                "desc": "Universally Unique Identifier (UUID v4) generation and RFC-4122 validation.",
-                "keywords": "uuid v4 unique identifier guid validate"
             }
         ]
     },

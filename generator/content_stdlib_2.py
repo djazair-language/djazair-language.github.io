@@ -83,52 +83,7 @@ print("Heap after GC:  ${lang.memoryUsed()} bytes")
 </div>
 '''
 
-    # 3. net
-    pages["docs/standard-library/net.html"] = '''
-<h1 id="net-module">net Module</h1>
-<p class="lead" style="font-size:1.15rem; color:var(--text-secondary); margin-bottom:1.75rem;">
-  The <code>net</code> module offers network communication primitives: TCP clients and servers, UDP sockets, raw sockets, URL parsing, URLSearchParams, DNS resolution, and TLS client connections.
-</p>
-
-<h2 id="importing">Importing</h2>
-<pre><code class="language-dz">use net</code></pre>
-
-<h2 id="tcp-client-server">TCP Client and Server</h2>
-<pre><code class="language-dz">use net
-
-# 1. High-Performance TCP Server (asynchronous Poller)
-let server = new net.tcpServer(fn(client, ip, port)
-    print("New connection from ${ip}:${port}")
-    client.send("Welcome to Djazair TCP Server!\n")
-    client.close()
-end)
-
-# Start listening on port 9000
-server.listen(9000)
-
-# 2. TCP Client
-let client = new net.tcpClient()
-client.connect("127.0.0.1", 9000)
-client.send("Hello Server")
-let reply = client.receive()
-print("Received: " + reply)
-client.close()
-</code></pre>
-
-<h2 id="url-parsing">URL Parsing & Query Strings</h2>
-<pre><code class="language-dz">use net
-
-let u = net.parseURL("https://api.example.com:8080/v1/users?role=admin&active=true")
-print("Host: ${u.hostname}") # => api.example.com
-print("Port: ${u.port}")     # => 8080
-print("Path: ${u.pathname}") # => /v1/users
-
-# Query Parameters
-let params = u.searchParams
-print("Role: ${params.get("role")}")       # => admin
-print("Active? ${params.has("active")}")   # => True
-</code></pre>
-'''
+    
 
     # 4. os
     pages["docs/standard-library/os.html"] = '''
@@ -273,53 +228,7 @@ print("Sorted output:\n${sortedOutput}")
 </div>
 '''
 
-    # 8. regex
-    pages["docs/standard-library/regex.html"] = '''
-<h1 id="regex-module">regex Module</h1>
-<p class="lead" style="font-size:1.15rem; color:var(--text-secondary); margin-bottom:1.75rem;">
-  The <code>regex</code> module provides powerful regular expression pattern matching, substring search, global match collection, replacements, and capture group extraction.
-</p>
-
-<h2 id="importing">Importing</h2>
-<pre><code class="language-dz">use regex</code></pre>
-
-<h2 id="convenience-functions">Convenience Functions</h2>
-<pre><code class="language-dz">use regex
-
-# 1. fullMatch — exact match against full string
-let isValidEmail = regex.fullMatch("[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}", "user@example.com")
-print("Valid email? ${isValidEmail != Null}") # => True
-
-# 2. search — finds first substring match
-let matched = regex.search("\\d+", "Order #12894 approved")
-if matched != Null
-    print("Found order ID: ${matched.group(0)}") # => 12894
-end
-
-# 3. findAll — collects all occurrences
-let words = regex.findAll("[A-Z][a-z]+", "Algiers Oran Constantine Annaba")
-print("Cities: ${words}") # => ["Algiers", "Oran", "Constantine", "Annaba"]
-
-# 4. sub — replaces matched patterns
-let cleaned = regex.sub("\\s+", " ", "Too   many    spaces")
-print(cleaned) # => "Too many spaces"
-</code></pre>
-
-<h2 id="compiled-patterns">Compiled Pattern Objects</h2>
-<p>For high performance inside loops, pre-compile patterns using <code>regex.compile(pattern, flags?)</code>:</p>
-
-<pre><code class="language-dz">use regex
-
-let phonePattern = regex.compile("(\\+\\d{1,3})\\s+(\\d{9})")
-let m = phonePattern.search("Contact: +213 555123456")
-
-if m != Null
-    print("Country code: ${m.group(1)}") # => +213
-    print("Local number: ${m.group(2)}") # => 555123456
-    print("Match span:   ${m.start()} to ${m.endPos()}")
-end
-</code></pre>
-'''
+    
 
     # 9. thread
     pages["docs/standard-library/thread.html"] = '''
@@ -421,38 +330,6 @@ pool.close()
 </code></pre>
 '''
 
-    # 10. uuid
-    pages["docs/standard-library/uuid.html"] = '''
-<h1 id="uuid-module">uuid Module</h1>
-<p class="lead" style="font-size:1.15rem; color:var(--text-secondary); margin-bottom:1.75rem;">
-  The <code>uuid</code> module generates cryptographically strong, RFC-4122 compliant Universally Unique Identifiers (UUID Version 4).
-</p>
-
-<h2 id="importing">Importing</h2>
-<pre><code class="language-dz">use uuid</code></pre>
-
-<h2 id="api-reference">API Reference</h2>
-<div class="table-wrapper">
-  <table>
-    <thead>
-      <tr><th>Function</th><th>Description</th></tr>
-    </thead>
-    <tbody>
-      <tr><td><code>uuid.v4()</code></td><td>Generates a random UUID v4 string (e.g. <code>"f47ac10b-58cc-4372-a567-0e02b2c3d479"</code>).</td></tr>
-      <tr><td><code>uuid.validate(uuidStr)</code></td><td>Validates whether a string matches the standard 36-character UUID format.</td></tr>
-    </tbody>
-  </table>
-</div>
-
-<h2 id="code-example">Example Usage</h2>
-<pre><code class="language-dz">use uuid
-
-let newId = uuid.v4()
-print("Generated UUID: ${newId}")
-
-print("Is valid? ${uuid.validate(newId)}")   # => True
-print("Is valid? ${uuid.validate("invalid")}") # => False
-</code></pre>
-'''
+    
 
     return pages

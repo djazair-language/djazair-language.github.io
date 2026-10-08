@@ -25,10 +25,7 @@ def get_stdlib_part1_pages():
     <div class="stdlib-name">collections</div>
     <div class="stdlib-desc">Stack, Queue, Deque, Set, LinkedList, and PriorityQueue data structures.</div>
   </a>
-  <a href="crypto.html" class="stdlib-card">
-    <div class="stdlib-name">crypto</div>
-    <div class="stdlib-desc">SHA-256 hashing, Base64 encoding/decoding, and AES encryption.</div>
-  </a>
+  
   <a href="datetime.html" class="stdlib-card">
     <div class="stdlib-name">datetime</div>
     <div class="stdlib-desc">High-precision timestamps, formatting, calendar math, and Date class.</div>
@@ -45,10 +42,7 @@ def get_stdlib_part1_pages():
     <div class="stdlib-name">file</div>
     <div class="stdlib-desc">File read/write, streams, binary bytes, stat, chmod, and symlinks.</div>
   </a>
-  <a href="http.html" class="stdlib-card">
-    <div class="stdlib-name">http</div>
-    <div class="stdlib-desc">HTTP client (GET, POST, etc.) and multithreaded HTTP/1.1 web server.</div>
-  </a>
+  
   <a href="json.html" class="stdlib-card">
     <div class="stdlib-name">json</div>
     <div class="stdlib-desc">JSON serialization and deserialization with pretty-printing.</div>
@@ -61,10 +55,7 @@ def get_stdlib_part1_pages():
     <div class="stdlib-name">math</div>
     <div class="stdlib-desc">Constants, trigonometry, logs, powers, rounding, gcd, lcm, factorial.</div>
   </a>
-  <a href="net.html" class="stdlib-card">
-    <div class="stdlib-name">net</div>
-    <div class="stdlib-desc">TCP/UDP client and server, URL parsing, URLSearchParams, DNS, TLS.</div>
-  </a>
+  
   <a href="os.html" class="stdlib-card">
     <div class="stdlib-name">os</div>
     <div class="stdlib-desc">Platform detection, CPU count, memory, username, temp directory.</div>
@@ -81,18 +72,12 @@ def get_stdlib_part1_pages():
     <div class="stdlib-name">random</div>
     <div class="stdlib-desc">Pseudorandom numbers, floats, integers, choice, shuffle, seed.</div>
   </a>
-  <a href="regex.html" class="stdlib-card">
-    <div class="stdlib-name">regex</div>
-    <div class="stdlib-desc">Regular expressions, compile, search, fullMatch, findAll, sub, split.</div>
-  </a>
+  
   <a href="thread.html" class="stdlib-card">
     <div class="stdlib-name">thread</div>
     <div class="stdlib-desc">Actor model concurrency, worker threads, message passing, pools.</div>
   </a>
-  <a href="uuid.html" class="stdlib-card">
-    <div class="stdlib-name">uuid</div>
-    <div class="stdlib-desc">Universally Unique Identifier (UUID v4) generation and validation.</div>
-  </a>
+  
 </div>
 '''
 
@@ -273,56 +258,7 @@ print(pq.dequeue()) # => "Medium priority task"
 </code></pre>
 '''
 
-    # 5. crypto
-    pages["docs/standard-library/crypto.html"] = '''
-<h1 id="crypto-module">crypto Module</h1>
-<p class="lead" style="font-size:1.15rem; color:var(--text-secondary); margin-bottom:1.75rem;">
-  The <code>crypto</code> module provides cryptographic primitives: SHA-256 secure hashing, Base64 encoding/decoding, and AES-CBC symmetric encryption.
-</p>
-
-<h2 id="importing">Importing</h2>
-<pre><code class="language-dz">use crypto</code></pre>
-
-<h2 id="api-reference">API Reference</h2>
-<div class="table-wrapper">
-  <table>
-    <thead>
-      <tr><th>Function</th><th>Description</th></tr>
-    </thead>
-    <tbody>
-      <tr><td><code>crypto.sha256(text)</code></td><td>Computes the SHA-256 digest of <code>text</code>, returning a 64-character lowercase hex string.</td></tr>
-      <tr><td><code>crypto.base64Encode(text)</code></td><td>Encodes text into a standard RFC-4648 Base64 string.</td></tr>
-      <tr><td><code>crypto.base64Decode(encoded)</code></td><td>Decodes a Base64 string back into original text.</td></tr>
-      <tr><td><code>crypto.aesEncrypt(plain, key, iv)</code></td><td>Encrypts plaintext using AES-256-CBC with the provided 32-byte key and 16-byte IV.</td></tr>
-      <tr><td><code>crypto.aesDecrypt(cipher, key, iv)</code></td><td>Decrypts ciphertext back to plaintext using AES-256-CBC.</td></tr>
-    </tbody>
-  </table>
-</div>
-
-<h2 id="code-example">Example Usage</h2>
-<pre><code class="language-dz">use crypto
-
-# 1. SHA-256 Hashing
-let hash = crypto.sha256("password123")
-print("SHA-256: ${hash}")
-# => ef92b778bafe771e89245b89ecbc08a44a4e166c06659911881f383d4473e94f
-
-# 2. Base64 Roundtrip
-let encoded = crypto.base64Encode("Djazair Language")
-print("Base64: ${encoded}") # => "RGphemFpciBMYW5ndWFnZQ=="
-print("Decoded: ${crypto.base64Decode(encoded)}")
-
-# 3. AES-256 Symmetric Encryption
-let key = "0123456789abcdef0123456789abcdef" # 32 bytes
-let iv  = "0123456789abcdef"                 # 16 bytes
-
-let secret = "Confidential payload data"
-let encrypted = crypto.aesEncrypt(secret, key, iv)
-let decrypted = crypto.aesDecrypt(encrypted, key, iv)
-
-print("Decrypted successfully: ${decrypted == secret}") # => True
-</code></pre>
-'''
+    
 
     # 6. datetime
     pages["docs/standard-library/datetime.html"] = '''
