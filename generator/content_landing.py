@@ -76,6 +76,7 @@ print("Doubled evens: ${doubledEvens}") # => [4, 8]
 
     <nav class="header-nav">
       <a href="docs/getting-started/index.html" class="nav-link">Documentation</a>
+      <a href="#playground" class="nav-link">Playground</a>
       <a href="docs/standard-library/index.html" class="nav-link">Standard Library</a>
       <a href="docs/dpm/index.html" class="nav-link">DPM</a>
       <a href="docs/cookbook/rest-api.html" class="nav-link">Cookbook</a>
@@ -115,6 +116,7 @@ print("Doubled evens: ${doubledEvens}") # => [4, 8]
         <a href="docs/getting-started/index.html" class="btn btn-primary">
           <i class="fa-solid fa-book"></i> Read Documentation
         </a>
+        <a href="#playground" class="btn btn-primary"><i class="fa-solid fa-play"></i> Try in Browser</a>
         <a href="docs/getting-started/installation.html" class="btn btn-secondary">
           <i class="fa-solid fa-download"></i> Install Djazair
         </a>
@@ -129,6 +131,52 @@ print("Doubled evens: ${doubledEvens}") # => [4, 8]
       </div>
     </section>
 
+
+    <!-- Browser Playground -->
+    <section class="playground-section" id="playground" aria-labelledby="playground-title">
+      <div class="section-header playground-intro">
+        <div class="playground-eyebrow"><i class="fa-solid fa-globe"></i> WebAssembly Playground</div>
+        <h2 class="section-title" id="playground-title">Write Djazair. Run it in your browser.</h2>
+        <p class="section-desc">A local, private execution environment powered by the same C VM compiled to WebAssembly. No installation, account, or server-side code execution required.</p>
+      </div>
+      <div class="playground-capabilities" aria-label="Playground capabilities">
+        <span><i class="fa-solid fa-shield-halved"></i> Sandboxed</span>
+        <span><i class="fa-solid fa-bolt"></i> Runs locally</span>
+        <span><i class="fa-solid fa-language"></i> UTF-8 &amp; Arabic</span>
+      </div>
+      <div class="playground-shell">
+        <div class="playground-toolbar">
+          <div class="playground-file"><i class="fa-solid fa-file-code"></i><span>main.dz</span></div>
+          <div class="playground-status" id="playground-status" role="status" aria-live="polite" data-state="loading">Loading WebAssembly…</div>
+        </div>
+        <div class="playground-workspace">
+          <div class="playground-pane">
+            <label class="playground-pane-title" for="playground-editor">Source</label>
+            <textarea id="playground-editor" class="playground-editor" spellcheck="false" aria-describedby="playground-help"># Djazair runs directly in your browser
+let name = "Djazair"
+let version = 1.0
+print("Hello from ${{name}} v${{version}}!")</textarea>
+          </div>
+          <div class="playground-pane playground-output-pane">
+            <div class="playground-pane-title"><span>Output</span><button class="playground-copy" id="playground-copy" type="button"><i class="fa-regular fa-copy"></i> Copy output</button></div>
+            <pre class="playground-output" id="playground-output" aria-live="polite" aria-label="Program output"></pre>
+          </div>
+        </div>
+        <div class="playground-controls">
+          <div class="playground-samples" aria-label="Load example">
+            <span>Examples:</span>
+            <button type="button" data-playground-sample="hello">Hello</button>
+            <button type="button" data-playground-sample="functions">Closures</button>
+            <button type="button" data-playground-sample="arabic">Arabic</button>
+          </div>
+          <div class="playground-actions">
+            <button class="btn btn-secondary playground-reset" id="playground-reset" type="button"><i class="fa-solid fa-rotate-left"></i> Reset</button>
+            <button class="btn btn-primary playground-run" id="playground-run" type="button"><i class="fa-solid fa-play"></i> Run <kbd>Ctrl Enter</kbd></button>
+          </div>
+        </div>
+        <p class="playground-help" id="playground-help"><i class="fa-solid fa-circle-info"></i> Each run starts in a fresh VM. Browser builds intentionally exclude filesystem, subprocess, network, and thread APIs.</p>
+      </div>
+    </section>
     <!-- Core Features Grid -->
     <section class="features-section">
       <div class="section-header">
@@ -259,5 +307,10 @@ print("Doubled evens: ${doubledEvens}") # => [4, 8]
   <script src="assets/js/search-index.js"></script>
   <script src="assets/js/search.js"></script>
   <script src="assets/js/code-tools.js"></script>
+  <script src="assets/wasm/djazair.js"></script>
+  <script src="assets/js/playground.js"></script>
 </body>
 </html>'''
+
+
+
