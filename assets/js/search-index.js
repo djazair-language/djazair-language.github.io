@@ -260,27 +260,6 @@ window.DJAZAIR_SEARCH_INDEX = [
     "keywords": "c extensions djazair_api.h native functions dll so"
   },
   {
-    "title": "Building a REST API",
-    "category": "Cookbook & Practical",
-    "path": "docs/cookbook/rest-api.html",
-    "desc": "Step-by-step tutorial building a production-ready REST API with http and json.",
-    "keywords": "rest api tutorial server http json routes backend"
-  },
-  {
-    "title": "CLI Automation Tool",
-    "category": "Cookbook & Practical",
-    "path": "docs/cookbook/cli-tool.html",
-    "desc": "Build a command-line file analyzer using path, file, and process modules.",
-    "keywords": "cli tool automation flags arguments file processing"
-  },
-  {
-    "title": "Parallel Worker Pool",
-    "category": "Cookbook & Practical",
-    "path": "docs/cookbook/parallel-workers.html",
-    "desc": "Distribute heavy tasks across CPU cores using actor threads and JSON messaging.",
-    "keywords": "parallel workers actor threads background processing"
-  },
-  {
     "title": "Built-in Functions",
     "category": "Reference",
     "path": "docs/reference/builtins.html",

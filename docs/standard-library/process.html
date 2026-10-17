@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="dark">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -31,26 +31,23 @@
     <a href="../../index.html" class="brand-link">
       <img src="../../assets/images/logo.svg" alt="Djazair Logo" class="brand-logo">
       <span>Djazair</span>
-      <span class="version-tag">v1.2.0</span>
+      <span class="version-tag">v1.0.0</span>
     </a>
   </div>
 
   <nav class="header-nav">
     <a href="../../docs/getting-started/index.html" class="nav-link ">Documentation</a>
+    <a href="../../index.html#playground" class="nav-link ">Playground</a>
     <a href="../../docs/standard-library/index.html" class="nav-link active">Standard Library</a>
     <a href="../../docs/dpm/index.html" class="nav-link ">DPM</a>
-    <a href="../../docs/cookbook/rest-api.html" class="nav-link ">Cookbook</a>
     <a href="../../docs/reference/cheat-sheet.html" class="nav-link ">Cheat Sheet</a>
   </nav>
 
   <div class="header-right">
     <button class="search-btn" aria-label="Search documentation">
       <i class="fa-solid fa-magnifying-glass"></i>
-      <span>Search...</span>
+      <span>Search docs...</span>
       <span class="search-shortcut">Ctrl K</span>
-    </button>
-    <button class="theme-btn" id="theme-toggle" aria-label="Toggle dark mode">
-      <i class="fa-solid fa-moon"></i>
     </button>
     <a href="https://github.com/djazair-language/djazair" target="_blank" rel="noopener noreferrer" class="icon-btn" aria-label="GitHub repository">
       <i class="fa-brands fa-github"></i>
@@ -209,22 +206,6 @@
 </div>
 <div class="sidebar-category">
   <div class="category-title">
-    <span><i class="fa-solid fa-utensils fa-fw" style="margin-right:6px; opacity:0.7;"></i> Cookbook &amp; Practical</span>
-  </div>
-  <ul class="sidebar-items">
-    <li class="sidebar-item">
-      <a href="../../docs/cookbook/rest-api.html" class="sidebar-link ">Building a REST API</a>
-    </li>
-    <li class="sidebar-item">
-      <a href="../../docs/cookbook/cli-tool.html" class="sidebar-link ">CLI Automation Tool</a>
-    </li>
-    <li class="sidebar-item">
-      <a href="../../docs/cookbook/parallel-workers.html" class="sidebar-link ">Parallel Worker Pool</a>
-    </li>
-  </ul>
-</div>
-<div class="sidebar-category">
-  <div class="category-title">
     <span><i class="fa-solid fa-bookmark fa-fw" style="margin-right:6px; opacity:0.7;"></i> Reference</span>
   </div>
   <ul class="sidebar-items">
@@ -263,7 +244,7 @@
     <span class="code-lang">djazair</span>
     <button class="copy-btn" aria-label="Copy code"><i class="fa-regular fa-copy"></i> Copy</button>
   </div>
-  <pre><code><span class="hl-kw">use</span> process</code></pre>
+  <pre><code><span class="hl-kw">use</span> <span class="hl-type">process</span></code></pre>
 </div>
 
 <h2 id="synchronous-exec">Synchronous Execution (<code>process.exec</code>)</h2>
@@ -274,9 +255,9 @@
     <span class="code-lang">djazair</span>
     <button class="copy-btn" aria-label="Copy code"><i class="fa-regular fa-copy"></i> Copy</button>
   </div>
-  <pre><code><span class="hl-kw">use</span> process
+  <pre><code><span class="hl-kw">use</span> <span class="hl-type">process</span>
 
-<span class="hl-kw">let</span> res <span class="hl-op">=</span> process.<span class="hl-fn">exec</span>(<span class="hl-str">&quot;git --version&quot;</span>)
+<span class="hl-kw">let</span> res <span class="hl-op">=</span> <span class="hl-type">process</span>.<span class="hl-fn">exec</span>(<span class="hl-str">&quot;git --version&quot;</span>)
 <span class="hl-kw">if</span> res[<span class="hl-str">&quot;exit_code&quot;</span>] <span class="hl-op">==</span> <span class="hl-num">0</span>
     <span class="hl-builtin">print</span>(<span class="hl-str">&quot;Git output: ${res[&quot;</span>stdout<span class="hl-str">&quot;].strip()}&quot;</span>)
 <span class="hl-kw">else</span>
@@ -292,21 +273,21 @@
     <span class="code-lang">djazair</span>
     <button class="copy-btn" aria-label="Copy code"><i class="fa-regular fa-copy"></i> Copy</button>
   </div>
-  <pre><code><span class="hl-kw">use</span> process
+  <pre><code><span class="hl-kw">use</span> <span class="hl-type">process</span>
 
 <span class="hl-comment"># Spawn process with pipes</span>
-<span class="hl-kw">let</span> p <span class="hl-op">=</span> process.<span class="hl-fn">spawn</span>(<span class="hl-str">&quot;sort&quot;</span>)
+<span class="hl-kw">let</span> p <span class="hl-op">=</span> <span class="hl-type">process</span>.<span class="hl-fn">spawn</span>(<span class="hl-str">&quot;sort&quot;</span>)
 
 <span class="hl-comment"># Write data into child process stdin</span>
-process.<span class="hl-fn">write</span>(p[<span class="hl-str">&quot;write&quot;</span>], <span class="hl-str">&quot;zebra
+<span class="hl-type">process</span>.<span class="hl-fn">write</span>(p[<span class="hl-str">&quot;write&quot;</span>], <span class="hl-str">&quot;zebra
 apple
 banana
 &quot;</span>)
-process.<span class="hl-fn">close</span>(p[<span class="hl-str">&quot;write&quot;</span>]) <span class="hl-comment"># Close stdin to signal EOF</span>
+<span class="hl-type">process</span>.<span class="hl-fn">close</span>(p[<span class="hl-str">&quot;write&quot;</span>]) <span class="hl-comment"># Close stdin to signal EOF</span>
 
 <span class="hl-comment"># Wait for completion and read sorted stdout</span>
-process.<span class="hl-fn">wait</span>(p[<span class="hl-str">&quot;pid&quot;</span>])
-<span class="hl-kw">let</span> sortedOutput <span class="hl-op">=</span> process.<span class="hl-fn">read</span>(p[<span class="hl-str">&quot;read&quot;</span>])
+<span class="hl-type">process</span>.<span class="hl-fn">wait</span>(p[<span class="hl-str">&quot;pid&quot;</span>])
+<span class="hl-kw">let</span> sortedOutput <span class="hl-op">=</span> <span class="hl-type">process</span>.<span class="hl-fn">read</span>(p[<span class="hl-str">&quot;read&quot;</span>])
 <span class="hl-builtin">print</span>(<span class="hl-str">&quot;Sorted output:
 <span class="hl-interp">${</span>sortedOutput<span class="hl-interp">}</span>&quot;</span>)
 <span class="hl-comment"># apple</span>

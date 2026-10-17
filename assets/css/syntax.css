@@ -1,42 +1,49 @@
 /* =============================================================================
    Djazair Syntax Highlighting Theme (syntax.css)
-   Vibrant, high-contrast, optimized for Djazair code snippets.
+   Strictly aligned with the Monaco Editor "djazair-theme" from Djazair IDE.
    ============================================================================= */
 
 pre code {
-  color: #e2e8f0;
+  color: #e2e2e6;
 }
 
-/* Keywords (let, fn, class, if, match, end, use, import...) */
+/* Keywords (fn, let, class, if, else, while, for, match, end, use, import...) */
 .token.keyword, .hl-kw {
-  color: #c084fc; /* Electric Purple */
-  font-weight: 600;
+  color: #00e5ff; /* Cyan */
+  font-weight: 700;
 }
 
-/* Built-in Functions & Types (print, range, str, int, bool...) */
-.token.builtin, .hl-builtin {
-  color: #38bdf8; /* Cyan Sky */
-  font-weight: 600;
+/* Constants & Language Values (True, False, Null) */
+.token.constant, .token.boolean, .token.null, .hl-bool, .hl-const {
+  color: #ffeac0; /* Warm Cream / Gold */
+  font-weight: 700;
+}
+
+/* Types & Standard Library (Number, String, Bool, Map, Array, math, json...) */
+.token.type, .token.class-name, .hl-type, .hl-class {
+  color: #c792ea; /* Soft Orchid Purple */
+  font-weight: 700;
 }
 
 /* Strings ("...", `...`) */
 .token.string, .hl-str {
-  color: #34d399; /* Emerald Green */
+  color: #c3e88d; /* Soft Green */
 }
 
 /* String Interpolation ${...} */
 .token.interpolation, .hl-interp {
-  color: #f472b6; /* Hot Pink */
+  color: #ffcb6b; /* Amber Yellow */
+  font-weight: 600;
 }
 
-/* Numbers (123, 3.14, 100_000, 0xFF) */
+/* Numbers (123, 3.14, 0xFF, 0b1011, 1_000_000) */
 .token.number, .hl-num {
-  color: #fb923c; /* Warm Orange */
+  color: #f78c6c; /* Coral Orange */
 }
 
-/* Comments (#, #! ... !#) */
+/* Comments (#, #* ... *#, ###) */
 .token.comment, .hl-comment {
-  color: #64748b; /* Muted Slate */
+  color: #546e7a; /* Muted Slate */
   font-style: italic;
 }
 
@@ -49,34 +56,28 @@ pre code {
 
 /* Functions & Method calls */
 .token.function, .hl-fn {
-  color: #60a5fa; /* Vibrant Blue */
-  font-weight: 500;
-}
-
-/* Class / Type Names */
-.token.class-name, .hl-class {
-  color: #facc15; /* Golden Yellow */
+  color: #82aaff; /* Soft Blue */
   font-weight: 600;
 }
 
-/* Operators (+, -, *, /, **, //, ==, !=, =>, ..) */
+/* Built-in Functions */
+.token.builtin, .hl-builtin {
+  color: #82aaff; /* Soft Blue */
+  font-weight: 600;
+}
+
+/* Operators (+, -, *, /, **, //, ==, !=, =>, ->, .., +=, -=) */
 .token.operator, .hl-op {
-  color: #f43f5e; /* Rose Red */
+  color: #89ddff; /* Bright Sky / Cyan */
 }
 
 /* Properties / Hash keys */
 .token.property, .hl-prop {
-  color: #e2e8f0;
-}
-
-/* Booleans and Null */
-.token.boolean, .token.null, .hl-bool {
-  color: #f87171; /* Coral Red */
-  font-weight: 600;
+  color: #e2e2e6;
 }
 
 /* Self / Super identifiers */
 .token.variable-special, .hl-special {
-  color: #e879f9; /* Violet */
+  color: #00e5ff;
   font-weight: 600;
 }

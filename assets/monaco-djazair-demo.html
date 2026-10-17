@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Djazair Language — Monaco Syntax Highlighting Demo</title>
+  <link rel="icon" type="image/svg+xml" href="images/logo.svg">
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      background-color: #0b0c0e;
+      color: #e2e2e6;
+      display: flex;
+      flex-direction: column;
+      height: 100vh;
+      overflow: hidden;
+    }
+    header {
+      background: #111316;
+      border-bottom: 1px solid #23272d;
+      padding: 12px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+    }
+    .header-left {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .logo-badge {
+      background: #00e5ff;
+      color: #000;
+      font-weight: 800;
+      font-size: 13px;
+      padding: 3px 8px;
+      border-radius: 4px;
+      letter-spacing: 0.5px;
+    }
+    .header-title {
+      font-size: 16px;
+      font-weight: 600;
+      color: #ffffff;
+    }
+    .header-controls {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    select, button {
+      background: #1a1c22;
+      color: #e2e2e6;
+      border: 1px solid #323842;
+      padding: 6px 12px;
+      border-radius: 6px;
+      font-size: 13px;
+      cursor: pointer;
+      outline: none;
+      transition: all 0.2s ease;
+    }
+    select:hover, button:hover {
+      background: #252830;
+      border-color: #00e5ff;
+    }
+    .btn-primary {
+      background: #00e5ff;
+      color: #000;
+      font-weight: 600;
+      border: none;
+    }
+    .btn-primary:hover {
+      background: #33ebff;
+      color: #000;
+    }
+    #editor-container {
+      flex: 1;
+      width: 100%;
+      height: 100%;
+    }
+    footer {
+      background: #111316;
+      border-top: 1px solid #23272d;
+      padding: 6px 24px;
+      font-size: 12px;
+      color: #78909c;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .status-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .status-dot {
+      width: 8px;
+      height: 8px;
+      background: #00e5ff;
+      border-radius: 50%;
+      box-shadow: 0 0 8px #00e5ff;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="header-left">
+      <span class="logo-badge">DZ</span>
+      <h1 class="header-title">Djazair Language Monaco Syntax Highlighting</h1>
+    </div>
+    <div class="header-controls">
+      <label for="sample-select" style="font-size: 13px; color: #849396;">Sample:</label>
+      <select id="sample-select">
+        <option value="showcase">Language Showcase (Full Syntax)</option>
+        <option value="arabic">Arabic & Unicode First-class</option>
+        <option value="oop">Object-Oriented & Inheritance</option>
+        <option value="closures">Closures & Higher-order</option>
+        <option value="exceptions">Exceptions & Error Handling</option>
+      </select>
+
+      <label for="theme-select" style="font-size: 13px; color: #849396; margin-left: 10px;">Theme:</label>
+      <select id="theme-select">
+        <option value="djazair-dark">Djazair Dark</option>
+        <option value="djazair-light">Djazair Light</option>
+        <option value="vs-dark">VS Code Dark</option>
+      </select>
+    </div>
+  </header>
+
+  <div id="editor-container"></div>
+
+  <footer>
+    <div class="status-badge">
+      <span class="status-dot"></span>
+      <span>Language: <strong>Djazair (Monarch Engine)</strong></span>
+    </div>
+    <div>Extensions: <code>.dz</code>, <code>.djazair</code> | Autocomplete & Hover Active (Try typing <code>fn</code>, <code>print</code>, or hovering symbols)</div>
+  </footer>
+
+  <!-- Monaco Editor AMD Loader from CDN -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/monaco-editor/0.45.0/min/vs/loader.min.js"></script>
+  <!-- Djazair Monaco Language Definition -->
+  <script src="js/monaco-djazair.js"></script>
+
+  <script>
+    const SAMPLES = {
+      showcase: `#*
+ * Djazair Programming Language (.dz)
+ * Complete Syntax Highlighting Showcase
+ *#
+
+use math
+use json
+use datetime
+
+# Constants and primitive values
+let PI = math.PI
+let MAX_USERS = 1_000_000
+let HEX_COLOR = 0xFF5733
+let BINARY_FLAG = 0b1011_0010
+let is_active = True
+let user_token = Null
+
+# Single-line comment & Doc comment
+### Calculates user permissions based on roles
+fn getPermissions(role)
+    match role
+        case "admin", "root"
+            return ["read", "write", "delete"]
+        case "editor"
+            return ["read", "write"]
+        case "guest"
+            return ["read"]
+        default
+            return []
+    end
+end
+
+# Class definition with Constructor and Inheritance
+class User
+    init(name, email, age)
+        self.name = name
+        self.email = email
+        self.age = age
+    end
+
+    describe()
+        # String interpolation with nested expression
+        return "User \${self.name} <\${self.email}> is \${self.age} years old."
+    end
+end
+
+class SuperAdmin is User
+    init(name, email, age, secretKey)
+        super.init(name, email, age)
+        self.secretKey = secretKey
+    end
+
+    describe()
+        return "[SUPERADMIN] " + super.describe()
+    end
+end
+
+# Multiline Backtick String with Interpolation
+let admin = new SuperAdmin("Harizi Riyadh", "harizi@djazair.org", 26, "SEC-9988")
+let report = \`
+==================================================
+Report Generated: \${datetime.now()}
+Details: \${admin.describe()}
+Active Flag: \${is_active}
+==================================================
+\`
+
+print(report)
+
+# Exception handling
+try
+    let raw_data = '{"status": "ok", "code": 200}'
+    let parsed = json.parse(raw_data)
+    print("Parsed JSON code: \${parsed['code']}")
+catch err
+    print("Caught error: \${err}")
+finally
+    print("Execution complete.")
+end
+`,
+
+      arabic: `#*
+ * لغة البرمجة الجزائر — دعم كامل ورفيع المستوى للغة العربية واليونيكود
+ * Arabic & Unicode identifiers are first-class citizens in Djazair
+ *#
+
+# متغيرات عربية وإيموجي
+let 🚀_السرعة = 300_000 # سرعة الضوء كم/ث
+let 🇩🇿_البلد = "الجمهورية الجزائرية الديمقراطية الشعبية"
+let هل_البيانات_جاهزة = صحيح
+let قيمة_فارغة = عدم
+
+# تعريف الدوال باللغة العربية
+دالة حساب_المساحة(الطول, العرض)
+    إذا الطول <= 0 أو العرض <= 0
+        اطرح "الأبعاد يجب أن تكون موجبة!"
+    نهاية
+    أرجع الطول * العرض
+نهاية
+
+# مصفوفات وقواميس عربية
+let الفواكه = ["تفاح 🍎", "موز 🍌", "برتقال 🍊"]
+let معلومات_المطور = {
+    "الاسم": "رياض حريزي",
+    "اللغة": "جزائر (.dz)",
+    "الإصدار": 1.0
+}
+
+# دوران وحلقات تكرارية
+لكل فاكهة في الفواكه
+    اطبع("فاكهة لذيذة: \${فاكهة}")
+نهاية
+
+# تجربة دمج النصوص العربية والرموز
+print("مرحبا بالعالم من \${🇩🇿_البلد}!")
+print("مساحة الغرفة: \${حساب_المساحة(5, 4)} متر مربع")
+`,
+
+      oop: `# Object-Oriented Programming & Polymorphism in Djazair
+
+class Shape
+    init(name, color)
+        self.name = name
+        self.color = color
+    end
+
+    area()
+        return 0.0
+    end
+
+    describe()
+        return "Shape: \${self.name} (\${self.color}), Area: \${self.area()}"
+    end
+end
+
+class Rectangle is Shape
+    init(color, width, height)
+        super.init("Rectangle", color)
+        self.width = width
+        self.height = height
+    end
+
+    area()
+        return self.width * self.height
+    end
+end
+
+class Circle is Shape
+    init(color, radius)
+        super.init("Circle", color)
+        self.radius = radius
+    end
+
+    area()
+        return 3.1415926535 * self.radius * self.radius
+    end
+end
+
+let shapes = [
+    new Rectangle("Blue", 10, 5),
+    new Circle("Red", 7)
+]
+
+for s in shapes
+    print(s.describe())
+end
+`,
+
+      closures: `# Functional Programming & Higher-Order Functions
+
+fn createCounter(startStep)
+    let count = 0
+    fn step()
+        count += startStep
+        return count
+    end
+    return step
+end
+
+let counter10 = createCounter(10)
+print(counter10()) # 10
+print(counter10()) # 20
+print(counter10()) # 30
+
+# Array functional transformations
+let numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+
+let evensSquared = numbers
+    .filter(fn(x) => x % 2 == 0)
+    .map(fn(x) => x * x)
+
+print("Squared evens: \${evensSquared}")
+`,
+
+      exceptions: `# Robust Exception Handling in Djazair
+
+fn parsePositiveNumber(strVal)
+    let val = num(strVal)
+    if val < 0
+        throw "Negative number is not allowed: \${val}"
+    end
+    return val
+end
+
+let inputs = ["42", "-5", "100"]
+
+for item in inputs
+    try
+        let parsed = parsePositiveNumber(item)
+        print("Successfully parsed: \${parsed}")
+    catch e
+        print("[ERROR] Caught exception: \${e}")
+    finally
+        print("--- Checked item: \${item} ---")
+    end
+end
+`
+    };
+
+    require.config({ paths: { vs: 'https://cdnjs.cloudflare.com/ajax/libs/monaco-editor/0.45.0/min/vs' } });
+
+    require(['vs/editor/editor.main'], function () {
+      // Initialize Djazair language definition
+      if (window.MonacoDjazair) {
+        window.MonacoDjazair.setup(monaco);
+      }
+
+      // Create editor instance
+      const editor = monaco.editor.create(document.getElementById('editor-container'), {
+        value: SAMPLES.showcase,
+        language: 'djazair',
+        theme: 'djazair-dark',
+        fontSize: 14,
+        fontFamily: "'Fira Code', 'Cascadia Code', Consolas, 'Courier New', monospace",
+        fontLigatures: true,
+        automaticLayout: true,
+        minimap: { enabled: true },
+        scrollBeyondLastLine: false,
+        renderWhitespace: 'selection',
+        bracketPairColorization: { enabled: true }
+      });
+
+      // Sample switch
+      document.getElementById('sample-select').addEventListener('change', function (e) {
+        const key = e.target.value;
+        if (SAMPLES[key]) {
+          editor.setValue(SAMPLES[key]);
+        }
+      });
+
+      // Theme switch
+      document.getElementById('theme-select').addEventListener('change', function (e) {
+        monaco.editor.setTheme(e.target.value);
+      });
+    });
+  </script>
+</body>
+</html>

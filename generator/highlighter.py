@@ -5,20 +5,22 @@ import re
 import html
 
 def highlight_djazair(code: str) -> str:
-    """Highlight Djazair programming language code."""
-    # Token specification ordered by precedence
+    """Highlight Djazair programming language code matching Monaco djazair-theme."""
     token_spec = [
-        ('COMMENT_MULTI', r'#![\s\S]*?!#'),
+        ('COMMENT_MULTI', r'#\*[\s\S]*?\*#'),
+        ('COMMENT_DOC', r'###[^\n]*'),
         ('OUTPUT_COMMENT', r'#\s*=>[^\n]*'),
         ('COMMENT_SINGLE', r'#[^\n]*'),
         ('STRING_BACKTICK', r'`(?:\\.|[^`\\])*`'),
         ('STRING_DOUBLE', r'"(?:\\.|[^"\\])*"'),
-        ('NUMBER', r'\b\d+(?:_\d+)*(?:\.\d+)?\b|\b0x[0-9a-fA-F]+\b'),
-        ('KEYWORD', r'\b(?:let|fn|return|class|init|super|self|is|instanceof|try|catch|finally|throw|if|elif|else|match|case|default|while|do|for|in|to|break|continue|and|or|not|Null|True|False|use|import|as|end|new|async|await)\b'),
+        ('NUMBER', r'\b0[xX][0-9a-fA-F_]+\b|\b0[bB][01_]+\b|\b0[oO][0-7_]+\b|\b\d+(?:_\d+)*(?:\.\d+)?(?:[eE][+-]?\d+)?\b'),
+        ('KEYWORD', r'\b(?:let|fn|return|class|init|super|self|is|instanceof|try|catch|finally|throw|if|elif|else|match|case|default|while|do|for|in|break|continue|and|or|not|use|import|as|end|new|async|await)\b'),
+        ('CONSTANT', r'\b(?:True|False|Null)\b'),
+        ('TYPE', r'\b(?:Number|String|Bool|Map|Array|Function|NullType|assert|bytes|collections|crypto|datetime|dir|env|file|http|json|lang|math|net|os|path|process|random|regex|thread|uuid)\b'),
         ('BUILTIN', r'\b(?:print|input|type|str|num|bool|int|float|chr|ord|range|enumerate|zip|abs|round|exit|isNull|isString|isNumber|isInt|isFloat|isBool|isArray|isMap|isFunction|isClass|__native|hasNative|getFile|getDir|getLine)\b'),
-        ('FN_CALL', r'\b[a-zA-Z_][a-zA-Z0-9_]*(?=\s*\()'),
-        ('OP', r'[+\-*/%&|^~<>!=?:@]+|\.\.|\=\>'),
-        ('IDENT', r'[a-zA-Z_][a-zA-Z0-9_]*'),
+        ('FN_CALL', r'[a-zA-Z_\u0600-\u06FF\u0750-\u077F\u08A0-\u08FF\uFB50-\uFDFF\uFE70-\uFEFF][\w\u0600-\u06FF\u0750-\u077F\u08A0-\u08FF\uFB50-\uFDFF\uFE70-\uFEFF]*(?=\s*\()'),
+        ('OP', r'[+\-*/%&|^~<>!=?:@]+|\.\.|\=\>|->'),
+        ('IDENT', r'[a-zA-Z_\u0600-\u06FF\u0750-\u077F\u08A0-\u08FF\uFB50-\uFDFF\uFE70-\uFEFF][\w\u0600-\u06FF\u0750-\u077F\u08A0-\u08FF\uFB50-\uFDFF\uFE70-\uFEFF]*'),
         ('SPACE', r'\s+'),
         ('OTHER', r'.')
     ]
@@ -31,12 +33,11 @@ def highlight_djazair(code: str) -> str:
         val = mo.group()
         esc_val = html.escape(val)
         
-        if kind == 'COMMENT_MULTI' or kind == 'COMMENT_SINGLE':
+        if kind in ('COMMENT_MULTI', 'COMMENT_DOC', 'COMMENT_SINGLE'):
             out.append(f'<span class="hl-comment">{esc_val}</span>')
         elif kind == 'OUTPUT_COMMENT':
             out.append(f'<span class="hl-output">{esc_val}</span>')
         elif kind in ('STRING_DOUBLE', 'STRING_BACKTICK'):
-            # Highlight string interpolation ${...} inside strings
             interp_pattern = r'(\$\{)(.*?)(\})'
             def interp_replace(m):
                 prefix = html.escape(m.group(1))
@@ -44,11 +45,14 @@ def highlight_djazair(code: str) -> str:
                 suffix = html.escape(m.group(3))
                 return f'<span class="hl-interp">{prefix}</span>{inner}<span class="hl-interp">{suffix}</span>'
             
-            # First escape string body
             highlighted_str = re.sub(interp_pattern, interp_replace, esc_val)
             out.append(f'<span class="hl-str">{highlighted_str}</span>')
         elif kind == 'KEYWORD':
             out.append(f'<span class="hl-kw">{esc_val}</span>')
+        elif kind == 'CONSTANT':
+            out.append(f'<span class="hl-const">{esc_val}</span>')
+        elif kind == 'TYPE':
+            out.append(f'<span class="hl-type">{esc_val}</span>')
         elif kind == 'BUILTIN':
             out.append(f'<span class="hl-builtin">{esc_val}</span>')
         elif kind == 'NUMBER':

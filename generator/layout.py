@@ -301,33 +301,6 @@ SITE_STRUCTURE = [
         ]
     },
     {
-        "category": "Cookbook & Practical",
-        "icon": "fa-utensils",
-        "pages": [
-            {
-                "id": "recipe-rest-api",
-                "title": "Building a REST API",
-                "path": "docs/cookbook/rest-api.html",
-                "desc": "Step-by-step tutorial building a production-ready REST API with http and json.",
-                "keywords": "rest api tutorial server http json routes backend"
-            },
-            {
-                "id": "recipe-cli-tool",
-                "title": "CLI Automation Tool",
-                "path": "docs/cookbook/cli-tool.html",
-                "desc": "Build a command-line file analyzer using path, file, and process modules.",
-                "keywords": "cli tool automation flags arguments file processing"
-            },
-            {
-                "id": "recipe-parallel-workers",
-                "title": "Parallel Worker Pool",
-                "path": "docs/cookbook/parallel-workers.html",
-                "desc": "Distribute heavy tasks across CPU cores using actor threads and JSON messaging.",
-                "keywords": "parallel workers actor threads background processing"
-            }
-        ]
-    },
-    {
         "category": "Reference",
         "icon": "fa-bookmark",
         "pages": [
@@ -386,35 +359,38 @@ def extract_toc(article_html: str):
         })
     return items
 
-def render_navbar(root_prefix: str, active_tab: str = "docs") -> str:
+def render_navbar(root_prefix: str, active_tab: str = "docs", is_landing: bool = False) -> str:
+    mobile_btn = ''
+    if not is_landing:
+        mobile_btn = '''<button class="mobile-toggle-btn" id="mobile-toggle" aria-label="Toggle navigation drawer">
+      <i class="fa-solid fa-bars"></i>
+    </button>'''
+
+    playground_href = "#playground" if is_landing else f"{root_prefix}index.html#playground"
+
     return f'''<header class="site-header">
   <div class="header-left">
-    <button class="mobile-toggle-btn" id="mobile-toggle" aria-label="Toggle navigation drawer">
-      <i class="fa-solid fa-bars"></i>
-    </button>
+    {mobile_btn}
     <a href="{root_prefix}index.html" class="brand-link">
       <img src="{root_prefix}assets/images/logo.svg" alt="Djazair Logo" class="brand-logo">
       <span>Djazair</span>
-      <span class="version-tag">v1.2.0</span>
+      <span class="version-tag">v1.0.0</span>
     </a>
   </div>
 
   <nav class="header-nav">
     <a href="{root_prefix}docs/getting-started/index.html" class="nav-link {'active' if active_tab == 'docs' else ''}">Documentation</a>
+    <a href="{playground_href}" class="nav-link {'active' if active_tab == 'playground' else ''}">Playground</a>
     <a href="{root_prefix}docs/standard-library/index.html" class="nav-link {'active' if active_tab == 'stdlib' else ''}">Standard Library</a>
     <a href="{root_prefix}docs/dpm/index.html" class="nav-link {'active' if active_tab == 'dpm' else ''}">DPM</a>
-    <a href="{root_prefix}docs/cookbook/rest-api.html" class="nav-link {'active' if active_tab == 'cookbook' else ''}">Cookbook</a>
     <a href="{root_prefix}docs/reference/cheat-sheet.html" class="nav-link {'active' if active_tab == 'reference' else ''}">Cheat Sheet</a>
   </nav>
 
   <div class="header-right">
     <button class="search-btn" aria-label="Search documentation">
       <i class="fa-solid fa-magnifying-glass"></i>
-      <span>Search...</span>
+      <span>Search docs...</span>
       <span class="search-shortcut">Ctrl K</span>
-    </button>
-    <button class="theme-btn" id="theme-toggle" aria-label="Toggle dark mode">
-      <i class="fa-solid fa-moon"></i>
     </button>
     <a href="https://github.com/djazair-language/djazair" target="_blank" rel="noopener noreferrer" class="icon-btn" aria-label="GitHub repository">
       <i class="fa-brands fa-github"></i>
@@ -529,8 +505,6 @@ def render_docs_page(current_page: dict, content_html: str) -> str:
         active_tab = "dpm"
     elif page_path.startswith("docs/standard-library/"):
         active_tab = "stdlib"
-    elif page_path.startswith("docs/cookbook/"):
-        active_tab = "cookbook"
     elif page_path == "docs/reference/cheat-sheet.html":
         active_tab = "reference"
 
@@ -542,7 +516,7 @@ def render_docs_page(current_page: dict, content_html: str) -> str:
     search_modal = render_search_modal()
 
     return f'''<!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="dark">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">

@@ -2,8 +2,10 @@
 Content generator for the modern landing page (index.html).
 """
 from .highlighter import process_code_blocks
+from .layout import render_navbar
 
 def render_landing_page() -> str:
+    navbar = render_navbar("", active_tab="home", is_landing=True)
     hero_code = '''# Experience the elegance of Djazair
 use http
 use json
@@ -40,7 +42,7 @@ print("Doubled evens: ${doubledEvens}") # => [4, 8]
     highlighted_hero_code = process_code_blocks(f'<pre><code class="language-dz">{hero_code}</code></pre>')
 
     return f'''<!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="dark">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -64,39 +66,7 @@ print("Doubled evens: ${doubledEvens}") # => [4, 8]
 </head>
 <body>
 
-  <!-- Top Navbar -->
-  <header class="site-header">
-    <div class="header-left">
-      <a href="index.html" class="brand-link">
-        <img src="assets/images/logo.svg" alt="Djazair Logo" class="brand-logo">
-        <span>Djazair</span>
-        <span class="version-tag">v1.0.0</span>
-      </a>
-    </div>
-
-    <nav class="header-nav">
-      <a href="docs/getting-started/index.html" class="nav-link">Documentation</a>
-      <a href="#playground" class="nav-link">Playground</a>
-      <a href="docs/standard-library/index.html" class="nav-link">Standard Library</a>
-      <a href="docs/dpm/index.html" class="nav-link">DPM</a>
-      <a href="docs/cookbook/rest-api.html" class="nav-link">Cookbook</a>
-      <a href="docs/reference/cheat-sheet.html" class="nav-link">Cheat Sheet</a>
-    </nav>
-
-    <div class="header-right">
-      <button class="search-btn" aria-label="Search documentation">
-        <i class="fa-solid fa-magnifying-glass"></i>
-        <span>Search docs...</span>
-        <span class="search-shortcut">Ctrl K</span>
-      </button>
-      <button class="theme-btn" id="theme-toggle" aria-label="Toggle theme">
-        <i class="fa-solid fa-moon"></i>
-      </button>
-      <a href="https://github.com/djazair-language/djazair" target="_blank" rel="noopener noreferrer" class="icon-btn" aria-label="GitHub repository">
-        <i class="fa-brands fa-github"></i>
-      </a>
-    </div>
-  </header>
+  {navbar}
 
   <!-- Hero Section -->
   <main>
@@ -146,32 +116,68 @@ print("Doubled evens: ${doubledEvens}") # => [4, 8]
       </div>
       <div class="playground-shell">
         <div class="playground-toolbar">
-          <div class="playground-file"><i class="fa-solid fa-file-code"></i><span>main.dz</span></div>
-          <div class="playground-status" id="playground-status" role="status" aria-live="polite" data-state="loading">Loading WebAssembly…</div>
+          <div class="playground-file">
+            <i class="fa-solid fa-file-code"></i>
+            <span>main.dz</span>
+            <span class="playground-tag">WASM VM</span>
+          </div>
+          <div class="playground-toolbar-right">
+            <div class="playground-font-controls" title="Adjust font size">
+              <button type="button" class="playground-icon-btn" id="playground-font-dec" title="Decrease font size" aria-label="Decrease font size"><i class="fa-solid fa-minus"></i></button>
+              <span class="playground-font-indicator" id="playground-font-indicator">14px</span>
+              <button type="button" class="playground-icon-btn" id="playground-font-inc" title="Increase font size" aria-label="Increase font size"><i class="fa-solid fa-plus"></i></button>
+            </div>
+            <button type="button" class="playground-icon-btn" id="playground-clear" title="Clear console output" aria-label="Clear console output"><i class="fa-solid fa-eraser"></i></button>
+            <div class="playground-status" id="playground-status" role="status" aria-live="polite" data-state="ready">Ready</div>
+          </div>
         </div>
         <div class="playground-workspace">
-          <div class="playground-pane">
-            <label class="playground-pane-title" for="playground-editor">Source</label>
+          <div class="playground-pane playground-editor-pane">
+            <div class="playground-pane-header">
+              <span class="pane-tag"><i class="fa-solid fa-code"></i> Source</span>
+              <span class="pane-hint">Djazair 1.0</span>
+            </div>
+            <div id="playground-monaco" class="playground-monaco" style="display:none; flex:1; min-height:340px; width:100%;"></div>
             <textarea id="playground-editor" class="playground-editor" spellcheck="false" aria-describedby="playground-help"># Djazair runs directly in your browser
 let name = "Djazair"
 let version = 1.0
-print("Hello from ${{name}} v${{version}}!")</textarea>
+print("Hello from ${{name}} v${{version}}!")
+
+# String formatting & methods
+let msg = "Welcome to the modern era of scripting."
+print("Uppercase: ${{msg.upper()}}")
+print("Length:    ${{msg.length()}} chars")</textarea>
           </div>
           <div class="playground-pane playground-output-pane">
-            <div class="playground-pane-title"><span>Output</span><button class="playground-copy" id="playground-copy" type="button"><i class="fa-regular fa-copy"></i> Copy output</button></div>
+            <div class="playground-pane-header">
+              <span class="pane-tag"><i class="fa-solid fa-terminal"></i> Output</span>
+              <button class="playground-copy" id="playground-copy" type="button" aria-label="Copy output">
+                <i class="fa-regular fa-copy"></i> <span>Copy output</span>
+              </button>
+            </div>
             <pre class="playground-output" id="playground-output" aria-live="polite" aria-label="Program output"></pre>
           </div>
         </div>
         <div class="playground-controls">
-          <div class="playground-samples" aria-label="Load example">
-            <span>Examples:</span>
-            <button type="button" data-playground-sample="hello">Hello</button>
-            <button type="button" data-playground-sample="functions">Closures</button>
-            <button type="button" data-playground-sample="arabic">Arabic</button>
+          <div class="playground-samples" aria-label="Load code sample">
+            <span class="samples-label"><i class="fa-solid fa-wand-magic-sparkles"></i> Examples:</span>
+            <button type="button" class="sample-btn active" data-playground-sample="hello">Hello</button>
+            <button type="button" class="sample-btn" data-playground-sample="match">Pattern Match</button>
+            <button type="button" class="sample-btn" data-playground-sample="closures">Closures</button>
+            <button type="button" class="sample-btn" data-playground-sample="classes">OOP</button>
+            <button type="button" class="sample-btn" data-playground-sample="arrays">Arrays</button>
+            <button type="button" class="sample-btn" data-playground-sample="arabic">العربية (Arabic)</button>
+            <button type="button" class="sample-btn" data-playground-sample="exceptions">Try / Catch</button>
+            <button type="button" class="sample-btn" data-playground-sample="fibonacci">Fibonacci</button>
+            <button type="button" class="sample-btn" data-playground-sample="algorithms">Algorithms</button>
           </div>
           <div class="playground-actions">
-            <button class="btn btn-secondary playground-reset" id="playground-reset" type="button"><i class="fa-solid fa-rotate-left"></i> Reset</button>
-            <button class="btn btn-primary playground-run" id="playground-run" type="button"><i class="fa-solid fa-play"></i> Run <kbd>Ctrl Enter</kbd></button>
+            <button class="btn btn-secondary playground-reset" id="playground-reset" type="button" title="Reset playground">
+              <i class="fa-solid fa-rotate-left"></i> Reset
+            </button>
+            <button class="btn btn-primary playground-run" id="playground-run" type="button" title="Run code (Ctrl + Enter)">
+              <i class="fa-solid fa-play"></i> Run <kbd>Ctrl Enter</kbd>
+            </button>
           </div>
         </div>
         <p class="playground-help" id="playground-help"><i class="fa-solid fa-circle-info"></i> Each run starts in a fresh VM. Browser builds intentionally exclude filesystem, subprocess, network, and thread APIs.</p>
@@ -279,10 +285,12 @@ print("Hello from ${{name}} v${{version}}!")</textarea>
         <p style="margin-top:0.4rem; color:var(--text-muted);">Released under the open-source MIT License. Designed & Developed by Harizi Riyadh.</p>
       </div>
       <div class="footer-links">
-        <a href="docs/getting-started/index.html">Docs</a>
-        <a href="docs/standard-library/index.html">Stdlib</a>
-        <a href="docs/cookbook/rest-api.html">Cookbook</a>
-        <a href="https://github.com/djazair-language/djazair" target="_blank">GitHub</a>
+        <a href="docs/getting-started/index.html">Documentation</a>
+        <a href="#playground">Playground</a>
+        <a href="docs/standard-library/index.html">Standard Library</a>
+        <a href="docs/dpm/index.html">DPM</a>
+        <a href="docs/reference/cheat-sheet.html">Cheat Sheet</a>
+        <a href="https://github.com/djazair-language/djazair" target="_blank" rel="noopener noreferrer">GitHub</a>
       </div>
     </div>
   </footer>
@@ -307,6 +315,8 @@ print("Hello from ${{name}} v${{version}}!")</textarea>
   <script src="assets/js/search-index.js"></script>
   <script src="assets/js/search.js"></script>
   <script src="assets/js/code-tools.js"></script>
+  <script src="assets/js/monaco-djazair.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/monaco-editor/0.45.0/min/vs/loader.min.js"></script>
   <script src="assets/wasm/djazair.js"></script>
   <script src="assets/js/playground.js"></script>
 </body>

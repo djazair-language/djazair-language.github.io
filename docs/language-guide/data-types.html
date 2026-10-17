@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="dark">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -31,26 +31,23 @@
     <a href="../../index.html" class="brand-link">
       <img src="../../assets/images/logo.svg" alt="Djazair Logo" class="brand-logo">
       <span>Djazair</span>
-      <span class="version-tag">v1.2.0</span>
+      <span class="version-tag">v1.0.0</span>
     </a>
   </div>
 
   <nav class="header-nav">
     <a href="../../docs/getting-started/index.html" class="nav-link active">Documentation</a>
+    <a href="../../index.html#playground" class="nav-link ">Playground</a>
     <a href="../../docs/standard-library/index.html" class="nav-link ">Standard Library</a>
     <a href="../../docs/dpm/index.html" class="nav-link ">DPM</a>
-    <a href="../../docs/cookbook/rest-api.html" class="nav-link ">Cookbook</a>
     <a href="../../docs/reference/cheat-sheet.html" class="nav-link ">Cheat Sheet</a>
   </nav>
 
   <div class="header-right">
     <button class="search-btn" aria-label="Search documentation">
       <i class="fa-solid fa-magnifying-glass"></i>
-      <span>Search...</span>
+      <span>Search docs...</span>
       <span class="search-shortcut">Ctrl K</span>
-    </button>
-    <button class="theme-btn" id="theme-toggle" aria-label="Toggle dark mode">
-      <i class="fa-solid fa-moon"></i>
     </button>
     <a href="https://github.com/djazair-language/djazair" target="_blank" rel="noopener noreferrer" class="icon-btn" aria-label="GitHub repository">
       <i class="fa-brands fa-github"></i>
@@ -209,22 +206,6 @@
 </div>
 <div class="sidebar-category">
   <div class="category-title">
-    <span><i class="fa-solid fa-utensils fa-fw" style="margin-right:6px; opacity:0.7;"></i> Cookbook &amp; Practical</span>
-  </div>
-  <ul class="sidebar-items">
-    <li class="sidebar-item">
-      <a href="../../docs/cookbook/rest-api.html" class="sidebar-link ">Building a REST API</a>
-    </li>
-    <li class="sidebar-item">
-      <a href="../../docs/cookbook/cli-tool.html" class="sidebar-link ">CLI Automation Tool</a>
-    </li>
-    <li class="sidebar-item">
-      <a href="../../docs/cookbook/parallel-workers.html" class="sidebar-link ">Parallel Worker Pool</a>
-    </li>
-  </ul>
-</div>
-<div class="sidebar-category">
-  <div class="category-title">
     <span><i class="fa-solid fa-bookmark fa-fw" style="margin-right:6px; opacity:0.7;"></i> Reference</span>
   </div>
   <ul class="sidebar-items">
@@ -348,7 +329,7 @@
   <pre><code><span class="hl-comment"># Converting to Int</span>
 <span class="hl-kw">let</span> a <span class="hl-op">=</span> <span class="hl-builtin">int</span>(<span class="hl-str">&quot;42&quot;</span>)       <span class="hl-comment"># 42</span>
 <span class="hl-kw">let</span> b <span class="hl-op">=</span> <span class="hl-builtin">int</span>(<span class="hl-num">3.99</span>)       <span class="hl-comment"># 3 (truncation)</span>
-<span class="hl-kw">let</span> c <span class="hl-op">=</span> <span class="hl-builtin">int</span>(<span class="hl-kw">True</span>)       <span class="hl-comment"># 1</span>
+<span class="hl-kw">let</span> c <span class="hl-op">=</span> <span class="hl-builtin">int</span>(<span class="hl-const">True</span>)       <span class="hl-comment"># 1</span>
 
 <span class="hl-comment"># Converting to Float</span>
 <span class="hl-kw">let</span> d <span class="hl-op">=</span> <span class="hl-builtin">float</span>(<span class="hl-str">&quot;3.14&quot;</span>)   <span class="hl-comment"># 3.14</span>
@@ -356,8 +337,8 @@
 
 <span class="hl-comment"># Converting to String</span>
 <span class="hl-kw">let</span> f <span class="hl-op">=</span> <span class="hl-builtin">str</span>(<span class="hl-num">123</span>)        <span class="hl-comment"># &quot;123&quot;</span>
-<span class="hl-kw">let</span> g <span class="hl-op">=</span> <span class="hl-builtin">str</span>(<span class="hl-kw">True</span>)       <span class="hl-comment"># &quot;True&quot;</span>
-<span class="hl-kw">let</span> h <span class="hl-op">=</span> <span class="hl-builtin">str</span>(<span class="hl-kw">Null</span>)       <span class="hl-comment"># &quot;Null&quot;</span>
+<span class="hl-kw">let</span> g <span class="hl-op">=</span> <span class="hl-builtin">str</span>(<span class="hl-const">True</span>)       <span class="hl-comment"># &quot;True&quot;</span>
+<span class="hl-kw">let</span> h <span class="hl-op">=</span> <span class="hl-builtin">str</span>(<span class="hl-const">Null</span>)       <span class="hl-comment"># &quot;Null&quot;</span>
 
 <span class="hl-comment"># Converting to Boolean (Truthy / Falsy semantics)</span>
 <span class="hl-builtin">print</span>(<span class="hl-builtin">bool</span>(<span class="hl-num">1</span>))          <span class="hl-comment"># True</span>
@@ -365,7 +346,7 @@
 <span class="hl-builtin">print</span>(<span class="hl-builtin">bool</span>(<span class="hl-str">&quot;hello&quot;</span>))    <span class="hl-comment"># True</span>
 <span class="hl-builtin">print</span>(<span class="hl-builtin">bool</span>(<span class="hl-str">&quot;&quot;</span>))         <span class="hl-comment"># False</span>
 <span class="hl-builtin">print</span>(<span class="hl-builtin">bool</span>([]))         <span class="hl-comment"># False (empty collections are falsy)</span>
-<span class="hl-builtin">print</span>(<span class="hl-builtin">bool</span>(<span class="hl-kw">Null</span>))       <span class="hl-comment"># False</span>
+<span class="hl-builtin">print</span>(<span class="hl-builtin">bool</span>(<span class="hl-const">Null</span>))       <span class="hl-comment"># False</span>
 
 <span class="hl-comment"># num() parses strings to either int or float automatically</span>
 <span class="hl-builtin">print</span>(<span class="hl-builtin">num</span>(<span class="hl-str">&quot;100&quot;</span>))       <span class="hl-comment"># 100 (Int)</span>
@@ -386,7 +367,7 @@
 <span class="hl-builtin">print</span>(<span class="hl-builtin">isArray</span>(val))     <span class="hl-output"># =&gt; True</span>
 <span class="hl-builtin">print</span>(<span class="hl-builtin">isString</span>(val))    <span class="hl-output"># =&gt; False</span>
 <span class="hl-builtin">print</span>(<span class="hl-builtin">isNumber</span>(<span class="hl-num">42</span>))     <span class="hl-output"># =&gt; True</span>
-<span class="hl-builtin">print</span>(<span class="hl-builtin">isNull</span>(<span class="hl-kw">Null</span>))     <span class="hl-output"># =&gt; True</span></code></pre>
+<span class="hl-builtin">print</span>(<span class="hl-builtin">isNull</span>(<span class="hl-const">Null</span>))     <span class="hl-output"># =&gt; True</span></code></pre>
 </div>
 
 
