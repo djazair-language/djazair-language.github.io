@@ -589,6 +589,13 @@ tbody tr:hover {
   transform: translateY(0);
 }
 
+.run-code-btn:disabled {
+  opacity: 0.7;
+  cursor: wait;
+  transform: none;
+  box-shadow: none;
+}
+
 .run-code-btn i {
   font-size: 0.68rem;
   color: #34d399;

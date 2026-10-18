@@ -312,6 +312,11 @@
           monacoEditor.addCommand(monaco.KeyMod.CtrlCmd | monaco.KeyCode.Enter, () => {
             run();
           });
+
+          // Check if hash was already set
+          if (location.hash && location.hash.startsWith("#src=")) {
+            loadFromHash();
+          }
         });
       } catch (e) {
         console.warn("Monaco initialization fallback to textarea:", e);
@@ -422,6 +427,19 @@
 
       if (exitCode === 0 && output.textContent.length === 0) {
         write("Program finished with no output.\n");
+      } else if (exitCode !== 0) {
+        // Detect if script tried to use system modules not available in browser WASM
+        const osModules = ['process', 'http', 'os', 'file', 'dir', 'env', 'thread'];
+        const matched = osModules.filter((m) => {
+          const regex = new RegExp(`(^|\\s)(use|import)\\s+${m}(\\s|;|$)`);
+          return regex.test(source);
+        });
+        if (matched.length > 0) {
+          write(
+            `\n💡 Note: Module(s) [${matched.join(', ')}] interact directly with host OS system APIs and run via the native Djazair CLI interpreter ('djazair script.dz'). The browser playground runs inside a sandboxed WebAssembly VM.\n`,
+            false
+          );
+        }
       }
 
       setStatus(
@@ -459,7 +477,7 @@
     /* ── Share (permalink) ──────────────────────────────────────────────── */
     const share = async () => {
       try {
-        const encoded = btoa(unescape(encodeURIComponent(getSource())));
+        const encoded = encodeURIComponent(btoa(unescape(encodeURIComponent(getSource()))));
         const url = `${location.origin}${location.pathname}#src=${encoded}`;
         await navigator.clipboard.writeText(url);
         if (shareBtn) {
@@ -488,7 +506,19 @@
           srcPart = srcPart.replace("&autorun=true", "");
         }
 
-        const source = decodeURIComponent(escape(atob(srcPart)));
+        let source = "";
+        try {
+          const decodedUri = decodeURIComponent(srcPart);
+          source = decodeURIComponent(escape(atob(decodedUri)));
+        } catch (_) {
+          try {
+            source = decodeURIComponent(escape(atob(srcPart)));
+          } catch (e2) {
+            console.error("Base64 decoding failed:", e2);
+            return;
+          }
+        }
+
         setSource(source);
         clearOutput();
         write("// Code snippet loaded into playground.\n");
@@ -499,7 +529,7 @@
         if (pg) {
           setTimeout(() => {
             pg.scrollIntoView({ behavior: "smooth" });
-          }, 120);
+          }, 80);
         }
 
         if (autoRun) {
@@ -509,11 +539,11 @@
             attempts++;
             if (wasmModule) {
               run();
-            } else if (attempts < 30) {
-              setTimeout(tryRun, 150);
+            } else if (attempts < 40) {
+              setTimeout(tryRun, 100);
             }
           };
-          setTimeout(tryRun, 350);
+          setTimeout(tryRun, 250);
         } else {
           write("// Press Run or Ctrl/⌘ + Enter to execute.\n");
         }
@@ -521,6 +551,11 @@
         console.warn("Could not load source from URL hash:", err);
       }
     };
+
+    // Load from hash immediately if present at startup
+    if (location.hash && location.hash.startsWith("#src=")) {
+      loadFromHash();
+    }
 
     window.setPlaygroundSource = (code) => {
       setSource(code);

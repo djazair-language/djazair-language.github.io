@@ -533,8 +533,8 @@ def render_docs_page(current_page: dict, content_html: str) -> str:
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
   
   <!-- Modern Docs Stylesheets -->
-  <link rel="stylesheet" href="{root_prefix}assets/css/main.css">
-  <link rel="stylesheet" href="{root_prefix}assets/css/syntax.css">
+  <link rel="stylesheet" href="{root_prefix}assets/css/main.css?v=2.2">
+  <link rel="stylesheet" href="{root_prefix}assets/css/syntax.css?v=2.2">
   
   <!-- Early theme application to avoid flash -->
   <script src="{root_prefix}assets/js/theme.js"></script>
@@ -564,7 +564,7 @@ def render_docs_page(current_page: dict, content_html: str) -> str:
   <!-- Scripts -->
   <script src="{root_prefix}assets/js/search-index.js"></script>
   <script src="{root_prefix}assets/js/search.js"></script>
-  <script src="{root_prefix}assets/js/code-tools.js"></script>
+  <script src="{root_prefix}assets/js/code-tools.js?v=2.2"></script>
   <script src="{root_prefix}assets/js/navigation.js"></script>
 </body>
 </html>'''
