@@ -357,10 +357,13 @@
 <h2 id="cli-reference">Complete CLI Reference & Workflows</h2>
 <p>DPM commands share a consistent interface, intuitive aliases, and standardized flag behavior:</p>
 
-<div class="code-wrapper">
+<div class="code-wrapper" data-root-prefix="../../">
   <div class="code-header">
     <span class="code-lang">bash</span>
-    <button class="copy-btn" aria-label="Copy code"><i class="fa-regular fa-copy"></i> Copy</button>
+    <div class="code-header-actions">
+      
+      <button class="copy-btn" aria-label="Copy code"><i class="fa-regular fa-copy"></i> Copy</button>
+    </div>
   </div>
   <pre><code>dpm &lt;command&gt; [options] [arguments]
 <span class="hl-comment"># or</span>
@@ -379,10 +382,13 @@ djazair dpm &lt;command&gt; [options] [arguments]</code></pre>
 <h3 id="cmd-init">1. Project Scaffolding: <code>dpm init</code></h3>
 <p>Initializes a new Djazair project or library package. It launches an interactive wizard that prompts for project metadata and automatically generates a standard <code>dpm.json</code> manifest, starter entrypoint, <code>.gitignore</code>, and <code>README.md</code>.</p>
 
-<div class="code-wrapper">
+<div class="code-wrapper" data-root-prefix="../../">
   <div class="code-header">
     <span class="code-lang">bash</span>
-    <button class="copy-btn" aria-label="Copy code"><i class="fa-regular fa-copy"></i> Copy</button>
+    <div class="code-header-actions">
+      
+      <button class="copy-btn" aria-label="Copy code"><i class="fa-regular fa-copy"></i> Copy</button>
+    </div>
   </div>
   <pre><code><span class="hl-comment"># Interactive scaffolding wizard</span>
 dpm init
@@ -394,10 +400,13 @@ dpm init <span class="hl-special">-y</span></code></pre>
 </div>
 
 <p>When run, <code>dpm init</code> scaffolds the following standard directory structure:</p>
-<div class="code-wrapper">
+<div class="code-wrapper" data-root-prefix="../../">
   <div class="code-header">
     <span class="code-lang">bash</span>
-    <button class="copy-btn" aria-label="Copy code"><i class="fa-regular fa-copy"></i> Copy</button>
+    <div class="code-header-actions">
+      
+      <button class="copy-btn" aria-label="Copy code"><i class="fa-regular fa-copy"></i> Copy</button>
+    </div>
   </div>
   <pre><code>my_project/
 ├── dpm.json         <span class="hl-comment"># Package manifest &amp; dependency declarations</span>
@@ -416,10 +425,13 @@ dpm init <span class="hl-special">-y</span></code></pre>
 
 <h4 id="batch-install">Batch Manifest Installation</h4>
 <p>Running <code>dpm install</code> without arguments reads the local <code>dpm.json</code>, parses the <code>require</code> block, and recursively downloads, verifies, and installs every listed dependency:</p>
-<div class="code-wrapper">
+<div class="code-wrapper" data-root-prefix="../../">
   <div class="code-header">
     <span class="code-lang">bash</span>
-    <button class="copy-btn" aria-label="Copy code"><i class="fa-regular fa-copy"></i> Copy</button>
+    <div class="code-header-actions">
+      
+      <button class="copy-btn" aria-label="Copy code"><i class="fa-regular fa-copy"></i> Copy</button>
+    </div>
   </div>
   <pre><code>dpm install</code></pre>
 </div>
@@ -472,10 +484,13 @@ dpm init <span class="hl-special">-y</span></code></pre>
 </div>
 
 <h4 id="install-flags">Installation Modifiers</h4>
-<div class="code-wrapper">
+<div class="code-wrapper" data-root-prefix="../../">
   <div class="code-header">
     <span class="code-lang">bash</span>
-    <button class="copy-btn" aria-label="Copy code"><i class="fa-regular fa-copy"></i> Copy</button>
+    <div class="code-header-actions">
+      
+      <button class="copy-btn" aria-label="Copy code"><i class="fa-regular fa-copy"></i> Copy</button>
+    </div>
   </div>
   <pre><code><span class="hl-comment"># Install globally into language packages directory</span>
 dpm install <span class="hl-special">-g</span> qalam
@@ -490,10 +505,13 @@ dpm install sqlite <span class="hl-special">--force</span></code></pre>
 <h3 id="cmd-run">3. Executing Projects: <code>dpm run</code></h3>
 <p>The <code>run</code> command executes the main script of your project automatically. It reads the <code>"entry"</code> field (usually <code>init.dz</code>) from your <code>dpm.json</code> file, launches the script in a child process, and <strong>streams the output in real-time</strong> back to your terminal.</p>
 
-<div class="code-wrapper">
+<div class="code-wrapper" data-root-prefix="../../">
   <div class="code-header">
     <span class="code-lang">bash</span>
-    <button class="copy-btn" aria-label="Copy code"><i class="fa-regular fa-copy"></i> Copy</button>
+    <div class="code-header-actions">
+      
+      <button class="copy-btn" aria-label="Copy code"><i class="fa-regular fa-copy"></i> Copy</button>
+    </div>
   </div>
   <pre><code><span class="hl-comment"># Start the project defined in dpm.json</span>
 dpm run</code></pre>
@@ -502,10 +520,13 @@ dpm run</code></pre>
 <h3 id="cmd-update">3. Package Upgrades: <code>dpm update</code></h3>
 <p>The <code>update</code> command (alias: <code>up</code>) inspects installed packages against their remote origin. For Git-backed packages, DPM queries remote tags (<code>git ls-remote --tags</code>), compares available versions using its SemVer engine, and upgrades the package when a newer compatible version is detected.</p>
 
-<div class="code-wrapper">
+<div class="code-wrapper" data-root-prefix="../../">
   <div class="code-header">
     <span class="code-lang">bash</span>
-    <button class="copy-btn" aria-label="Copy code"><i class="fa-regular fa-copy"></i> Copy</button>
+    <div class="code-header-actions">
+      
+      <button class="copy-btn" aria-label="Copy code"><i class="fa-regular fa-copy"></i> Copy</button>
+    </div>
   </div>
   <pre><code><span class="hl-comment"># Update a specific package locally</span>
 dpm update sqlite
@@ -525,10 +546,13 @@ dpm update sqlite <span class="hl-special">--force</span></code></pre>
 <h3 id="cmd-remove">4. Package Uninstallation: <code>dpm remove</code></h3>
 <p>The <code>remove</code> command (aliases: <code>rm</code>, <code>uninstall</code>) safely deletes a package from <code>djazair_packages/</code> and automatically removes its dependency constraint from <code>dpm.json</code>:</p>
 
-<div class="code-wrapper">
+<div class="code-wrapper" data-root-prefix="../../">
   <div class="code-header">
     <span class="code-lang">bash</span>
-    <button class="copy-btn" aria-label="Copy code"><i class="fa-regular fa-copy"></i> Copy</button>
+    <div class="code-header-actions">
+      
+      <button class="copy-btn" aria-label="Copy code"><i class="fa-regular fa-copy"></i> Copy</button>
+    </div>
   </div>
   <pre><code><span class="hl-comment"># Remove package locally and update dpm.json</span>
 dpm remove sqlite
@@ -540,10 +564,13 @@ dpm remove <span class="hl-special">-g</span> qalam</code></pre>
 <h3 id="cmd-list">5. Inventory Inspection: <code>dpm list</code></h3>
 <p>The <code>list</code> command (alias: <code>ls</code>) scans the packages directory and outputs a cleanly formatted table of all installed packages, their detected versions, and package types:</p>
 
-<div class="code-wrapper">
+<div class="code-wrapper" data-root-prefix="../../">
   <div class="code-header">
     <span class="code-lang">bash</span>
-    <button class="copy-btn" aria-label="Copy code"><i class="fa-regular fa-copy"></i> Copy</button>
+    <div class="code-header-actions">
+      
+      <button class="copy-btn" aria-label="Copy code"><i class="fa-regular fa-copy"></i> Copy</button>
+    </div>
   </div>
   <pre><code><span class="hl-comment"># List project-local packages</span>
 dpm list
@@ -555,18 +582,24 @@ dpm list <span class="hl-special">-g</span></code></pre>
 <h3 id="cmd-info">6. Deep Metadata Inspection: <code>dpm info</code></h3>
 <p>The <code>info</code> command (alias: <code>show</code>) prints an exhaustive diagnostic report for any package, including its scope, installation location, entrypoint, author, dependency map, update availability, and file inventory:</p>
 
-<div class="code-wrapper">
+<div class="code-wrapper" data-root-prefix="../../">
   <div class="code-header">
     <span class="code-lang">bash</span>
-    <button class="copy-btn" aria-label="Copy code"><i class="fa-regular fa-copy"></i> Copy</button>
+    <div class="code-header-actions">
+      
+      <button class="copy-btn" aria-label="Copy code"><i class="fa-regular fa-copy"></i> Copy</button>
+    </div>
   </div>
   <pre><code>dpm info sqlite</code></pre>
 </div>
 
-<div class="code-wrapper">
+<div class="code-wrapper" data-root-prefix="../../">
   <div class="code-header">
     <span class="code-lang">text</span>
-    <button class="copy-btn" aria-label="Copy code"><i class="fa-regular fa-copy"></i> Copy</button>
+    <div class="code-header-actions">
+      
+      <button class="copy-btn" aria-label="Copy code"><i class="fa-regular fa-copy"></i> Copy</button>
+    </div>
   </div>
   <pre><code>Package Information: sqlite
 ----------------------------------------------------
@@ -586,10 +619,13 @@ dpm list <span class="hl-special">-g</span></code></pre>
 <h3 id="cmd-pack">7. Distributable Bundling: <code>dpm pack</code></h3>
 <p>Packages the current project or library into a clean, distributable ZIP archive named <code>&lt;name&gt;-&lt;version&gt;.zip</code>. It automatically excludes local dependencies (<code>djazair_packages/</code>), compiled binaries, and temporary files, producing a production-ready distribution artifact ready to be published or shared.</p>
 
-<div class="code-wrapper">
+<div class="code-wrapper" data-root-prefix="../../">
   <div class="code-header">
     <span class="code-lang">bash</span>
-    <button class="copy-btn" aria-label="Copy code"><i class="fa-regular fa-copy"></i> Copy</button>
+    <div class="code-header-actions">
+      
+      <button class="copy-btn" aria-label="Copy code"><i class="fa-regular fa-copy"></i> Copy</button>
+    </div>
   </div>
   <pre><code>dpm pack
 <span class="hl-comment"># Output: Package archive created: &#x27;D:\Projects\my_lib\my_lib-1.0.0.zip&#x27;</span></code></pre>
@@ -600,10 +636,13 @@ dpm list <span class="hl-special">-g</span></code></pre>
 <h2 id="manifest-specification">Package Manifest (<code>dpm.json</code>) Specification</h2>
 <p>The <code>dpm.json</code> file is the single source of truth for any Djazair project or distributable library. Below is the complete annotated specification:</p>
 
-<div class="code-wrapper">
+<div class="code-wrapper" data-root-prefix="../../">
   <div class="code-header">
     <span class="code-lang">json</span>
-    <button class="copy-btn" aria-label="Copy code"><i class="fa-regular fa-copy"></i> Copy</button>
+    <div class="code-header-actions">
+      
+      <button class="copy-btn" aria-label="Copy code"><i class="fa-regular fa-copy"></i> Copy</button>
+    </div>
   </div>
   <pre><code>{
   &quot;name&quot;: &quot;super_cache&quot;,
@@ -703,20 +742,26 @@ dpm list <span class="hl-special">-g</span></code></pre>
 
 <h3 id="step-1-scaffold">Step 1: Scaffolding the Package</h3>
 <p>Create a dedicated directory for your library and initialize it with DPM:</p>
-<div class="code-wrapper">
+<div class="code-wrapper" data-root-prefix="../../">
   <div class="code-header">
     <span class="code-lang">bash</span>
-    <button class="copy-btn" aria-label="Copy code"><i class="fa-regular fa-copy"></i> Copy</button>
+    <div class="code-header-actions">
+      
+      <button class="copy-btn" aria-label="Copy code"><i class="fa-regular fa-copy"></i> Copy</button>
+    </div>
   </div>
   <pre><code>mkdir string_utils
 cd string_utils
 dpm init</code></pre>
 </div>
 <p>Fill in the interactive prompts:</p>
-<div class="code-wrapper">
+<div class="code-wrapper" data-root-prefix="../../">
   <div class="code-header">
     <span class="code-lang">text</span>
-    <button class="copy-btn" aria-label="Copy code"><i class="fa-regular fa-copy"></i> Copy</button>
+    <div class="code-header-actions">
+      
+      <button class="copy-btn" aria-label="Copy code"><i class="fa-regular fa-copy"></i> Copy</button>
+    </div>
   </div>
   <pre><code>Package name (string_utils): string_utils
 Version (0.1.0): 1.0.0
@@ -729,10 +774,13 @@ Author Email: hariziriyadh@gmail.com</code></pre>
 <h3 id="step-2-architecture">Step 2: Designing the Package Architecture</h3>
 <p>A professional package organizes its internal logic under a <code>src/</code> directory and exports a clean public API through <code>init.dz</code>:</p>
 
-<div class="code-wrapper">
+<div class="code-wrapper" data-root-prefix="../../">
   <div class="code-header">
     <span class="code-lang">bash</span>
-    <button class="copy-btn" aria-label="Copy code"><i class="fa-regular fa-copy"></i> Copy</button>
+    <div class="code-header-actions">
+      
+      <button class="copy-btn" aria-label="Copy code"><i class="fa-regular fa-copy"></i> Copy</button>
+    </div>
   </div>
   <pre><code>string_utils/
 ├── dpm.json
@@ -746,10 +794,13 @@ Author Email: hariziriyadh@gmail.com</code></pre>
 </div>
 
 <p>Write your internal modules inside <code>src/</code>:</p>
-<div class="code-wrapper">
+<div class="code-wrapper" data-root-prefix="../../">
   <div class="code-header">
     <span class="code-lang">ruby</span>
-    <button class="copy-btn" aria-label="Copy code"><i class="fa-regular fa-copy"></i> Copy</button>
+    <div class="code-header-actions">
+      
+      <button class="copy-btn" aria-label="Copy code"><i class="fa-regular fa-copy"></i> Copy</button>
+    </div>
   </div>
   <pre><code># src/slugify.dz
 fn toSlug(text)
@@ -769,10 +820,13 @@ end</code></pre>
 </div>
 
 <p>Expose your public functions in the package entrypoint (<code>init.dz</code>):</p>
-<div class="code-wrapper">
+<div class="code-wrapper" data-root-prefix="../../">
   <div class="code-header">
     <span class="code-lang">ruby</span>
-    <button class="copy-btn" aria-label="Copy code"><i class="fa-regular fa-copy"></i> Copy</button>
+    <div class="code-header-actions">
+      
+      <button class="copy-btn" aria-label="Copy code"><i class="fa-regular fa-copy"></i> Copy</button>
+    </div>
   </div>
   <pre><code># init.dz — Public API Gateway
 import &quot;src/slugify.dz&quot; as slug
@@ -789,10 +843,13 @@ end</code></pre>
 
 <h3 id="step-3-dependencies">Step 3: Managing Dependencies</h3>
 <p>If your package requires helper libraries (e.g. <code>qalam</code> for colored output or logging), install them directly:</p>
-<div class="code-wrapper">
+<div class="code-wrapper" data-root-prefix="../../">
   <div class="code-header">
     <span class="code-lang">bash</span>
-    <button class="copy-btn" aria-label="Copy code"><i class="fa-regular fa-copy"></i> Copy</button>
+    <div class="code-header-actions">
+      
+      <button class="copy-btn" aria-label="Copy code"><i class="fa-regular fa-copy"></i> Copy</button>
+    </div>
   </div>
   <pre><code>dpm install qalam</code></pre>
 </div>
@@ -800,10 +857,13 @@ end</code></pre>
 
 <h3 id="step-4-testing">Step 4: Writing Unit Tests</h3>
 <p>Create a test runner under <code>tests/test_string_utils.dz</code> utilizing the standard <code>assert</code> library:</p>
-<div class="code-wrapper">
+<div class="code-wrapper" data-root-prefix="../../">
   <div class="code-header">
     <span class="code-lang">ruby</span>
-    <button class="copy-btn" aria-label="Copy code"><i class="fa-regular fa-copy"></i> Copy</button>
+    <div class="code-header-actions">
+      
+      <button class="copy-btn" aria-label="Copy code"><i class="fa-regular fa-copy"></i> Copy</button>
+    </div>
   </div>
   <pre><code># tests/test_string_utils.dz
 use assert
@@ -817,30 +877,39 @@ assert.equal(string_utils.slugify(&quot;Djazair   Programming&quot;), &quot;djaz
 print(&quot;==&gt; All tests passed successfully!&quot;)</code></pre>
 </div>
 <p>Execute your tests:</p>
-<div class="code-wrapper">
+<div class="code-wrapper" data-root-prefix="../../">
   <div class="code-header">
     <span class="code-lang">bash</span>
-    <button class="copy-btn" aria-label="Copy code"><i class="fa-regular fa-copy"></i> Copy</button>
+    <div class="code-header-actions">
+      
+      <button class="copy-btn" aria-label="Copy code"><i class="fa-regular fa-copy"></i> Copy</button>
+    </div>
   </div>
   <pre><code>djazair tests/test_string_utils.dz</code></pre>
 </div>
 
 <h3 id="step-5-bundling">Step 5: Packaging & Publishing</h3>
 <p>When ready for release, bundle your package using <code>dpm pack</code>:</p>
-<div class="code-wrapper">
+<div class="code-wrapper" data-root-prefix="../../">
   <div class="code-header">
     <span class="code-lang">bash</span>
-    <button class="copy-btn" aria-label="Copy code"><i class="fa-regular fa-copy"></i> Copy</button>
+    <div class="code-header-actions">
+      
+      <button class="copy-btn" aria-label="Copy code"><i class="fa-regular fa-copy"></i> Copy</button>
+    </div>
   </div>
   <pre><code>dpm pack
 <span class="hl-comment"># Produces: string_utils-1.0.0.zip</span></code></pre>
 </div>
 
 <p>To publish via Git, push your code to GitHub with a SemVer release tag:</p>
-<div class="code-wrapper">
+<div class="code-wrapper" data-root-prefix="../../">
   <div class="code-header">
     <span class="code-lang">bash</span>
-    <button class="copy-btn" aria-label="Copy code"><i class="fa-regular fa-copy"></i> Copy</button>
+    <div class="code-header-actions">
+      
+      <button class="copy-btn" aria-label="Copy code"><i class="fa-regular fa-copy"></i> Copy</button>
+    </div>
   </div>
   <pre><code>git init
 git add .
@@ -852,10 +921,13 @@ git push <span class="hl-special">-u</span> origin main <span class="hl-special"
 
 <h3 id="step-6-consuming">Step 6: Consuming the Published Package</h3>
 <p>Other developers can now install and consume your package directly:</p>
-<div class="code-wrapper">
+<div class="code-wrapper" data-root-prefix="../../">
   <div class="code-header">
     <span class="code-lang">bash</span>
-    <button class="copy-btn" aria-label="Copy code"><i class="fa-regular fa-copy"></i> Copy</button>
+    <div class="code-header-actions">
+      
+      <button class="copy-btn" aria-label="Copy code"><i class="fa-regular fa-copy"></i> Copy</button>
+    </div>
   </div>
   <pre><code><span class="hl-comment"># Install via GitHub shorthand</span>
 dpm install github:myusername/string_utils
@@ -865,10 +937,13 @@ dpm install https://github.com/myusername/string_utils/releases/download/v1.0.0/
 </div>
 
 <p>In consumer code:</p>
-<div class="code-wrapper">
+<div class="code-wrapper" data-root-prefix="../../">
   <div class="code-header">
     <span class="code-lang">ruby</span>
-    <button class="copy-btn" aria-label="Copy code"><i class="fa-regular fa-copy"></i> Copy</button>
+    <div class="code-header-actions">
+      
+      <button class="copy-btn" aria-label="Copy code"><i class="fa-regular fa-copy"></i> Copy</button>
+    </div>
   </div>
   <pre><code>use string_utils
 
@@ -883,10 +958,13 @@ print(&quot;Generated Slug: &quot; + slug)
 <p>Hybrid packages bridge high-performance C or C++ shared libraries into the Djazair runtime. DPM automates native builds by orchestrating cross-platform build scripts.</p>
 
 <h3 id="hybrid-structure">Hybrid Package Layout</h3>
-<div class="code-wrapper">
+<div class="code-wrapper" data-root-prefix="../../">
   <div class="code-header">
     <span class="code-lang">bash</span>
-    <button class="copy-btn" aria-label="Copy code"><i class="fa-regular fa-copy"></i> Copy</button>
+    <div class="code-header-actions">
+      
+      <button class="copy-btn" aria-label="Copy code"><i class="fa-regular fa-copy"></i> Copy</button>
+    </div>
   </div>
   <pre><code>fast_hash/
 ├── dpm.json         <span class="hl-comment"># Declares &quot;type&quot;: &quot;hybrid&quot; and &quot;build&quot; scripts</span>
@@ -899,10 +977,13 @@ print(&quot;Generated Slug: &quot; + slug)
 </div>
 
 <h3 id="hybrid-manifest">Hybrid <code>dpm.json</code></h3>
-<div class="code-wrapper">
+<div class="code-wrapper" data-root-prefix="../../">
   <div class="code-header">
     <span class="code-lang">json</span>
-    <button class="copy-btn" aria-label="Copy code"><i class="fa-regular fa-copy"></i> Copy</button>
+    <div class="code-header-actions">
+      
+      <button class="copy-btn" aria-label="Copy code"><i class="fa-regular fa-copy"></i> Copy</button>
+    </div>
   </div>
   <pre><code>{
   &quot;name&quot;: &quot;fast_hash&quot;,
@@ -927,10 +1008,13 @@ print(&quot;Generated Slug: &quot; + slug)
   </div>
 
   <div id="tab-win" class="tab-content active">
-<div class="code-wrapper">
+<div class="code-wrapper" data-root-prefix="../../">
   <div class="code-header">
     <span class="code-lang">bash</span>
-    <button class="copy-btn" aria-label="Copy code"><i class="fa-regular fa-copy"></i> Copy</button>
+    <div class="code-header-actions">
+      
+      <button class="copy-btn" aria-label="Copy code"><i class="fa-regular fa-copy"></i> Copy</button>
+    </div>
   </div>
   <pre><code>@echo off
 setlocal
@@ -955,10 +1039,13 @@ if %ERRORLEVEL% equ 0 (
   </div>
 
   <div id="tab-posix" class="tab-content">
-<div class="code-wrapper">
+<div class="code-wrapper" data-root-prefix="../../">
   <div class="code-header">
     <span class="code-lang">bash</span>
-    <button class="copy-btn" aria-label="Copy code"><i class="fa-regular fa-copy"></i> Copy</button>
+    <div class="code-header-actions">
+      
+      <button class="copy-btn" aria-label="Copy code"><i class="fa-regular fa-copy"></i> Copy</button>
+    </div>
   </div>
   <pre><code><span class="hl-comment">#!/usr/bin/env bash</span>
 set <span class="hl-special">-e</span>
@@ -1016,10 +1103,13 @@ echo <span class="hl-str">&quot;[OK] fast_hash.so compiled successfully.&quot;</
 </div>
 
 <h3 id="runtime-check-example">Real-World Dynamic Inspection Example</h3>
-<div class="code-wrapper">
+<div class="code-wrapper" data-root-prefix="../../">
   <div class="code-header">
     <span class="code-lang">ruby</span>
-    <button class="copy-btn" aria-label="Copy code"><i class="fa-regular fa-copy"></i> Copy</button>
+    <div class="code-header-actions">
+      
+      <button class="copy-btn" aria-label="Copy code"><i class="fa-regular fa-copy"></i> Copy</button>
+    </div>
   </div>
   <pre><code>use lang
 
@@ -1052,10 +1142,13 @@ end</code></pre>
 <h3 id="ci-cd-pipelines">2. Continuous Integration (CI/CD) Configuration</h3>
 <p>In automated GitHub Actions or GitLab CI environments, incorporate DPM dependency synchronization into your build matrix:</p>
 
-<div class="code-wrapper">
+<div class="code-wrapper" data-root-prefix="../../">
   <div class="code-header">
     <span class="code-lang">yaml</span>
-    <button class="copy-btn" aria-label="Copy code"><i class="fa-regular fa-copy"></i> Copy</button>
+    <div class="code-header-actions">
+      
+      <button class="copy-btn" aria-label="Copy code"><i class="fa-regular fa-copy"></i> Copy</button>
+    </div>
   </div>
   <pre><code># .github/workflows/ci.yml
 name: Test Suite
@@ -1087,10 +1180,13 @@ jobs:
   <li><strong>Git is not recognized:</strong> DPM relies on the system <code>git</code> command to fetch repositories. Ensure Git is installed and added to your system <code>PATH</code>.</li>
   <li><strong>Compiler toolchain missing for hybrid packages:</strong> On Windows, ensure MinGW GCC (e.g. MSYS2 or WinLibs) is in your <code>PATH</code>. On Linux, install <code>build-essential</code> (GCC/Clang and Make).</li>
   <li><strong>Cleaning Cache:</strong> DPM caches monorepos and downloaded archives in your OS temporary directory under <code>dpm_cache/</code>. To clear stale caches, delete the directory:
-    <div class="code-wrapper">
+    <div class="code-wrapper" data-root-prefix="../../">
   <div class="code-header">
     <span class="code-lang">bash</span>
-    <button class="copy-btn" aria-label="Copy code"><i class="fa-regular fa-copy"></i> Copy</button>
+    <div class="code-header-actions">
+      
+      <button class="copy-btn" aria-label="Copy code"><i class="fa-regular fa-copy"></i> Copy</button>
+    </div>
   </div>
   <pre><code><span class="hl-comment"># Windows PowerShell</span>
 Remove<span class="hl-special">-Item</span> <span class="hl-special">-Recurse</span> <span class="hl-special">-Force</span> <span class="hl-str">&quot;$env:TEMP\dpm_cache&quot;</span>

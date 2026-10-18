@@ -241,10 +241,13 @@
 <h2 id="writing-hello-world">Writing "Hello World"</h2>
 <p>Create a file named <code>hello.dz</code> in your project directory using any text editor:</p>
 
-<div class="code-wrapper">
+<div class="code-wrapper" data-root-prefix="../../">
   <div class="code-header">
     <span class="code-lang">djazair</span>
-    <button class="copy-btn" aria-label="Copy code"><i class="fa-regular fa-copy"></i> Copy</button>
+    <div class="code-header-actions">
+      <button class="run-code-btn" type="button" title="Try this code in WebAssembly Playground" aria-label="Run in playground"><i class="fa-solid fa-play"></i> <span>Run</span></button>
+      <button class="copy-btn" aria-label="Copy code"><i class="fa-regular fa-copy"></i> Copy</button>
+    </div>
   </div>
   <pre><code><span class="hl-comment"># hello.dz — My first script in Djazair</span>
 <span class="hl-kw">let</span> greeting <span class="hl-op">=</span> <span class="hl-str">&quot;Hello from Djazair!&quot;</span>
@@ -254,10 +257,13 @@
 <h2 id="executing-the-script">Executing the Script</h2>
 <p>To run your script, pass the file path to the <code>djazair</code> interpreter:</p>
 
-<div class="code-wrapper">
+<div class="code-wrapper" data-root-prefix="../../">
   <div class="code-header">
     <span class="code-lang">bash</span>
-    <button class="copy-btn" aria-label="Copy code"><i class="fa-regular fa-copy"></i> Copy</button>
+    <div class="code-header-actions">
+      
+      <button class="copy-btn" aria-label="Copy code"><i class="fa-regular fa-copy"></i> Copy</button>
+    </div>
   </div>
   <pre><code>djazair hello.dz
 <span class="hl-comment"># Output:</span>
@@ -267,10 +273,13 @@
 <h2 id="interactive-input">Prompting for User Input</h2>
 <p>Djazair provides the built-in <code>input(prompt)</code> function to read text input from the console:</p>
 
-<div class="code-wrapper">
+<div class="code-wrapper" data-root-prefix="../../">
   <div class="code-header">
     <span class="code-lang">djazair</span>
-    <button class="copy-btn" aria-label="Copy code"><i class="fa-regular fa-copy"></i> Copy</button>
+    <div class="code-header-actions">
+      <button class="run-code-btn" type="button" title="Try this code in WebAssembly Playground" aria-label="Run in playground"><i class="fa-solid fa-play"></i> <span>Run</span></button>
+      <button class="copy-btn" aria-label="Copy code"><i class="fa-regular fa-copy"></i> Copy</button>
+    </div>
   </div>
   <pre><code><span class="hl-comment"># interactive.dz</span>
 <span class="hl-kw">let</span> name <span class="hl-op">=</span> <span class="hl-builtin">input</span>(<span class="hl-str">&quot;Enter your name: &quot;</span>)
@@ -280,10 +289,13 @@
 </div>
 
 <p>When run, the program prompts you in the terminal:</p>
-<div class="code-wrapper">
+<div class="code-wrapper" data-root-prefix="../../">
   <div class="code-header">
     <span class="code-lang">bash</span>
-    <button class="copy-btn" aria-label="Copy code"><i class="fa-regular fa-copy"></i> Copy</button>
+    <div class="code-header-actions">
+      
+      <button class="copy-btn" aria-label="Copy code"><i class="fa-regular fa-copy"></i> Copy</button>
+    </div>
   </div>
   <pre><code>djazair interactive.dz
 <span class="hl-comment"># Enter your name: Riad</span>
@@ -294,10 +306,13 @@
 <h2 id="comments-syntax">Comments in Djazair</h2>
 <p>Documentation is a vital part of every codebase. Djazair supports both single-line and multi-line comments:</p>
 
-<div class="code-wrapper">
+<div class="code-wrapper" data-root-prefix="../../">
   <div class="code-header">
     <span class="code-lang">djazair</span>
-    <button class="copy-btn" aria-label="Copy code"><i class="fa-regular fa-copy"></i> Copy</button>
+    <div class="code-header-actions">
+      <button class="run-code-btn" type="button" title="Try this code in WebAssembly Playground" aria-label="Run in playground"><i class="fa-solid fa-play"></i> <span>Run</span></button>
+      <button class="copy-btn" aria-label="Copy code"><i class="fa-regular fa-copy"></i> Copy</button>
+    </div>
   </div>
   <pre><code><span class="hl-comment"># 1. Single-line comment starts with a hash character (#)</span>
 <span class="hl-kw">let</span> x <span class="hl-op">=</span> <span class="hl-num">10</span> <span class="hl-comment"># This comment follows code</span>

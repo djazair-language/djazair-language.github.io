@@ -239,10 +239,13 @@
 </p>
 
 <h2 id="synopsis">CLI Synopsis</h2>
-<div class="code-wrapper">
+<div class="code-wrapper" data-root-prefix="../../">
   <div class="code-header">
     <span class="code-lang">bash</span>
-    <button class="copy-btn" aria-label="Copy code"><i class="fa-regular fa-copy"></i> Copy</button>
+    <div class="code-header-actions">
+      
+      <button class="copy-btn" aria-label="Copy code"><i class="fa-regular fa-copy"></i> Copy</button>
+    </div>
   </div>
   <pre><code>djazair [options] [script_file.dz] [arguments...]</code></pre>
 </div>
@@ -290,10 +293,13 @@
 <h2 id="inline-execution">Inline Code Execution (<code>-c</code>)</h2>
 <p>The <code>-c</code> option is handy for quick evaluations, shell one-liners, or piping data from command pipelines:</p>
 
-<div class="code-wrapper">
+<div class="code-wrapper" data-root-prefix="../../">
   <div class="code-header">
     <span class="code-lang">bash</span>
-    <button class="copy-btn" aria-label="Copy code"><i class="fa-regular fa-copy"></i> Copy</button>
+    <div class="code-header-actions">
+      
+      <button class="copy-btn" aria-label="Copy code"><i class="fa-regular fa-copy"></i> Copy</button>
+    </div>
   </div>
   <pre><code><span class="hl-comment"># One-line arithmetic and JSON calculation</span>
 djazair <span class="hl-special">-c</span> <span class="hl-str">&#x27;use json; print(json.encode({&quot;status&quot;: &quot;healthy&quot;, &quot;code&quot;: 200}))&#x27;</span>
@@ -303,10 +309,13 @@ djazair <span class="hl-special">-c</span> <span class="hl-str">&#x27;use json; 
 <h2 id="script-arguments">Accessing Command-Line Arguments</h2>
 <p>Any arguments passed after the script filename are accessible inside your Djazair script via the <code>process.args()</code> standard library function or the global <code>args</code> array:</p>
 
-<div class="code-wrapper">
+<div class="code-wrapper" data-root-prefix="../../">
   <div class="code-header">
     <span class="code-lang">djazair</span>
-    <button class="copy-btn" aria-label="Copy code"><i class="fa-regular fa-copy"></i> Copy</button>
+    <div class="code-header-actions">
+      <button class="run-code-btn" type="button" title="Try this code in WebAssembly Playground" aria-label="Run in playground"><i class="fa-solid fa-play"></i> <span>Run</span></button>
+      <button class="copy-btn" aria-label="Copy code"><i class="fa-regular fa-copy"></i> Copy</button>
+    </div>
   </div>
   <pre><code><span class="hl-comment"># args_demo.dz</span>
 <span class="hl-kw">use</span> <span class="hl-type">process</span>
@@ -319,10 +328,13 @@ djazair <span class="hl-special">-c</span> <span class="hl-str">&#x27;use json; 
 <span class="hl-kw">end</span></code></pre>
 </div>
 
-<div class="code-wrapper">
+<div class="code-wrapper" data-root-prefix="../../">
   <div class="code-header">
     <span class="code-lang">bash</span>
-    <button class="copy-btn" aria-label="Copy code"><i class="fa-regular fa-copy"></i> Copy</button>
+    <div class="code-header-actions">
+      
+      <button class="copy-btn" aria-label="Copy code"><i class="fa-regular fa-copy"></i> Copy</button>
+    </div>
   </div>
   <pre><code>djazair args_demo.dz apple banana cherry 42
 <span class="hl-comment"># Received 4 arguments:</span>

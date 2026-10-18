@@ -265,10 +265,13 @@
 <h2 id="comparison-deep-equality">Comparison & Deep Equality</h2>
 <p>In Djazair, the equality operator <code>==</code> performs <strong>deep structural equality</strong> for collections and hash maps, not just reference comparison:</p>
 
-<div class="code-wrapper">
+<div class="code-wrapper" data-root-prefix="../../">
   <div class="code-header">
     <span class="code-lang">djazair</span>
-    <button class="copy-btn" aria-label="Copy code"><i class="fa-regular fa-copy"></i> Copy</button>
+    <div class="code-header-actions">
+      <button class="run-code-btn" type="button" title="Try this code in WebAssembly Playground" aria-label="Run in playground"><i class="fa-solid fa-play"></i> <span>Run</span></button>
+      <button class="copy-btn" aria-label="Copy code"><i class="fa-regular fa-copy"></i> Copy</button>
+    </div>
   </div>
   <pre><code><span class="hl-comment"># Primitive comparisons</span>
 <span class="hl-builtin">print</span>(<span class="hl-num">10</span> <span class="hl-op">==</span> <span class="hl-num">10</span>)         <span class="hl-output"># =&gt; True</span>
@@ -289,10 +292,13 @@
 <h2 id="identity-membership">Identity (<code>is</code>) & Membership (<code>in</code>)</h2>
 <p>Djazair separates value equality (<code>==</code>) from object identity (<code>is</code>), and provides the powerful <code>in</code> operator for testing membership across collections, strings, and classes:</p>
 
-<div class="code-wrapper">
+<div class="code-wrapper" data-root-prefix="../../">
   <div class="code-header">
     <span class="code-lang">djazair</span>
-    <button class="copy-btn" aria-label="Copy code"><i class="fa-regular fa-copy"></i> Copy</button>
+    <div class="code-header-actions">
+      <button class="run-code-btn" type="button" title="Try this code in WebAssembly Playground" aria-label="Run in playground"><i class="fa-solid fa-play"></i> <span>Run</span></button>
+      <button class="copy-btn" aria-label="Copy code"><i class="fa-regular fa-copy"></i> Copy</button>
+    </div>
   </div>
   <pre><code><span class="hl-comment"># Identity check: checks if both variables reference the EXACT same heap object</span>
 <span class="hl-kw">let</span> x <span class="hl-op">=</span> [<span class="hl-num">1</span>, <span class="hl-num">2</span>]
@@ -318,10 +324,13 @@
 </div>
 
 <h2 id="bitwise-operators">Bitwise Operators</h2>
-<div class="code-wrapper">
+<div class="code-wrapper" data-root-prefix="../../">
   <div class="code-header">
     <span class="code-lang">djazair</span>
-    <button class="copy-btn" aria-label="Copy code"><i class="fa-regular fa-copy"></i> Copy</button>
+    <div class="code-header-actions">
+      <button class="run-code-btn" type="button" title="Try this code in WebAssembly Playground" aria-label="Run in playground"><i class="fa-solid fa-play"></i> <span>Run</span></button>
+      <button class="copy-btn" aria-label="Copy code"><i class="fa-regular fa-copy"></i> Copy</button>
+    </div>
   </div>
   <pre><code><span class="hl-kw">let</span> a <span class="hl-op">=</span> <span class="hl-num">5</span>   <span class="hl-comment"># binary 0101</span>
 <span class="hl-kw">let</span> b <span class="hl-op">=</span> <span class="hl-num">3</span>   <span class="hl-comment"># binary 0011</span>

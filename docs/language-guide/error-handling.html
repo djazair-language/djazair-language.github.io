@@ -239,10 +239,13 @@
 </p>
 
 <h2 id="try-catch-finally">Try, Catch, Finally</h2>
-<div class="code-wrapper">
+<div class="code-wrapper" data-root-prefix="../../">
   <div class="code-header">
     <span class="code-lang">djazair</span>
-    <button class="copy-btn" aria-label="Copy code"><i class="fa-regular fa-copy"></i> Copy</button>
+    <div class="code-header-actions">
+      <button class="run-code-btn" type="button" title="Try this code in WebAssembly Playground" aria-label="Run in playground"><i class="fa-solid fa-play"></i> <span>Run</span></button>
+      <button class="copy-btn" aria-label="Copy code"><i class="fa-regular fa-copy"></i> Copy</button>
+    </div>
   </div>
   <pre><code><span class="hl-kw">try</span>
     <span class="hl-kw">let</span> divisor <span class="hl-op">=</span> <span class="hl-num">0</span>
@@ -261,10 +264,13 @@
 <h2 id="nested-exceptions">Nested Exceptions & Rethrowing</h2>
 <p>Exceptions propagate up the call stack until caught. You can catch an error, perform logging, and rethrow:</p>
 
-<div class="code-wrapper">
+<div class="code-wrapper" data-root-prefix="../../">
   <div class="code-header">
     <span class="code-lang">djazair</span>
-    <button class="copy-btn" aria-label="Copy code"><i class="fa-regular fa-copy"></i> Copy</button>
+    <div class="code-header-actions">
+      <button class="run-code-btn" type="button" title="Try this code in WebAssembly Playground" aria-label="Run in playground"><i class="fa-solid fa-play"></i> <span>Run</span></button>
+      <button class="copy-btn" aria-label="Copy code"><i class="fa-regular fa-copy"></i> Copy</button>
+    </div>
   </div>
   <pre><code><span class="hl-kw">fn</span> <span class="hl-fn">processFile</span>(filename)
     <span class="hl-kw">try</span>

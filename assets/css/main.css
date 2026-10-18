@@ -555,6 +555,49 @@ tbody tr:hover {
   font-weight: 600;
 }
 
+.code-header-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.run-code-btn {
+  background: rgba(16, 185, 129, 0.12);
+  border: 1px solid rgba(16, 185, 129, 0.35);
+  color: #34d399;
+  font-family: var(--font-sans);
+  font-size: 0.74rem;
+  font-weight: 600;
+  padding: 0.22rem 0.65rem;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  transition: all var(--transition-fast);
+}
+
+.run-code-btn:hover {
+  background: rgba(16, 185, 129, 0.25);
+  border-color: #10b981;
+  color: #ffffff;
+  transform: translateY(-1px);
+  box-shadow: 0 2px 10px rgba(16, 185, 129, 0.3);
+}
+
+.run-code-btn:active {
+  transform: translateY(0);
+}
+
+.run-code-btn i {
+  font-size: 0.68rem;
+  color: #34d399;
+}
+
+.run-code-btn:hover i {
+  color: #ffffff;
+}
+
 .copy-btn {
   background: transparent;
   border: 1px solid rgba(255, 255, 255, 0.15);

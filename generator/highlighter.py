@@ -129,7 +129,7 @@ def highlight_shell(code: str) -> str:
             out.append(esc_val)
     return ''.join(out)
 
-def process_code_blocks(html_content: str) -> str:
+def process_code_blocks(html_content: str, root_prefix: str = "") -> str:
     """
     Find all <pre><code class="language-..."> blocks in HTML
     and replace them with highlighted code wrapped in .code-wrapper.
@@ -158,10 +158,17 @@ def process_code_blocks(html_content: str) -> str:
         else:
             highlighted = html.escape(unescaped_code)
             
-        return f'''<div class="code-wrapper">
+        run_btn = ""
+        if display_lang == 'djazair':
+            run_btn = '<button class="run-code-btn" type="button" title="Try this code in WebAssembly Playground" aria-label="Run in playground"><i class="fa-solid fa-play"></i> <span>Run</span></button>'
+
+        return f'''<div class="code-wrapper" data-root-prefix="{root_prefix}">
   <div class="code-header">
     <span class="code-lang">{display_lang}</span>
-    <button class="copy-btn" aria-label="Copy code"><i class="fa-regular fa-copy"></i> Copy</button>
+    <div class="code-header-actions">
+      {run_btn}
+      <button class="copy-btn" aria-label="Copy code"><i class="fa-regular fa-copy"></i> Copy</button>
+    </div>
   </div>
   <pre><code>{highlighted}</code></pre>
 </div>'''

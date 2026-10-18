@@ -241,10 +241,13 @@
 <h2 id="import-local-files">Importing Local Files (<code>import</code>)</h2>
 <p>Suppose you have a utility file named <code>math_utils.dz</code>:</p>
 
-<div class="code-wrapper">
+<div class="code-wrapper" data-root-prefix="../../">
   <div class="code-header">
     <span class="code-lang">djazair</span>
-    <button class="copy-btn" aria-label="Copy code"><i class="fa-regular fa-copy"></i> Copy</button>
+    <div class="code-header-actions">
+      <button class="run-code-btn" type="button" title="Try this code in WebAssembly Playground" aria-label="Run in playground"><i class="fa-solid fa-play"></i> <span>Run</span></button>
+      <button class="copy-btn" aria-label="Copy code"><i class="fa-regular fa-copy"></i> Copy</button>
+    </div>
   </div>
   <pre><code><span class="hl-comment"># math_utils.dz</span>
 <span class="hl-kw">fn</span> <span class="hl-fn">square</span>(x)
@@ -258,10 +261,13 @@
 
 <p>You can import it in your main script using three different styles:</p>
 
-<div class="code-wrapper">
+<div class="code-wrapper" data-root-prefix="../../">
   <div class="code-header">
     <span class="code-lang">djazair</span>
-    <button class="copy-btn" aria-label="Copy code"><i class="fa-regular fa-copy"></i> Copy</button>
+    <div class="code-header-actions">
+      <button class="run-code-btn" type="button" title="Try this code in WebAssembly Playground" aria-label="Run in playground"><i class="fa-solid fa-play"></i> <span>Run</span></button>
+      <button class="copy-btn" aria-label="Copy code"><i class="fa-regular fa-copy"></i> Copy</button>
+    </div>
   </div>
   <pre><code><span class="hl-comment"># 1. Standard import (module namespace matches filename)</span>
 <span class="hl-kw">import</span> <span class="hl-str">&quot;math_utils.dz&quot;</span>
@@ -279,10 +285,13 @@
 <h2 id="use-standard-library">Standard Library Imports (<code>use</code>)</h2>
 <p>Standard library modules are loaded with the <code>use</code> keyword:</p>
 
-<div class="code-wrapper">
+<div class="code-wrapper" data-root-prefix="../../">
   <div class="code-header">
     <span class="code-lang">djazair</span>
-    <button class="copy-btn" aria-label="Copy code"><i class="fa-regular fa-copy"></i> Copy</button>
+    <div class="code-header-actions">
+      <button class="run-code-btn" type="button" title="Try this code in WebAssembly Playground" aria-label="Run in playground"><i class="fa-solid fa-play"></i> <span>Run</span></button>
+      <button class="copy-btn" aria-label="Copy code"><i class="fa-regular fa-copy"></i> Copy</button>
+    </div>
   </div>
   <pre><code><span class="hl-comment"># Standard import</span>
 <span class="hl-kw">use</span> <span class="hl-type">json</span>

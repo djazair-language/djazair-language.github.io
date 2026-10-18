@@ -246,10 +246,13 @@
 <h2 id="arabic-identifiers">Arabic Identifiers & Code Example</h2>
 <p>You can write complete scripts using Arabic variable and function names:</p>
 
-<div class="code-wrapper">
+<div class="code-wrapper" data-root-prefix="../../">
   <div class="code-header">
     <span class="code-lang">djazair</span>
-    <button class="copy-btn" aria-label="Copy code"><i class="fa-regular fa-copy"></i> Copy</button>
+    <div class="code-header-actions">
+      <button class="run-code-btn" type="button" title="Try this code in WebAssembly Playground" aria-label="Run in playground"><i class="fa-solid fa-play"></i> <span>Run</span></button>
+      <button class="copy-btn" aria-label="Copy code"><i class="fa-regular fa-copy"></i> Copy</button>
+    </div>
   </div>
   <pre><code><span class="hl-comment"># Variables and functions with Arabic and emojis</span>
 <span class="hl-kw">let</span> 🚀_السرعة <span class="hl-op">=</span> <span class="hl-num">100</span>
@@ -265,10 +268,13 @@
 <h2 id="code-point-accuracy">Code-Point Accurate Length & Indexing</h2>
 <p>Consider a mixed string with 1-byte, 2-byte, 3-byte, and 4-byte characters:</p>
 
-<div class="code-wrapper">
+<div class="code-wrapper" data-root-prefix="../../">
   <div class="code-header">
     <span class="code-lang">djazair</span>
-    <button class="copy-btn" aria-label="Copy code"><i class="fa-regular fa-copy"></i> Copy</button>
+    <div class="code-header-actions">
+      <button class="run-code-btn" type="button" title="Try this code in WebAssembly Playground" aria-label="Run in playground"><i class="fa-solid fa-play"></i> <span>Run</span></button>
+      <button class="copy-btn" aria-label="Copy code"><i class="fa-regular fa-copy"></i> Copy</button>
+    </div>
   </div>
   <pre><code><span class="hl-comment"># A (1 byte), م (2 bytes), 漢 (3 bytes), 🚀 (4 bytes)</span>
 <span class="hl-kw">let</span> complexStr <span class="hl-op">=</span> <span class="hl-str">&quot;Aم漢🚀&quot;</span>
@@ -293,10 +299,13 @@
 <h2 id="arabic-diacritics">Arabic Diacritics (التشكيل)</h2>
 <p>Arabic vowels and diacritical marks (حركات التشكيل) are treated as distinct logical Unicode code points, allowing precise linguistic processing:</p>
 
-<div class="code-wrapper">
+<div class="code-wrapper" data-root-prefix="../../">
   <div class="code-header">
     <span class="code-lang">djazair</span>
-    <button class="copy-btn" aria-label="Copy code"><i class="fa-regular fa-copy"></i> Copy</button>
+    <div class="code-header-actions">
+      <button class="run-code-btn" type="button" title="Try this code in WebAssembly Playground" aria-label="Run in playground"><i class="fa-solid fa-play"></i> <span>Run</span></button>
+      <button class="copy-btn" aria-label="Copy code"><i class="fa-regular fa-copy"></i> Copy</button>
+    </div>
   </div>
   <pre><code><span class="hl-kw">let</span> phrase <span class="hl-op">=</span> <span class="hl-str">&quot;بِسْمِ اللَّهِ&quot;</span>
 <span class="hl-builtin">print</span>(<span class="hl-str">&quot;Text: <span class="hl-interp">${</span>phrase<span class="hl-interp">}</span>&quot;</span>)

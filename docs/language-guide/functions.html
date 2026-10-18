@@ -239,10 +239,13 @@
 </p>
 
 <h2 id="defining-functions">Defining Functions</h2>
-<div class="code-wrapper">
+<div class="code-wrapper" data-root-prefix="../../">
   <div class="code-header">
     <span class="code-lang">djazair</span>
-    <button class="copy-btn" aria-label="Copy code"><i class="fa-regular fa-copy"></i> Copy</button>
+    <div class="code-header-actions">
+      <button class="run-code-btn" type="button" title="Try this code in WebAssembly Playground" aria-label="Run in playground"><i class="fa-solid fa-play"></i> <span>Run</span></button>
+      <button class="copy-btn" aria-label="Copy code"><i class="fa-regular fa-copy"></i> Copy</button>
+    </div>
   </div>
   <pre><code><span class="hl-comment"># Standard function declaration</span>
 <span class="hl-kw">fn</span> <span class="hl-fn">add</span>(a, b)
@@ -259,10 +262,13 @@
 <h2 id="default-arguments">Default Arguments</h2>
 <p>Parameters can have default expressions, which can even reference previous parameters:</p>
 
-<div class="code-wrapper">
+<div class="code-wrapper" data-root-prefix="../../">
   <div class="code-header">
     <span class="code-lang">djazair</span>
-    <button class="copy-btn" aria-label="Copy code"><i class="fa-regular fa-copy"></i> Copy</button>
+    <div class="code-header-actions">
+      <button class="run-code-btn" type="button" title="Try this code in WebAssembly Playground" aria-label="Run in playground"><i class="fa-solid fa-play"></i> <span>Run</span></button>
+      <button class="copy-btn" aria-label="Copy code"><i class="fa-regular fa-copy"></i> Copy</button>
+    </div>
   </div>
   <pre><code><span class="hl-kw">fn</span> <span class="hl-fn">greet</span>(name <span class="hl-op">=</span> <span class="hl-str">&quot;World&quot;</span>, greeting <span class="hl-op">=</span> <span class="hl-str">&quot;Hello&quot;</span>)
     <span class="hl-builtin">print</span>(<span class="hl-str">&quot;<span class="hl-interp">${</span>greeting<span class="hl-interp">}</span>, <span class="hl-interp">${</span>name<span class="hl-interp">}</span>!&quot;</span>)
@@ -282,10 +288,13 @@
 <h2 id="rest-parameters">Rest Parameters (<code>...args</code>)</h2>
 <p>Variadic functions accept any number of trailing arguments packed into an Array:</p>
 
-<div class="code-wrapper">
+<div class="code-wrapper" data-root-prefix="../../">
   <div class="code-header">
     <span class="code-lang">djazair</span>
-    <button class="copy-btn" aria-label="Copy code"><i class="fa-regular fa-copy"></i> Copy</button>
+    <div class="code-header-actions">
+      <button class="run-code-btn" type="button" title="Try this code in WebAssembly Playground" aria-label="Run in playground"><i class="fa-solid fa-play"></i> <span>Run</span></button>
+      <button class="copy-btn" aria-label="Copy code"><i class="fa-regular fa-copy"></i> Copy</button>
+    </div>
   </div>
   <pre><code><span class="hl-kw">fn</span> <span class="hl-fn">sumAll</span>(initial, <span class="hl-op">..</span>.rest)
     <span class="hl-kw">let</span> total <span class="hl-op">=</span> initial
@@ -301,10 +310,13 @@
 <h2 id="lexical-closures">Lexical Closures</h2>
 <p>Functions maintain a reference to their enclosing scope even after the outer function has returned:</p>
 
-<div class="code-wrapper">
+<div class="code-wrapper" data-root-prefix="../../">
   <div class="code-header">
     <span class="code-lang">djazair</span>
-    <button class="copy-btn" aria-label="Copy code"><i class="fa-regular fa-copy"></i> Copy</button>
+    <div class="code-header-actions">
+      <button class="run-code-btn" type="button" title="Try this code in WebAssembly Playground" aria-label="Run in playground"><i class="fa-solid fa-play"></i> <span>Run</span></button>
+      <button class="copy-btn" aria-label="Copy code"><i class="fa-regular fa-copy"></i> Copy</button>
+    </div>
   </div>
   <pre><code><span class="hl-kw">fn</span> <span class="hl-fn">createCounter</span>(start <span class="hl-op">=</span> <span class="hl-num">0</span>)
     <span class="hl-kw">let</span> count <span class="hl-op">=</span> start

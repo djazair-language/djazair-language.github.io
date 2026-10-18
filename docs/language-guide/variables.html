@@ -241,10 +241,13 @@
 <h2 id="declaring-variables">Declaring Variables</h2>
 <p>Variables are declared using <code>let</code> followed by an identifier and an optional initial value:</p>
 
-<div class="code-wrapper">
+<div class="code-wrapper" data-root-prefix="../../">
   <div class="code-header">
     <span class="code-lang">djazair</span>
-    <button class="copy-btn" aria-label="Copy code"><i class="fa-regular fa-copy"></i> Copy</button>
+    <div class="code-header-actions">
+      <button class="run-code-btn" type="button" title="Try this code in WebAssembly Playground" aria-label="Run in playground"><i class="fa-solid fa-play"></i> <span>Run</span></button>
+      <button class="copy-btn" aria-label="Copy code"><i class="fa-regular fa-copy"></i> Copy</button>
+    </div>
   </div>
   <pre><code><span class="hl-kw">let</span> name <span class="hl-op">=</span> <span class="hl-str">&quot;Djazair&quot;</span>
 <span class="hl-kw">let</span> version <span class="hl-op">=</span> <span class="hl-num">1.1</span>
@@ -258,10 +261,13 @@
 <h2 id="reassignment-mutation">Reassignment & Mutation</h2>
 <p>Once declared with <code>let</code>, variables can be reassigned to values of any type, or mutated using shorthand assignment operators:</p>
 
-<div class="code-wrapper">
+<div class="code-wrapper" data-root-prefix="../../">
   <div class="code-header">
     <span class="code-lang">djazair</span>
-    <button class="copy-btn" aria-label="Copy code"><i class="fa-regular fa-copy"></i> Copy</button>
+    <div class="code-header-actions">
+      <button class="run-code-btn" type="button" title="Try this code in WebAssembly Playground" aria-label="Run in playground"><i class="fa-solid fa-play"></i> <span>Run</span></button>
+      <button class="copy-btn" aria-label="Copy code"><i class="fa-regular fa-copy"></i> Copy</button>
+    </div>
   </div>
   <pre><code><span class="hl-kw">let</span> score <span class="hl-op">=</span> <span class="hl-num">10</span>
 score <span class="hl-op">+=</span> <span class="hl-num">5</span>       <span class="hl-comment"># score is now 15</span>
@@ -275,10 +281,13 @@ score <span class="hl-op">=</span> <span class="hl-str">&quot;Thirty-One&quot;</
 <h2 id="lexical-scoping">Lexical Block Scoping</h2>
 <p>Djazair follows strict lexical block scoping. Any variable declared inside a block (such as an <code>if</code>, <code>while</code>, <code>for</code>, or <code>fn</code> block) is isolated to that block and shadows any identical outer identifier:</p>
 
-<div class="code-wrapper">
+<div class="code-wrapper" data-root-prefix="../../">
   <div class="code-header">
     <span class="code-lang">djazair</span>
-    <button class="copy-btn" aria-label="Copy code"><i class="fa-regular fa-copy"></i> Copy</button>
+    <div class="code-header-actions">
+      <button class="run-code-btn" type="button" title="Try this code in WebAssembly Playground" aria-label="Run in playground"><i class="fa-solid fa-play"></i> <span>Run</span></button>
+      <button class="copy-btn" aria-label="Copy code"><i class="fa-regular fa-copy"></i> Copy</button>
+    </div>
   </div>
   <pre><code><span class="hl-kw">let</span> count <span class="hl-op">=</span> <span class="hl-num">100</span>
 

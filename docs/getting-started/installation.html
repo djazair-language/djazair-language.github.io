@@ -249,10 +249,13 @@
 <h2 id="linux-macos">Building on Linux & macOS</h2>
 <p>Open your terminal and clone the repository, then run <code>make</code>:</p>
 
-<div class="code-wrapper">
+<div class="code-wrapper" data-root-prefix="../../">
   <div class="code-header">
     <span class="code-lang">bash</span>
-    <button class="copy-btn" aria-label="Copy code"><i class="fa-regular fa-copy"></i> Copy</button>
+    <div class="code-header-actions">
+      
+      <button class="copy-btn" aria-label="Copy code"><i class="fa-regular fa-copy"></i> Copy</button>
+    </div>
   </div>
   <pre><code><span class="hl-comment"># 1. Clone the repository</span>
 git clone https://github.com/djazair<span class="hl-special">-language</span>/djazair.git
@@ -269,10 +272,13 @@ make
 <div class="callout callout-note">
   <div class="callout-title"><i class="fa-solid fa-circle-info"></i> System-wide Installation (Optional)</div>
   <p>To install the <code>djazair</code> executable into your standard binary path (<code>/usr/local/bin</code>), execute:</p>
-  <div class="code-wrapper">
+  <div class="code-wrapper" data-root-prefix="../../">
   <div class="code-header">
     <span class="code-lang">bash</span>
-    <button class="copy-btn" aria-label="Copy code"><i class="fa-regular fa-copy"></i> Copy</button>
+    <div class="code-header-actions">
+      
+      <button class="copy-btn" aria-label="Copy code"><i class="fa-regular fa-copy"></i> Copy</button>
+    </div>
   </div>
   <pre><code>sudo make install</code></pre>
 </div>
@@ -281,10 +287,13 @@ make
 <h2 id="windows">Building on Windows</h2>
 <p>Djazair includes an automated build script written in PowerShell that configures the build, links with MinGW, and automatically registers the binary directory in your system environment PATH.</p>
 
-<div class="code-wrapper">
+<div class="code-wrapper" data-root-prefix="../../">
   <div class="code-header">
     <span class="code-lang">powershell</span>
-    <button class="copy-btn" aria-label="Copy code"><i class="fa-regular fa-copy"></i> Copy</button>
+    <div class="code-header-actions">
+      
+      <button class="copy-btn" aria-label="Copy code"><i class="fa-regular fa-copy"></i> Copy</button>
+    </div>
   </div>
   <pre><code><span class="hl-comment"># 1. Clone the repository</span>
 git clone https://github.com/djazair<span class="hl-special">-language</span>/djazair.git
@@ -300,10 +309,13 @@ powershell <span class="hl-special">-ExecutionPolicy</span> Bypass <span class="
 <div class="callout callout-warning">
   <div class="callout-title"><i class="fa-solid fa-triangle-exclamation"></i> MinGW-w64 Dependency Note</div>
   <p>If you encounter a linker error regarding missing regex symbols (<code>regcomp</code>, <code>regexec</code>) on Windows, ensure that <code>libgnurx</code> is installed in your MSYS2 / MinGW environment using:</p>
-  <div class="code-wrapper">
+  <div class="code-wrapper" data-root-prefix="../../">
   <div class="code-header">
     <span class="code-lang">bash</span>
-    <button class="copy-btn" aria-label="Copy code"><i class="fa-regular fa-copy"></i> Copy</button>
+    <div class="code-header-actions">
+      
+      <button class="copy-btn" aria-label="Copy code"><i class="fa-regular fa-copy"></i> Copy</button>
+    </div>
   </div>
   <pre><code>pacman <span class="hl-special">-S</span> mingw<span class="hl-special">-w64-x86_64-libgnurx</span></code></pre>
 </div>

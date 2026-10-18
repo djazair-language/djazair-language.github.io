@@ -487,7 +487,7 @@ def render_docs_page(current_page: dict, content_html: str) -> str:
     root_prefix = get_root_prefix(current_page["path"])
     
     # Highlight all code blocks in content
-    highlighted_content = process_code_blocks(content_html)
+    highlighted_content = process_code_blocks(content_html, root_prefix=root_prefix)
     
     # Extract TOC from content
     toc_items = extract_toc(highlighted_content)

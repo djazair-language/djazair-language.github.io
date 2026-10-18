@@ -321,10 +321,13 @@
 <h2 id="type-casting">Explicit Type Casting</h2>
 <p>Djazair provides five global conversion functions: <code>int()</code>, <code>float()</code>, <code>str()</code>, <code>bool()</code>, and <code>num()</code>:</p>
 
-<div class="code-wrapper">
+<div class="code-wrapper" data-root-prefix="../../">
   <div class="code-header">
     <span class="code-lang">djazair</span>
-    <button class="copy-btn" aria-label="Copy code"><i class="fa-regular fa-copy"></i> Copy</button>
+    <div class="code-header-actions">
+      <button class="run-code-btn" type="button" title="Try this code in WebAssembly Playground" aria-label="Run in playground"><i class="fa-solid fa-play"></i> <span>Run</span></button>
+      <button class="copy-btn" aria-label="Copy code"><i class="fa-regular fa-copy"></i> Copy</button>
+    </div>
   </div>
   <pre><code><span class="hl-comment"># Converting to Int</span>
 <span class="hl-kw">let</span> a <span class="hl-op">=</span> <span class="hl-builtin">int</span>(<span class="hl-str">&quot;42&quot;</span>)       <span class="hl-comment"># 42</span>
@@ -356,10 +359,13 @@
 <h2 id="type-introspection">Type Introspection</h2>
 <p>You can check a value's runtime type with <code>type(v)</code> or use dedicated type predicate functions:</p>
 
-<div class="code-wrapper">
+<div class="code-wrapper" data-root-prefix="../../">
   <div class="code-header">
     <span class="code-lang">djazair</span>
-    <button class="copy-btn" aria-label="Copy code"><i class="fa-regular fa-copy"></i> Copy</button>
+    <div class="code-header-actions">
+      <button class="run-code-btn" type="button" title="Try this code in WebAssembly Playground" aria-label="Run in playground"><i class="fa-solid fa-play"></i> <span>Run</span></button>
+      <button class="copy-btn" aria-label="Copy code"><i class="fa-regular fa-copy"></i> Copy</button>
+    </div>
   </div>
   <pre><code><span class="hl-kw">let</span> val <span class="hl-op">=</span> [<span class="hl-num">1</span>, <span class="hl-num">2</span>, <span class="hl-num">3</span>]
 

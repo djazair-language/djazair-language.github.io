@@ -477,15 +477,63 @@
       try {
         const hash = location.hash;
         if (!hash.startsWith("#src=")) return;
-        const encoded = hash.slice(5);
-        const source = decodeURIComponent(escape(atob(encoded)));
+
+        let srcPart = hash.slice(5);
+        let autoRun = false;
+        if (srcPart.includes("&autorun=1")) {
+          autoRun = true;
+          srcPart = srcPart.replace("&autorun=1", "");
+        } else if (srcPart.includes("&autorun=true")) {
+          autoRun = true;
+          srcPart = srcPart.replace("&autorun=true", "");
+        }
+
+        const source = decodeURIComponent(escape(atob(srcPart)));
         setSource(source);
         clearOutput();
-        write("Source loaded from shared link. Press Run to execute.\n");
-      } catch (_) {
-        // Ignore malformed hashes silently
+        write("// Code snippet loaded into playground.\n");
+
+        document.querySelectorAll("[data-playground-sample]").forEach((b) => b.classList.remove("active"));
+
+        const pg = document.getElementById("playground");
+        if (pg) {
+          setTimeout(() => {
+            pg.scrollIntoView({ behavior: "smooth" });
+          }, 120);
+        }
+
+        if (autoRun) {
+          write("// Executing snippet in WebAssembly VM…\n\n");
+          let attempts = 0;
+          const tryRun = () => {
+            attempts++;
+            if (wasmModule) {
+              run();
+            } else if (attempts < 30) {
+              setTimeout(tryRun, 150);
+            }
+          };
+          setTimeout(tryRun, 350);
+        } else {
+          write("// Press Run or Ctrl/⌘ + Enter to execute.\n");
+        }
+      } catch (err) {
+        console.warn("Could not load source from URL hash:", err);
       }
     };
+
+    window.setPlaygroundSource = (code) => {
+      setSource(code);
+      document.querySelectorAll("[data-playground-sample]").forEach((b) => b.classList.remove("active"));
+      clearOutput();
+      write("// Code snippet loaded into playground.\n");
+    };
+
+    window.runPlayground = () => {
+      run();
+    };
+
+    window.addEventListener("hashchange", loadFromHash);
 
     /* ── Font size ──────────────────────────────────────────────────────── */
     const updateFontIndicator = () => {

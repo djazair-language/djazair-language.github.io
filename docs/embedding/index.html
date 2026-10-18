@@ -239,10 +239,13 @@
 </p>
 
 <h2 id="minimal-c-example">Minimal Embed Example (main.c)</h2>
-<div class="code-wrapper">
+<div class="code-wrapper" data-root-prefix="../../">
   <div class="code-header">
     <span class="code-lang">c</span>
-    <button class="copy-btn" aria-label="Copy code"><i class="fa-regular fa-copy"></i> Copy</button>
+    <div class="code-header-actions">
+      
+      <button class="copy-btn" aria-label="Copy code"><i class="fa-regular fa-copy"></i> Copy</button>
+    </div>
   </div>
   <pre><code><span class="hl-special">#include &quot;djazair.h&quot;</span>
 <span class="hl-special">#include &lt;stdio.h&gt;</span>
@@ -275,10 +278,13 @@
 <h2 id="compiling-linking">Compiling & Linking</h2>
 <p>Link your C application against the Djazair static library or compiled object files:</p>
 
-<div class="code-wrapper">
+<div class="code-wrapper" data-root-prefix="../../">
   <div class="code-header">
     <span class="code-lang">bash</span>
-    <button class="copy-btn" aria-label="Copy code"><i class="fa-regular fa-copy"></i> Copy</button>
+    <div class="code-header-actions">
+      
+      <button class="copy-btn" aria-label="Copy code"><i class="fa-regular fa-copy"></i> Copy</button>
+    </div>
   </div>
   <pre><code><span class="hl-comment"># Linux / macOS</span>
 gcc <span class="hl-special">-Isrc</span>/include <span class="hl-special">-Isrc</span>/core main.c build/bin/libdjazair.a <span class="hl-special">-lm</span> <span class="hl-special">-lpthread</span> <span class="hl-special">-ldl</span> <span class="hl-special">-o</span> my_app
